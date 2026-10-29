@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html","k":"18"},{"p":"com.atomictempest.coins.api","l":"CoinsAPI","k":"10"},{"p":"com.atomictempest.coins.api","l":"CoinStacks"},{"p":"com.atomictempest.coins.api","l":"CoinsAPI.Holder"}];updateSearchResults();

@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html","k":"18"},{"p":"com.atomictempest.shop.api","l":"ShopAPI.Offer","k":"11"},{"p":"com.atomictempest.shop.api","l":"ShopAPI"}];updateSearchResults();

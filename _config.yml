@@ -1,0 +1,4 @@
+theme: jekyll-theme-cayman
+title: Tempest plugins API
+description: Build on Tempest Core and the Tempest plugins for Hytale
+include: [javadoc]
