@@ -8,6 +8,7 @@ title: Tempest plugins API
 
 **Questions and help:** [Discord](https://discord.gg/Q9PNVCMZXK)
 
+{% raw %}
 # AtomicTempest plugins: API for other plugins and mods
 
 The plugins (Core, Coins, Shop, Crates, Quests, SlotMachine, Lottery, Holograms, Coinflip) can be used from other plugins (Java) and from
@@ -785,6 +786,7 @@ Example: an item that gives a reward once used (in `Server/Item/Items/Treasure_M
 - Unregister what you registered (leaderboards, HUD lines, help topics, settings tabs, listeners) in `shutdown()`.
 - Prefer `PlayerActions` over parsing wallet reasons: reasons are for people and may change.
 
+{% endraw %}
 
 ---
 
