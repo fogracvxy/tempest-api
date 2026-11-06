@@ -2,7 +2,7 @@
 title: Tempest plugins API
 ---
 
-**API reference (javadoc):** [Coinflip 1.0.1](javadoc/coinflip/) · [Coins 2.0.1](javadoc/coins/) · [Core 1.0.1](javadoc/core/) · [Holograms 1.0.1](javadoc/holograms/) · [Lottery 1.1.0](javadoc/lottery/) · [Pass 1.0.1](javadoc/pass/) · [Quests 1.1.1](javadoc/quests/) · [Shop 1.1.1](javadoc/shop/) · [SlotMachine 1.1.1](javadoc/slotmachine/)
+**API reference (javadoc):** [Coinflip 1.0.3](javadoc/coinflip/) · [Coins 2.4.0](javadoc/coins/) · [Core 1.4.0](javadoc/core/) · [Holograms 1.2.0](javadoc/holograms/) · [Jobs 1.0.0](javadoc/jobs/) · [Lottery 1.1.2](javadoc/lottery/) · [Pass 1.2.0](javadoc/pass/) · [Projects 1.0.1](javadoc/projects/) · [Quests 1.3.0](javadoc/quests/) · [Shop 1.4.0](javadoc/shop/) · [SlotMachine 1.2.2](javadoc/slotmachine/)
 
 **Jars:** from the plugins' [CurseForge pages](https://www.curseforge.com/hytale/mods/search?search=tempest); compile against them with `compileOnly`.
 
@@ -27,6 +27,8 @@ package.
 | Coinflip | `AtomicTempest:Coinflip` | `com.atomictempest.coinflip.api.CoinflipAPI`, `RoomMode` |
 | Events | `AtomicTempest:Events` | no API of its own: it turns on Core's `Boosts` (below) and has placeholders |
 | Contracts | `AtomicTempest:Contracts` | no API of its own: the `contract_deliver` action, the `contract_pay` boost kind and placeholders |
+| Projects | `AtomicTempest:Projects` | `com.atomictempest.projects.api.ProjectsAPI` (the buildings and their states); the `projects_donate` action (amount: items given), `projects_coins` (amount: coins given) and the `projects_open` placeholder |
+| Town | `AtomicTempest:Town` | no API of its own: it decides Core's `Unlocks` (below), and has the `town_unlocked` and `town_total` placeholders |
 
 Every API class has a version constant that goes up when something is added. Everything in these APIs is safe to call
 from any thread unless it says otherwise.
@@ -72,6 +74,7 @@ protected void setup() {
     core.helpCommand("server.dragons.help.mod", "/dragons", Message.translation("server.dragons.help.command"));
     core.hudLine("dragons.next", uuid -> Message.translation("server.dragons.hud.next"));
     core.placeholder("dragons_slain", uuid -> String.valueOf(slain(uuid)));
+    core.mapKind(new MapPlaces.Kind("nest", "Dragon nests", Message.translation("server.dragons.map.nest")).blocks("Dragon_Nest"::equals));
     core.leaderboard(board);  core.onWallet(listener);  core.veto(veto);  core.onAction(listener);
     core.onAnnouncement(listener);  core.restrictCraft("Dragon_Egg", () -> config.playersCanCraft());
     core.edition(isPro, PRO_ADDS, licensedTo);     // plugins with a free and a Pro jar
@@ -93,6 +96,14 @@ file does not have keep the class's defaults, so new settings never break old fi
 static DragonsConfig load() { return JsonFiles.loadAndSave(PATH, DragonsConfig.class, DragonsConfig::new); }
 void save() { JsonFiles.save(PATH, this); }
 Map<String, Long> times = JsonFiles.load(PATH, new TypeToken<Map<String, Long>>() {}.getType(), HashMap::new);
+```
+
+A setting renamed or moved later keeps the server's value with config versions (API 12): give the class an
+`int configVersion` field and list the steps; a file runs only the steps it has not had yet.
+
+```java
+JsonFiles.loadAndSave(PATH, DragonsConfig.class, DragonsConfig::new, List.of(
+        json -> JsonFiles.rename(json, "dragonsPerHour", "spawnsPerHour")));     // version 1
 ```
 
 ## Which Core is installed: `CoreAPI` (Core)
@@ -144,6 +155,12 @@ List<ItemStack> items = CoinStacks.of(1250);         // coin items worth an amou
 When your plugin pays out coin items instead of money (dropped, put in a tray), call `paidAsCoins` with the reason you
 would give a wallet change: the balance does not change, but the economy screen (`/eco`) and the leaderboards count
 the payout under its kind. Without it the money shows up only later, as "Deposited coins".
+
+**Town unlock:** Coins describes the feature `coins:bank_interest` ("Bank savings interest") with Core's `Unlocks`
+(Core API 8) and pays savings interest only while `Unlocks.isOn("coins:bank_interest")` and the admin has switched it
+on. A plugin that decides the unlocks (`Registrations.unlockProvider`) can keep it off, for example until a bank
+building is finished; without one, Coins' own setting decides. Interest is paid into banks with the history line
+"Savings interest" (no wallet changes, so no `WalletEvents`).
 
 ## Core: shared helpers
 
@@ -242,7 +259,7 @@ String text = Lang.text(language, Message.translation("server.mymod.hud.bounty")
 ```
 
 The admin can pick one language for everyone (`/tempest` → General → Language), for languages Hytale does not offer
-yet (German, Polish). That only covers keys under the Tempest plugins' own prefixes.
+yet (German, Italian, Polish). That only covers keys under the Tempest plugins' own prefixes.
 
 ### Admin settings: `CasinoSettings`
 
@@ -276,6 +293,16 @@ Setting.choice("Crate", () -> crateChoices(), true, () -> config.crate, v -> con
 A dropdown only saves one of its own entries. Give your tab an icon for the menu's side bar (API 3):
 `new SettingsTab("Dragons", settings, config::save).icon("Weapon_Sword_Iron")`. The side bar lists Core's tabs, then
 plugins with several tabs under their name, then the rest under "Plugins".
+
+A Reset to defaults button (API 11): give the tab the same settings built on a fresh config. An admin clicks it twice,
+every value is copied over, logged and saved through your save action. Guard it for older Cores:
+
+```java
+SettingsTab tab = new SettingsTab("Dragons", settings(config), config::save);
+if (CoreAPI.runningVersion() >= 11) {
+    tab.defaults(() -> settings(new DragonsConfig()));
+}
+```
 
 ### Menu themes: `Themes` (API version 3)
 
@@ -377,8 +404,9 @@ Placeholders.register("mymod_bounty", uuid -> String.valueOf(bounty(uuid)));
 | `achievements_unlocked`, `achievements_total`, `quests_active`, `quests_current`, `quests_points`, `quests_rank`, `quests_streak` | Quests | `7`, `19`, `2`, `Daily miner  40%`, `230`, `Adventurer`, `3` |
 | `coinflip_wins`, `coinflip_losses`, `coinflip_profit`, `coinflip_profit_formatted`, `coinflip_staked`, `coinflip_rooms` | Coinflip | `12`, `9`, `850`, `850 copper`, `4000`, `3` |
 | `events_name`, `events_time_left`, `events_goal_percent`, `events_next` | Events | `Gold Rush`, `1h 5m`, `42`, `Monster Hunt` (empty when nothing is on) |
-| `contracts_delivered`, `contracts_earned`, `contracts_earned_formatted`, `contracts_rank`, `contracts_open`, `contracts_to_collect`, `contracts_market_items`, `contracts_sold` | Contracts | `120`, `540`, `540 copper`, `Courier`, `7`, `10`, `14`, `320` |
+| `contracts_delivered`, `contracts_earned`, `contracts_earned_formatted`, `contracts_rank`, `contracts_open`, `contracts_to_collect`, `contracts_market_items`, `contracts_sold`, `contracts_bounty`, `contracts_bounties_claimed`, `contracts_most_wanted` | Contracts | `120`, `540`, `540 copper`, `Courier`, `7`, `10`, `14`, `320` |
 | `events_fund_percent`, `events_fund_total`, `events_stage` | Events | `42`, `10500`, `2` (empty when the fund is off or nothing is on) |
+| `town_unlocked`, `town_total` | Town | `3`, `5` |
 
 ### Announcements: `Announcements`
 
@@ -411,6 +439,25 @@ Perks.name(uuid);                                         // "VIP", or "" withou
 
 Perks are checked against the player's permissions while they are online; offline players get none.
 
+`Perks.highestPercent(Perks.Bonus.SHOP_DISCOUNT)` (API version 9) is the best value any perk on the server gives,
+whoever has it. Cap what you pay players with it, so someone with a discount cannot buy for a friend who sells back.
+
+`Perks.Bonus.PASS_XP` (API version 10) is a rank's pass XP bonus; Tempest Pass (Pro) adds it to every XP gain.
+Check `CoreAPI.runningVersion() >= 10` before using it.
+
+### Who is really playing: `Activity` (API version 9)
+
+Pay for time played only to players who are there. A player counts as active while they turned their view in the last
+`Activity.AFK_MINUTES` (5) minutes; water pushing them or standing in a farm moves them but never turns their head.
+A player who has just joined counts as active.
+
+```java
+if (Activity.isActive(uuid)) { addMinutePlayed(uuid); }
+Activity.idleMillis(uuid);   // how long they have not turned their view
+```
+
+Tempest Pass (minutes played) and Tempest Events (playtime goals) use it. Check `CoreAPI.runningVersion() >= 9` first.
+
 ### One mailbox for every plugin: `Mailbox` (API version 6)
 
 Instead of dropping a reward at a player's feet (full inventory) or keeping it in your own file until they come back
@@ -430,6 +477,57 @@ Mailbox.count(uuid);   Mailbox.of(uuid);   // what is waiting
 
 The title is a key in your plugin's `server.lang`, so each player reads it in their language. Crates sends keys from
 `/cratekey` and key parties there when the player is not in a world.
+
+### Places on the world map: `MapPlaces` (API version 7)
+
+Register a kind of place and Core does the rest: a tab in `/tempest` (on or off, icon, colour, name, size, compass, who
+sees it, how far away, which worlds), changing or hiding one place from `/places`, and each player picking what their
+map shows.
+
+```java
+// Blocks: Core remembers each one when it is placed or used, and forgets it when it goes
+core.mapKind(new MapPlaces.Kind("nest", "Dragon nests", Message.translation("server.dragons.map.nest"))
+        .icon("Tempest_Star.png").color("#E74C3C").item("Rock_Gem_Ruby")
+        .blocks(id -> id.equals("Dragon_Nest")));
+
+// Or your own list, asked for every few seconds on any thread, so keep it quick
+core.mapKind(new MapPlaces.Kind("dragon", "Dragons", Message.translation("server.dragons.map.dragon"))
+        .places(() -> dragons.stream()
+                .map(d -> new MapPlaces.Place(d.id(), d.world(), d.x(), d.y(), d.z(), d.name())).toList()));
+
+MapPlaces.refresh();   // after a change that should show at once
+```
+
+`Kind.startOff()` leaves a kind off until an admin turns it on. A place's `key` must stay the same, as admins' changes
+are kept under it. The second argument of `Kind` is what admins read in `/tempest`; the third is what players read.
+Icons are files in `Common/UI/WorldMap/MapMarkers`, so an asset pack can add its own: `MapPlaces.ICONS` lists what every
+server has. Paint them white with a dark edge and the admin's colour tints them.
+
+### Features the town unlocks: `Unlocks` (API version 8)
+
+Some features should wait until the server has earned them: savings interest once the town has a bank, market stalls
+once the market hall stands. Describe each such feature, and ask Core before using it:
+
+```java
+core.unlockFeature(new Unlocks.Feature("dragons:nest_rewards", "Dragon nest rewards",       // Registrations
+        Message.translation("server.dragons.unlock.nests"), "Rock_Gem_Ruby"));
+if (Unlocks.isOn("dragons:nest_rewards")) { payNestReward(); }
+core.onUnlock((feature, on) -> { if (feature.equals("dragons:nest_rewards")) refreshNests(); });
+```
+
+- The id is your plugin's name and the feature; keep it the same, as admins' choices are kept under it. The second
+  argument is what admins read in menus, the third what players read on `/town`.
+- **Without a provider every feature is on**, so a server without Tempest Town works as before and your plugin's own
+  settings decide. Tempest Town is the provider (`tempest:town`): an admin ties features to unlocks there (always on,
+  always off, or once a building is finished, a date has come or another unlock came first). A feature no unlock names
+  stays on.
+- `isOn` is asked from any thread and answers from memory, so call it as often as you like. A listener hears a feature
+  switched on or off on the thread that changed it.
+- Your own provider (a plugin that decides unlocks some other way): `core.unlockProvider("mymod", feature -> ...)`
+  returns `TRUE`, `FALSE`, or `null` to leave the feature on. A feature is off when any provider says off. Tell the
+  plugins with `Unlocks.fire(feature, on)` when your answer changes.
+- `Unlocks.features()` lists every described feature (Town's editor shows them); check `CoreAPI.runningVersion() >= 8`
+  first when your plugin may run with an older Core.
 
 ### Boosts for a while: `Boosts` (API version 5)
 
@@ -463,6 +561,111 @@ it would change the odds players were shown.
 
 A plugin built against Core 1.0.x and run with an older Core must not touch `Boosts`; check first:
 `if (CoreAPI.runningVersion() >= 5) { ... }`.
+
+Personal boosters need no code: `/booster <player> <kind> <percent> <minutes>` (permission `tempest.boosters`, also
+from the console) gives one player a boost of any described kind for a while, so a crate's command prize, a quest or a
+vote plugin can hand them out. They count like any other source and show under the coin counter with the time left.
+`/booster <player> clear 0 0` takes them away.
+
+### Catching money from nothing: `Doctor` (API version 13)
+
+`/tempest doctor` looks through every plugin's settings for ways players could make money from nothing, before they
+find them. A plugin that pays coins or takes items for coins adds a check, and its prices take part in every check the
+doctor runs across plugins:
+
+```java
+core.doctor(new Doctor.Check() {                                     // Registrations
+    public void prices(Doctor.Market market) {
+        // where players buy items for coins, and get coins for items, with the settings as they are now
+        market.buy("my stall", "Ingredient_Bar_Iron", 12, 0, "/mystall");        // 0 = no daily limit
+        market.sell("my bounty board", "Ingredient_Bar_Iron", 20, 64, "/bounties");
+        market.play(Doctor.CRATE_OPENS, averageLossPerOpening, "my crate");    // for quests that count openings
+    }
+    public void check(Doctor.Market market, Doctor.Findings findings) {
+        long worth = market.worth("Rock_Gem_Diamond");                // the most any plugin pays for one
+        if (myPrize > myPrice) findings.problem("prize", "My prize is worth more than it costs.", "My price");
+    }
+});
+```
+
+Core itself finds every item bought cheaper in one place than it sells for in another, and every game recipe whose
+parts, bought at their cheapest, cost less than what it makes sells for (items only admins may craft are left out).
+A finding is `problem` (money from nothing), `warning` (easy to farm) or `hint`. Its key must stay the same between
+checks, as the admin can mark it "on purpose". A fix is a command (`"/shop"`) or the label of a setting in /tempest,
+which the FIX button searches for. Texts are for admins and may be English. Give the most a player can get (rank perks
+and running `Boosts` included): the doctor is there for the worst case. `new Doctor.Findings(list)` collects findings in a
+plugin's own tests. Check `CoreAPI.runningVersion() >= 13` first, and keep the check in a class of its own.
+
+### Player levels: `Levels` (API version 14)
+
+Levels from whichever leveling mod the server runs, as `Economies` is for money. Endless Leveling is found by itself
+(through its public API, nothing of it is shipped); another mod's bridge can `Levels.register` its own `Leveling`.
+
+```java
+Levels.Leveling leveling = Levels.get();            // null without a leveling mod
+if (leveling != null) {
+    int level = leveling.level(uuid);
+    int prestige = leveling.prestige(uuid);
+    leveling.giveXp(uuid, 250, "Quest: Miner");      // with the mod's own bonuses and level cap
+}
+
+Levels.listen(new Levels.Listener() {                  // stopListening in shutdown (or Registrations.onClose)
+    @Override
+    public void levelUp(UUID player, int oldLevel, int newLevel) { ... }
+    @Override
+    public void prestige(UUID player, int oldPrestige, int newPrestige) { ... }
+    @Override
+    public void dungeonCleared(UUID player, String rank) { ... }           // API version 15, for each player in it
+    @Override
+    public void gateCleared(UUID player, String rank, int waves) { ... }   // 15: a wave gate or fate zone
+    @Override
+    public void raidCleared(UUID player, int waves) { ... }                // 15
+});
+```
+
+Listeners run on the thread the leveling mod fires on: keep them quick. Core itself pays the admin's money per level-up,
+prestige, dungeon, wave gate and raid clear (`/tempest`, Leveling tab), gives the placeholders `{leveling_level}` and
+`{leveling_prestige}`, and shows a "Highest levels" board in /leaderboards while a leveling mod runs. A bridge for
+another mod fires the clears with `Levels.fireDungeonCleared`, `fireGateCleared` and `fireRaidCleared` (15).
+
+Everything Core pays is set on the Leveling tab: money per level-up, more for each level reached, a milestone bonus
+every N levels, money per prestige, per dungeon, per wave gate (plus per wave, with the fewest waves that pay), per raid
+(plus per wave), a rank bonus in percent for each rank above E, a chat line telling players what they got, and switches
+for the leaderboard and the boost with its highest percent. The Pass has its own "Pass leveling" tab: Pass XP per
+level-up, prestige, dungeon, gate and raid, and the most of it a player gets in a day.
+
+API version 16 adds: `Levels.available()`, `level`, `meets(uuid, minLevel)` and `hasClass(uuid, class)` (both true
+without a leveling mod, so a missing mod never locks players out), `mobLevel(ref, store, buffer)` and `mobGold`; on
+`Leveling`: `xp`, `xpForNext`, `levelCap`, `playerClass`, `secondClass`, `race`, `mobLevel`, `inPartyWith`; on
+`Listener`: `raidStarted`; and `Registrations.levelingTab(tab)`, a /tempest tab shown only while a leveling mod runs.
+Every setting is in the Leveling tabs of /tempest, which show only while Endless Leveling runs.
+
+`Boosts.LEVELING_XP` (15) raises leveling XP: Core gives the extra through Endless Leveling each time it gives a player
+XP, so Tempest Events, rank perks and boosters can run "double leveling XP". The kind is described (and offered in
+Events) only while the mod lets Core do it.
+
+### Items the server wants: `Demand` (Core, API version 17)
+
+A plugin with orders tells Core what is wanted; any plugin asks Core, so neither depends on the other. Tempest
+Contracts provides the items of its open server orders (players' own contracts do not count, so a cheap one cannot
+raise everyone's pay); Tempest Jobs pays more for work that brings one in.
+
+```java
+core.demandSource("myplugin", () -> Set.of("Ore_Iron", "Wood_Oak_Trunk"));   // removed by core.close()
+Demand.isWanted("Ore_Iron_Stone");   // true: the id contains a wanted id ("_Item" endings are ignored)
+Demand.wanted();                     // every wanted id now, from every source (kept for 10 seconds)
+```
+
+### A progress bar on the screen: `HudLines.progress` (Core, API version 17)
+
+A bar under the money counter for five seconds: an item icon, a short line and how far along (0 to 1). A newer bar
+replaces the one showing. Shown even while the Tempest board replaces the counter, never when the player hid it with
+/hud. One HUD for everything, so it never fights another mod's HUD.
+
+```java
+HudLines.progress(uuid, "Tool_Pickaxe_Iron", Message.raw("Miner 14   +6 XP"), 0.42f);
+HudLines.progress(uuid, "Tool_Pickaxe_Iron", Message.raw("Miner 14"), 0.42f, 8000);   // shown for 8 seconds
+```
 
 ### Saving files safely: `SafeFiles`
 
@@ -531,7 +734,11 @@ QuestsAPI.isDone(uuid, "fishing:first_catch");
 QuestsAPI.progressOf(uuid, "fishing:daily");
 QuestsAPI.goals();                                  // every goal, as GoalInfo
 QuestsAPI.onComplete((uuid, goal) -> { ... });      // after the reward was paid
+QuestsAPI.givesPassXp(goal.id());                   // version 2: false when the admin switched pass XP off for it
 ```
+
+`givesPassXp` is new in `QuestsAPI.API_VERSION` 2; against an older Quests catch `NoSuchMethodError` and treat it as
+true.
 
 ### Custom triggers (no new objective needed)
 
@@ -716,6 +923,53 @@ CoinflipAPI.get().registerMode(new JackpotMode());   // in setup(); unregisterMo
 - The Rooms page lists rooms of every mode (with the mode's title on the row) and lets players join with
   `matching`; `/cf create` and the Create room tab make `coins_1v1` rooms. A mode that needs its own way to make or
   join rooms (choosing items) calls `create` and `join` from its own page or command.
+
+## Jobs: `JobsAPI` (Jobs plugin)
+
+Which jobs there are, who holds them and their levels, and a way for any mod to pay job work Jobs cannot see itself
+(`JobsAPI.API_VERSION`, 2). Declare `"AtomicTempest:Jobs": "*"` under OptionalDependencies and check
+`JobsAPI.get() != null` (null while Jobs is not running).
+
+```java
+JobsAPI jobs = JobsAPI.get();
+if (jobs != null && jobs.holds(uuid, "miner") && jobs.level(uuid, "miner") >= 10) { ... }
+jobs.xp(uuid, "miner"); jobs.earned(uuid, "miner"); jobs.earnedToday(uuid);     // API 2
+// A fishing mod's catch, paid to a "fisher" job the admin made: the level bonus, boosts and caps apply
+if (jobs != null && JobsAPI.API_VERSION >= 2) {
+    jobs.reward(uuid, "fisher", 3, 5);        // false when the player does not hold it; at most 10,000 a call
+}
+```
+
+Core's `PlayerActions` tells of `jobs_paid` (amount paid), `jobs_level` (the new level), `jobs_tree` (a whole tree
+felled, 1) and `jobs_found` (a place found for the first time, 1). Placeholders: `{jobs_list}`, `{jobs_count}`,
+`{jobs_earned_today}`, and for each job `{jobs_<id>_level}`, `_xp`, `_percent` (to the next level) and `_earned`.
+
+## Town projects: `ProjectsAPI` (Projects plugin)
+
+What is being built and how far each building is, and a word whenever a project changes state
+(`ProjectsAPI.API_VERSION`, 1). Tempest Town uses it to unlock features when a building is finished. Declare
+`"AtomicTempest:Projects": "*"` under OptionalDependencies, keep the classes that touch it in one file of their own
+(as Shop does with Holograms), and check `ProjectsAPI.isAvailable()` first.
+
+```java
+for (ProjectsAPI.Building b : ProjectsAPI.buildings()) {   // a copy; empty when Projects is not running
+    b.id(); b.name(); b.prefab(); b.world(); b.state(); b.percentDone(); b.finished();
+}
+ProjectsAPI.building("k3f9");          // one, or null
+ProjectsAPI.donors("k3f9");            // different players who donated; -1 when there is no such project
+ProjectsAPI.listen(listener);          // listener.changed(building): made, paused, finished, stopped, cancelled, removed
+ProjectsAPI.stopListening(listener);   // in your shutdown()
+```
+
+- `state` is the project's state name: `CLEARING`, `OPEN`, `PAUSED`, `FINISHING`, `FINISHED`, `CANCELLING`, `STOPPING`
+  or `STOPPED`. A listener hears `ProjectsAPI.REMOVED` for a project taken off the list (after a cancel has put the old
+  ground back, or an admin removed a finished or stopped one).
+- `percentDone` is how much of the goal was donated (100 once finished). Donations change no state, so listeners are
+  not told about them: read `buildings()` again when you need the numbers.
+- Listeners are called on Projects' timer thread, within a second of the change and never while Projects holds a
+  lock, so a listener may call `buildings()`. Every call may come from any thread; answers never wait for the builder.
+- When Projects stops (or reloads) it forgets every listener: listen again when it is back, or ask `buildings()` on
+  a timer, as Town does every minute.
 
 ## Battle pass: `PassAPI` (Pass plugin)
 
