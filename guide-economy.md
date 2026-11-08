@@ -293,8 +293,8 @@ Players paying each other with /pay or the wallet's Pay button.
 
 | Setting | What it does | Values |
 |---|---|---|
-| Players can pay each other |  | On or off |
-| Smallest payment |  | 1 to 1000000000 |
+| Players can pay each other | Off: /pay and the wallet's Pay button stop working. Admins can still move money with /eco. | On or off |
+| Smallest payment | The lowest amount a player can send with /pay. Stops players from spamming each other with tiny payments. | 1 to 1000000000 |
 | Fee (%) | Paid on top by the sender. It leaves the game. | 0 to 100 |
 
 #### Leaderboards
@@ -304,7 +304,7 @@ Players paying each other with /pay or the wallet's Pay button.
 | Setting | What it does | Values |
 |---|---|---|
 | Open to everyone | Off: only admins can see them. | On or off |
-| Players on each board |  | 1 to 50 |
+| Players on each board | How many players each leaderboard and /baltop lists, from first place down. | 1 to 50 |
 
 #### Shared banks
 
@@ -314,7 +314,7 @@ Players open a bank with /bank and save up together; the owner decides who may t
 |---|---|---|
 | Shared banks | Off: no new banks. Existing ones can still be used and closed. | On or off |
 | Price to open a bank | It leaves the game. 0 = free. | 0 to 1000000000 |
-| Banks one player can own |  | 1 to 100 |
+| Banks one player can own | How many shared banks one player can open. Being a member of other players' banks does not count. | 1 to 100 |
 | Members per bank | Besides the owner. | 1 to 200 |
 
 #### Savings interest
@@ -324,7 +324,7 @@ Banks earn a little each day on the lowest balance they had since the last payou
 | Setting | What it does | Values |
 |---|---|---|
 | Savings interest | Off: no interest. New money: keep the rate low. | On or off |
-| Rate (% a day) |  | 0 to 5 |
+| Rate (% a day) | What a bank earns each day, as a share of its lowest balance since the last payout. 1% on 10,000 is 100 a day. The limits below keep it from growing too fast. | 0 to 5 |
 | Highest balance that earns | 0 = no limit. | 0 to 1000000000000 |
 | Most per bank a day | 0 = no limit. | 0 to 1000000000 |
 | Most per owner a day | All banks of one owner together, so many small banks earn no more. 0 = no limit. | 0 to 1000000000 |
@@ -389,25 +389,25 @@ The chance that mining an ore also drops coins, and how much. Ores placed by pla
 | Setting | What it does | Values |
 |---|---|---|
 | Copper | Chance (%) | 0 to 100 |
-| Worth |  | 0 to 1000000000 |
+| Worth | How much money one drop from this ore is worth. 0: this ore never drops coins. It counts for every rock this ore is found in. | 0 to 1000000000 |
 | Iron | Chance (%) | 0 to 100 |
-| Worth |  | 0 to 1000000000 |
+| Worth | How much money one drop from this ore is worth. 0: this ore never drops coins. It counts for every rock this ore is found in. | 0 to 1000000000 |
 | Silver | Chance (%) | 0 to 100 |
-| Worth |  | 0 to 1000000000 |
+| Worth | How much money one drop from this ore is worth. 0: this ore never drops coins. It counts for every rock this ore is found in. | 0 to 1000000000 |
 | Gold | Chance (%) | 0 to 100 |
-| Worth |  | 0 to 1000000000 |
+| Worth | How much money one drop from this ore is worth. 0: this ore never drops coins. It counts for every rock this ore is found in. | 0 to 1000000000 |
 | Cobalt | Chance (%) | 0 to 100 |
-| Worth |  | 0 to 1000000000 |
+| Worth | How much money one drop from this ore is worth. 0: this ore never drops coins. It counts for every rock this ore is found in. | 0 to 1000000000 |
 | Mithril | Chance (%) | 0 to 100 |
-| Worth |  | 0 to 1000000000 |
+| Worth | How much money one drop from this ore is worth. 0: this ore never drops coins. It counts for every rock this ore is found in. | 0 to 1000000000 |
 | Adamantite | Chance (%) | 0 to 100 |
-| Worth |  | 0 to 1000000000 |
+| Worth | How much money one drop from this ore is worth. 0: this ore never drops coins. It counts for every rock this ore is found in. | 0 to 1000000000 |
 | Thorium | Chance (%) | 0 to 100 |
-| Worth |  | 0 to 1000000000 |
+| Worth | How much money one drop from this ore is worth. 0: this ore never drops coins. It counts for every rock this ore is found in. | 0 to 1000000000 |
 | Onyxium | Chance (%) | 0 to 100 |
-| Worth |  | 0 to 1000000000 |
+| Worth | How much money one drop from this ore is worth. 0: this ore never drops coins. It counts for every rock this ore is found in. | 0 to 1000000000 |
 | Prisma | Chance (%) | 0 to 100 |
-| Worth |  | 0 to 1000000000 |
+| Worth | How much money one drop from this ore is worth. 0: this ore never drops coins. It counts for every rock this ore is found in. | 0 to 1000000000 |
 
 
 ### Currency
@@ -421,7 +421,7 @@ What amounts are called in every message.
 | Setting | What it does | Values |
 |---|---|---|
 | Name | For 1 | Text |
-| For 2 or more |  | Text |
+| For 2 or more | The currency's name for amounts of 2 or more, such as coins in 250 coins. | Text |
 
 #### Coins
 
@@ -431,15 +431,15 @@ Each coin's name, and how many of the smallest coin it is worth.
 |---|---|---|
 | Copper Coin | Name | Text |
 | Iron Coin | Name | Text |
-| Worth |  | 1 to 1000000000000 |
+| Worth | How many copper coins one of these is worth. Prices and balances are counted in copper, so this only changes how amounts are split into coins. | 1 to 1000000000000 |
 | Silver Coin | Name | Text |
-| Worth |  | 1 to 1000000000000 |
+| Worth | How many copper coins one of these is worth. Prices and balances are counted in copper, so this only changes how amounts are split into coins. | 1 to 1000000000000 |
 | Gold Coin | Name | Text |
-| Worth |  | 1 to 1000000000000 |
+| Worth | How many copper coins one of these is worth. Prices and balances are counted in copper, so this only changes how amounts are split into coins. | 1 to 1000000000000 |
 | Emerald Coin | Name | Text |
-| Worth |  | 1 to 1000000000000 |
+| Worth | How many copper coins one of these is worth. Prices and balances are counted in copper, so this only changes how amounts are split into coins. | 1 to 1000000000000 |
 | Diamond Coin | Name | Text |
-| Worth |  | 1 to 1000000000000 |
+| Worth | How many copper coins one of these is worth. Prices and balances are counted in copper, so this only changes how amounts are split into coins. | 1 to 1000000000000 |
 
 #### Chat tags
 
@@ -448,11 +448,11 @@ The word in front of messages, and its colour. Leave a tag empty to hide it.
 | Setting | What it does | Values |
 |---|---|---|
 | Wallet and payments | Tag | Text |
-| Colour |  | A colour |
+| Colour | The colour of the tag word in front of these chat messages. The example at the end of the row shows it. | A colour |
 | Daily rewards | Tag | Text |
-| Colour |  | A colour |
+| Colour | The colour of the tag word in front of these chat messages. The example at the end of the row shows it. | A colour |
 | Admin /eco | Tag | Text |
-| Colour |  | A colour |
+| Colour | The colour of the tag word in front of these chat messages. The example at the end of the row shows it. | A colour |
 
 
 ### Integrations
@@ -482,12 +482,12 @@ Posts big moments to a Discord channel. In Discord: Edit channel, Integrations, 
 | Setting | What it does | Values |
 |---|---|---|
 | Webhook link | Empty: Discord is off. Keep it secret, anyone with it can post. | Text |
-| Name in Discord |  | Text |
-| Jackpots |  | On or off |
+| Name in Discord | The name the posts appear under in your Discord channel, such as your server's name. Empty: the name the webhook was given in Discord. | Text |
+| Jackpots | Posts when a player wins a jackpot. | On or off |
 | Big slot machine wins | The size is set on the Slot Machine tab (Announce wins from). | On or off |
-| Lottery winners |  | On or off |
-| Achievements |  | On or off |
-| News from other mods |  | On or off |
+| Lottery winners | Posts who won each lottery drawing and how much. | On or off |
+| Achievements | Posts when a player unlocks an achievement or finishes a quest that announces itself, and when the server finishes a server quest together. | On or off |
+| News from other mods | Posts the other big moments: bounties, crate key parties, events starting and ending, finished town projects and unlocks, and battle pass seasons and players who finish them. | On or off |
 | Send a test message when saved | Tick, then Save: a test message is posted if the link works. | On or off |
 
 #### Placeholders

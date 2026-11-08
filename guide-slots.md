@@ -93,7 +93,7 @@ Players crouch and press F on a machine (or type /slotbet) to choose their bet.
 |---|---|---|
 | Players can craft slot machines | Off: only admins can. | On or off |
 | Chat tag | Tag | Text |
-| Colour |  | A colour |
+| Colour | The colour of the slot machine's tag word in front of its chat messages. | A colour |
 
 #### Free edition
 
@@ -111,15 +111,15 @@ What three of a kind pays (times the bet), and how often it comes up compared wi
 | Setting | What it does | Values |
 |---|---|---|
 | Cherries | Pays (x bet) | 0.1 to 1000000 |
-| How often |  | 0 to 100000 |
+| How often | How often this symbol wins, next to the others: a symbol at 40 comes up twice as often as one at 20. 0: it never wins. | 0 to 100000 |
 | Bells | Pays (x bet) | 0.1 to 1000000 |
-| How often |  | 0 to 100000 |
+| How often | How often this symbol wins, next to the others: a symbol at 40 comes up twice as often as one at 20. 0: it never wins. | 0 to 100000 |
 | Coins | Pays (x bet) | 0.1 to 1000000 |
-| How often |  | 0 to 100000 |
+| How often | How often this symbol wins, next to the others: a symbol at 40 comes up twice as often as one at 20. 0: it never wins. | 0 to 100000 |
 | Diamonds | Pays (x bet) | 0.1 to 1000000 |
-| How often |  | 0 to 100000 |
+| How often | How often this symbol wins, next to the others: a symbol at 40 comes up twice as often as one at 20. 0: it never wins. | 0 to 100000 |
 | Sevens | Pays (x bet) | 0.1 to 1000000 |
-| How often |  | 0 to 100000 |
+| How often | How often this symbol wins, next to the others: a symbol at 40 comes up twice as often as one at 20. 0: it never wins. | 0 to 100000 |
 
 #### Jackpot
 
@@ -131,7 +131,7 @@ Three sevens wins a pot that grows from lost bets.
 | Jackpot chance (%) | Per spin. | 0 to 100 |
 | Share of lost bets (%) | Added to the pot from every losing spin. | 0 to 100 |
 | Starting amount | What the pot starts at after it is won. | 0 to 1000000000 |
-| Pot right now |  | 0 to 1000000000000 |
+| Pot right now | What the jackpot holds at this moment. Change it to fill the pot up for an event, or to reset it. | 0 to 1000000000000 |
 | Smaller bets win a share | Off: every bet wins the whole pot. | On or off |
 | Announce jackpots | A message and a title for everyone. | On or off |
-| Pot under the coin counter |  | On or off |
+| Pot under the coin counter | On: every player sees the jackpot's size in a line under their coin counter, so they know when it is worth playing. | On or off |

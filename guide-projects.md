@@ -77,14 +77,14 @@ What everyone sees.
 
 | Setting | What it does | Values |
 |---|---|---|
-| Announce finished buildings |  | On or off |
+| Announce finished buildings | On: everyone gets a chat line when a town project is finished, with how many players helped. It also goes to Discord when that is set up. | On or off |
 | Progress text over the plot | Needs Tempest Holograms. | On or off |
 | Show the finished building as a ghost | A see-through plan stands on the plot, and the real blocks fill it. Off: no project shows one, whatever is set for it. | On or off |
 | Ghost of a new project | Off: nothing shows on the plot, and real blocks appear as people donate. The placing panel can choose for each project, and so can a project's own page. | Everyone, Only players in creative mode, Off: real blocks only |
 | New projects cannot be walked through | Invisible solid blocks hold the walls that are still to come, so the plan feels solid. Only for a plan everyone sees. Doorways stay open, and a project's page changes it. | On or off |
 | Frame around a plot under way | Everyone near sees where a site is, even with its plan hidden. | On or off |
-| Colour of the frame |  | A colour |
-| How far the frame shows (blocks) |  | 16 to 512 |
+| Colour of the frame | The colour of the frame around a plot that is being built. | A colour |
+| How far the frame shows (blocks) | Players farther away than this do not see the frame. | 16 to 512 |
 
 #### Pro edition
 
@@ -103,17 +103,17 @@ What an admin starts with in the placing panel. The VIEW tab changes the ghost, 
 |---|---|---|
 | Ghost of the building | The game's own see-through copy of the building. Everyone near sees it. Off: only the outline, which only the admin sees. | On or off |
 | Largest building with a ghost (blocks) | A bigger one starts without its ghost, as all of it is sent to everyone near. It can still be switched on in the panel. | 100 to 400000 |
-| Outline of the plot |  | On or off |
-| Outline thickness (blocks) |  | 0.02 to 1 |
-| Colour when it fits |  | A colour |
-| Colour when it does not |  | A colour |
+| Outline of the plot | On: the placing panel starts with the outline of the plot shown. Only the admin who places sees it. | On or off |
+| Outline thickness (blocks) | How thick the outline's lines are. The site frame uses it too. | 0.02 to 1 |
+| Colour when it fits | The outline's colour while the building can go where it is. | A colour |
+| Colour when it does not | The outline's colour while something is in the way. | A colour |
 | See-through box over the plot (%) | How solid the coloured box around the plot is. 0: no box. | 0 to 100 |
 | Show the plots nearby | Outlines of the other projects, to line a street up. | On or off |
-| Colour of the plots nearby |  | A colour |
+| Colour of the plots nearby | The outline colour of other projects' plots near the one being placed, so they do not overlap. | A colour |
 | Red blocks where it goes into something | Only the admin sees them. They show what the building would replace, and in a second colour what stops it from starting. | On or off |
-| Colour of those blocks |  | A colour |
-| Colour of what stops it |  | A colour |
-| How solid those blocks look (%) |  | 5 to 100 |
+| Colour of those blocks | The colour of the blocks the building would replace. | A colour |
+| Colour of what stops it | The colour of the blocks that stop the building from starting where it is. | A colour |
+| How solid those blocks look (%) | How solid the coloured blocks look. Low: see-through, high: solid. | 5 to 100 |
 
 #### Moving
 
@@ -123,8 +123,8 @@ How the plot moves.
 |---|---|---|
 | Step sizes | The sizes the STEP button goes through, in blocks, such as 1, 5, 10, 25. | Text |
 | Start on the ground | A new plot settles where it fits the land best. Off: it starts at the admin's feet. | On or off |
-| How far AIM reaches (blocks) |  | 8 to 256 |
-| Gap left by BESIDE (blocks) |  | 0 to 64 |
+| How far AIM reaches (blocks) | AIM moves the plot to the block the admin looks at. It finds blocks up to this far away. | 8 to 256 |
+| Gap left by BESIDE (blocks) | BESIDE moves the plot right next to the nearest other plot, with this many blocks between them. 0: wall to wall. | 0 to 64 |
 
 #### The camera
 
@@ -132,8 +132,8 @@ The views of the placing panel.
 
 | Setting | What it does | Values |
 |---|---|---|
-| View to start in |  | Normal, From the top, From an angle |
-| Closest zoom (blocks) |  | 4 to 64 |
-| Farthest zoom (blocks) |  | 4 to 256 |
-| Zoom step (blocks) |  | 1 to 64 |
+| View to start in | The camera the placing panel opens with: the admin's own eyes, straight down from the top, or from an angle. | Normal, From the top, From an angle |
+| Closest zoom (blocks) | How close the top and angled views can zoom in. | 4 to 64 |
+| Farthest zoom (blocks) | How far the top and angled views can zoom out. | 4 to 256 |
+| Zoom step (blocks) | How much one click on zoom in or out moves the camera. | 1 to 64 |
 | Zoom to start at (blocks) | A big building starts farther away, so all of it is in view. | 4 to 256 |

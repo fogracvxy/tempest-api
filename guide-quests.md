@@ -66,11 +66,11 @@ Ranks, the daily sweep, the featured quest and server quests: what brings player
 | Quest points and ranks | Every finished goal gives points; Wanderer, Adventurer, Pathfinder, Hero, Champion and Legend. A new rank is told to everyone. | On or off |
 | Ranks raise quest rewards | From +2% for Adventurers to +10% for Legends. | On or off |
 | Daily sweep: daily quests to finish | Finish this many of the day's daily quests for a bonus. 0 = off. | 0 to 20 |
-| Daily sweep bonus |  | 0 to 1000000000 |
-| Streak: more each day in a row (%) |  | 0 to 500 |
-| Streak grows for (days) |  | 1 to 60 |
+| Daily sweep bonus | Extra money once a day for a player who finishes enough of that day's daily quests (the number is set above). 0: no sweep bonus. | 0 to 1000000000 |
+| Streak: more each day in a row (%) | The sweep bonus grows for each day in a row a player earns it. 10: day 2 pays 10% more, day 3 20% more, and so on. | 0 to 500 |
+| Streak grows for (days) | After this many days in a row the sweep bonus stops growing and stays at its highest. | 1 to 60 |
 | Featured quest pays (times) | One daily quest a day, the same for everyone. 1 = no featured quest. | 1 to 10 |
-| Server quests: top helper gets more (%) |  | 0 to 1000 |
+| Server quests: top helper gets more (%) | When the server finishes a server quest together, the player who did the most gets this much more than the others. | 0 to 1000 |
 | Server quests: least share to be paid (%) | Of the target. Players who did less are thanked but not paid, so nobody earns by doing one thing. | 0 to 100 |
 
 #### Achievements
@@ -88,7 +88,7 @@ Ranks, the daily sweep, the featured quest and server quests: what brings player
 | Sounds | A short jingle when something is done, and coins when it pays. | On or off |
 | Quest under the coin counter | The player's first quest and how far along it is. | On or off |
 | Chat tag | Tag | Text |
-| Colour |  | A colour |
+| Colour | The colour of the quests' tag word in front of their chat messages. | A colour |
 
 #### Free edition
 

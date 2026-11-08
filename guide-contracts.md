@@ -64,12 +64,12 @@ Players post orders; the reward is taken when they post and paid out as items ar
 
 | Setting | What it does | Values |
 |---|---|---|
-| Players may post contracts |  | On or off |
-| Open contracts per player |  | 0 to 100 |
+| Players may post contracts | On: players can post their own orders on the contract board. Off: players cannot post new ones; the server's orders stay. | On or off |
+| Open contracts per player | How many contracts one player can have on the board at once. 0: players cannot post any. | 0 to 100 |
 | Posting fee (%) | Taken when posting and never given back: it takes money out of the economy. | 0 to 50 |
-| Least pay per item |  | 1 to 1000000 |
-| Most items in one contract |  | 1 to 1000000 |
-| Largest reward |  | 1 to 1000000000 |
+| Least pay per item | The lowest reward a contract can offer for each item, so the board does not fill with worthless orders. 64 items at 5 needs a reward of at least 320. | 1 to 1000000 |
+| Most items in one contract | The most items one contract can ask for. | 1 to 1000000 |
+| Largest reward | The most money one contract can offer. It also limits how much one player can put on one bounty. | 1 to 1000000000 |
 | How long contracts and offers last (hours) | Players pick one of these. Separate with commas, e.g. 24, 72, 168. | Text |
 | Items nobody may ask for or sell | Item ids separated with commas. Coins never can. | Text |
 
@@ -79,8 +79,8 @@ Off: everyone may. On: only players with the permission.
 
 | Setting | What it does | Values |
 |---|---|---|
-| Posting contracts needs contracts.post |  | On or off |
-| Selling on the market needs contracts.sell |  | On or off |
+| Posting contracts needs contracts.post | On: only players with the permission contracts.post can post contracts (admins always can). Give it to a rank in your ranks plugin. Off: everyone can. | On or off |
+| Selling on the market needs contracts.sell | On: only players with the permission contracts.sell can put items up for sale on the market (admins always can). Buying stays open to everyone. Off: everyone can sell. | On or off |
 
 #### Telling players
 
@@ -89,9 +89,9 @@ Chat lines and sounds.
 | Setting | What it does | Values |
 |---|---|---|
 | Announce new contracts | One chat line to everyone (at most once a minute per player), and when server orders start again. | On or off |
-| Sounds |  | On or off |
+| Sounds | On: a sound when a player posts, delivers or sells, and when they are paid. | On or off |
 | Chat tag | Tag | Text |
-| Tag colour |  | A colour |
+| Tag colour | The colour of the contracts' tag word in front of their chat messages. | A colour |
 
 
 ### Market & ranks
@@ -104,10 +104,10 @@ Players put items up for sale; others buy at once, cheapest first. Prices of the
 
 | Setting | What it does | Values |
 |---|---|---|
-| Market is on |  | On or off |
+| Market is on | On: players can sell items to each other on the market in /contracts. Off: nobody can put up or buy offers. | On or off |
 | Sales tax (%) | Kept from each sale; the seller gets the rest. It takes money out of the economy. | 0 to 50 |
-| Offers per player |  | 0 to 100 |
-| Highest price per item |  | 1 to 1000000000 |
+| Offers per player | How many items one player can have up for sale on the market at once. 0: players cannot sell. | 0 to 100 |
+| Highest price per item | The most a player can ask for one item on the market. | 1 to 1000000000 |
 
 #### Contractor ranks
 
@@ -116,19 +116,19 @@ By items delivered; the bonus is on server orders. Leave a name empty for the bu
 | Setting | What it does | Values |
 |---|---|---|
 | Rank 1 name | Newcomer | Text |
-| Rank 1: bonus (%) |  | 0 to 100 |
+| Rank 1: bonus (%) | Players at this rank get this much more for delivering to server orders. Players' own contracts pay what they offer. | 0 to 100 |
 | Rank 2 name | Courier | Text |
-| Rank 2: items delivered |  | 1 to 10000000 |
-| Rank 2: bonus (%) |  | 0 to 100 |
+| Rank 2: items delivered | How many items a player must have delivered in all to reach this rank. | 1 to 10000000 |
+| Rank 2: bonus (%) | Players at this rank get this much more for delivering to server orders. Players' own contracts pay what they offer. | 0 to 100 |
 | Rank 3 name | Trader | Text |
-| Rank 3: items delivered |  | 1 to 10000000 |
-| Rank 3: bonus (%) |  | 0 to 100 |
+| Rank 3: items delivered | How many items a player must have delivered in all to reach this rank. | 1 to 10000000 |
+| Rank 3: bonus (%) | Players at this rank get this much more for delivering to server orders. Players' own contracts pay what they offer. | 0 to 100 |
 | Rank 4 name | Merchant | Text |
-| Rank 4: items delivered |  | 1 to 10000000 |
-| Rank 4: bonus (%) |  | 0 to 100 |
+| Rank 4: items delivered | How many items a player must have delivered in all to reach this rank. | 1 to 10000000 |
+| Rank 4: bonus (%) | Players at this rank get this much more for delivering to server orders. Players' own contracts pay what they offer. | 0 to 100 |
 | Rank 5 name | Tycoon | Text |
-| Rank 5: items delivered |  | 1 to 10000000 |
-| Rank 5: bonus (%) |  | 0 to 100 |
+| Rank 5: items delivered | How many items a player must have delivered in all to reach this rank. | 1 to 10000000 |
+| Rank 5: bonus (%) | Players at this rank get this much more for delivering to server orders. Players' own contracts pay what they offer. | 0 to 100 |
 
 
 ### Bounties
@@ -140,7 +140,7 @@ Players put money on each other; whoever kills that player collects it. Only for
 | Setting | What it does | Values |
 |---|---|---|
 | Bounties are on | Off: the tab is gone and kills pay nothing. Bounties already posted keep their money, and it still comes back when they end. | On or off |
-| Smallest bounty |  | 1 to 1000000000 |
+| Smallest bounty | The least money a player can put on another player's head. | 1 to 1000000000 |
 | Posting fee (%) | Taken when posting and never given back: it takes money out of the economy and makes moving money between friends cost something. | 0 to 50 |
 | Bounties per player | How many players one player may have a bounty on at once. The largest bounty and how long one lasts are in the Contracts tab. | 0 to 100 |
 
@@ -160,4 +160,4 @@ Chat lines and the Tempest board.
 | Setting | What it does | Values |
 |---|---|---|
 | Announce bounties | One chat line to everyone when a bounty is posted or claimed, and in the Discord feed. The player it is on always hears. | On or off |
-| Posting bounties needs contracts.bounty |  | On or off |
+| Posting bounties needs contracts.bounty | On: only players with the permission contracts.bounty can post bounties. Off: everyone can. | On or off |

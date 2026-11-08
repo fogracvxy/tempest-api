@@ -88,10 +88,10 @@ A higher level raises the rewards ticked below, as rank perks do. Example: 2% fo
 |---|---|---|
 | Bonus per 10 levels (%) | 0 is off | 0 to 1000 |
 | Highest bonus (%) | Never more than this, prestige bonus included | 0 to 1000 |
-| Raises mob gold |  | On or off |
-| Raises quest rewards |  | On or off |
-| Raises daily rewards |  | On or off |
-| Raises battle pass XP |  | On or off |
+| Raises mob gold | On: the level bonus also raises the coins mobs drop (Tempest Economy). | On or off |
+| Raises quest rewards | On: the level bonus also raises the money from quests and achievements (Tempest Quests). | On or off |
+| Raises daily rewards | On: the level bonus also raises daily rewards. | On or off |
+| Raises battle pass XP | On: the level bonus also raises the XP players get for the battle pass (Tempest Pass). | On or off |
 | Raises what the shop pays | Never above the shop's own buying price | On or off |
 
 #### Chat, boards and XP boosts
@@ -118,16 +118,16 @@ Run by the server console when a player reaches a level: ranks, kits, titles fro
 
 | Setting | What it does | Values |
 |---|---|---|
-| Reward 1 at level |  | 0 to 100000 |
-| Reward 1 command |  | Text |
-| Reward 2 at level |  | 0 to 100000 |
-| Reward 2 command |  | Text |
-| Reward 3 at level |  | 0 to 100000 |
-| Reward 3 command |  | Text |
-| Reward 4 at level |  | 0 to 100000 |
-| Reward 4 command |  | Text |
-| Reward 5 at level |  | 0 to 100000 |
-| Reward 5 command |  | Text |
+| Reward 1 at level | The level at which the command below runs. 0: this reward is off. | 0 to 100000 |
+| Reward 1 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 2 at level | The level at which the command below runs. 0: this reward is off. | 0 to 100000 |
+| Reward 2 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 3 at level | The level at which the command below runs. 0: this reward is off. | 0 to 100000 |
+| Reward 3 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 4 at level | The level at which the command below runs. 0: this reward is off. | 0 to 100000 |
+| Reward 4 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 5 at level | The level at which the command below runs. 0: this reward is off. | 0 to 100000 |
+| Reward 5 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
 
 #### Leveling XP from the economy
 
@@ -135,12 +135,12 @@ Leveling XP for what players do in the Tempest plugins, with the leveling mod's 
 
 | Setting | What it does | Values |
 |---|---|---|
-| XP per daily reward |  | 0 to 1000000 |
-| XP per crate opened |  | 0 to 1000000 |
-| XP per contract delivery |  | 0 to 1000000 |
+| XP per daily reward | Leveling XP each time a player claims their daily reward. | 0 to 1000000 |
+| XP per crate opened | Leveling XP for each crate a player opens. | 0 to 1000000 |
+| XP per contract delivery | Leveling XP for each delivery to a contract or a server order (Tempest Contracts), however many items it holds. | 0 to 1000000 |
 | XP per 100 the shop pays | Selling 500 worth at 2 gives 10 XP | 0 to 1000000 |
 | XP per item given to a town project | Tempest Projects: building the town levels you up | 0 to 1000000 |
-| XP per 100 coins given to a project |  | 0 to 1000000 |
+| XP per 100 coins given to a project | Leveling XP for every 100 coins a player gives to a town project (Tempest Projects). 250 coins at 2 gives 5 XP. | 0 to 1000000 |
 
 #### Stopping alts
 
@@ -210,7 +210,7 @@ Mobs from a level on are elite: more gold, and the server hears who defeated one
 |---|---|---|
 | Elite from mob level | 0 is off | 0 to 100000 |
 | Elite gold bonus (%) | On top of the gold per mob level | 0 to 10000 |
-| Tell everyone about elite kills |  | On or off |
+| Tell everyone about elite kills | On: when a player defeats an elite mob, the whole server reads a line such as "Steve defeated an elite level 60 Trork Warlord!". Nothing happens while "Elite from mob level" is 0. | On or off |
 
 
 ### MMO Skill Tree
@@ -323,7 +323,7 @@ A player who defeats someone far below their level pays them. The money moves fr
 | Setting | What it does | Values |
 |---|---|---|
 | Fine per level below | For each level the victim was lower | 0 to 1000000000 |
-| Lowest level gap for a fine |  | 0 to 10000 |
+| Lowest level gap for a fine | The killer pays only when the victim was at least this many levels lower. 10: a level 30 player who kills a level 20 pays; one who kills a level 25 does not. The fine counts every level of the gap. | 0 to 10000 |
 | Highest fine | Never more than the killer has; 0 is no limit | 0 to 1000000000 |
 
 
@@ -338,5 +338,5 @@ Only with Endless Leveling: community goals for dungeons, wave gates and raids a
 | Setting | What it does | Values |
 |---|---|---|
 | Start an event when a raid starts | Only when no other event is on. Events must be switched on. | On or off |
-| Event it starts |  | Gold Rush, Monster Hunt, XP Frenzy, Market Day, Lucky Hour |
+| Event it starts | The event that starts by itself when an Endless Leveling raid starts. Make and change events in /events, Manage. | Gold Rush, Monster Hunt, XP Frenzy, Market Day, Lucky Hour |
 | For how long (minutes) | 0: the event's own length | 0 to 10080 |

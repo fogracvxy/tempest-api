@@ -345,7 +345,7 @@ A panel on the right of each player's screen with their name, world and money, t
 | Board title | Your server's name, in the menu theme's colour. Empty: no title. | Text |
 | Line under the title | Such as your server's address or Discord. Empty: none. | Text |
 | Players may show the time | The time of day in their world. | On or off |
-| Players may show their ping |  | On or off |
+| Players may show their ping | Lets each player add their ping (the delay between them and the server) to their own Tempest board. Players switch it on themselves in /board. | On or off |
 | Players may show their position | Off for servers where coordinates should stay secret. Players switch it on themselves. | On or off |
 | Your own line 1 | "Label \| text": placeholders show other plugins' numbers, such as "Kills \| {myplugin_kills}". Without \| it is one line of text. | Text |
 | Your own line 2 | Empty: none. | Text |
@@ -370,7 +370,7 @@ The look of every Tempest menu, for every player.
 | Help screen for new players | Opens /guide the first time someone joins. | On or off |
 | What's on, when players join | A few chat lines from the Tempest board: a daily reward waiting, a running event, the lottery pot. Nothing when there is nothing to say. | On or off |
 | Tips for players | One line about something the server has, taken from /guide. Each tip comes once per player, then they stop. | On or off |
-| Minutes between tips |  | 1 to 1440 |
+| Minutes between tips | How long one player waits between two tips. Each tip comes only once per player, so after a while the tips stop by themselves. | 1 to 1440 |
 
 #### Updates
 
@@ -406,35 +406,35 @@ Give a rank a perk's permission in your ranks plugin (LuckPerms, or Hytale's own
 | Setting | What it does | Values |
 |---|---|---|
 | Perk 1 | Name | Text |
-| Permission |  | Text |
+| Permission | The permission that gives this perk, such as tempest.perk.vip. Give it to a rank in your ranks plugin (LuckPerms or Hytale's own permissions). Empty: this perk is off. A player with several perks gets the best of each bonus. | Text |
 | Daily rewards | Bonus (%) | 0 to 1000 |
-| Quest rewards (%) |  | 0 to 1000 |
+| Quest rewards (%) | Players with this perk get this much more money from quest and achievement rewards. | 0 to 1000 |
 | Shop | Discount (%) | 0 to 90 |
-| Sell bonus (%) |  | 0 to 1000 |
+| Sell bonus (%) | Players with this perk get this much more when they sell to the shop. A sale never pays more than the item costs to buy, so it cannot be turned into a money loop. | 0 to 1000 |
 | Payment fee cut (%) | 100 = this rank pays no fee when paying other players. | 0 to 100 |
 | Pass XP (%) | Tempest Pass, Pro edition: more pass XP for this rank. | 0 to 1000 |
 | Perk 2 | Name | Text |
-| Permission |  | Text |
+| Permission | The permission that gives this perk, such as tempest.perk.vip. Give it to a rank in your ranks plugin (LuckPerms or Hytale's own permissions). Empty: this perk is off. A player with several perks gets the best of each bonus. | Text |
 | Daily rewards | Bonus (%) | 0 to 1000 |
-| Quest rewards (%) |  | 0 to 1000 |
+| Quest rewards (%) | Players with this perk get this much more money from quest and achievement rewards. | 0 to 1000 |
 | Shop | Discount (%) | 0 to 90 |
-| Sell bonus (%) |  | 0 to 1000 |
+| Sell bonus (%) | Players with this perk get this much more when they sell to the shop. A sale never pays more than the item costs to buy, so it cannot be turned into a money loop. | 0 to 1000 |
 | Payment fee cut (%) | 100 = this rank pays no fee when paying other players. | 0 to 100 |
 | Pass XP (%) | Tempest Pass, Pro edition: more pass XP for this rank. | 0 to 1000 |
 | Perk 3 | Name | Text |
-| Permission |  | Text |
+| Permission | The permission that gives this perk, such as tempest.perk.vip. Give it to a rank in your ranks plugin (LuckPerms or Hytale's own permissions). Empty: this perk is off. A player with several perks gets the best of each bonus. | Text |
 | Daily rewards | Bonus (%) | 0 to 1000 |
-| Quest rewards (%) |  | 0 to 1000 |
+| Quest rewards (%) | Players with this perk get this much more money from quest and achievement rewards. | 0 to 1000 |
 | Shop | Discount (%) | 0 to 90 |
-| Sell bonus (%) |  | 0 to 1000 |
+| Sell bonus (%) | Players with this perk get this much more when they sell to the shop. A sale never pays more than the item costs to buy, so it cannot be turned into a money loop. | 0 to 1000 |
 | Payment fee cut (%) | 100 = this rank pays no fee when paying other players. | 0 to 100 |
 | Pass XP (%) | Tempest Pass, Pro edition: more pass XP for this rank. | 0 to 1000 |
 | Perk 4 | Name | Text |
-| Permission |  | Text |
+| Permission | The permission that gives this perk, such as tempest.perk.vip. Give it to a rank in your ranks plugin (LuckPerms or Hytale's own permissions). Empty: this perk is off. A player with several perks gets the best of each bonus. | Text |
 | Daily rewards | Bonus (%) | 0 to 1000 |
-| Quest rewards (%) |  | 0 to 1000 |
+| Quest rewards (%) | Players with this perk get this much more money from quest and achievement rewards. | 0 to 1000 |
 | Shop | Discount (%) | 0 to 90 |
-| Sell bonus (%) |  | 0 to 1000 |
+| Sell bonus (%) | Players with this perk get this much more when they sell to the shop. A sale never pays more than the item costs to buy, so it cannot be turned into a money loop. | 0 to 1000 |
 | Payment fee cut (%) | 100 = this rank pays no fee when paying other players. | 0 to 100 |
 | Pass XP (%) | Tempest Pass, Pro edition: more pass XP for this rank. | 0 to 1000 |
 
@@ -447,20 +447,20 @@ Your own page: rules and anything players should know. It is the first page of /
 
 | Setting | What it does | Values |
 |---|---|---|
-| Show the page |  | On or off |
-| Title |  | Text |
-| Line 1 |  | Text |
-| Line 2 |  | Text |
-| Line 3 |  | Text |
-| Line 4 |  | Text |
-| Line 5 |  | Text |
-| Line 6 |  | Text |
-| Line 7 |  | Text |
-| Line 8 |  | Text |
-| Line 9 |  | Text |
-| Line 10 |  | Text |
-| Line 11 |  | Text |
-| Line 12 |  | Text |
+| Show the page | On: /info and /rules open this page, and it is the first page of /guide (new players see it when they first join, if that is on). Off: the page is hidden. | On or off |
+| Title | The heading at the top of the page, such as your server's name or "Rules". | Text |
+| Line 1 | Start a line with # to make it a heading; an empty line is a gap. One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
+| Line 2 | One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
+| Line 3 | One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
+| Line 4 | One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
+| Line 5 | One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
+| Line 6 | One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
+| Line 7 | One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
+| Line 8 | One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
+| Line 9 | One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
+| Line 10 | One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
+| Line 11 | One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
+| Line 12 | One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
 
 #### Buttons
 
@@ -468,10 +468,10 @@ Up to two buttons under the text, each running a command as the player.
 
 | Setting | What it does | Values |
 |---|---|---|
-| Button 1 text |  | Text |
-| Button 1 command | For example /shop | Text |
-| Button 2 text |  | Text |
-| Button 2 command |  | Text |
+| Button 1 text | The word on the first button under the text. Empty: no button. | Text |
+| Button 1 command | For example /shop The command the first button runs as the player who clicks it, such as /shop or /spawn. | Text |
+| Button 2 text | The word on the second button. Empty: no second button. | Text |
+| Button 2 command | The command the second button runs as the player who clicks it. | Text |
 
 
 ### World map
@@ -482,7 +482,7 @@ Tempest's places show on every player's map and compass. Each kind of place has 
 
 | Setting | What it does | Values |
 |---|---|---|
-| Show Tempest places on the map |  | On or off |
+| Show Tempest places on the map | Off: no Tempest place (shops, slot machines, ATMs, crates, your own places) shows on any map or compass. Each kind can also be switched off on its own tab. | On or off |
 | Players may pick what their map shows | With /places each player can leave out kinds of place. | On or off |
 | Players may use /places | Lists the places nearest first. Admins can always use it. | On or off |
 
@@ -497,12 +497,12 @@ How these look on the map and who gets them. To change one of them, use /places.
 
 | Setting | What it does | Values |
 |---|---|---|
-| Show on the map |  | On or off |
+| Show on the map | Shows every place of this kind on players' maps. Off: they are hidden, but stay known, so switching it on brings them back. | On or off |
 | Icon | A resource pack's own picture: put its file name in map.json. | A list |
 | Colour | White shows the icon as it was drawn. | A colour |
 | Name on the map | Empty: each place's own name. Written here, every one of them shows this. | Text |
-| Big icon |  | On or off |
-| On the compass too |  | On or off |
+| Big icon | A larger icon on the map, for places players should find easily. | On or off |
+| On the compass too | These places also show on the compass at the top of the screen, not only on the map. | On or off |
 | Who sees it (permission) | Empty: everyone. With a permission, only players or ranks who have it. | Text |
 | Shown within (blocks) | Only players this near see them. 0: from anywhere. | 0 to 100000 |
 | Only in these worlds | World names with commas between them. Empty: every world. | Text |
@@ -518,12 +518,12 @@ How these look on the map and who gets them. To change one of them, use /places.
 
 | Setting | What it does | Values |
 |---|---|---|
-| Show on the map |  | On or off |
+| Show on the map | Shows every place of this kind on players' maps. Off: they are hidden, but stay known, so switching it on brings them back. | On or off |
 | Icon | A resource pack's own picture: put its file name in map.json. | A list |
 | Colour | White shows the icon as it was drawn. | A colour |
 | Name on the map | Empty: each place's own name. Written here, every one of them shows this. | Text |
-| Big icon |  | On or off |
-| On the compass too |  | On or off |
+| Big icon | A larger icon on the map, for places players should find easily. | On or off |
+| On the compass too | These places also show on the compass at the top of the screen, not only on the map. | On or off |
 | Who sees it (permission) | Empty: everyone. With a permission, only players or ranks who have it. | Text |
 | Shown within (blocks) | Only players this near see them. 0: from anywhere. | 0 to 100000 |
 | Only in these worlds | World names with commas between them. Empty: every world. | Text |
@@ -539,12 +539,12 @@ How these look on the map and who gets them. To change one of them, use /places.
 
 | Setting | What it does | Values |
 |---|---|---|
-| Show on the map |  | On or off |
+| Show on the map | Shows every place of this kind on players' maps. Off: they are hidden, but stay known, so switching it on brings them back. | On or off |
 | Icon | A resource pack's own picture: put its file name in map.json. | A list |
 | Colour | White shows the icon as it was drawn. | A colour |
 | Name on the map | Empty: each place's own name. Written here, every one of them shows this. | Text |
-| Big icon |  | On or off |
-| On the compass too |  | On or off |
+| Big icon | A larger icon on the map, for places players should find easily. | On or off |
+| On the compass too | These places also show on the compass at the top of the screen, not only on the map. | On or off |
 | Who sees it (permission) | Empty: everyone. With a permission, only players or ranks who have it. | Text |
 | Shown within (blocks) | Only players this near see them. 0: from anywhere. | 0 to 100000 |
 | Only in these worlds | World names with commas between them. Empty: every world. | Text |
@@ -560,12 +560,12 @@ How these look on the map and who gets them. To change one of them, use /places.
 
 | Setting | What it does | Values |
 |---|---|---|
-| Show on the map |  | On or off |
+| Show on the map | Shows every place of this kind on players' maps. Off: they are hidden, but stay known, so switching it on brings them back. | On or off |
 | Icon | A resource pack's own picture: put its file name in map.json. | A list |
 | Colour | White shows the icon as it was drawn. | A colour |
 | Name on the map | Empty: each place's own name. Written here, every one of them shows this. | Text |
-| Big icon |  | On or off |
-| On the compass too |  | On or off |
+| Big icon | A larger icon on the map, for places players should find easily. | On or off |
+| On the compass too | These places also show on the compass at the top of the screen, not only on the map. | On or off |
 | Who sees it (permission) | Empty: everyone. With a permission, only players or ranks who have it. | Text |
 | Shown within (blocks) | Only players this near see them. 0: from anywhere. | 0 to 100000 |
 | Only in these worlds | World names with commas between them. Empty: every world. | Text |
@@ -581,12 +581,12 @@ How these look on the map and who gets them. To change one of them, use /places.
 
 | Setting | What it does | Values |
 |---|---|---|
-| Show on the map |  | On or off |
+| Show on the map | Shows every place of this kind on players' maps. Off: they are hidden, but stay known, so switching it on brings them back. | On or off |
 | Icon | A resource pack's own picture: put its file name in map.json. | A list |
 | Colour | White shows the icon as it was drawn. | A colour |
 | Name on the map | Empty: each place's own name. Written here, every one of them shows this. | Text |
-| Big icon |  | On or off |
-| On the compass too |  | On or off |
+| Big icon | A larger icon on the map, for places players should find easily. | On or off |
+| On the compass too | These places also show on the compass at the top of the screen, not only on the map. | On or off |
 | Who sees it (permission) | Empty: everyone. With a permission, only players or ranks who have it. | Text |
 | Shown within (blocks) | Only players this near see them. 0: from anywhere. | 0 to 100000 |
 | Only in these worlds | World names with commas between them. Empty: every world. | Text |
@@ -887,8 +887,8 @@ Players paying each other with /pay or the wallet's Pay button.
 
 | Setting | What it does | Values |
 |---|---|---|
-| Players can pay each other |  | On or off |
-| Smallest payment |  | 1 to 1000000000 |
+| Players can pay each other | Off: /pay and the wallet's Pay button stop working. Admins can still move money with /eco. | On or off |
+| Smallest payment | The lowest amount a player can send with /pay. Stops players from spamming each other with tiny payments. | 1 to 1000000000 |
 | Fee (%) | Paid on top by the sender. It leaves the game. | 0 to 100 |
 
 #### Leaderboards
@@ -898,7 +898,7 @@ Players paying each other with /pay or the wallet's Pay button.
 | Setting | What it does | Values |
 |---|---|---|
 | Open to everyone | Off: only admins can see them. | On or off |
-| Players on each board |  | 1 to 50 |
+| Players on each board | How many players each leaderboard and /baltop lists, from first place down. | 1 to 50 |
 
 #### Shared banks
 
@@ -908,7 +908,7 @@ Players open a bank with /bank and save up together; the owner decides who may t
 |---|---|---|
 | Shared banks | Off: no new banks. Existing ones can still be used and closed. | On or off |
 | Price to open a bank | It leaves the game. 0 = free. | 0 to 1000000000 |
-| Banks one player can own |  | 1 to 100 |
+| Banks one player can own | How many shared banks one player can open. Being a member of other players' banks does not count. | 1 to 100 |
 | Members per bank | Besides the owner. | 1 to 200 |
 
 #### Savings interest
@@ -918,7 +918,7 @@ Banks earn a little each day on the lowest balance they had since the last payou
 | Setting | What it does | Values |
 |---|---|---|
 | Savings interest | Off: no interest. New money: keep the rate low. | On or off |
-| Rate (% a day) |  | 0 to 5 |
+| Rate (% a day) | What a bank earns each day, as a share of its lowest balance since the last payout. 1% on 10,000 is 100 a day. The limits below keep it from growing too fast. | 0 to 5 |
 | Highest balance that earns | 0 = no limit. | 0 to 1000000000000 |
 | Most per bank a day | 0 = no limit. | 0 to 1000000000 |
 | Most per owner a day | All banks of one owner together, so many small banks earn no more. 0 = no limit. | 0 to 1000000000 |
@@ -983,25 +983,25 @@ The chance that mining an ore also drops coins, and how much. Ores placed by pla
 | Setting | What it does | Values |
 |---|---|---|
 | Copper | Chance (%) | 0 to 100 |
-| Worth |  | 0 to 1000000000 |
+| Worth | How much money one drop from this ore is worth. 0: this ore never drops coins. It counts for every rock this ore is found in. | 0 to 1000000000 |
 | Iron | Chance (%) | 0 to 100 |
-| Worth |  | 0 to 1000000000 |
+| Worth | How much money one drop from this ore is worth. 0: this ore never drops coins. It counts for every rock this ore is found in. | 0 to 1000000000 |
 | Silver | Chance (%) | 0 to 100 |
-| Worth |  | 0 to 1000000000 |
+| Worth | How much money one drop from this ore is worth. 0: this ore never drops coins. It counts for every rock this ore is found in. | 0 to 1000000000 |
 | Gold | Chance (%) | 0 to 100 |
-| Worth |  | 0 to 1000000000 |
+| Worth | How much money one drop from this ore is worth. 0: this ore never drops coins. It counts for every rock this ore is found in. | 0 to 1000000000 |
 | Cobalt | Chance (%) | 0 to 100 |
-| Worth |  | 0 to 1000000000 |
+| Worth | How much money one drop from this ore is worth. 0: this ore never drops coins. It counts for every rock this ore is found in. | 0 to 1000000000 |
 | Mithril | Chance (%) | 0 to 100 |
-| Worth |  | 0 to 1000000000 |
+| Worth | How much money one drop from this ore is worth. 0: this ore never drops coins. It counts for every rock this ore is found in. | 0 to 1000000000 |
 | Adamantite | Chance (%) | 0 to 100 |
-| Worth |  | 0 to 1000000000 |
+| Worth | How much money one drop from this ore is worth. 0: this ore never drops coins. It counts for every rock this ore is found in. | 0 to 1000000000 |
 | Thorium | Chance (%) | 0 to 100 |
-| Worth |  | 0 to 1000000000 |
+| Worth | How much money one drop from this ore is worth. 0: this ore never drops coins. It counts for every rock this ore is found in. | 0 to 1000000000 |
 | Onyxium | Chance (%) | 0 to 100 |
-| Worth |  | 0 to 1000000000 |
+| Worth | How much money one drop from this ore is worth. 0: this ore never drops coins. It counts for every rock this ore is found in. | 0 to 1000000000 |
 | Prisma | Chance (%) | 0 to 100 |
-| Worth |  | 0 to 1000000000 |
+| Worth | How much money one drop from this ore is worth. 0: this ore never drops coins. It counts for every rock this ore is found in. | 0 to 1000000000 |
 
 
 ### Currency
@@ -1015,7 +1015,7 @@ What amounts are called in every message.
 | Setting | What it does | Values |
 |---|---|---|
 | Name | For 1 | Text |
-| For 2 or more |  | Text |
+| For 2 or more | The currency's name for amounts of 2 or more, such as coins in 250 coins. | Text |
 
 #### Coins
 
@@ -1025,15 +1025,15 @@ Each coin's name, and how many of the smallest coin it is worth.
 |---|---|---|
 | Copper Coin | Name | Text |
 | Iron Coin | Name | Text |
-| Worth |  | 1 to 1000000000000 |
+| Worth | How many copper coins one of these is worth. Prices and balances are counted in copper, so this only changes how amounts are split into coins. | 1 to 1000000000000 |
 | Silver Coin | Name | Text |
-| Worth |  | 1 to 1000000000000 |
+| Worth | How many copper coins one of these is worth. Prices and balances are counted in copper, so this only changes how amounts are split into coins. | 1 to 1000000000000 |
 | Gold Coin | Name | Text |
-| Worth |  | 1 to 1000000000000 |
+| Worth | How many copper coins one of these is worth. Prices and balances are counted in copper, so this only changes how amounts are split into coins. | 1 to 1000000000000 |
 | Emerald Coin | Name | Text |
-| Worth |  | 1 to 1000000000000 |
+| Worth | How many copper coins one of these is worth. Prices and balances are counted in copper, so this only changes how amounts are split into coins. | 1 to 1000000000000 |
 | Diamond Coin | Name | Text |
-| Worth |  | 1 to 1000000000000 |
+| Worth | How many copper coins one of these is worth. Prices and balances are counted in copper, so this only changes how amounts are split into coins. | 1 to 1000000000000 |
 
 #### Chat tags
 
@@ -1042,11 +1042,11 @@ The word in front of messages, and its colour. Leave a tag empty to hide it.
 | Setting | What it does | Values |
 |---|---|---|
 | Wallet and payments | Tag | Text |
-| Colour |  | A colour |
+| Colour | The colour of the tag word in front of these chat messages. The example at the end of the row shows it. | A colour |
 | Daily rewards | Tag | Text |
-| Colour |  | A colour |
+| Colour | The colour of the tag word in front of these chat messages. The example at the end of the row shows it. | A colour |
 | Admin /eco | Tag | Text |
-| Colour |  | A colour |
+| Colour | The colour of the tag word in front of these chat messages. The example at the end of the row shows it. | A colour |
 
 
 ### Integrations
@@ -1076,12 +1076,12 @@ Posts big moments to a Discord channel. In Discord: Edit channel, Integrations, 
 | Setting | What it does | Values |
 |---|---|---|
 | Webhook link | Empty: Discord is off. Keep it secret, anyone with it can post. | Text |
-| Name in Discord |  | Text |
-| Jackpots |  | On or off |
+| Name in Discord | The name the posts appear under in your Discord channel, such as your server's name. Empty: the name the webhook was given in Discord. | Text |
+| Jackpots | Posts when a player wins a jackpot. | On or off |
 | Big slot machine wins | The size is set on the Slot Machine tab (Announce wins from). | On or off |
-| Lottery winners |  | On or off |
-| Achievements |  | On or off |
-| News from other mods |  | On or off |
+| Lottery winners | Posts who won each lottery drawing and how much. | On or off |
+| Achievements | Posts when a player unlocks an achievement or finishes a quest that announces itself, and when the server finishes a server quest together. | On or off |
+| News from other mods | Posts the other big moments: bounties, crate key parties, events starting and ending, finished town projects and unlocks, and battle pass seasons and players who finish them. | On or off |
 | Send a test message when saved | Tick, then Save: a test message is posted if the link works. | On or off |
 
 #### Placeholders
@@ -1174,8 +1174,8 @@ Items and their prices are set in the shop itself, with Edit shop.
 
 | Setting | What it does | Values |
 |---|---|---|
-| Players can buy |  | On or off |
-| Players can sell |  | On or off |
+| Players can buy | Off: nobody can buy from the shop, and there are no daily deals. Selling still works if it is on. | On or off |
+| Players can sell | Off: nobody can sell to the shop or use /sell. Buying still works if it is on. | On or off |
 | /shop works anywhere | Off: players must go to a shop stall. | On or off |
 
 #### Prices
@@ -1194,12 +1194,12 @@ Prices move with what players trade: each item sold lowers what the shop pays fo
 
 | Setting | What it does | Values |
 |---|---|---|
-| Prices move |  | On or off |
+| Prices move | On: prices follow what players trade, with the rules below. Off: every item always costs and pays exactly what you set in the shop. | On or off |
 | Each one sold lowers it (%) | 0.5: after 64 sold the shop pays about 73%. | 0 to 50 |
-| Never under (%) |  | 1 to 100 |
+| Never under (%) | The lowest the shop's pay for an item can fall, as a share of the price you set. 50: never under half. | 1 to 100 |
 | Each one bought raises it (%) | 0 = buying never raises prices. | 0 to 50 |
-| Never over (%) |  | 100 to 1000 |
-| Halfway back to normal in (hours) |  | 0.1 to 720 |
+| Never over (%) | The highest a buy price can climb, as a share of the price you set. 200: never more than double. | 100 to 1000 |
+| Halfway back to normal in (hours) | How fast moved prices drift back to the ones you set. After this many hours half the change is gone, after twice as long three quarters. | 0.1 to 720 |
 
 #### The shop's menu
 
@@ -1208,15 +1208,15 @@ What players see. Items, prices and categories are set in the shop itself, with 
 | Setting | What it does | Values |
 |---|---|---|
 | Title | Empty: "Shop" in each player's language. | Text |
-| Search box |  | On or off |
-| Sort list |  | On or off |
-| Category list |  | On or off |
-| Deals banner |  | On or off |
-| How many a player has |  | On or off |
-| First sorted by |  | The shop's own order, Cheapest first, Dearest first, By name |
-| Items on one page |  | 4 to 60 |
-| Third amount button |  | 2 to 10000 |
-| Most in one purchase |  | 1 to 100000 |
+| Search box | On: a search box at the top of the shop, so players can type an item's name. | On or off |
+| Sort list | On: players can sort the items themselves (cheapest, dearest, by name). | On or off |
+| Category list | On: the categories you made show as a list players can click to see only that kind of item. | On or off |
+| Deals banner | On: a line at the top of the shop names today's deals. | On or off |
+| How many a player has | On: each item shows how many of it the player already carries, so they know what they can sell. | On or off |
+| First sorted by | The order items are in when a player opens the shop. The shop's own order is the one you made in Edit shop. | The shop's own order, Cheapest first, Dearest first, By name |
+| Items on one page | How many items fit on one page of the shop before players turn to the next page. | 4 to 60 |
+| Third amount button | The shop has three amount buttons: 1, the bulk amount above, and this one. | 2 to 10000 |
+| Most in one purchase | The most of one item a player can buy or sell at once. | 1 to 100000 |
 
 #### Daily deals
 
@@ -1225,7 +1225,7 @@ A few items are cheaper each day, the same ones for everyone, picked anew at mid
 | Setting | What it does | Values |
 |---|---|---|
 | Deals each day | 0 = no deals. | 0 to 10 |
-| Deal discount (%) |  | 1 to 90 |
+| Deal discount (%) | How much cheaper a deal item is. 25: it costs three quarters of its normal price. | 1 to 90 |
 | Deals are picked from | Choose the pool in the shop: Edit shop, pick an item, Daily deal. Items set to Always are a deal every day. | Any item in the shop, Only the deal pool |
 | At the deal price, per player a day | How many of each deal one player may buy cheaper a day; more cost the normal price. 0 = no limit. | 0 to 100000 |
 
@@ -1245,7 +1245,7 @@ Tools, weapons and armour that have lost durability.
 | Price tag under the coin counter | What the shop pays for the item in your hand. | On or off |
 | Players can craft stalls | Off: only admins can. | On or off |
 | Chat tag | Tag | Text |
-| Colour |  | A colour |
+| Colour | The colour of the shop's tag word in front of its chat messages. | A colour |
 
 #### Free edition
 
@@ -1263,9 +1263,9 @@ Choose items for it in the shop: Edit shop, pick an item. One stall's own settin
 | Setting | What it does | Values |
 |---|---|---|
 | Title | Empty: the shop's own title. | Text |
-| It sells |  | Everything in the shop, What fits, plus chosen items, Only items chosen for it |
-| Items on its shelves |  | On or off |
-| How many |  | 1 to 3 |
+| It sells | Which shop items this kind of stall offers. What fits: the items that suit this stall, plus any you chose for it in Edit shop. Only chosen: just the ones you picked. | Everything in the shop, What fits, plus chosen items, Only items chosen for it |
+| Items on its shelves | On: real items from what this stall sells stand on its shelves while a player is near. Needs Tempest Holograms and Show items on stalls on the Stall shelves tab. | On or off |
+| How many | How many items stand on this stall's shelves at once. | 1 to 3 |
 
 #### Blacksmith
 
@@ -1274,9 +1274,9 @@ Choose items for it in the shop: Edit shop, pick an item. One stall's own settin
 | Setting | What it does | Values |
 |---|---|---|
 | Title | Empty: the stall's name in each player's language. | Text |
-| It sells |  | Everything in the shop, What fits, plus chosen items, Only items chosen for it |
-| Items on its shelves |  | On or off |
-| How many |  | 1 to 4 |
+| It sells | Which shop items this kind of stall offers. What fits: the items that suit this stall, plus any you chose for it in Edit shop. Only chosen: just the ones you picked. | Everything in the shop, What fits, plus chosen items, Only items chosen for it |
+| Items on its shelves | On: real items from what this stall sells stand on its shelves while a player is near. Needs Tempest Holograms and Show items on stalls on the Stall shelves tab. | On or off |
+| How many | How many items stand on this stall's shelves at once. | 1 to 4 |
 
 #### Farmer
 
@@ -1285,9 +1285,9 @@ Choose items for it in the shop: Edit shop, pick an item. One stall's own settin
 | Setting | What it does | Values |
 |---|---|---|
 | Title | Empty: the stall's name in each player's language. | Text |
-| It sells |  | Everything in the shop, What fits, plus chosen items, Only items chosen for it |
-| Items on its shelves |  | On or off |
-| How many |  | 1 to 4 |
+| It sells | Which shop items this kind of stall offers. What fits: the items that suit this stall, plus any you chose for it in Edit shop. Only chosen: just the ones you picked. | Everything in the shop, What fits, plus chosen items, Only items chosen for it |
+| Items on its shelves | On: real items from what this stall sells stand on its shelves while a player is near. Needs Tempest Holograms and Show items on stalls on the Stall shelves tab. | On or off |
+| How many | How many items stand on this stall's shelves at once. | 1 to 4 |
 
 #### Apothecary
 
@@ -1296,9 +1296,9 @@ Choose items for it in the shop: Edit shop, pick an item. One stall's own settin
 | Setting | What it does | Values |
 |---|---|---|
 | Title | Empty: the stall's name in each player's language. | Text |
-| It sells |  | Everything in the shop, What fits, plus chosen items, Only items chosen for it |
-| Items on its shelves |  | On or off |
-| How many |  | 1 to 3 |
+| It sells | Which shop items this kind of stall offers. What fits: the items that suit this stall, plus any you chose for it in Edit shop. Only chosen: just the ones you picked. | Everything in the shop, What fits, plus chosen items, Only items chosen for it |
+| Items on its shelves | On: real items from what this stall sells stand on its shelves while a player is near. Needs Tempest Holograms and Show items on stalls on the Stall shelves tab. | On or off |
+| How many | How many items stand on this stall's shelves at once. | 1 to 3 |
 
 #### Fishmonger
 
@@ -1307,9 +1307,9 @@ Choose items for it in the shop: Edit shop, pick an item. One stall's own settin
 | Setting | What it does | Values |
 |---|---|---|
 | Title | Empty: the stall's name in each player's language. | Text |
-| It sells |  | Everything in the shop, What fits, plus chosen items, Only items chosen for it |
-| Items on its shelves |  | On or off |
-| How many |  | 1 to 4 |
+| It sells | Which shop items this kind of stall offers. What fits: the items that suit this stall, plus any you chose for it in Edit shop. Only chosen: just the ones you picked. | Everything in the shop, What fits, plus chosen items, Only items chosen for it |
+| Items on its shelves | On: real items from what this stall sells stand on its shelves while a player is near. Needs Tempest Holograms and Show items on stalls on the Stall shelves tab. | On or off |
+| How many | How many items stand on this stall's shelves at once. | 1 to 4 |
 
 #### Tavern
 
@@ -1318,9 +1318,9 @@ Choose items for it in the shop: Edit shop, pick an item. One stall's own settin
 | Setting | What it does | Values |
 |---|---|---|
 | Title | Empty: the stall's name in each player's language. | Text |
-| It sells |  | Everything in the shop, What fits, plus chosen items, Only items chosen for it |
-| Items on its shelves |  | On or off |
-| How many |  | 1 to 3 |
+| It sells | Which shop items this kind of stall offers. What fits: the items that suit this stall, plus any you chose for it in Edit shop. Only chosen: just the ones you picked. | Everything in the shop, What fits, plus chosen items, Only items chosen for it |
+| Items on its shelves | On: real items from what this stall sells stand on its shelves while a player is near. Needs Tempest Holograms and Show items on stalls on the Stall shelves tab. | On or off |
+| How many | How many items stand on this stall's shelves at once. | 1 to 3 |
 
 #### Mage
 
@@ -1329,9 +1329,9 @@ Choose items for it in the shop: Edit shop, pick an item. One stall's own settin
 | Setting | What it does | Values |
 |---|---|---|
 | Title | Empty: the stall's name in each player's language. | Text |
-| It sells |  | Everything in the shop, What fits, plus chosen items, Only items chosen for it |
-| Items on its shelves |  | On or off |
-| How many |  | 1 to 3 |
+| It sells | Which shop items this kind of stall offers. What fits: the items that suit this stall, plus any you chose for it in Edit shop. Only chosen: just the ones you picked. | Everything in the shop, What fits, plus chosen items, Only items chosen for it |
+| Items on its shelves | On: real items from what this stall sells stand on its shelves while a player is near. Needs Tempest Holograms and Show items on stalls on the Stall shelves tab. | On or off |
+| How many | How many items stand on this stall's shelves at once. | 1 to 3 |
 
 
 ### Stall shelves
@@ -1344,14 +1344,14 @@ Real items from what a stall sells stand on it while a player is near. Needs Tem
 
 | Setting | What it does | Values |
 |---|---|---|
-| Show items on stalls |  | On or off |
+| Show items on stalls | On: real items from what a stall sells stand on its shelves while a player is near. Needs the free Tempest Holograms plugin. Each kind of stall can switch its shelves off on the Stalls tab. | On or off |
 | Show from (blocks away) | Closer costs less when a server has many stalls. | 4 to 128 |
 | Items stand on the stall | Still 3D models. Off: they hang in the air like dropped items, with the game's rarity beam. | On or off |
 | Item size | 1 is the size of a dropped item; smaller items stand apart on the counter. | 0.2 to 1.5 |
 | Only items marked for the shelves | Mark them in the shop: Edit shop, pick an item, First on the shelves. Off: deals and the rest of the stock fill the shelf. | On or off |
 | A different choice each day | Marked items and deals always come first. | On or off |
-| Today's deals glow |  | On or off |
-| Glow colour |  | A colour |
+| Today's deals glow | On: items on the shelves that are one of today's deals glow, so players spot them from afar. | On or off |
+| Glow colour | The colour of the deals' glow. | A colour |
 
 #### What a sale does
 
@@ -1359,9 +1359,9 @@ Every stall plays its own animation; these go on top of it.
 
 | Setting | What it does | Values |
 |---|---|---|
-| Sounds |  | On or off |
-| Sparks |  | On or off |
-| The item hops over the counter |  | On or off |
+| Sounds | On: the stall plays its own sound when a player buys or sells there. | On or off |
+| Sparks | On: a puff of particles over the counter with each sale. | On or off |
+| The item hops over the counter | On: the item jumps over the counter: towards the player when they buy, into the stall when they sell. It is only a show; nobody can pick it up. | On or off |
 
 
 # Crates
@@ -1436,22 +1436,22 @@ A prize's rarity comes from its chance. Choose the colours, and from which chanc
 
 | Setting | What it does | Values |
 |---|---|---|
-| Common |  | A colour |
-| from (%) |  | 0 to 100 |
-| Uncommon |  | A colour |
-| from (%) |  | 0 to 100 |
-| Rare |  | A colour |
-| from (%) |  | 0 to 100 |
-| Epic |  | A colour |
-| from (%) |  | 0 to 100 |
-| Legendary |  | A colour |
+| Common | The colour of Common prizes: their names in the crate menu, the spin, and the chat line and pop-up when one is won. | A colour |
+| from (%) | A prize with at least this chance, and not enough for the rarity above, is Common. Prizes rarer than every row are Legendary. | 0 to 100 |
+| Uncommon | The colour of Uncommon prizes: their names in the crate menu, the spin, and the chat line and pop-up when one is won. | A colour |
+| from (%) | A prize with at least this chance, and not enough for the rarity above, is Uncommon. Prizes rarer than every row are Legendary. | 0 to 100 |
+| Rare | The colour of Rare prizes: their names in the crate menu, the spin, and the chat line and pop-up when one is won. | A colour |
+| from (%) | A prize with at least this chance, and not enough for the rarity above, is Rare. Prizes rarer than every row are Legendary. | 0 to 100 |
+| Epic | The colour of Epic prizes: their names in the crate menu, the spin, and the chat line and pop-up when one is won. | A colour |
+| from (%) | A prize with at least this chance, and not enough for the rarity above, is Epic. Prizes rarer than every row are Legendary. | 0 to 100 |
+| Legendary | The colour of Legendary prizes: their names in the crate menu, the spin, and the chat line and pop-up when one is won. | A colour |
 
 #### Chat
 
 | Setting | What it does | Values |
 |---|---|---|
 | Chat tag | Tag | Text |
-| Colour |  | A colour |
+| Colour | The colour of the crates' tag word in front of their chat messages. | A colour |
 
 #### Free edition
 
@@ -1475,11 +1475,11 @@ Place a crate block, right-click it with crates.admin and choose its crate.
 | Circling prizes per crate | Each crate's own choice (Edit crates) says whether they circle at all. | 1 to 8 |
 | Circling prizes on the server | At most this many at once, all crate blocks together (0 = none). | 0 to 500 |
 | Seconds for one turn | How slowly the prizes circle the block. | 3 to 60 |
-| Circle size (blocks) |  | 0.4 to 3 |
-| Circle height (blocks) |  | 0 to 3 |
-| Moves per second |  | 2 to 20 |
+| Circle size (blocks) | How far from the middle of the crate block the prizes circle. | 0.4 to 3 |
+| Circle height (blocks) | How high above the crate block the prizes circle. | 0 to 3 |
+| Moves per second | How often a second the circling prizes move on. More looks smoother but sends players more updates. | 2 to 20 |
 | Seconds between sparkles | Fewer moves and sparkles are easier on players' games. | 0.5 to 30 |
-| Text height (blocks) |  | 0.5 to 5 |
+| Text height (blocks) | How high above the crate block its floating text (the crate's name and price) hangs. | 0.5 to 5 |
 | The won prize lights up | It glows in its rarity's colour as it rises from the chest. | On or off |
 | Players can craft crate blocks | Off: only admins (coins.admin.craft) can craft them. | On or off |
 
@@ -1491,8 +1491,8 @@ Everyone online gets crate keys at once, after a ten-second countdown in chat. S
 |---|---|---|
 | A key party every (hours) | 0 = only when an admin types /keyparty. | 0 to 168 |
 | Key | bronze, silver, gold or any item id. | Text |
-| Keys each |  | 1 to 64 |
-| Players online for one by itself |  | 1 to 500 |
+| Keys each | How many of the key above each online player gets in a key party: the timed ones, and /keyparty typed without a key and amount. | 1 to 64 |
+| Players online for one by itself | A timed key party waits until at least this many players are online, so keys are not given to an empty server. /keyparty always works. | 1 to 500 |
 
 
 # Quests
@@ -1563,11 +1563,11 @@ Ranks, the daily sweep, the featured quest and server quests: what brings player
 | Quest points and ranks | Every finished goal gives points; Wanderer, Adventurer, Pathfinder, Hero, Champion and Legend. A new rank is told to everyone. | On or off |
 | Ranks raise quest rewards | From +2% for Adventurers to +10% for Legends. | On or off |
 | Daily sweep: daily quests to finish | Finish this many of the day's daily quests for a bonus. 0 = off. | 0 to 20 |
-| Daily sweep bonus |  | 0 to 1000000000 |
-| Streak: more each day in a row (%) |  | 0 to 500 |
-| Streak grows for (days) |  | 1 to 60 |
+| Daily sweep bonus | Extra money once a day for a player who finishes enough of that day's daily quests (the number is set above). 0: no sweep bonus. | 0 to 1000000000 |
+| Streak: more each day in a row (%) | The sweep bonus grows for each day in a row a player earns it. 10: day 2 pays 10% more, day 3 20% more, and so on. | 0 to 500 |
+| Streak grows for (days) | After this many days in a row the sweep bonus stops growing and stays at its highest. | 1 to 60 |
 | Featured quest pays (times) | One daily quest a day, the same for everyone. 1 = no featured quest. | 1 to 10 |
-| Server quests: top helper gets more (%) |  | 0 to 1000 |
+| Server quests: top helper gets more (%) | When the server finishes a server quest together, the player who did the most gets this much more than the others. | 0 to 1000 |
 | Server quests: least share to be paid (%) | Of the target. Players who did less are thanked but not paid, so nobody earns by doing one thing. | 0 to 100 |
 
 #### Achievements
@@ -1585,7 +1585,7 @@ Ranks, the daily sweep, the featured quest and server quests: what brings player
 | Sounds | A short jingle when something is done, and coins when it pays. | On or off |
 | Quest under the coin counter | The player's first quest and how far along it is. | On or off |
 | Chat tag | Tag | Text |
-| Colour |  | A colour |
+| Colour | The colour of the quests' tag word in front of their chat messages. | A colour |
 
 #### Free edition
 
@@ -1633,7 +1633,7 @@ Make the tiers in /pass, Edit tab (permission pass.admin). A new season starts t
 | Pass is on | Off: /pass says so and no XP counts. | On or off |
 | Season name | Shown at the top of /pass. | Text |
 | Season length (days) | From the day it started. 0 = no end. Rewards can still be claimed after it ends. | 0 to 365 |
-| XP for each tier |  | 1 to 1000000 |
+| XP for each tier | How much pass XP a player needs to go up one tier. Every tier needs the same amount. Higher: the season takes longer to finish. | 1 to 1000000 |
 | Premium price | In-game money only. 0 = not for sale; the permission pass.premium always gives it. | 0 to 1000000000 |
 
 #### Where XP comes from
@@ -1642,16 +1642,16 @@ Quests count when the Quests plugin is installed.
 
 | Setting | What it does | Values |
 |---|---|---|
-| Daily quest done |  | 0 to 1000000 |
-| Weekly quest done |  | 0 to 1000000 |
-| One-time quest done |  | 0 to 1000000 |
-| Achievement unlocked |  | 0 to 1000000 |
-| Each minute played |  | 0 to 1000000 |
-| Play XP a day, at most |  | 0 to 1000000 |
+| Daily quest done | Pass XP for each daily quest a player finishes. Needs Tempest Quests. | 0 to 1000000 |
+| Weekly quest done | Pass XP for each weekly quest a player finishes. Needs Tempest Quests. | 0 to 1000000 |
+| One-time quest done | Pass XP for each one-time quest a player finishes. Needs Tempest Quests. | 0 to 1000000 |
+| Achievement unlocked | Pass XP for each achievement a player unlocks. Needs Tempest Quests. | 0 to 1000000 |
+| Each minute played | Pass XP for every minute a player is online. The next setting limits how much this gives in a day. | 0 to 1000000 |
+| Play XP a day, at most | The most pass XP one player can get from play time in one day. The other sources have no daily limit. | 0 to 1000000 |
 | Play time only while moving | Standing still (AFK) earns nothing. | On or off |
-| First login of the day |  | 0 to 1000000 |
+| First login of the day | Pass XP the first time a player joins on a new day. | 0 to 1000000 |
 | Each game played | A slot spin, lottery ticket purchase, crate or coinflip. | 0 to 1000000 |
-| Game XP a day, at most |  | 0 to 1000000 |
+| Game XP a day, at most | The most pass XP one player can get from games (slots, lottery tickets, crates, coinflip) in one day. | 0 to 1000000 |
 
 #### The /pass page
 
@@ -1670,10 +1670,10 @@ How players see the tiers. Each player can switch the layout in /pass.
 | Setting | What it does | Values |
 |---|---|---|
 | Tell everyone when someone finishes | A chat line when a player reaches the last tier. | On or off |
-| Tier under the coin counter |  | On or off |
-| Sounds |  | On or off |
+| Tier under the coin counter | On: players see their pass tier and how far they are to the next one in a line under their coin counter. | On or off |
+| Sounds | On: a sound when a player reaches a tier, claims a reward or buys the premium pass. | On or off |
 | Chat tag | Tag | Text |
-| Colour |  | A colour |
+| Colour | The colour of the pass's tag word in front of its chat messages. | A colour |
 
 #### Pro edition
 
@@ -1739,12 +1739,12 @@ How players hear about events.
 | Setting | What it does | Values |
 |---|---|---|
 | Big title on screen | When an event starts, reaches its goal and ends. | On or off |
-| Chat messages |  | On or off |
-| Sounds |  | On or off |
+| Chat messages | On: everyone gets chat lines when an event is coming, starts and ends. Off: no event chat lines; titles and sounds have their own switches. | On or off |
+| Sounds | On: everyone hears a sound when an event is coming, when it starts, and when a goal or stage is reached. | On or off |
 | Warn before a start (minutes) | Players are told this long before a scheduled event. 0: not told. | 0 to 120 |
 | Show on the board | The event, its time left and the goal on the Tempest board (players can hide it in /board). | On or off |
 | Chat tag | Tag | Text |
-| Tag colour |  | A colour |
+| Tag colour | The colour of the events' tag word in front of their chat messages. | A colour |
 
 #### Server fund
 
@@ -1752,9 +1752,9 @@ Players put money in together; when it is full, the event below starts for every
 
 | Setting | What it does | Values |
 |---|---|---|
-| Server fund |  | On or off |
-| Event it starts |  | Gold Rush, Monster Hunt, XP Frenzy, Market Day, Lucky Hour |
-| Money to fill it |  | 1 to 1000000000 |
+| Server fund | On: players give money to the server fund with /events give <amount>. When it is full, the event below starts for everyone, at once or as soon as the event that is on ends. | On or off |
+| Event it starts | The event that starts when the server fund is full. Make and change events in /events, Manage. | Gold Rush, Monster Hunt, XP Frenzy, Market Day, Lucky Hour |
+| Money to fill it | How much money the players must give together. When it is full the event starts and the fund starts again from 0. The money leaves the economy. | 1 to 1000000000 |
 | Tell everyone about gifts of (% of the fund) | 0: never. | 0 to 100 |
 
 #### Lucky events
@@ -1763,9 +1763,9 @@ Now and then, by chance, an event starts by itself while nothing else is on.
 
 | Setting | What it does | Values |
 |---|---|---|
-| Lucky events |  | On or off |
-| Which event |  | Gold Rush, Monster Hunt, XP Frenzy, Market Day, Lucky Hour |
-| Chance each hour (%) |  | 0 to 100 |
+| Lucky events | On: once an hour there is a chance the event below starts by itself, when no other event is on. | On or off |
+| Which event | The event a lucky roll starts. | Gold Rush, Monster Hunt, XP Frenzy, Market Day, Lucky Hour |
+| Chance each hour (%) | The chance, checked once an hour, that a lucky event starts. 10: about one every 10 hours. | 0 to 100 |
 | Players online at least | Fewer players online: no lucky event, so nobody misses it. | 0 to 500 |
 
 
@@ -1835,12 +1835,12 @@ Players post orders; the reward is taken when they post and paid out as items ar
 
 | Setting | What it does | Values |
 |---|---|---|
-| Players may post contracts |  | On or off |
-| Open contracts per player |  | 0 to 100 |
+| Players may post contracts | On: players can post their own orders on the contract board. Off: players cannot post new ones; the server's orders stay. | On or off |
+| Open contracts per player | How many contracts one player can have on the board at once. 0: players cannot post any. | 0 to 100 |
 | Posting fee (%) | Taken when posting and never given back: it takes money out of the economy. | 0 to 50 |
-| Least pay per item |  | 1 to 1000000 |
-| Most items in one contract |  | 1 to 1000000 |
-| Largest reward |  | 1 to 1000000000 |
+| Least pay per item | The lowest reward a contract can offer for each item, so the board does not fill with worthless orders. 64 items at 5 needs a reward of at least 320. | 1 to 1000000 |
+| Most items in one contract | The most items one contract can ask for. | 1 to 1000000 |
+| Largest reward | The most money one contract can offer. It also limits how much one player can put on one bounty. | 1 to 1000000000 |
 | How long contracts and offers last (hours) | Players pick one of these. Separate with commas, e.g. 24, 72, 168. | Text |
 | Items nobody may ask for or sell | Item ids separated with commas. Coins never can. | Text |
 
@@ -1850,8 +1850,8 @@ Off: everyone may. On: only players with the permission.
 
 | Setting | What it does | Values |
 |---|---|---|
-| Posting contracts needs contracts.post |  | On or off |
-| Selling on the market needs contracts.sell |  | On or off |
+| Posting contracts needs contracts.post | On: only players with the permission contracts.post can post contracts (admins always can). Give it to a rank in your ranks plugin. Off: everyone can. | On or off |
+| Selling on the market needs contracts.sell | On: only players with the permission contracts.sell can put items up for sale on the market (admins always can). Buying stays open to everyone. Off: everyone can sell. | On or off |
 
 #### Telling players
 
@@ -1860,9 +1860,9 @@ Chat lines and sounds.
 | Setting | What it does | Values |
 |---|---|---|
 | Announce new contracts | One chat line to everyone (at most once a minute per player), and when server orders start again. | On or off |
-| Sounds |  | On or off |
+| Sounds | On: a sound when a player posts, delivers or sells, and when they are paid. | On or off |
 | Chat tag | Tag | Text |
-| Tag colour |  | A colour |
+| Tag colour | The colour of the contracts' tag word in front of their chat messages. | A colour |
 
 
 ### Market & ranks
@@ -1875,10 +1875,10 @@ Players put items up for sale; others buy at once, cheapest first. Prices of the
 
 | Setting | What it does | Values |
 |---|---|---|
-| Market is on |  | On or off |
+| Market is on | On: players can sell items to each other on the market in /contracts. Off: nobody can put up or buy offers. | On or off |
 | Sales tax (%) | Kept from each sale; the seller gets the rest. It takes money out of the economy. | 0 to 50 |
-| Offers per player |  | 0 to 100 |
-| Highest price per item |  | 1 to 1000000000 |
+| Offers per player | How many items one player can have up for sale on the market at once. 0: players cannot sell. | 0 to 100 |
+| Highest price per item | The most a player can ask for one item on the market. | 1 to 1000000000 |
 
 #### Contractor ranks
 
@@ -1887,19 +1887,19 @@ By items delivered; the bonus is on server orders. Leave a name empty for the bu
 | Setting | What it does | Values |
 |---|---|---|
 | Rank 1 name | Newcomer | Text |
-| Rank 1: bonus (%) |  | 0 to 100 |
+| Rank 1: bonus (%) | Players at this rank get this much more for delivering to server orders. Players' own contracts pay what they offer. | 0 to 100 |
 | Rank 2 name | Courier | Text |
-| Rank 2: items delivered |  | 1 to 10000000 |
-| Rank 2: bonus (%) |  | 0 to 100 |
+| Rank 2: items delivered | How many items a player must have delivered in all to reach this rank. | 1 to 10000000 |
+| Rank 2: bonus (%) | Players at this rank get this much more for delivering to server orders. Players' own contracts pay what they offer. | 0 to 100 |
 | Rank 3 name | Trader | Text |
-| Rank 3: items delivered |  | 1 to 10000000 |
-| Rank 3: bonus (%) |  | 0 to 100 |
+| Rank 3: items delivered | How many items a player must have delivered in all to reach this rank. | 1 to 10000000 |
+| Rank 3: bonus (%) | Players at this rank get this much more for delivering to server orders. Players' own contracts pay what they offer. | 0 to 100 |
 | Rank 4 name | Merchant | Text |
-| Rank 4: items delivered |  | 1 to 10000000 |
-| Rank 4: bonus (%) |  | 0 to 100 |
+| Rank 4: items delivered | How many items a player must have delivered in all to reach this rank. | 1 to 10000000 |
+| Rank 4: bonus (%) | Players at this rank get this much more for delivering to server orders. Players' own contracts pay what they offer. | 0 to 100 |
 | Rank 5 name | Tycoon | Text |
-| Rank 5: items delivered |  | 1 to 10000000 |
-| Rank 5: bonus (%) |  | 0 to 100 |
+| Rank 5: items delivered | How many items a player must have delivered in all to reach this rank. | 1 to 10000000 |
+| Rank 5: bonus (%) | Players at this rank get this much more for delivering to server orders. Players' own contracts pay what they offer. | 0 to 100 |
 
 
 ### Bounties
@@ -1911,7 +1911,7 @@ Players put money on each other; whoever kills that player collects it. Only for
 | Setting | What it does | Values |
 |---|---|---|
 | Bounties are on | Off: the tab is gone and kills pay nothing. Bounties already posted keep their money, and it still comes back when they end. | On or off |
-| Smallest bounty |  | 1 to 1000000000 |
+| Smallest bounty | The least money a player can put on another player's head. | 1 to 1000000000 |
 | Posting fee (%) | Taken when posting and never given back: it takes money out of the economy and makes moving money between friends cost something. | 0 to 50 |
 | Bounties per player | How many players one player may have a bounty on at once. The largest bounty and how long one lasts are in the Contracts tab. | 0 to 100 |
 
@@ -1931,7 +1931,7 @@ Chat lines and the Tempest board.
 | Setting | What it does | Values |
 |---|---|---|
 | Announce bounties | One chat line to everyone when a bounty is posted or claimed, and in the Discord feed. The player it is on always hears. | On or off |
-| Posting bounties needs contracts.bounty |  | On or off |
+| Posting bounties needs contracts.bounty | On: only players with the permission contracts.bounty can post bounties. Off: everyone can. | On or off |
 
 
 # Town projects
@@ -2013,14 +2013,14 @@ What everyone sees.
 
 | Setting | What it does | Values |
 |---|---|---|
-| Announce finished buildings |  | On or off |
+| Announce finished buildings | On: everyone gets a chat line when a town project is finished, with how many players helped. It also goes to Discord when that is set up. | On or off |
 | Progress text over the plot | Needs Tempest Holograms. | On or off |
 | Show the finished building as a ghost | A see-through plan stands on the plot, and the real blocks fill it. Off: no project shows one, whatever is set for it. | On or off |
 | Ghost of a new project | Off: nothing shows on the plot, and real blocks appear as people donate. The placing panel can choose for each project, and so can a project's own page. | Everyone, Only players in creative mode, Off: real blocks only |
 | New projects cannot be walked through | Invisible solid blocks hold the walls that are still to come, so the plan feels solid. Only for a plan everyone sees. Doorways stay open, and a project's page changes it. | On or off |
 | Frame around a plot under way | Everyone near sees where a site is, even with its plan hidden. | On or off |
-| Colour of the frame |  | A colour |
-| How far the frame shows (blocks) |  | 16 to 512 |
+| Colour of the frame | The colour of the frame around a plot that is being built. | A colour |
+| How far the frame shows (blocks) | Players farther away than this do not see the frame. | 16 to 512 |
 
 #### Pro edition
 
@@ -2039,17 +2039,17 @@ What an admin starts with in the placing panel. The VIEW tab changes the ghost, 
 |---|---|---|
 | Ghost of the building | The game's own see-through copy of the building. Everyone near sees it. Off: only the outline, which only the admin sees. | On or off |
 | Largest building with a ghost (blocks) | A bigger one starts without its ghost, as all of it is sent to everyone near. It can still be switched on in the panel. | 100 to 400000 |
-| Outline of the plot |  | On or off |
-| Outline thickness (blocks) |  | 0.02 to 1 |
-| Colour when it fits |  | A colour |
-| Colour when it does not |  | A colour |
+| Outline of the plot | On: the placing panel starts with the outline of the plot shown. Only the admin who places sees it. | On or off |
+| Outline thickness (blocks) | How thick the outline's lines are. The site frame uses it too. | 0.02 to 1 |
+| Colour when it fits | The outline's colour while the building can go where it is. | A colour |
+| Colour when it does not | The outline's colour while something is in the way. | A colour |
 | See-through box over the plot (%) | How solid the coloured box around the plot is. 0: no box. | 0 to 100 |
 | Show the plots nearby | Outlines of the other projects, to line a street up. | On or off |
-| Colour of the plots nearby |  | A colour |
+| Colour of the plots nearby | The outline colour of other projects' plots near the one being placed, so they do not overlap. | A colour |
 | Red blocks where it goes into something | Only the admin sees them. They show what the building would replace, and in a second colour what stops it from starting. | On or off |
-| Colour of those blocks |  | A colour |
-| Colour of what stops it |  | A colour |
-| How solid those blocks look (%) |  | 5 to 100 |
+| Colour of those blocks | The colour of the blocks the building would replace. | A colour |
+| Colour of what stops it | The colour of the blocks that stop the building from starting where it is. | A colour |
+| How solid those blocks look (%) | How solid the coloured blocks look. Low: see-through, high: solid. | 5 to 100 |
 
 #### Moving
 
@@ -2059,8 +2059,8 @@ How the plot moves.
 |---|---|---|
 | Step sizes | The sizes the STEP button goes through, in blocks, such as 1, 5, 10, 25. | Text |
 | Start on the ground | A new plot settles where it fits the land best. Off: it starts at the admin's feet. | On or off |
-| How far AIM reaches (blocks) |  | 8 to 256 |
-| Gap left by BESIDE (blocks) |  | 0 to 64 |
+| How far AIM reaches (blocks) | AIM moves the plot to the block the admin looks at. It finds blocks up to this far away. | 8 to 256 |
+| Gap left by BESIDE (blocks) | BESIDE moves the plot right next to the nearest other plot, with this many blocks between them. 0: wall to wall. | 0 to 64 |
 
 #### The camera
 
@@ -2068,10 +2068,10 @@ The views of the placing panel.
 
 | Setting | What it does | Values |
 |---|---|---|
-| View to start in |  | Normal, From the top, From an angle |
-| Closest zoom (blocks) |  | 4 to 64 |
-| Farthest zoom (blocks) |  | 4 to 256 |
-| Zoom step (blocks) |  | 1 to 64 |
+| View to start in | The camera the placing panel opens with: the admin's own eyes, straight down from the top, or from an angle. | Normal, From the top, From an angle |
+| Closest zoom (blocks) | How close the top and angled views can zoom in. | 4 to 64 |
+| Farthest zoom (blocks) | How far the top and angled views can zoom out. | 4 to 256 |
+| Zoom step (blocks) | How much one click on zoom in or out moves the camera. | 1 to 64 |
 | Zoom to start at (blocks) | A big building starts farther away, so all of it is in view. | 4 to 256 |
 
 
@@ -2128,10 +2128,10 @@ When something is unlocked or locked.
 
 | Setting | What it does | Values |
 |---|---|---|
-| Announce in chat |  | On or off |
+| Announce in chat | On: everyone gets a chat line when the town unlocks something or it is locked again. It also goes to Discord when that is set up. | On or off |
 | Seconds before announcing it again | Against chat floods. Console commands of an unlock always run. | 5 to 86400 |
 | Chat tag | Tag | Text |
-| Colour of the tag |  | A colour |
+| Colour of the tag | The colour of the town's tag word in front of its chat messages. | A colour |
 
 #### Mayor
 
@@ -2139,18 +2139,18 @@ Each term the player who gave most to town projects becomes mayor, with a few sm
 
 | Setting | What it does | Values |
 |---|---|---|
-| The town has a mayor |  | On or off |
-| A term lasts (days) |  | 1 to 90 |
+| The town has a mayor | On: at the end of each term, the player who gave most to town projects in that term becomes mayor for the next one. Off: no mayor and no mayor powers. | On or off |
+| A term lasts (days) | How long one mayor's term is. Donations are counted again from 0 for each term. | 1 to 90 |
 | Least given to become mayor | In points: one per coin, and the next setting per item. | 0 to 10000000 |
-| Points per item given |  | 0 to 10000 |
+| Points per item given | Points for each item a player gives to a project. Each coin given is one point. | 0 to 10000 |
 | The mayor's boost | For everyone online, started with /mayor boost. | Jobs pay, Mob coins, Ore coins, Quest reward, Shop sell, Daily reward, Pass xp, Shop discount, Contract pay |
-| Boost (%) |  | 1 to 100 |
-| For (minutes) |  | 1 to 1440 |
-| Boosts each term |  | 0 to 20 |
+| Boost (%) | How much the mayor's boost raises what it boosts. | 1 to 100 |
+| For (minutes) | How long one mayor's boost lasts. | 1 to 1440 |
+| Boosts each term | How many boosts the mayor can start in one term. 0: the mayor cannot start boosts. | 0 to 20 |
 | Reward (coins) | /mayor reward <player>: new coins for a player who helped. Never the mayor, each player once a term. | 0 to 1000000 |
-| Rewards each term |  | 0 to 20 |
+| Rewards each term | How many players the mayor can reward in one term. 0: no rewards. | 0 to 20 |
 | Fine (coins) | /mayor fine <player>: never more than they have, never an admin; only the two of them are told. Every use is in the admin log. | 0 to 1000000 |
-| Fines each term |  | 0 to 20 |
+| Fines each term | How many players the mayor can fine in one term. 0: no fines. | 0 to 20 |
 
 #### Buildings
 
@@ -2201,9 +2201,9 @@ Players with tempest.jobs.slots.2 (up to .10) hold more.
 
 | Setting | What it does | Values |
 |---|---|---|
-| Jobs a player holds |  | 1 to 10 |
-| Keep the level when leaving |  | On or off |
-| Minutes before taking a job again |  | 0 to 43200 |
+| Jobs a player holds | How many jobs one player can have at the same time. Players with the permission tempest.jobs.slots.2 (up to .10) can hold that many instead. When all are taken, the /jobs page offers to swap their lowest-level job for the new one. | 1 to 10 |
+| Keep the level when leaving | On: a player who leaves a job keeps its level and XP, and has them back when they take it again. Off: leaving starts that job over at level 1. | On or off |
+| Minutes before taking a job again | After leaving a job, a player waits this long before taking the same job again. Stops players hopping between jobs for the best pay. 0 lets them take it back at once. | 0 to 43200 |
 
 #### Levels
 
@@ -2211,8 +2211,8 @@ Job XP for the next level is base x level ^ power.
 
 | Setting | What it does | Values |
 |---|---|---|
-| Highest job level |  | 1 to 1000 |
-| XP base |  | 1 to 1000000 |
+| Highest job level | No job goes above this level. With Tempest Town, the guild hall setting below can hold levels lower until the town builds it. | 1 to 1000 |
+| XP base | The job XP the first levels need. Each level needs base x level ^ power: with 100 and power 1.5, level 10 needs about 3,160 XP. Higher means slower levels. | 1 to 1000000 |
 | XP power | 1 is the same XP every level; 1.5 grows | 1 to 3 |
 | More pay per level (%) | Level 50 at 2% pays double | 0 to 100 |
 
@@ -2222,7 +2222,7 @@ Earnings are added up and paid together, held to the caps.
 
 | Setting | What it does | Values |
 |---|---|---|
-| Pay every (seconds) |  | 1 to 60 |
+| Pay every (seconds) | Job pay is added up and paid in one go every so many seconds, so the wallet log is not flooded with one line per block. The hourly caps are checked on each payment. | 1 to 60 |
 | Most a player earns an hour | 0 is no limit | 0 to 1000000000 |
 | Most the server pays an hour | All players together; 0 is no limit | 0 to 1000000000 |
 | Town bonus (%) | With Tempest Town, once an unlock gives jobs:town_bonus | 0 to 1000 |
@@ -2233,11 +2233,11 @@ Earnings are added up and paid together, held to the caps.
 
 | Setting | What it does | Values |
 |---|---|---|
-| Tell level-ups |  | On or off |
+| Tell level-ups | On: a chat line ("Miner level 12!") when a job level goes up. The sound is set on its own below. | On or off |
 | A chat line for each payment | Off: the money counter shows it | On or off |
 | Job XP bar while working | A bar under the money counter for a few seconds after each payment | On or off |
-| Job XP bar: seconds shown |  | 1 to 60 |
-| Level-up sound |  | SFX_Discovery_Z1_Short, None |
+| Job XP bar: seconds shown | How long the job's XP bar stays under the money counter after the last bit of work. | 1 to 60 |
+| Level-up sound | The sound a player hears when a job levels up. Pick none for silence. | SFX_Discovery_Z1_Short, None |
 
 
 ### Jobs bonuses
@@ -2251,17 +2251,17 @@ Streaks, felled trees and what the server's contracts want pay more.
 | Setting | What it does | Values |
 |---|---|---|
 | Streak: seconds between blocks | 0 is no streaks | 0 to 60 |
-| Streak: more per block (%) |  | 0 to 100 |
-| Streak: the most (%) |  | 0 to 500 |
-| Streak sound |  | On or off |
+| Streak: more per block (%) | Each block mined or chopped within the streak time of the last one adds this much to its pay, so steady work pays more. Example: 5% makes the 4th block in a row pay 15% more. | 0 to 100 |
+| Streak: the most (%) | A streak never adds more than this, however long it runs. | 0 to 500 |
+| Streak sound | On: a chime that rises with each block of a streak, so players hear it building. | On or off |
 | Streak sound | Plays higher with each block | SFX_Crystal_Hit, None |
 | Tool tiers, worst first | Each tier above the first adds a job's tool bonus once | Text |
-| Felled tree: more per log (%) |  | 0 to 100 |
+| Felled tree: more per log (%) | Cutting a whole tree (its last log) pays this much more of what its logs paid, for each log. Example: 2.5% on a 20-log tree adds 50%. | 0 to 100 |
 | Felled tree: the most (%) | 0 is no tree bonus | 0 to 500 |
-| Felled tree: blocks around a log |  | 1 to 8 |
-| Felled tree: blocks above a log |  | 4 to 64 |
+| Felled tree: blocks around a log | How far sideways from a cut log the rest of the tree is looked for. Larger finds wide trees, but can join two trees standing close together. | 1 to 8 |
+| Felled tree: blocks above a log | How far up from a cut log the rest of the tree is looked for. Raise it for very tall trees. | 4 to 64 |
 | Wanted by contracts (%) | With Tempest Contracts: work bringing in an item on the board pays this much more | 0 to 1000 |
-| Builder: minutes a block must stand |  | 1 to 120 |
+| Builder: minutes a block must stand | A builder is paid for a block only when it is still standing this many minutes after it was placed, so placing and breaking blocks over and over pays nothing. | 1 to 120 |
 
 #### Mob farms
 
@@ -2269,11 +2269,11 @@ Many kills of one kind of mob in one spot pay less and less.
 
 | Setting | What it does | Values |
 |---|---|---|
-| Minutes counted |  | 1 to 240 |
-| Kills that pay in full |  | 1 to 10000 |
-| Size of a spot (blocks) |  | 4 to 256 |
-| Each kill after pays less (%) |  | 0 to 100 |
-| Never under (%) |  | 0 to 100 |
+| Minutes counted | Mob farms: kills of one kind of mob in one spot are counted over this many minutes. Older kills are forgotten. | 1 to 240 |
+| Kills that pay in full | Mob farms: this many kills of one kind of mob in one spot pay in full; after that, each kill pays less. | 1 to 10000 |
+| Size of a spot (blocks) | Mob farms: kills this close together count as one spot. A farm usually kills in a small area; normal hunting moves around. | 4 to 256 |
+| Each kill after pays less (%) | Mob farms: after the kills that pay in full, each further kill in the same spot pays this much less than the one before. | 0 to 100 |
+| Never under (%) | Mob farms: a kill never pays less than this share of its normal pay, however many there were. | 0 to 100 |
 | Mobs that never pay | Parts of mob names, commas between: Chicken, Dummy | Text |
 
 #### Jobs on this server
@@ -2282,13 +2282,13 @@ Pay tables are edited on the /jobs page (EDIT tab).
 
 | Setting | What it does | Values |
 |---|---|---|
-| Miner job |  | On or off |
-| Woodcutter job |  | On or off |
-| Farmer job |  | On or off |
-| Hunter job |  | On or off |
-| Crafter job |  | On or off |
-| Builder job |  | On or off |
-| Explorer job |  | On or off |
+| Miner job | On: players can join the Miner job and are paid for its work. Off: players do not see it in /jobs, nobody can join it, and those who hold it are not paid for it until it is on again. | On or off |
+| Woodcutter job | On: players can join the Woodcutter job and are paid for its work. Off: players do not see it in /jobs, nobody can join it, and those who hold it are not paid for it until it is on again. | On or off |
+| Farmer job | On: players can join the Farmer job and are paid for its work. Off: players do not see it in /jobs, nobody can join it, and those who hold it are not paid for it until it is on again. | On or off |
+| Hunter job | On: players can join the Hunter job and are paid for its work. Off: players do not see it in /jobs, nobody can join it, and those who hold it are not paid for it until it is on again. | On or off |
+| Crafter job | On: players can join the Crafter job and are paid for its work. Off: players do not see it in /jobs, nobody can join it, and those who hold it are not paid for it until it is on again. | On or off |
+| Builder job | On: players can join the Builder job and are paid for its work. Off: players do not see it in /jobs, nobody can join it, and those who hold it are not paid for it until it is on again. | On or off |
+| Explorer job | On: players can join the Explorer job and are paid for its work. Off: players do not see it in /jobs, nobody can join it, and those who hold it are not paid for it until it is on again. | On or off |
 
 
 # Trade
@@ -2340,7 +2340,7 @@ Trades are safe anywhere: offered items are held by the server until the trade i
 | Setting | What it does | Values |
 |---|---|---|
 | Players must be near each other | Off: players can trade from anywhere on the server. | On or off |
-| Near means within (blocks) |  | 2 to 1000 |
+| Near means within (blocks) | How close two players must be to trade, while the setting before it is on. | 2 to 1000 |
 | Only in the same world | Always on while players must be near each other. | On or off |
 
 #### Coins
@@ -2358,10 +2358,10 @@ What keeps trades fair.
 
 | Setting | What it does | Values |
 |---|---|---|
-| Item slots for each player |  | 1 to 18 |
+| Item slots for each player | How many different stacks each player can put into one trade. | 1 to 18 |
 | Countdown after both are ready (seconds) | Any change stops it, so nobody can swap an item at the last moment. | 1 to 10 |
-| A request waits (seconds) |  | 10 to 600 |
-| Before asking the same player again (seconds) |  | 0 to 600 |
+| A request waits (seconds) | How long a /trade request stays open for the other player to accept. After that it is gone. | 10 to 600 |
+| Before asking the same player again (seconds) | How long a player waits before sending the same player another request, so nobody can spam requests. 0: no wait. | 0 to 600 |
 | Items that can never be traded | Item ids, with commas. End with * for every id that starts so: Crate_Key_* | Text |
 | Log every trade | In the server log and /tempest log: who gave what to whom. | On or off |
 
@@ -2461,7 +2461,7 @@ Players crouch and press F on a machine (or type /slotbet) to choose their bet.
 |---|---|---|
 | Players can craft slot machines | Off: only admins can. | On or off |
 | Chat tag | Tag | Text |
-| Colour |  | A colour |
+| Colour | The colour of the slot machine's tag word in front of its chat messages. | A colour |
 
 #### Free edition
 
@@ -2479,15 +2479,15 @@ What three of a kind pays (times the bet), and how often it comes up compared wi
 | Setting | What it does | Values |
 |---|---|---|
 | Cherries | Pays (x bet) | 0.1 to 1000000 |
-| How often |  | 0 to 100000 |
+| How often | How often this symbol wins, next to the others: a symbol at 40 comes up twice as often as one at 20. 0: it never wins. | 0 to 100000 |
 | Bells | Pays (x bet) | 0.1 to 1000000 |
-| How often |  | 0 to 100000 |
+| How often | How often this symbol wins, next to the others: a symbol at 40 comes up twice as often as one at 20. 0: it never wins. | 0 to 100000 |
 | Coins | Pays (x bet) | 0.1 to 1000000 |
-| How often |  | 0 to 100000 |
+| How often | How often this symbol wins, next to the others: a symbol at 40 comes up twice as often as one at 20. 0: it never wins. | 0 to 100000 |
 | Diamonds | Pays (x bet) | 0.1 to 1000000 |
-| How often |  | 0 to 100000 |
+| How often | How often this symbol wins, next to the others: a symbol at 40 comes up twice as often as one at 20. 0: it never wins. | 0 to 100000 |
 | Sevens | Pays (x bet) | 0.1 to 1000000 |
-| How often |  | 0 to 100000 |
+| How often | How often this symbol wins, next to the others: a symbol at 40 comes up twice as often as one at 20. 0: it never wins. | 0 to 100000 |
 
 #### Jackpot
 
@@ -2499,10 +2499,10 @@ Three sevens wins a pot that grows from lost bets.
 | Jackpot chance (%) | Per spin. | 0 to 100 |
 | Share of lost bets (%) | Added to the pot from every losing spin. | 0 to 100 |
 | Starting amount | What the pot starts at after it is won. | 0 to 1000000000 |
-| Pot right now |  | 0 to 1000000000000 |
+| Pot right now | What the jackpot holds at this moment. Change it to fill the pot up for an event, or to reset it. | 0 to 1000000000000 |
 | Smaller bets win a share | Off: every bet wins the whole pot. | On or off |
 | Announce jackpots | A message and a title for everyone. | On or off |
-| Pot under the coin counter |  | On or off |
+| Pot under the coin counter | On: every player sees the jackpot's size in a line under their coin counter, so they know when it is worth playing. | On or off |
 
 
 # Lottery
@@ -2555,15 +2555,15 @@ Players buy tickets; every drawing one ticket wins the pot.
 
 | Setting | What it does | Values |
 |---|---|---|
-| Ticket price |  | 1 to 1000000000 |
-| Most in one purchase |  | 1 to 1000000 |
+| Ticket price | What one lottery ticket costs. All of it goes into the pot; the winner gets the share of the pot set below. | 1 to 1000000000 |
+| Most in one purchase | The most tickets a player can buy at once. Use "Most per player" below to limit a whole round. | 1 to 1000000 |
 | Most per player | In one round. 0 = no limit. | 0 to 1000000 |
 
 #### Drawings
 
 | Setting | What it does | Values |
 |---|---|---|
-| Time between drawings (seconds) |  | 5 to 604800 |
+| Time between drawings (seconds) | How often a winner is drawn. 3600 is every hour, 86400 every day. | 5 to 604800 |
 | Fewest players | With fewer, the tickets wait for the next drawing. | 1 to 1000 |
 
 #### Prize
@@ -2579,11 +2579,11 @@ Players buy tickets; every drawing one ticket wins the pot.
 |---|---|---|
 | Announce ticket sales | "Steve bought 3 tickets. The pot is now ..." | On or off |
 | Announce the winner | Off: only the winner is told. | On or off |
-| Warn before a drawing |  | On or off |
-| Warn how long before (seconds) |  | 5 to 86400 |
+| Warn before a drawing | On: everyone gets a chat line with the pot and the time left, shortly before the drawing. Only when someone has a ticket. | On or off |
+| Warn how long before (seconds) | How long before the drawing the warning comes. It is skipped when the drawings are too close together for it. | 5 to 86400 |
 | Pot under the coin counter | With the time left to the drawing. | On or off |
 | Chat tag | Tag | Text |
-| Colour |  | A colour |
+| Colour | The colour of the lottery's tag word in front of its chat messages. | A colour |
 
 
 # Coinflip
@@ -2646,9 +2646,9 @@ Players stake coins on heads or tails; another player matches the stake and the 
 
 | Setting | What it does | Values |
 |---|---|---|
-| Smallest stake |  | 1 to 1000000000 |
+| Smallest stake | The least a player can bet when they open or join a coinflip room. | 1 to 1000000000 |
 | Largest stake | 0 = no limit. | 0 to 1000000000000 |
-| Open rooms per player |  | 1 to 20 |
+| Open rooms per player | How many rooms one player can have waiting for an opponent at the same time. | 1 to 20 |
 | Rooms close after (minutes) | A room nobody joins closes and its stake goes back. 0 = never. | 0 to 1440 |
 | House fee (%) | Kept from the pot; it leaves the game. | 0 to 50 |
 
@@ -2658,16 +2658,16 @@ Players stake coins on heads or tails; another player matches the stake and the 
 |---|---|---|
 | Flip time (seconds) | How long the coin spins; the winner is paid when it lands. | 1 to 10 |
 | Show the flip to the room's maker | Opens the flip for them when someone joins, unless another page is open. | On or off |
-| Sounds |  | On or off |
+| Sounds | On: ticks while the coin spins, and a win sound for the winner. | On or off |
 
 #### Announcements
 
 | Setting | What it does | Values |
 |---|---|---|
-| Tell everyone about new rooms |  | On or off |
+| Tell everyone about new rooms | On: a chat line to everyone when a player opens a room, with the stake. At most one per player every 30 seconds, so chat cannot be flooded. | On or off |
 | Tell everyone about flips from (pot) | Also sent to Discord. 0 = never. | 0 to 1000000000000 |
 | Chat tag | Tag | Text |
-| Colour |  | A colour |
+| Colour | The colour of the coinflip's tag word in front of its chat messages. | A colour |
 
 
 # Leveling mods for server owners
@@ -2760,10 +2760,10 @@ A higher level raises the rewards ticked below, as rank perks do. Example: 2% fo
 |---|---|---|
 | Bonus per 10 levels (%) | 0 is off | 0 to 1000 |
 | Highest bonus (%) | Never more than this, prestige bonus included | 0 to 1000 |
-| Raises mob gold |  | On or off |
-| Raises quest rewards |  | On or off |
-| Raises daily rewards |  | On or off |
-| Raises battle pass XP |  | On or off |
+| Raises mob gold | On: the level bonus also raises the coins mobs drop (Tempest Economy). | On or off |
+| Raises quest rewards | On: the level bonus also raises the money from quests and achievements (Tempest Quests). | On or off |
+| Raises daily rewards | On: the level bonus also raises daily rewards. | On or off |
+| Raises battle pass XP | On: the level bonus also raises the XP players get for the battle pass (Tempest Pass). | On or off |
 | Raises what the shop pays | Never above the shop's own buying price | On or off |
 
 #### Chat, boards and XP boosts
@@ -2790,16 +2790,16 @@ Run by the server console when a player reaches a level: ranks, kits, titles fro
 
 | Setting | What it does | Values |
 |---|---|---|
-| Reward 1 at level |  | 0 to 100000 |
-| Reward 1 command |  | Text |
-| Reward 2 at level |  | 0 to 100000 |
-| Reward 2 command |  | Text |
-| Reward 3 at level |  | 0 to 100000 |
-| Reward 3 command |  | Text |
-| Reward 4 at level |  | 0 to 100000 |
-| Reward 4 command |  | Text |
-| Reward 5 at level |  | 0 to 100000 |
-| Reward 5 command |  | Text |
+| Reward 1 at level | The level at which the command below runs. 0: this reward is off. | 0 to 100000 |
+| Reward 1 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 2 at level | The level at which the command below runs. 0: this reward is off. | 0 to 100000 |
+| Reward 2 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 3 at level | The level at which the command below runs. 0: this reward is off. | 0 to 100000 |
+| Reward 3 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 4 at level | The level at which the command below runs. 0: this reward is off. | 0 to 100000 |
+| Reward 4 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 5 at level | The level at which the command below runs. 0: this reward is off. | 0 to 100000 |
+| Reward 5 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
 
 #### Leveling XP from the economy
 
@@ -2807,12 +2807,12 @@ Leveling XP for what players do in the Tempest plugins, with the leveling mod's 
 
 | Setting | What it does | Values |
 |---|---|---|
-| XP per daily reward |  | 0 to 1000000 |
-| XP per crate opened |  | 0 to 1000000 |
-| XP per contract delivery |  | 0 to 1000000 |
+| XP per daily reward | Leveling XP each time a player claims their daily reward. | 0 to 1000000 |
+| XP per crate opened | Leveling XP for each crate a player opens. | 0 to 1000000 |
+| XP per contract delivery | Leveling XP for each delivery to a contract or a server order (Tempest Contracts), however many items it holds. | 0 to 1000000 |
 | XP per 100 the shop pays | Selling 500 worth at 2 gives 10 XP | 0 to 1000000 |
 | XP per item given to a town project | Tempest Projects: building the town levels you up | 0 to 1000000 |
-| XP per 100 coins given to a project |  | 0 to 1000000 |
+| XP per 100 coins given to a project | Leveling XP for every 100 coins a player gives to a town project (Tempest Projects). 250 coins at 2 gives 5 XP. | 0 to 1000000 |
 
 #### Stopping alts
 
@@ -2882,7 +2882,7 @@ Mobs from a level on are elite: more gold, and the server hears who defeated one
 |---|---|---|
 | Elite from mob level | 0 is off | 0 to 100000 |
 | Elite gold bonus (%) | On top of the gold per mob level | 0 to 10000 |
-| Tell everyone about elite kills |  | On or off |
+| Tell everyone about elite kills | On: when a player defeats an elite mob, the whole server reads a line such as "Steve defeated an elite level 60 Trork Warlord!". Nothing happens while "Elite from mob level" is 0. | On or off |
 
 
 ### MMO Skill Tree
@@ -2995,7 +2995,7 @@ A player who defeats someone far below their level pays them. The money moves fr
 | Setting | What it does | Values |
 |---|---|---|
 | Fine per level below | For each level the victim was lower | 0 to 1000000000 |
-| Lowest level gap for a fine |  | 0 to 10000 |
+| Lowest level gap for a fine | The killer pays only when the victim was at least this many levels lower. 10: a level 30 player who kills a level 20 pays; one who kills a level 25 does not. The fine counts every level of the gap. | 0 to 10000 |
 | Highest fine | Never more than the killer has; 0 is no limit | 0 to 1000000000 |
 
 
@@ -3010,7 +3010,7 @@ Only with Endless Leveling: community goals for dungeons, wave gates and raids a
 | Setting | What it does | Values |
 |---|---|---|
 | Start an event when a raid starts | Only when no other event is on. Events must be switched on. | On or off |
-| Event it starts |  | Gold Rush, Monster Hunt, XP Frenzy, Market Day, Lucky Hour |
+| Event it starts | The event that starts by itself when an Endless Leveling raid starts. Make and change events in /events, Manage. | Gold Rush, Monster Hunt, XP Frenzy, Market Day, Lucky Hour |
 | For how long (minutes) | 0: the event's own length | 0 to 10080 |
 
 

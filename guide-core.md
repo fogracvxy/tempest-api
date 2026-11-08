@@ -72,7 +72,7 @@ A panel on the right of each player's screen with their name, world and money, t
 | Board title | Your server's name, in the menu theme's colour. Empty: no title. | Text |
 | Line under the title | Such as your server's address or Discord. Empty: none. | Text |
 | Players may show the time | The time of day in their world. | On or off |
-| Players may show their ping |  | On or off |
+| Players may show their ping | Lets each player add their ping (the delay between them and the server) to their own Tempest board. Players switch it on themselves in /board. | On or off |
 | Players may show their position | Off for servers where coordinates should stay secret. Players switch it on themselves. | On or off |
 | Your own line 1 | "Label \| text": placeholders show other plugins' numbers, such as "Kills \| {myplugin_kills}". Without \| it is one line of text. | Text |
 | Your own line 2 | Empty: none. | Text |
@@ -97,7 +97,7 @@ The look of every Tempest menu, for every player.
 | Help screen for new players | Opens /guide the first time someone joins. | On or off |
 | What's on, when players join | A few chat lines from the Tempest board: a daily reward waiting, a running event, the lottery pot. Nothing when there is nothing to say. | On or off |
 | Tips for players | One line about something the server has, taken from /guide. Each tip comes once per player, then they stop. | On or off |
-| Minutes between tips |  | 1 to 1440 |
+| Minutes between tips | How long one player waits between two tips. Each tip comes only once per player, so after a while the tips stop by themselves. | 1 to 1440 |
 
 #### Updates
 
@@ -133,35 +133,35 @@ Give a rank a perk's permission in your ranks plugin (LuckPerms, or Hytale's own
 | Setting | What it does | Values |
 |---|---|---|
 | Perk 1 | Name | Text |
-| Permission |  | Text |
+| Permission | The permission that gives this perk, such as tempest.perk.vip. Give it to a rank in your ranks plugin (LuckPerms or Hytale's own permissions). Empty: this perk is off. A player with several perks gets the best of each bonus. | Text |
 | Daily rewards | Bonus (%) | 0 to 1000 |
-| Quest rewards (%) |  | 0 to 1000 |
+| Quest rewards (%) | Players with this perk get this much more money from quest and achievement rewards. | 0 to 1000 |
 | Shop | Discount (%) | 0 to 90 |
-| Sell bonus (%) |  | 0 to 1000 |
+| Sell bonus (%) | Players with this perk get this much more when they sell to the shop. A sale never pays more than the item costs to buy, so it cannot be turned into a money loop. | 0 to 1000 |
 | Payment fee cut (%) | 100 = this rank pays no fee when paying other players. | 0 to 100 |
 | Pass XP (%) | Tempest Pass, Pro edition: more pass XP for this rank. | 0 to 1000 |
 | Perk 2 | Name | Text |
-| Permission |  | Text |
+| Permission | The permission that gives this perk, such as tempest.perk.vip. Give it to a rank in your ranks plugin (LuckPerms or Hytale's own permissions). Empty: this perk is off. A player with several perks gets the best of each bonus. | Text |
 | Daily rewards | Bonus (%) | 0 to 1000 |
-| Quest rewards (%) |  | 0 to 1000 |
+| Quest rewards (%) | Players with this perk get this much more money from quest and achievement rewards. | 0 to 1000 |
 | Shop | Discount (%) | 0 to 90 |
-| Sell bonus (%) |  | 0 to 1000 |
+| Sell bonus (%) | Players with this perk get this much more when they sell to the shop. A sale never pays more than the item costs to buy, so it cannot be turned into a money loop. | 0 to 1000 |
 | Payment fee cut (%) | 100 = this rank pays no fee when paying other players. | 0 to 100 |
 | Pass XP (%) | Tempest Pass, Pro edition: more pass XP for this rank. | 0 to 1000 |
 | Perk 3 | Name | Text |
-| Permission |  | Text |
+| Permission | The permission that gives this perk, such as tempest.perk.vip. Give it to a rank in your ranks plugin (LuckPerms or Hytale's own permissions). Empty: this perk is off. A player with several perks gets the best of each bonus. | Text |
 | Daily rewards | Bonus (%) | 0 to 1000 |
-| Quest rewards (%) |  | 0 to 1000 |
+| Quest rewards (%) | Players with this perk get this much more money from quest and achievement rewards. | 0 to 1000 |
 | Shop | Discount (%) | 0 to 90 |
-| Sell bonus (%) |  | 0 to 1000 |
+| Sell bonus (%) | Players with this perk get this much more when they sell to the shop. A sale never pays more than the item costs to buy, so it cannot be turned into a money loop. | 0 to 1000 |
 | Payment fee cut (%) | 100 = this rank pays no fee when paying other players. | 0 to 100 |
 | Pass XP (%) | Tempest Pass, Pro edition: more pass XP for this rank. | 0 to 1000 |
 | Perk 4 | Name | Text |
-| Permission |  | Text |
+| Permission | The permission that gives this perk, such as tempest.perk.vip. Give it to a rank in your ranks plugin (LuckPerms or Hytale's own permissions). Empty: this perk is off. A player with several perks gets the best of each bonus. | Text |
 | Daily rewards | Bonus (%) | 0 to 1000 |
-| Quest rewards (%) |  | 0 to 1000 |
+| Quest rewards (%) | Players with this perk get this much more money from quest and achievement rewards. | 0 to 1000 |
 | Shop | Discount (%) | 0 to 90 |
-| Sell bonus (%) |  | 0 to 1000 |
+| Sell bonus (%) | Players with this perk get this much more when they sell to the shop. A sale never pays more than the item costs to buy, so it cannot be turned into a money loop. | 0 to 1000 |
 | Payment fee cut (%) | 100 = this rank pays no fee when paying other players. | 0 to 100 |
 | Pass XP (%) | Tempest Pass, Pro edition: more pass XP for this rank. | 0 to 1000 |
 
@@ -174,20 +174,20 @@ Your own page: rules and anything players should know. It is the first page of /
 
 | Setting | What it does | Values |
 |---|---|---|
-| Show the page |  | On or off |
-| Title |  | Text |
-| Line 1 |  | Text |
-| Line 2 |  | Text |
-| Line 3 |  | Text |
-| Line 4 |  | Text |
-| Line 5 |  | Text |
-| Line 6 |  | Text |
-| Line 7 |  | Text |
-| Line 8 |  | Text |
-| Line 9 |  | Text |
-| Line 10 |  | Text |
-| Line 11 |  | Text |
-| Line 12 |  | Text |
+| Show the page | On: /info and /rules open this page, and it is the first page of /guide (new players see it when they first join, if that is on). Off: the page is hidden. | On or off |
+| Title | The heading at the top of the page, such as your server's name or "Rules". | Text |
+| Line 1 | Start a line with # to make it a heading; an empty line is a gap. One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
+| Line 2 | One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
+| Line 3 | One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
+| Line 4 | One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
+| Line 5 | One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
+| Line 6 | One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
+| Line 7 | One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
+| Line 8 | One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
+| Line 9 | One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
+| Line 10 | One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
+| Line 11 | One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
+| Line 12 | One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
 
 #### Buttons
 
@@ -195,10 +195,10 @@ Up to two buttons under the text, each running a command as the player.
 
 | Setting | What it does | Values |
 |---|---|---|
-| Button 1 text |  | Text |
-| Button 1 command | For example /shop | Text |
-| Button 2 text |  | Text |
-| Button 2 command |  | Text |
+| Button 1 text | The word on the first button under the text. Empty: no button. | Text |
+| Button 1 command | For example /shop The command the first button runs as the player who clicks it, such as /shop or /spawn. | Text |
+| Button 2 text | The word on the second button. Empty: no second button. | Text |
+| Button 2 command | The command the second button runs as the player who clicks it. | Text |
 
 
 ### World map
@@ -209,7 +209,7 @@ Tempest's places show on every player's map and compass. Each kind of place has 
 
 | Setting | What it does | Values |
 |---|---|---|
-| Show Tempest places on the map |  | On or off |
+| Show Tempest places on the map | Off: no Tempest place (shops, slot machines, ATMs, crates, your own places) shows on any map or compass. Each kind can also be switched off on its own tab. | On or off |
 | Players may pick what their map shows | With /places each player can leave out kinds of place. | On or off |
 | Players may use /places | Lists the places nearest first. Admins can always use it. | On or off |
 
@@ -224,12 +224,12 @@ How these look on the map and who gets them. To change one of them, use /places.
 
 | Setting | What it does | Values |
 |---|---|---|
-| Show on the map |  | On or off |
+| Show on the map | Shows every place of this kind on players' maps. Off: they are hidden, but stay known, so switching it on brings them back. | On or off |
 | Icon | A resource pack's own picture: put its file name in map.json. | A list |
 | Colour | White shows the icon as it was drawn. | A colour |
 | Name on the map | Empty: each place's own name. Written here, every one of them shows this. | Text |
-| Big icon |  | On or off |
-| On the compass too |  | On or off |
+| Big icon | A larger icon on the map, for places players should find easily. | On or off |
+| On the compass too | These places also show on the compass at the top of the screen, not only on the map. | On or off |
 | Who sees it (permission) | Empty: everyone. With a permission, only players or ranks who have it. | Text |
 | Shown within (blocks) | Only players this near see them. 0: from anywhere. | 0 to 100000 |
 | Only in these worlds | World names with commas between them. Empty: every world. | Text |
@@ -245,12 +245,12 @@ How these look on the map and who gets them. To change one of them, use /places.
 
 | Setting | What it does | Values |
 |---|---|---|
-| Show on the map |  | On or off |
+| Show on the map | Shows every place of this kind on players' maps. Off: they are hidden, but stay known, so switching it on brings them back. | On or off |
 | Icon | A resource pack's own picture: put its file name in map.json. | A list |
 | Colour | White shows the icon as it was drawn. | A colour |
 | Name on the map | Empty: each place's own name. Written here, every one of them shows this. | Text |
-| Big icon |  | On or off |
-| On the compass too |  | On or off |
+| Big icon | A larger icon on the map, for places players should find easily. | On or off |
+| On the compass too | These places also show on the compass at the top of the screen, not only on the map. | On or off |
 | Who sees it (permission) | Empty: everyone. With a permission, only players or ranks who have it. | Text |
 | Shown within (blocks) | Only players this near see them. 0: from anywhere. | 0 to 100000 |
 | Only in these worlds | World names with commas between them. Empty: every world. | Text |
@@ -266,12 +266,12 @@ How these look on the map and who gets them. To change one of them, use /places.
 
 | Setting | What it does | Values |
 |---|---|---|
-| Show on the map |  | On or off |
+| Show on the map | Shows every place of this kind on players' maps. Off: they are hidden, but stay known, so switching it on brings them back. | On or off |
 | Icon | A resource pack's own picture: put its file name in map.json. | A list |
 | Colour | White shows the icon as it was drawn. | A colour |
 | Name on the map | Empty: each place's own name. Written here, every one of them shows this. | Text |
-| Big icon |  | On or off |
-| On the compass too |  | On or off |
+| Big icon | A larger icon on the map, for places players should find easily. | On or off |
+| On the compass too | These places also show on the compass at the top of the screen, not only on the map. | On or off |
 | Who sees it (permission) | Empty: everyone. With a permission, only players or ranks who have it. | Text |
 | Shown within (blocks) | Only players this near see them. 0: from anywhere. | 0 to 100000 |
 | Only in these worlds | World names with commas between them. Empty: every world. | Text |
@@ -287,12 +287,12 @@ How these look on the map and who gets them. To change one of them, use /places.
 
 | Setting | What it does | Values |
 |---|---|---|
-| Show on the map |  | On or off |
+| Show on the map | Shows every place of this kind on players' maps. Off: they are hidden, but stay known, so switching it on brings them back. | On or off |
 | Icon | A resource pack's own picture: put its file name in map.json. | A list |
 | Colour | White shows the icon as it was drawn. | A colour |
 | Name on the map | Empty: each place's own name. Written here, every one of them shows this. | Text |
-| Big icon |  | On or off |
-| On the compass too |  | On or off |
+| Big icon | A larger icon on the map, for places players should find easily. | On or off |
+| On the compass too | These places also show on the compass at the top of the screen, not only on the map. | On or off |
 | Who sees it (permission) | Empty: everyone. With a permission, only players or ranks who have it. | Text |
 | Shown within (blocks) | Only players this near see them. 0: from anywhere. | 0 to 100000 |
 | Only in these worlds | World names with commas between them. Empty: every world. | Text |
@@ -308,12 +308,12 @@ How these look on the map and who gets them. To change one of them, use /places.
 
 | Setting | What it does | Values |
 |---|---|---|
-| Show on the map |  | On or off |
+| Show on the map | Shows every place of this kind on players' maps. Off: they are hidden, but stay known, so switching it on brings them back. | On or off |
 | Icon | A resource pack's own picture: put its file name in map.json. | A list |
 | Colour | White shows the icon as it was drawn. | A colour |
 | Name on the map | Empty: each place's own name. Written here, every one of them shows this. | Text |
-| Big icon |  | On or off |
-| On the compass too |  | On or off |
+| Big icon | A larger icon on the map, for places players should find easily. | On or off |
+| On the compass too | These places also show on the compass at the top of the screen, not only on the map. | On or off |
 | Who sees it (permission) | Empty: everyone. With a permission, only players or ranks who have it. | Text |
 | Shown within (blocks) | Only players this near see them. 0: from anywhere. | 0 to 100000 |
 | Only in these worlds | World names with commas between them. Empty: every world. | Text |

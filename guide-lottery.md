@@ -48,15 +48,15 @@ Players buy tickets; every drawing one ticket wins the pot.
 
 | Setting | What it does | Values |
 |---|---|---|
-| Ticket price |  | 1 to 1000000000 |
-| Most in one purchase |  | 1 to 1000000 |
+| Ticket price | What one lottery ticket costs. All of it goes into the pot; the winner gets the share of the pot set below. | 1 to 1000000000 |
+| Most in one purchase | The most tickets a player can buy at once. Use "Most per player" below to limit a whole round. | 1 to 1000000 |
 | Most per player | In one round. 0 = no limit. | 0 to 1000000 |
 
 #### Drawings
 
 | Setting | What it does | Values |
 |---|---|---|
-| Time between drawings (seconds) |  | 5 to 604800 |
+| Time between drawings (seconds) | How often a winner is drawn. 3600 is every hour, 86400 every day. | 5 to 604800 |
 | Fewest players | With fewer, the tickets wait for the next drawing. | 1 to 1000 |
 
 #### Prize
@@ -72,8 +72,8 @@ Players buy tickets; every drawing one ticket wins the pot.
 |---|---|---|
 | Announce ticket sales | "Steve bought 3 tickets. The pot is now ..." | On or off |
 | Announce the winner | Off: only the winner is told. | On or off |
-| Warn before a drawing |  | On or off |
-| Warn how long before (seconds) |  | 5 to 86400 |
+| Warn before a drawing | On: everyone gets a chat line with the pot and the time left, shortly before the drawing. Only when someone has a ticket. | On or off |
+| Warn how long before (seconds) | How long before the drawing the warning comes. It is skipped when the drawings are too close together for it. | 5 to 86400 |
 | Pot under the coin counter | With the time left to the drawing. | On or off |
 | Chat tag | Tag | Text |
-| Colour |  | A colour |
+| Colour | The colour of the lottery's tag word in front of its chat messages. | A colour |

@@ -57,12 +57,12 @@ How players hear about events.
 | Setting | What it does | Values |
 |---|---|---|
 | Big title on screen | When an event starts, reaches its goal and ends. | On or off |
-| Chat messages |  | On or off |
-| Sounds |  | On or off |
+| Chat messages | On: everyone gets chat lines when an event is coming, starts and ends. Off: no event chat lines; titles and sounds have their own switches. | On or off |
+| Sounds | On: everyone hears a sound when an event is coming, when it starts, and when a goal or stage is reached. | On or off |
 | Warn before a start (minutes) | Players are told this long before a scheduled event. 0: not told. | 0 to 120 |
 | Show on the board | The event, its time left and the goal on the Tempest board (players can hide it in /board). | On or off |
 | Chat tag | Tag | Text |
-| Tag colour |  | A colour |
+| Tag colour | The colour of the events' tag word in front of their chat messages. | A colour |
 
 #### Server fund
 
@@ -70,9 +70,9 @@ Players put money in together; when it is full, the event below starts for every
 
 | Setting | What it does | Values |
 |---|---|---|
-| Server fund |  | On or off |
-| Event it starts |  | Gold Rush, Monster Hunt, XP Frenzy, Market Day, Lucky Hour |
-| Money to fill it |  | 1 to 1000000000 |
+| Server fund | On: players give money to the server fund with /events give <amount>. When it is full, the event below starts for everyone, at once or as soon as the event that is on ends. | On or off |
+| Event it starts | The event that starts when the server fund is full. Make and change events in /events, Manage. | Gold Rush, Monster Hunt, XP Frenzy, Market Day, Lucky Hour |
+| Money to fill it | How much money the players must give together. When it is full the event starts and the fund starts again from 0. The money leaves the economy. | 1 to 1000000000 |
 | Tell everyone about gifts of (% of the fund) | 0: never. | 0 to 100 |
 
 #### Lucky events
@@ -81,7 +81,7 @@ Now and then, by chance, an event starts by itself while nothing else is on.
 
 | Setting | What it does | Values |
 |---|---|---|
-| Lucky events |  | On or off |
-| Which event |  | Gold Rush, Monster Hunt, XP Frenzy, Market Day, Lucky Hour |
-| Chance each hour (%) |  | 0 to 100 |
+| Lucky events | On: once an hour there is a chance the event below starts by itself, when no other event is on. | On or off |
+| Which event | The event a lucky roll starts. | Gold Rush, Monster Hunt, XP Frenzy, Market Day, Lucky Hour |
+| Chance each hour (%) | The chance, checked once an hour, that a lucky event starts. 10: about one every 10 hours. | 0 to 100 |
 | Players online at least | Fewer players online: no lucky event, so nobody misses it. | 0 to 500 |

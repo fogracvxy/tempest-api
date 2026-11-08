@@ -51,10 +51,10 @@ When something is unlocked or locked.
 
 | Setting | What it does | Values |
 |---|---|---|
-| Announce in chat |  | On or off |
+| Announce in chat | On: everyone gets a chat line when the town unlocks something or it is locked again. It also goes to Discord when that is set up. | On or off |
 | Seconds before announcing it again | Against chat floods. Console commands of an unlock always run. | 5 to 86400 |
 | Chat tag | Tag | Text |
-| Colour of the tag |  | A colour |
+| Colour of the tag | The colour of the town's tag word in front of its chat messages. | A colour |
 
 #### Mayor
 
@@ -62,18 +62,18 @@ Each term the player who gave most to town projects becomes mayor, with a few sm
 
 | Setting | What it does | Values |
 |---|---|---|
-| The town has a mayor |  | On or off |
-| A term lasts (days) |  | 1 to 90 |
+| The town has a mayor | On: at the end of each term, the player who gave most to town projects in that term becomes mayor for the next one. Off: no mayor and no mayor powers. | On or off |
+| A term lasts (days) | How long one mayor's term is. Donations are counted again from 0 for each term. | 1 to 90 |
 | Least given to become mayor | In points: one per coin, and the next setting per item. | 0 to 10000000 |
-| Points per item given |  | 0 to 10000 |
+| Points per item given | Points for each item a player gives to a project. Each coin given is one point. | 0 to 10000 |
 | The mayor's boost | For everyone online, started with /mayor boost. | Jobs pay, Mob coins, Ore coins, Quest reward, Shop sell, Daily reward, Pass xp, Shop discount, Contract pay |
-| Boost (%) |  | 1 to 100 |
-| For (minutes) |  | 1 to 1440 |
-| Boosts each term |  | 0 to 20 |
+| Boost (%) | How much the mayor's boost raises what it boosts. | 1 to 100 |
+| For (minutes) | How long one mayor's boost lasts. | 1 to 1440 |
+| Boosts each term | How many boosts the mayor can start in one term. 0: the mayor cannot start boosts. | 0 to 20 |
 | Reward (coins) | /mayor reward <player>: new coins for a player who helped. Never the mayor, each player once a term. | 0 to 1000000 |
-| Rewards each term |  | 0 to 20 |
+| Rewards each term | How many players the mayor can reward in one term. 0: no rewards. | 0 to 20 |
 | Fine (coins) | /mayor fine <player>: never more than they have, never an admin; only the two of them are told. Every use is in the admin log. | 0 to 1000000 |
-| Fines each term |  | 0 to 20 |
+| Fines each term | How many players the mayor can fine in one term. 0: no fines. | 0 to 20 |
 
 #### Buildings
 

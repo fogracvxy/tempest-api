@@ -47,7 +47,7 @@ Trades are safe anywhere: offered items are held by the server until the trade i
 | Setting | What it does | Values |
 |---|---|---|
 | Players must be near each other | Off: players can trade from anywhere on the server. | On or off |
-| Near means within (blocks) |  | 2 to 1000 |
+| Near means within (blocks) | How close two players must be to trade, while the setting before it is on. | 2 to 1000 |
 | Only in the same world | Always on while players must be near each other. | On or off |
 
 #### Coins
@@ -65,9 +65,9 @@ What keeps trades fair.
 
 | Setting | What it does | Values |
 |---|---|---|
-| Item slots for each player |  | 1 to 18 |
+| Item slots for each player | How many different stacks each player can put into one trade. | 1 to 18 |
 | Countdown after both are ready (seconds) | Any change stops it, so nobody can swap an item at the last moment. | 1 to 10 |
-| A request waits (seconds) |  | 10 to 600 |
-| Before asking the same player again (seconds) |  | 0 to 600 |
+| A request waits (seconds) | How long a /trade request stays open for the other player to accept. After that it is gone. | 10 to 600 |
+| Before asking the same player again (seconds) | How long a player waits before sending the same player another request, so nobody can spam requests. 0: no wait. | 0 to 600 |
 | Items that can never be traded | Item ids, with commas. End with * for every id that starts so: Crate_Key_* | Text |
 | Log every trade | In the server log and /tempest log: who gave what to whom. | On or off |

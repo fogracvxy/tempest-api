@@ -70,22 +70,22 @@ A prize's rarity comes from its chance. Choose the colours, and from which chanc
 
 | Setting | What it does | Values |
 |---|---|---|
-| Common |  | A colour |
-| from (%) |  | 0 to 100 |
-| Uncommon |  | A colour |
-| from (%) |  | 0 to 100 |
-| Rare |  | A colour |
-| from (%) |  | 0 to 100 |
-| Epic |  | A colour |
-| from (%) |  | 0 to 100 |
-| Legendary |  | A colour |
+| Common | The colour of Common prizes: their names in the crate menu, the spin, and the chat line and pop-up when one is won. | A colour |
+| from (%) | A prize with at least this chance, and not enough for the rarity above, is Common. Prizes rarer than every row are Legendary. | 0 to 100 |
+| Uncommon | The colour of Uncommon prizes: their names in the crate menu, the spin, and the chat line and pop-up when one is won. | A colour |
+| from (%) | A prize with at least this chance, and not enough for the rarity above, is Uncommon. Prizes rarer than every row are Legendary. | 0 to 100 |
+| Rare | The colour of Rare prizes: their names in the crate menu, the spin, and the chat line and pop-up when one is won. | A colour |
+| from (%) | A prize with at least this chance, and not enough for the rarity above, is Rare. Prizes rarer than every row are Legendary. | 0 to 100 |
+| Epic | The colour of Epic prizes: their names in the crate menu, the spin, and the chat line and pop-up when one is won. | A colour |
+| from (%) | A prize with at least this chance, and not enough for the rarity above, is Epic. Prizes rarer than every row are Legendary. | 0 to 100 |
+| Legendary | The colour of Legendary prizes: their names in the crate menu, the spin, and the chat line and pop-up when one is won. | A colour |
 
 #### Chat
 
 | Setting | What it does | Values |
 |---|---|---|
 | Chat tag | Tag | Text |
-| Colour |  | A colour |
+| Colour | The colour of the crates' tag word in front of their chat messages. | A colour |
 
 #### Free edition
 
@@ -109,11 +109,11 @@ Place a crate block, right-click it with crates.admin and choose its crate.
 | Circling prizes per crate | Each crate's own choice (Edit crates) says whether they circle at all. | 1 to 8 |
 | Circling prizes on the server | At most this many at once, all crate blocks together (0 = none). | 0 to 500 |
 | Seconds for one turn | How slowly the prizes circle the block. | 3 to 60 |
-| Circle size (blocks) |  | 0.4 to 3 |
-| Circle height (blocks) |  | 0 to 3 |
-| Moves per second |  | 2 to 20 |
+| Circle size (blocks) | How far from the middle of the crate block the prizes circle. | 0.4 to 3 |
+| Circle height (blocks) | How high above the crate block the prizes circle. | 0 to 3 |
+| Moves per second | How often a second the circling prizes move on. More looks smoother but sends players more updates. | 2 to 20 |
 | Seconds between sparkles | Fewer moves and sparkles are easier on players' games. | 0.5 to 30 |
-| Text height (blocks) |  | 0.5 to 5 |
+| Text height (blocks) | How high above the crate block its floating text (the crate's name and price) hangs. | 0.5 to 5 |
 | The won prize lights up | It glows in its rarity's colour as it rises from the chest. | On or off |
 | Players can craft crate blocks | Off: only admins (coins.admin.craft) can craft them. | On or off |
 
@@ -125,5 +125,5 @@ Everyone online gets crate keys at once, after a ten-second countdown in chat. S
 |---|---|---|
 | A key party every (hours) | 0 = only when an admin types /keyparty. | 0 to 168 |
 | Key | bronze, silver, gold or any item id. | Text |
-| Keys each |  | 1 to 64 |
-| Players online for one by itself |  | 1 to 500 |
+| Keys each | How many of the key above each online player gets in a key party: the timed ones, and /keyparty typed without a key and amount. | 1 to 64 |
+| Players online for one by itself | A timed key party waits until at least this many players are online, so keys are not given to an empty server. /keyparty always works. | 1 to 500 |

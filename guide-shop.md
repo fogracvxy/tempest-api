@@ -55,8 +55,8 @@ Items and their prices are set in the shop itself, with Edit shop.
 
 | Setting | What it does | Values |
 |---|---|---|
-| Players can buy |  | On or off |
-| Players can sell |  | On or off |
+| Players can buy | Off: nobody can buy from the shop, and there are no daily deals. Selling still works if it is on. | On or off |
+| Players can sell | Off: nobody can sell to the shop or use /sell. Buying still works if it is on. | On or off |
 | /shop works anywhere | Off: players must go to a shop stall. | On or off |
 
 #### Prices
@@ -75,12 +75,12 @@ Prices move with what players trade: each item sold lowers what the shop pays fo
 
 | Setting | What it does | Values |
 |---|---|---|
-| Prices move |  | On or off |
+| Prices move | On: prices follow what players trade, with the rules below. Off: every item always costs and pays exactly what you set in the shop. | On or off |
 | Each one sold lowers it (%) | 0.5: after 64 sold the shop pays about 73%. | 0 to 50 |
-| Never under (%) |  | 1 to 100 |
+| Never under (%) | The lowest the shop's pay for an item can fall, as a share of the price you set. 50: never under half. | 1 to 100 |
 | Each one bought raises it (%) | 0 = buying never raises prices. | 0 to 50 |
-| Never over (%) |  | 100 to 1000 |
-| Halfway back to normal in (hours) |  | 0.1 to 720 |
+| Never over (%) | The highest a buy price can climb, as a share of the price you set. 200: never more than double. | 100 to 1000 |
+| Halfway back to normal in (hours) | How fast moved prices drift back to the ones you set. After this many hours half the change is gone, after twice as long three quarters. | 0.1 to 720 |
 
 #### The shop's menu
 
@@ -89,15 +89,15 @@ What players see. Items, prices and categories are set in the shop itself, with 
 | Setting | What it does | Values |
 |---|---|---|
 | Title | Empty: "Shop" in each player's language. | Text |
-| Search box |  | On or off |
-| Sort list |  | On or off |
-| Category list |  | On or off |
-| Deals banner |  | On or off |
-| How many a player has |  | On or off |
-| First sorted by |  | The shop's own order, Cheapest first, Dearest first, By name |
-| Items on one page |  | 4 to 60 |
-| Third amount button |  | 2 to 10000 |
-| Most in one purchase |  | 1 to 100000 |
+| Search box | On: a search box at the top of the shop, so players can type an item's name. | On or off |
+| Sort list | On: players can sort the items themselves (cheapest, dearest, by name). | On or off |
+| Category list | On: the categories you made show as a list players can click to see only that kind of item. | On or off |
+| Deals banner | On: a line at the top of the shop names today's deals. | On or off |
+| How many a player has | On: each item shows how many of it the player already carries, so they know what they can sell. | On or off |
+| First sorted by | The order items are in when a player opens the shop. The shop's own order is the one you made in Edit shop. | The shop's own order, Cheapest first, Dearest first, By name |
+| Items on one page | How many items fit on one page of the shop before players turn to the next page. | 4 to 60 |
+| Third amount button | The shop has three amount buttons: 1, the bulk amount above, and this one. | 2 to 10000 |
+| Most in one purchase | The most of one item a player can buy or sell at once. | 1 to 100000 |
 
 #### Daily deals
 
@@ -106,7 +106,7 @@ A few items are cheaper each day, the same ones for everyone, picked anew at mid
 | Setting | What it does | Values |
 |---|---|---|
 | Deals each day | 0 = no deals. | 0 to 10 |
-| Deal discount (%) |  | 1 to 90 |
+| Deal discount (%) | How much cheaper a deal item is. 25: it costs three quarters of its normal price. | 1 to 90 |
 | Deals are picked from | Choose the pool in the shop: Edit shop, pick an item, Daily deal. Items set to Always are a deal every day. | Any item in the shop, Only the deal pool |
 | At the deal price, per player a day | How many of each deal one player may buy cheaper a day; more cost the normal price. 0 = no limit. | 0 to 100000 |
 
@@ -126,7 +126,7 @@ Tools, weapons and armour that have lost durability.
 | Price tag under the coin counter | What the shop pays for the item in your hand. | On or off |
 | Players can craft stalls | Off: only admins can. | On or off |
 | Chat tag | Tag | Text |
-| Colour |  | A colour |
+| Colour | The colour of the shop's tag word in front of its chat messages. | A colour |
 
 #### Free edition
 
@@ -144,9 +144,9 @@ Choose items for it in the shop: Edit shop, pick an item. One stall's own settin
 | Setting | What it does | Values |
 |---|---|---|
 | Title | Empty: the shop's own title. | Text |
-| It sells |  | Everything in the shop, What fits, plus chosen items, Only items chosen for it |
-| Items on its shelves |  | On or off |
-| How many |  | 1 to 3 |
+| It sells | Which shop items this kind of stall offers. What fits: the items that suit this stall, plus any you chose for it in Edit shop. Only chosen: just the ones you picked. | Everything in the shop, What fits, plus chosen items, Only items chosen for it |
+| Items on its shelves | On: real items from what this stall sells stand on its shelves while a player is near. Needs Tempest Holograms and Show items on stalls on the Stall shelves tab. | On or off |
+| How many | How many items stand on this stall's shelves at once. | 1 to 3 |
 
 #### Blacksmith
 
@@ -155,9 +155,9 @@ Choose items for it in the shop: Edit shop, pick an item. One stall's own settin
 | Setting | What it does | Values |
 |---|---|---|
 | Title | Empty: the stall's name in each player's language. | Text |
-| It sells |  | Everything in the shop, What fits, plus chosen items, Only items chosen for it |
-| Items on its shelves |  | On or off |
-| How many |  | 1 to 4 |
+| It sells | Which shop items this kind of stall offers. What fits: the items that suit this stall, plus any you chose for it in Edit shop. Only chosen: just the ones you picked. | Everything in the shop, What fits, plus chosen items, Only items chosen for it |
+| Items on its shelves | On: real items from what this stall sells stand on its shelves while a player is near. Needs Tempest Holograms and Show items on stalls on the Stall shelves tab. | On or off |
+| How many | How many items stand on this stall's shelves at once. | 1 to 4 |
 
 #### Farmer
 
@@ -166,9 +166,9 @@ Choose items for it in the shop: Edit shop, pick an item. One stall's own settin
 | Setting | What it does | Values |
 |---|---|---|
 | Title | Empty: the stall's name in each player's language. | Text |
-| It sells |  | Everything in the shop, What fits, plus chosen items, Only items chosen for it |
-| Items on its shelves |  | On or off |
-| How many |  | 1 to 4 |
+| It sells | Which shop items this kind of stall offers. What fits: the items that suit this stall, plus any you chose for it in Edit shop. Only chosen: just the ones you picked. | Everything in the shop, What fits, plus chosen items, Only items chosen for it |
+| Items on its shelves | On: real items from what this stall sells stand on its shelves while a player is near. Needs Tempest Holograms and Show items on stalls on the Stall shelves tab. | On or off |
+| How many | How many items stand on this stall's shelves at once. | 1 to 4 |
 
 #### Apothecary
 
@@ -177,9 +177,9 @@ Choose items for it in the shop: Edit shop, pick an item. One stall's own settin
 | Setting | What it does | Values |
 |---|---|---|
 | Title | Empty: the stall's name in each player's language. | Text |
-| It sells |  | Everything in the shop, What fits, plus chosen items, Only items chosen for it |
-| Items on its shelves |  | On or off |
-| How many |  | 1 to 3 |
+| It sells | Which shop items this kind of stall offers. What fits: the items that suit this stall, plus any you chose for it in Edit shop. Only chosen: just the ones you picked. | Everything in the shop, What fits, plus chosen items, Only items chosen for it |
+| Items on its shelves | On: real items from what this stall sells stand on its shelves while a player is near. Needs Tempest Holograms and Show items on stalls on the Stall shelves tab. | On or off |
+| How many | How many items stand on this stall's shelves at once. | 1 to 3 |
 
 #### Fishmonger
 
@@ -188,9 +188,9 @@ Choose items for it in the shop: Edit shop, pick an item. One stall's own settin
 | Setting | What it does | Values |
 |---|---|---|
 | Title | Empty: the stall's name in each player's language. | Text |
-| It sells |  | Everything in the shop, What fits, plus chosen items, Only items chosen for it |
-| Items on its shelves |  | On or off |
-| How many |  | 1 to 4 |
+| It sells | Which shop items this kind of stall offers. What fits: the items that suit this stall, plus any you chose for it in Edit shop. Only chosen: just the ones you picked. | Everything in the shop, What fits, plus chosen items, Only items chosen for it |
+| Items on its shelves | On: real items from what this stall sells stand on its shelves while a player is near. Needs Tempest Holograms and Show items on stalls on the Stall shelves tab. | On or off |
+| How many | How many items stand on this stall's shelves at once. | 1 to 4 |
 
 #### Tavern
 
@@ -199,9 +199,9 @@ Choose items for it in the shop: Edit shop, pick an item. One stall's own settin
 | Setting | What it does | Values |
 |---|---|---|
 | Title | Empty: the stall's name in each player's language. | Text |
-| It sells |  | Everything in the shop, What fits, plus chosen items, Only items chosen for it |
-| Items on its shelves |  | On or off |
-| How many |  | 1 to 3 |
+| It sells | Which shop items this kind of stall offers. What fits: the items that suit this stall, plus any you chose for it in Edit shop. Only chosen: just the ones you picked. | Everything in the shop, What fits, plus chosen items, Only items chosen for it |
+| Items on its shelves | On: real items from what this stall sells stand on its shelves while a player is near. Needs Tempest Holograms and Show items on stalls on the Stall shelves tab. | On or off |
+| How many | How many items stand on this stall's shelves at once. | 1 to 3 |
 
 #### Mage
 
@@ -210,9 +210,9 @@ Choose items for it in the shop: Edit shop, pick an item. One stall's own settin
 | Setting | What it does | Values |
 |---|---|---|
 | Title | Empty: the stall's name in each player's language. | Text |
-| It sells |  | Everything in the shop, What fits, plus chosen items, Only items chosen for it |
-| Items on its shelves |  | On or off |
-| How many |  | 1 to 3 |
+| It sells | Which shop items this kind of stall offers. What fits: the items that suit this stall, plus any you chose for it in Edit shop. Only chosen: just the ones you picked. | Everything in the shop, What fits, plus chosen items, Only items chosen for it |
+| Items on its shelves | On: real items from what this stall sells stand on its shelves while a player is near. Needs Tempest Holograms and Show items on stalls on the Stall shelves tab. | On or off |
+| How many | How many items stand on this stall's shelves at once. | 1 to 3 |
 
 
 ### Stall shelves
@@ -225,14 +225,14 @@ Real items from what a stall sells stand on it while a player is near. Needs Tem
 
 | Setting | What it does | Values |
 |---|---|---|
-| Show items on stalls |  | On or off |
+| Show items on stalls | On: real items from what a stall sells stand on its shelves while a player is near. Needs the free Tempest Holograms plugin. Each kind of stall can switch its shelves off on the Stalls tab. | On or off |
 | Show from (blocks away) | Closer costs less when a server has many stalls. | 4 to 128 |
 | Items stand on the stall | Still 3D models. Off: they hang in the air like dropped items, with the game's rarity beam. | On or off |
 | Item size | 1 is the size of a dropped item; smaller items stand apart on the counter. | 0.2 to 1.5 |
 | Only items marked for the shelves | Mark them in the shop: Edit shop, pick an item, First on the shelves. Off: deals and the rest of the stock fill the shelf. | On or off |
 | A different choice each day | Marked items and deals always come first. | On or off |
-| Today's deals glow |  | On or off |
-| Glow colour |  | A colour |
+| Today's deals glow | On: items on the shelves that are one of today's deals glow, so players spot them from afar. | On or off |
+| Glow colour | The colour of the deals' glow. | A colour |
 
 #### What a sale does
 
@@ -240,6 +240,6 @@ Every stall plays its own animation; these go on top of it.
 
 | Setting | What it does | Values |
 |---|---|---|
-| Sounds |  | On or off |
-| Sparks |  | On or off |
-| The item hops over the counter |  | On or off |
+| Sounds | On: the stall plays its own sound when a player buys or sells there. | On or off |
+| Sparks | On: a puff of particles over the counter with each sale. | On or off |
+| The item hops over the counter | On: the item jumps over the counter: towards the player when they buy, into the stall when they sell. It is only a show; nobody can pick it up. | On or off |

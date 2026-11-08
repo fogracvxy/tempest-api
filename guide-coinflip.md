@@ -58,9 +58,9 @@ Players stake coins on heads or tails; another player matches the stake and the 
 
 | Setting | What it does | Values |
 |---|---|---|
-| Smallest stake |  | 1 to 1000000000 |
+| Smallest stake | The least a player can bet when they open or join a coinflip room. | 1 to 1000000000 |
 | Largest stake | 0 = no limit. | 0 to 1000000000000 |
-| Open rooms per player |  | 1 to 20 |
+| Open rooms per player | How many rooms one player can have waiting for an opponent at the same time. | 1 to 20 |
 | Rooms close after (minutes) | A room nobody joins closes and its stake goes back. 0 = never. | 0 to 1440 |
 | House fee (%) | Kept from the pot; it leaves the game. | 0 to 50 |
 
@@ -70,13 +70,13 @@ Players stake coins on heads or tails; another player matches the stake and the 
 |---|---|---|
 | Flip time (seconds) | How long the coin spins; the winner is paid when it lands. | 1 to 10 |
 | Show the flip to the room's maker | Opens the flip for them when someone joins, unless another page is open. | On or off |
-| Sounds |  | On or off |
+| Sounds | On: ticks while the coin spins, and a win sound for the winner. | On or off |
 
 #### Announcements
 
 | Setting | What it does | Values |
 |---|---|---|
-| Tell everyone about new rooms |  | On or off |
+| Tell everyone about new rooms | On: a chat line to everyone when a player opens a room, with the stake. At most one per player every 30 seconds, so chat cannot be flooded. | On or off |
 | Tell everyone about flips from (pot) | Also sent to Discord. 0 = never. | 0 to 1000000000000 |
 | Chat tag | Tag | Text |
-| Colour |  | A colour |
+| Colour | The colour of the coinflip's tag word in front of its chat messages. | A colour |
