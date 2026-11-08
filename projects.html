@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Town projects · Tempest plugins API</title>
+<meta name="description" content="The buildings players build together, and their states.">
+<link rel="stylesheet" href="site.css">
+<script src="site.js"></script>
+</head>
+<body>
+<header class="top">
+  <button class="icon-btn menu-btn" id="menu" type="button" aria-label="Menu">&#9776;</button>
+  <a class="brand" href="index.html"><span class="logo">T</span>Tempest API</a>
+  <span class="version">Core API 19</span>
+  <div class="search"><input id="q" type="search" placeholder="Search the API" autocomplete="off" aria-label="Search"><kbd>Ctrl K</kbd><div class="results" id="results"></div></div>
+  <nav class="top-links"><a href="javadoc.html">Javadoc</a><a href="https://discord.gg/Q9PNVCMZXK" target="_blank" rel="noopener">Discord</a><a href="https://www.curseforge.com/hytale/mods/search?search=tempest" target="_blank" rel="noopener">CurseForge</a></nav>
+  <button class="icon-btn" id="theme" type="button" aria-label="Light or dark">&#9680;</button>
+</header>
+<div class="layout">
+  <aside class="side"><h4>Getting started</h4><a href="index.html">Introduction</a><a href="quick-start.html">Quick start</a><a href="setup.html">Setting up a plugin</a><a href="versions.html">API versions</a><h4>Core</h4><a href="money.html">Money</a><a href="actions.html">Player actions</a><a href="settings.html">Settings and menus</a><a href="hud.html">Boards, HUD and placeholders</a><a href="rewards.html">Rewards, mail and boosts</a><a href="world.html">Map, town and demand</a><a href="safety.html">Safety and helpers</a><h4>Leveling and skills</h4><a href="levels.html">Player levels</a><a href="skills.html"><span class="badge">NEW</span>Skills (MMO Skill Tree)</a><a href="leveling-mods.html"><span class="badge">NEW</span>Leveling mods for server owners</a><h4>Plugins</h4><a href="quests.html">Quests</a><a href="crates.html">Crates</a><a href="holograms.html">Holograms</a><a href="coinflip.html">Coinflip</a><a href="jobs.html">Jobs</a><a href="projects.html" class="here">Town projects</a><a href="pass.html">Battle pass</a><a href="games.html">Lottery, slots and shop</a><h4>More</h4><a href="integrations.html">Integrations</a><a href="content.html">Content mods (JSON)</a><a href="rules.html">Rules of thumb</a><h4>Reference</h4><a href="javadoc.html">Javadoc</a><a href="changelog.html">Changelog</a></aside>
+  <main>
+    <div class="crumbs">Plugins</div>
+    <h1>Town projects</h1>
+    <p class="lead">The buildings players build together, and their states.</p>
+    <article>
+<h2 id="town-projects-projectsapi-projects-plugin"><a class="anchor" href="#town-projects-projectsapi-projects-plugin" aria-label="Link to this section">#</a>Town projects: <code>ProjectsAPI</code> (Projects plugin)</h2>
+<p>What is being built and how far each building is, and a word whenever a project changes state (<code>ProjectsAPI.API_VERSION</code>, 1). Tempest Town uses it to unlock features when a building is finished. Declare <code>"AtomicTempest:Projects": "*"</code> under OptionalDependencies, keep the classes that touch it in one file of their own (as Shop does with Holograms), and check <code>ProjectsAPI.isAvailable()</code> first.</p>
+<div class="code"><div class="code-bar"><span>java</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-java">for (ProjectsAPI.Building b : ProjectsAPI.buildings()) {   // a copy; empty when Projects is not running
+    b.id(); b.name(); b.prefab(); b.world(); b.state(); b.percentDone(); b.finished();
+}
+ProjectsAPI.building("k3f9");          // one, or null
+ProjectsAPI.donors("k3f9");            // different players who donated; -1 when there is no such project
+ProjectsAPI.listen(listener);          // listener.changed(building): made, paused, finished, stopped, cancelled, removed
+ProjectsAPI.stopListening(listener);   // in your shutdown()</code></pre></div>
+<ul><li><code>state</code> is the project's state name: <code>CLEARING</code>, <code>OPEN</code>, <code>PAUSED</code>, <code>FINISHING</code>, <code>FINISHED</code>, <code>CANCELLING</code>, <code>STOPPING</code> or <code>STOPPED</code>. A listener hears <code>ProjectsAPI.REMOVED</code> for a project taken off the list (after a cancel has put the old ground back, or an admin removed a finished or stopped one).</li><li><code>percentDone</code> is how much of the goal was donated (100 once finished). Donations change no state, so listeners are not told about them: read <code>buildings()</code> again when you need the numbers.</li><li>Listeners are called on Projects' timer thread, within a second of the change and never while Projects holds a lock, so a listener may call <code>buildings()</code>. Every call may come from any thread; answers never wait for the builder.</li><li>When Projects stops (or reloads) it forgets every listener: listen again when it is back, or ask <code>buildings()</code> on a timer, as Town does every minute.</li></ul>
+    </article>
+    <nav class="pager"><a class="prev" href="jobs.html"><small>Previous</small>Jobs</a><a class="next" href="pass.html"><small>Next</small>Battle pass</a></nav>
+    <footer class="foot">Tempest plugins for Hytale by AtomicTempest. Not made or endorsed by Hypixel Studios. · <a href="projects.md">This page as Markdown</a> · <a href="llms.txt">llms.txt</a></footer>
+  </main>
+  <aside class="toc"><h5>On this page</h5><a href="#town-projects-projectsapi-projects-plugin">Town projects: ProjectsAPI (Projects plugin)</a></aside>
+</div>
+</body>
+</html>

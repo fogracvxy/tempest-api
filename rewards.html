@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rewards, mail and boosts · Tempest plugins API</title>
+<meta name="description" content="Item and command rewards, the mailbox, boosts for a while and rank perks.">
+<link rel="stylesheet" href="site.css">
+<script src="site.js"></script>
+</head>
+<body>
+<header class="top">
+  <button class="icon-btn menu-btn" id="menu" type="button" aria-label="Menu">&#9776;</button>
+  <a class="brand" href="index.html"><span class="logo">T</span>Tempest API</a>
+  <span class="version">Core API 19</span>
+  <div class="search"><input id="q" type="search" placeholder="Search the API" autocomplete="off" aria-label="Search"><kbd>Ctrl K</kbd><div class="results" id="results"></div></div>
+  <nav class="top-links"><a href="javadoc.html">Javadoc</a><a href="https://discord.gg/Q9PNVCMZXK" target="_blank" rel="noopener">Discord</a><a href="https://www.curseforge.com/hytale/mods/search?search=tempest" target="_blank" rel="noopener">CurseForge</a></nav>
+  <button class="icon-btn" id="theme" type="button" aria-label="Light or dark">&#9680;</button>
+</header>
+<div class="layout">
+  <aside class="side"><h4>Getting started</h4><a href="index.html">Introduction</a><a href="quick-start.html">Quick start</a><a href="setup.html">Setting up a plugin</a><a href="versions.html">API versions</a><h4>Core</h4><a href="money.html">Money</a><a href="actions.html">Player actions</a><a href="settings.html">Settings and menus</a><a href="hud.html">Boards, HUD and placeholders</a><a href="rewards.html" class="here">Rewards, mail and boosts</a><a href="world.html">Map, town and demand</a><a href="safety.html">Safety and helpers</a><h4>Leveling and skills</h4><a href="levels.html">Player levels</a><a href="skills.html"><span class="badge">NEW</span>Skills (MMO Skill Tree)</a><a href="leveling-mods.html"><span class="badge">NEW</span>Leveling mods for server owners</a><h4>Plugins</h4><a href="quests.html">Quests</a><a href="crates.html">Crates</a><a href="holograms.html">Holograms</a><a href="coinflip.html">Coinflip</a><a href="jobs.html">Jobs</a><a href="projects.html">Town projects</a><a href="pass.html">Battle pass</a><a href="games.html">Lottery, slots and shop</a><h4>More</h4><a href="integrations.html">Integrations</a><a href="content.html">Content mods (JSON)</a><a href="rules.html">Rules of thumb</a><h4>Reference</h4><a href="javadoc.html">Javadoc</a><a href="changelog.html">Changelog</a></aside>
+  <main>
+    <div class="crumbs">Core</div>
+    <h1>Rewards, mail and boosts</h1>
+    <p class="lead">Item and command rewards, the mailbox, boosts for a while and rank perks.</p>
+    <article>
+<h2 id="item-and-command-rewards-rewards"><a class="anchor" href="#item-and-command-rewards-rewards" aria-label="Link to this section">#</a>Item and command rewards: <code>Rewards</code> <span class="since" title="Core API version 18">API 18+</span></h2>
+<p>The same rewards in every plugin. Admins type items as one line (<code>Ingredient_Bar_Iron x16, Food_Bread x5</code>; <code>16 Food_Bread</code> and a bare id for one work too), at most <code>Rewards.MAX_KINDS</code> (8) kinds and <code>MAX_AMOUNT</code> (1000) of each. <code>giveItems</code> puts them in the inventory; what does not fit, and everything for a player who is offline, waits in the mailbox. The parcel is saved before anything is given, so a crash can neither lose nor double it. Any thread.</p>
+<div class="code"><div class="code-bar"><span>java</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-java">if (CoreAPI.runningVersion() &gt;= 18) {
+    String problem = Rewards.itemsProblem(text);              // in the editor: null when it can be saved
+    List&lt;Mailbox.Item&gt; items = Rewards.parseItems(text);      // the same ids added together, junk left out
+    Rewards.describe(items);                                  // "16 Ingredient Bar Iron, 5 Food Bread", for players
+    Rewards.giveItems(uuid, "Dragons", "server.dragons.mail.reward", Map.of("dragon", "Ember"), items);
+    Rewards.commandProblem(command);                          // one line, at most MAX_COMMAND (200) characters
+    Rewards.runCommand(uuid, name, "cratekey give {player} vote 1");   // as the console; name null: looked up online
+}</code></pre></div>
+<h2 id="one-mailbox-for-every-plugin-mailbox"><a class="anchor" href="#one-mailbox-for-every-plugin-mailbox" aria-label="Link to this section">#</a>One mailbox for every plugin: <code>Mailbox</code> <span class="since" title="Core API version 6">API 6+</span></h2>
+<p>Instead of dropping a reward at a player's feet (full inventory) or keeping it in your own file until they come back (offline), send it to their mailbox. Players open it with <code>/mail</code>, are told when a parcel arrives and when they join, and see "Mail: 2" on the Tempest board. Claiming gives what fits; the rest stays in the parcel, and money is paid through the server's economy.</p>
+<div class="code"><div class="code-bar"><span>java</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-java">if (CoreAPI.runningVersion() &gt;= 6) {
+    String id = Mailbox.send(uuid, "Dragons", "server.dragons.mail.reward",
+            Map.of("dragon", "%server.dragons.name.ember"),          // a value starting with % is a translation key
+            List.of(new Mailbox.Item("Rock_Gem_Ruby", 3)), 500);   // items and money
+    if (id == null) { ... }   // nothing in it, or the mailbox is full (Mailbox.MAX_PARCELS): keep the reward yourself
+}
+Mailbox.count(uuid);   Mailbox.of(uuid);   // what is waiting</code></pre></div>
+<p>The title is a key in your plugin's <code>server.lang</code>, so each player reads it in their language. Crates sends keys from <code>/cratekey</code> and key parties there when the player is not in a world.</p>
+<h2 id="boosts-for-a-while-boosts"><a class="anchor" href="#boosts-for-a-while-boosts" aria-label="Link to this section">#</a>Boosts for a while: <code>Boosts</code> <span class="since" title="Core API version 5">API 5+</span></h2>
+<p>More of something for a while: monster and ore gold, daily and quest rewards, battle pass XP, shop prices. Tempest Events turns them on during an event; your plugin can too (a full moon, a boss kill, a vote party). The plugins that pay out ask for the boost at the moment they pay, in percent like <code>Perks</code> (100 = double). Several sources add up, to at most 1000%; a discount takes at most 90% off.</p>
+<div class="code"><div class="code-bar"><span>java</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-java">core.boost("mymod:full-moon", (kind, player) -&gt; Boosts.MOB_COINS.equals(kind) &amp;&amp; fullMoon() ? 50 : 0);   // Registrations
+long paid = Boosts.boosted(Boosts.MOB_COINS, killer, amount);   // what Coins does for each monster
+long price = Boosts.discounted(Boosts.SHOP_DISCOUNT, player, price);
+Boosts.percent(Boosts.PASS_XP, player);                         // 50.0</code></pre></div>
+<div class="table"><table><thead><tr><th>Kind</th><th>Used by</th><th>What it raises</th></tr></thead><tbody><tr><td><code>MOB_COINS</code></td><td>Coins</td><td>coins a monster drops (after the admin's cap)</td></tr><tr><td><code>ORE_COINS</code></td><td>Coins</td><td>coins found in ores</td></tr><tr><td><code>DAILY_REWARD</code></td><td>Coins</td><td>the daily reward (after rank perks)</td></tr><tr><td><code>QUEST_REWARD</code></td><td>Quests</td><td>quest and achievement rewards (after rank perks)</td></tr><tr><td><code>PASS_XP</code></td><td>Pass</td><td>battle pass XP (added to the Pro weekend boost)</td></tr><tr><td><code>SHOP_SELL</code></td><td>Shop</td><td>what the shop pays (never more than its buying price)</td></tr><tr><td><code>SHOP_DISCOUNT</code></td><td>Shop</td><td>off the shop's prices</td></tr><tr><td><code>"contract_pay"</code></td><td>Contracts</td><td>what server orders pay (players' contracts pay what their poster put up, never boosted)</td></tr></tbody></table></div>
+<p>Your own kind: pay out through <code>Boosts.boosted("mymod_bounty", player, amount)</code> and describe it with <code>Boosts.describe("mymod_bounty", Message.translation("server.mymod.boost"), "Weapon_Sword_Iron")</code>, so Tempest Events' editor lists it and admins can boost it in their events. Games of chance (slots, lottery, coinflip) are never boosted: it would change the odds players were shown.</p>
+<p>A plugin built against Core 1.0.x and run with an older Core must not touch <code>Boosts</code>; check first: <code>if (CoreAPI.runningVersion() &gt;= 5) { ... }</code>.</p>
+<p>Personal boosters need no code: <code>/booster &lt;player&gt; &lt;kind&gt; &lt;percent&gt; &lt;minutes&gt;</code> (permission <code>tempest.boosters</code>, also from the console) gives one player a boost of any described kind for a while, so a crate's command prize, a quest or a vote plugin can hand them out. They count like any other source and show under the coin counter with the time left. <code>/booster &lt;player&gt; clear 0 0</code> takes them away.</p>
+<h2 id="rank-perks-perks"><a class="anchor" href="#rank-perks-perks" aria-label="Link to this section">#</a>Rank perks: <code>Perks</code></h2>
+<p>Admins set up to four perks in <code>/tempest</code> (Rank Perks tab), each tied to a permission such as <code>coins.perk.vip</code>, which a permissions plugin gives to a rank. Read them for your own rewards:</p>
+<div class="code"><div class="code-bar"><span>java</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-java">Perks.percent(uuid, Perks.Bonus.DAILY_REWARD);            // 25.0 = 25% more
+Perks.boosted(uuid, Perks.Bonus.QUEST_REWARD, 100);       // 125
+Perks.discounted(uuid, Perks.Bonus.SHOP_DISCOUNT, 100);   // 90
+Perks.name(uuid);                                         // "VIP", or "" without a perk</code></pre></div>
+<p>Perks are checked against the player's permissions while they are online; offline players get none.</p>
+<p><code>Perks.highestPercent(Perks.Bonus.SHOP_DISCOUNT)</code> (API version 9) is the best value any perk on the server gives, whoever has it. Cap what you pay players with it, so someone with a discount cannot buy for a friend who sells back.</p>
+<p><code>Perks.Bonus.PASS_XP</code> (API version 10) is a rank's pass XP bonus; Tempest Pass (Pro) adds it to every XP gain. Check <code>CoreAPI.runningVersion() &gt;= 10</code> before using it.</p>
+    </article>
+    <nav class="pager"><a class="prev" href="hud.html"><small>Previous</small>Boards, HUD and placeholders</a><a class="next" href="world.html"><small>Next</small>Map, town and demand</a></nav>
+    <footer class="foot">Tempest plugins for Hytale by AtomicTempest. Not made or endorsed by Hypixel Studios. · <a href="rewards.md">This page as Markdown</a> · <a href="llms.txt">llms.txt</a></footer>
+  </main>
+  <aside class="toc"><h5>On this page</h5><a href="#item-and-command-rewards-rewards">Item and command rewards: Rewards</a><a href="#one-mailbox-for-every-plugin-mailbox">One mailbox for every plugin: Mailbox</a><a href="#boosts-for-a-while-boosts">Boosts for a while: Boosts</a><a href="#rank-perks-perks">Rank perks: Perks</a></aside>
+</div>
+</body>
+</html>

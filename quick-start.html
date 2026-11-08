@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quick start · Tempest plugins API</title>
+<meta name="description" content="From an empty plugin to one that pays players and reads their level, in five steps.">
+<link rel="stylesheet" href="site.css">
+<script src="site.js"></script>
+</head>
+<body>
+<header class="top">
+  <button class="icon-btn menu-btn" id="menu" type="button" aria-label="Menu">&#9776;</button>
+  <a class="brand" href="index.html"><span class="logo">T</span>Tempest API</a>
+  <span class="version">Core API 19</span>
+  <div class="search"><input id="q" type="search" placeholder="Search the API" autocomplete="off" aria-label="Search"><kbd>Ctrl K</kbd><div class="results" id="results"></div></div>
+  <nav class="top-links"><a href="javadoc.html">Javadoc</a><a href="https://discord.gg/Q9PNVCMZXK" target="_blank" rel="noopener">Discord</a><a href="https://www.curseforge.com/hytale/mods/search?search=tempest" target="_blank" rel="noopener">CurseForge</a></nav>
+  <button class="icon-btn" id="theme" type="button" aria-label="Light or dark">&#9680;</button>
+</header>
+<div class="layout">
+  <aside class="side"><h4>Getting started</h4><a href="index.html">Introduction</a><a href="quick-start.html" class="here">Quick start</a><a href="setup.html">Setting up a plugin</a><a href="versions.html">API versions</a><h4>Core</h4><a href="money.html">Money</a><a href="actions.html">Player actions</a><a href="settings.html">Settings and menus</a><a href="hud.html">Boards, HUD and placeholders</a><a href="rewards.html">Rewards, mail and boosts</a><a href="world.html">Map, town and demand</a><a href="safety.html">Safety and helpers</a><h4>Leveling and skills</h4><a href="levels.html">Player levels</a><a href="skills.html"><span class="badge">NEW</span>Skills (MMO Skill Tree)</a><a href="leveling-mods.html"><span class="badge">NEW</span>Leveling mods for server owners</a><h4>Plugins</h4><a href="quests.html">Quests</a><a href="crates.html">Crates</a><a href="holograms.html">Holograms</a><a href="coinflip.html">Coinflip</a><a href="jobs.html">Jobs</a><a href="projects.html">Town projects</a><a href="pass.html">Battle pass</a><a href="games.html">Lottery, slots and shop</a><h4>More</h4><a href="integrations.html">Integrations</a><a href="content.html">Content mods (JSON)</a><a href="rules.html">Rules of thumb</a><h4>Reference</h4><a href="javadoc.html">Javadoc</a><a href="changelog.html">Changelog</a></aside>
+  <main>
+    <div class="crumbs">Getting started</div>
+    <h1>Quick start</h1>
+    <p class="lead">From an empty plugin to one that pays players and reads their level, in five steps.</p>
+    <article>
+<h2 id="checklist"><a class="anchor" href="#checklist" aria-label="Link to this section">#</a>Checklist</h2>
+<div class="table"><table><thead><tr><th>Step</th><th>What to do</th></tr></thead><tbody><tr><td>1</td><td>Put Tempest Core (and the plugins you use) in your server's <code>mods</code> folder, and compile against their jars with <code>compileOnly</code></td></tr><tr><td>2</td><td>Depend on <code>AtomicTempest:Core</code> in your <code>manifest.json</code>; make the other Tempest plugins optional</td></tr><tr><td>3</td><td>Make one <code>Registrations</code> for your plugin and <code>close()</code> it in <code>shutdown()</code></td></tr><tr><td>4</td><td>Ask Core for what you need on every use (<code>Economies.get()</code>, <code>Levels.get()</code>): mods can start after yours</td></tr><tr><td>5</td><td>Before using anything newer than the Core you support, check <code>CoreAPI.runningVersion()</code></td></tr></tbody></table></div>
+<h2 id="1-compile-against-the-jars"><a class="anchor" href="#1-compile-against-the-jars" aria-label="Link to this section">#</a>1. Compile against the jars</h2>
+<p>Download the jars from the plugins' CurseForge pages, then in <code>build.gradle</code>:</p>
+<div class="code"><div class="code-bar"><span>groovy</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-groovy">dependencies {
+    compileOnly(files("libs/Core-1.5.0.jar"))
+    compileOnly(files("libs/Quests-1.4.0.jar"))   // only if you use it
+}</code></pre></div>
+<p><code>compileOnly</code> means the jars are not packed into yours: the server loads them from its <code>mods</code> folder.</p>
+<h2 id="2-declare-the-dependencies"><a class="anchor" href="#2-declare-the-dependencies" aria-label="Link to this section">#</a>2. Declare the dependencies</h2>
+<div class="code"><div class="code-bar"><span>json</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-json">"Dependencies": { "AtomicTempest:Core": "*" },
+"OptionalDependencies": { "AtomicTempest:Coins": "*", "AtomicTempest:Quests": "*" }</code></pre></div>
+<div class="callout note"><div class="callout-title">Note</div><p>With an optional dependency, check that the plugin is there (<code>QuestsAPI.isAvailable()</code>, <code>CoinsAPI.get() != null</code>) and touch its classes in one class of yours only, so your plugin still loads without it.</p></div>
+<h2 id="3-register-with-core"><a class="anchor" href="#3-register-with-core" aria-label="Link to this section">#</a>3. Register with Core</h2>
+<div class="code"><div class="code-bar"><span>java</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-java">public class DragonsPlugin extends JavaPlugin {
+    private final Registrations core = new Registrations("Dragons");
+
+    public DragonsPlugin(JavaPluginInit init) {
+        super(init);
+    }
+
+    @Override
+    protected void setup() {
+        core.placeholder("dragons_slain", uuid -&gt; String.valueOf(slain(uuid)));
+        core.onAction((player, action, amount) -&gt; {
+            if (action.equals(PlayerActions.CRATE_OPEN)) { /* a crate was opened */ }
+        });
+    }
+
+    @Override
+    public void shutdown() {
+        core.close();   // takes back everything registered above
+        super.shutdown();
+    }
+}</code></pre></div>
+<h2 id="4-pay-a-player-read-their-level"><a class="anchor" href="#4-pay-a-player-read-their-level" aria-label="Link to this section">#</a>4. Pay a player, read their level</h2>
+<div class="code"><div class="code-bar"><span>java</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-java">Economy money = Economies.get();                     // null while no economy is installed
+if (money != null) {
+    money.deposit(player, 250, "Dragons: a dragon slain");   // the reason shows in the economy log
+}
+
+Levels.Leveling leveling = Levels.get();             // Endless Leveling or MMO Skill Tree, or null
+if (leveling != null &amp;&amp; leveling.level(player) &gt;= 20) {
+    leveling.giveXp(player, 100, "Dragons: a dragon slain");
+}</code></pre></div>
+<h2 id="5-check-the-core-version"><a class="anchor" href="#5-check-the-core-version" aria-label="Link to this section">#</a>5. Check the Core version</h2>
+<div class="code"><div class="code-bar"><span>java</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-java">if (CoreAPI.runningVersion() &gt;= 19 &amp;&amp; Skills.available()) {
+    int mining = Skills.level(player, "Mining");     // MMO Skill Tree skills (API 19)
+}</code></pre></div>
+<div class="callout tip"><div class="callout-title">Tip</div><p>Keep code that needs a newer Core in a class of its own and call it only after the check: on an older Core the class is then never loaded, and your plugin keeps working.</p></div>
+<p>Next: <a href="setup.html">Setting up a plugin</a> has every option, and <a href="actions.html">Player actions</a> lists everything the Tempest plugins report.</p>
+    </article>
+    <nav class="pager"><a class="prev" href="index.html"><small>Previous</small>Introduction</a><a class="next" href="setup.html"><small>Next</small>Setting up a plugin</a></nav>
+    <footer class="foot">Tempest plugins for Hytale by AtomicTempest. Not made or endorsed by Hypixel Studios. · <a href="quick-start.md">This page as Markdown</a> · <a href="llms.txt">llms.txt</a></footer>
+  </main>
+  <aside class="toc"><h5>On this page</h5><a href="#checklist">Checklist</a><a href="#1-compile-against-the-jars">1. Compile against the jars</a><a href="#2-declare-the-dependencies">2. Declare the dependencies</a><a href="#3-register-with-core">3. Register with Core</a><a href="#4-pay-a-player-read-their-level">4. Pay a player, read their level</a><a href="#5-check-the-core-version">5. Check the Core version</a></aside>
+</div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Content mods (JSON) · Tempest plugins API</title>
+<meta name="description" content="Add to the Tempest plugins without code.">
+<link rel="stylesheet" href="site.css">
+<script src="site.js"></script>
+</head>
+<body>
+<header class="top">
+  <button class="icon-btn menu-btn" id="menu" type="button" aria-label="Menu">&#9776;</button>
+  <a class="brand" href="index.html"><span class="logo">T</span>Tempest API</a>
+  <span class="version">Core API 19</span>
+  <div class="search"><input id="q" type="search" placeholder="Search the API" autocomplete="off" aria-label="Search"><kbd>Ctrl K</kbd><div class="results" id="results"></div></div>
+  <nav class="top-links"><a href="javadoc.html">Javadoc</a><a href="https://discord.gg/Q9PNVCMZXK" target="_blank" rel="noopener">Discord</a><a href="https://www.curseforge.com/hytale/mods/search?search=tempest" target="_blank" rel="noopener">CurseForge</a></nav>
+  <button class="icon-btn" id="theme" type="button" aria-label="Light or dark">&#9680;</button>
+</header>
+<div class="layout">
+  <aside class="side"><h4>Getting started</h4><a href="index.html">Introduction</a><a href="quick-start.html">Quick start</a><a href="setup.html">Setting up a plugin</a><a href="versions.html">API versions</a><h4>Core</h4><a href="money.html">Money</a><a href="actions.html">Player actions</a><a href="settings.html">Settings and menus</a><a href="hud.html">Boards, HUD and placeholders</a><a href="rewards.html">Rewards, mail and boosts</a><a href="world.html">Map, town and demand</a><a href="safety.html">Safety and helpers</a><h4>Leveling and skills</h4><a href="levels.html">Player levels</a><a href="skills.html"><span class="badge">NEW</span>Skills (MMO Skill Tree)</a><a href="leveling-mods.html"><span class="badge">NEW</span>Leveling mods for server owners</a><h4>Plugins</h4><a href="quests.html">Quests</a><a href="crates.html">Crates</a><a href="holograms.html">Holograms</a><a href="coinflip.html">Coinflip</a><a href="jobs.html">Jobs</a><a href="projects.html">Town projects</a><a href="pass.html">Battle pass</a><a href="games.html">Lottery, slots and shop</a><h4>More</h4><a href="integrations.html">Integrations</a><a href="content.html" class="here">Content mods (JSON)</a><a href="rules.html">Rules of thumb</a><h4>Reference</h4><a href="javadoc.html">Javadoc</a><a href="changelog.html">Changelog</a></aside>
+  <main>
+    <div class="crumbs">More</div>
+    <h1>Content mods (JSON)</h1>
+    <p class="lead">Add to the Tempest plugins without code.</p>
+    <article>
+<h2 id="content-mods-without-code-json"><a class="anchor" href="#content-mods-without-code-json" aria-label="Link to this section">#</a>Content mods without code (JSON)</h2>
+<p>These interaction types can be used in any item, block or NPC interaction once the plugin is installed:</p>
+<div class="code"><div class="code-bar"><span>json</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-json">{ "Type": "Coins_Give", "Amount": 50, "Reason": "Found a treasure chest" }
+{ "Type": "Coins_Take", "Amount": 20, "Reason": "Ferry ticket", "Message": "Have a nice trip!" }
+{ "Type": "Quests_Trigger", "Trigger": "visit_shrine", "Amount": 1 }</code></pre></div>
+<ul><li><code>Coins_Give</code> adds coins to the player who used it. <code>Message</code> is optional (otherwise they are told the amount).</li><li><code>Coins_Take</code> takes coins, or <strong>fails</strong> when the player has too little: nothing is taken, the player is told what they need, and the interactions after it in the same chain do not run. Put it before what is being paid for (opening a door, giving an item).</li><li><code>Quests_Trigger</code> counts a custom trigger for the player (see above).</li><li>These run every time the interaction does. For anything that should not be farmed (a reward chest, a shrine), give the interaction a cooldown in your JSON, or have the goal count once (an achievement with amount 1), so a player cannot click it a thousand times.</li></ul>
+<p>Example: an item that gives a reward once used (in <code>Server/Item/Items/Treasure_Map.json</code>):</p>
+<div class="code"><div class="code-bar"><span>json</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-json">"Interactions": {
+  "Secondary": {
+    "Interactions": [
+      { "Type": "Coins_Give", "Amount": 100, "Reason": "Treasure map" },
+      { "Type": "Quests_Trigger", "Trigger": "treasure_map" }
+    ]
+  }
+}</code></pre></div>
+    </article>
+    <nav class="pager"><a class="prev" href="integrations.html"><small>Previous</small>Integrations</a><a class="next" href="rules.html"><small>Next</small>Rules of thumb</a></nav>
+    <footer class="foot">Tempest plugins for Hytale by AtomicTempest. Not made or endorsed by Hypixel Studios. · <a href="content.md">This page as Markdown</a> · <a href="llms.txt">llms.txt</a></footer>
+  </main>
+  <aside class="toc"><h5>On this page</h5><a href="#content-mods-without-code-json">Content mods without code (JSON)</a></aside>
+</div>
+</body>
+</html>

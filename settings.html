@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Settings and menus · Tempest plugins API</title>
+<meta name="description" content="A /tempest settings tab for your plugin, menu themes, editions, languages and help pages.">
+<link rel="stylesheet" href="site.css">
+<script src="site.js"></script>
+</head>
+<body>
+<header class="top">
+  <button class="icon-btn menu-btn" id="menu" type="button" aria-label="Menu">&#9776;</button>
+  <a class="brand" href="index.html"><span class="logo">T</span>Tempest API</a>
+  <span class="version">Core API 19</span>
+  <div class="search"><input id="q" type="search" placeholder="Search the API" autocomplete="off" aria-label="Search"><kbd>Ctrl K</kbd><div class="results" id="results"></div></div>
+  <nav class="top-links"><a href="javadoc.html">Javadoc</a><a href="https://discord.gg/Q9PNVCMZXK" target="_blank" rel="noopener">Discord</a><a href="https://www.curseforge.com/hytale/mods/search?search=tempest" target="_blank" rel="noopener">CurseForge</a></nav>
+  <button class="icon-btn" id="theme" type="button" aria-label="Light or dark">&#9680;</button>
+</header>
+<div class="layout">
+  <aside class="side"><h4>Getting started</h4><a href="index.html">Introduction</a><a href="quick-start.html">Quick start</a><a href="setup.html">Setting up a plugin</a><a href="versions.html">API versions</a><h4>Core</h4><a href="money.html">Money</a><a href="actions.html">Player actions</a><a href="settings.html" class="here">Settings and menus</a><a href="hud.html">Boards, HUD and placeholders</a><a href="rewards.html">Rewards, mail and boosts</a><a href="world.html">Map, town and demand</a><a href="safety.html">Safety and helpers</a><h4>Leveling and skills</h4><a href="levels.html">Player levels</a><a href="skills.html"><span class="badge">NEW</span>Skills (MMO Skill Tree)</a><a href="leveling-mods.html"><span class="badge">NEW</span>Leveling mods for server owners</a><h4>Plugins</h4><a href="quests.html">Quests</a><a href="crates.html">Crates</a><a href="holograms.html">Holograms</a><a href="coinflip.html">Coinflip</a><a href="jobs.html">Jobs</a><a href="projects.html">Town projects</a><a href="pass.html">Battle pass</a><a href="games.html">Lottery, slots and shop</a><h4>More</h4><a href="integrations.html">Integrations</a><a href="content.html">Content mods (JSON)</a><a href="rules.html">Rules of thumb</a><h4>Reference</h4><a href="javadoc.html">Javadoc</a><a href="changelog.html">Changelog</a></aside>
+  <main>
+    <div class="crumbs">Core</div>
+    <h1>Settings and menus</h1>
+    <p class="lead">A /tempest settings tab for your plugin, menu themes, editions, languages and help pages.</p>
+    <article>
+<h2 id="admin-settings-casinosettings"><a class="anchor" href="#admin-settings-casinosettings" aria-label="Link to this section">#</a>Admin settings: <code>CasinoSettings</code></h2>
+<div class="code"><div class="code-bar"><span>java</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-java">CasinoSettings.register(new SettingsTab("Dragons", List.of(
+        Setting.heading("Bounties", "What players earn for dragons."),
+        Setting.number("Bounty", 0, 1_000_000, 0, () -&gt; config.bounty, v -&gt; config.bounty = (long) v)
+                .hint("Per dragon.").preview(() -&gt; Message.raw("= " + Currency.format(config.bounty))),
+        Setting.toggle("Announce kills", () -&gt; config.announce, v -&gt; config.announce = v),
+        Setting.text("Chat tag", true, () -&gt; config.tag, v -&gt; config.tag = v).icon("Weapon_Sword_Iron").caption("Tag"),
+        Setting.color("Colour", () -&gt; config.tagColor, v -&gt; config.tagColor = v).inline()
+), config::save));</code></pre></div>
+<p>Your tab appears in <code>/tempest</code> for admins (permission <code>tempest.admin</code>), up to 40 settings. Staff with <code>tempest.admin.&lt;group&gt;</code> see only that group's tabs. The group is the title in lower case without spaces (<code>tempest.admin.dragons</code>); give it yourself when your plugin has more than one tab, so one permission covers them all (API 2): <code>new SettingsTab("Dragon Loot", "dragons", settings, config::save)</code>.</p>
+<p>Where there are only a few right answers, give admins a dropdown instead of a number or a code (API 3):</p>
+<div class="code"><div class="code-bar"><span>java</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-java">Setting.choice("Difficulty", List.of(Setting.option("easy", "Easy"), Setting.option("hard", "Hard")),
+        () -&gt; config.difficulty, v -&gt; config.difficulty = v),
+Setting.choiceNumber("Corner", List.of(Setting.option("1", "Top right"), Setting.option("2", "Left")),
+        () -&gt; config.corner, v -&gt; config.corner = v),             // a setting kept as a whole number
+Setting.item("Reward item", () -&gt; config.item, v -&gt; config.item = v),   // every item, with a search box
+Setting.choice("Crate", () -&gt; crateChoices(), true, () -&gt; config.crate, v -&gt; config.crate = v)  // worked out each time</code></pre></div>
+<p>A dropdown only saves one of its own entries. Give your tab an icon for the menu's side bar (API 3): <code>new SettingsTab("Dragons", settings, config::save).icon("Weapon_Sword_Iron")</code>. The side bar lists Core's tabs, then plugins with several tabs under their name, then the rest under "Plugins".</p>
+<p>A Reset to defaults button (API 11): give the tab the same settings built on a fresh config. An admin clicks it twice, every value is copied over, logged and saved through your save action. Guard it for older Cores:</p>
+<div class="code"><div class="code-bar"><span>java</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-java">SettingsTab tab = new SettingsTab("Dragons", settings(config), config::save);
+if (CoreAPI.runningVersion() &gt;= 11) {
+    tab.defaults(() -&gt; settings(new DragonsConfig()));
+}</code></pre></div>
+<h2 id="menu-themes-themes"><a class="anchor" href="#menu-themes-themes" aria-label="Link to this section">#</a>Menu themes: <code>Themes</code> <span class="since" title="Core API version 3">API 3+</span></h2>
+<p>The admin picks the look of every Tempest menu (<code>/tempest</code>, General, "Menu theme"): Tempest gold (the plugins' own look), Dark crimson, Elven emerald, Frostbite, Amethyst, Cyberpunk neon, Cozy parchment, or their own two colours. Use it on your pages so they match:</p>
+<p>Put your <code>.ui</code> files in a folder with your own name in it (<code>Common/UI/Custom/Pages/MyName_Dragons/</code>), never straight in <code>Pages/</code> or in a folder named after a feature (<code>Pages/Quests/</code>): every mod's UI files and the game's share one folder tree in the client, and a file at the same path as another mod's replaces it. Tempest's own are in <code>Pages/AtomicTempest_&lt;Plugin&gt;/</code> and <code>Hud/AtomicTempest_*</code>.</p>
+<div class="code"><div class="code-bar"><span>java</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-java">cmd.append("Pages/MyName_Dragons/DragonsPage.ui");
+Themes.tint(cmd, "#Content");                            // the page's body in the theme's colour
+cmd.set("#Heading.TextSpans", Themes.accent("Bounties")); // titles and highlights
+Themes.row(cmd, "#List[0]");                             // a row in the theme's row colour</code></pre></div>
+<p>The default theme paints nothing, so a page looks as its <code>.ui</code> file says until an admin picks a theme.</p>
+<h2 id="free-and-pro-editions-editions"><a class="anchor" href="#free-and-pro-editions-editions" aria-label="Link to this section">#</a>Free and Pro editions: <code>Editions</code></h2>
+<p>For plugins that come as a free and a Pro jar (Crates, Quests and Holograms do; yours can too). Register the edition in <code>setup()</code>, unregister it in <code>shutdown()</code>. Only admins ever see these texts.</p>
+<div class="code"><div class="code-bar"><span>java</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-java">Editions.register("MyPlugin", isPro, List.of("any number of arenas", "team modes"), licensedTo);
+settings.add(Editions.heading("MyPlugin"));          // "Free edition: the Pro edition adds ..." at the end of your /tempest tab
+String why = Editions.limitReached("MyPlugin", "5 arenas"); // "The free edition of MyPlugin has up to 5 arenas. ..."
+String what = Editions.proOnly("MyPlugin", "Team modes");   // "Team modes are in the Pro edition of MyPlugin."
+Editions.isPro("Crates");                            // which edition another plugin runs</code></pre></div>
+<p><code>licensedTo</code> is shown in the Pro heading ("Licensed to ..."); pass "" when there is none. Keep your API the same in both editions, and let free limits only stop making more, never break what a server already has.</p>
+<h2 id="languages-lang"><a class="anchor" href="#languages-lang" aria-label="Link to this section">#</a>Languages: <code>Lang</code></h2>
+<p>Texts are Hytale translation keys. Put them in <code>src/main/resources/Server/Languages/&lt;locale&gt;/server.lang</code> (prefix them with your plugin's id, so <code>mymod.help.title = Dragons</code> is <code>server.mymod.help.title</code>), set <code>"IncludesAssetPack": true</code>, and send <code>Message.translation(key).param(...)</code>. The game fills in English for keys a language lacks. <code>Message.raw(text)</code> still works for text that needs no translation.</p>
+<div class="code"><div class="code-bar"><span>java</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-java">String language = Lang.languageOf(playerRef);                  // the language the plugins use for this player
+String text = Lang.text(language, Message.translation("server.mymod.hud.bounty").param("amount", "250")); // for logs, signs, placeholders</code></pre></div>
+<p>The admin can pick one language for everyone (<code>/tempest</code> → General → Language), for languages Hytale does not offer yet (German, Italian, Polish). That only covers keys under the Tempest plugins' own prefixes.</p>
+<h2 id="the-help-screen-helptopics"><a class="anchor" href="#the-help-screen-helptopics" aria-label="Link to this section">#</a>The help screen: <code>HelpTopics</code></h2>
+<div class="code"><div class="code-bar"><span>java</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-java">HelpTopics.register(new HelpTopic("mymod", 80, Message.translation("server.mymod.help.title"), "Weapon_Sword_Iron",
+                uuid -&gt; List.of(
+                        HelpTopic.heading("server.mymod.help.bounties"),
+                        Message.translation("server.mymod.help.earn").param("amount", Currency.format(250))))
+        .button(Message.translation("server.mymod.help.open"), (player, ref, store) -&gt; { openPage(player, ref, store); return false; }));
+HelpTopics.registerCommand("server.mymod.help.mod", "/bounties", Message.translation("server.mymod.help.bountiesCmd"));</code></pre></div>
+<p><code>HelpTopics.open(playerRef, ref, store)</code> opens the help screen (for a command like <code>/coins</code>). <code>HelpTopics.justWelcomed(uuid)</code> is true for a minute after the help screen opened by itself for a new player: a page you would open on join should wait, so the two do not cover each other.</p>
+<p><code>HelpTopic.heading(key)</code> makes a heading line (bold). Shown in <code>/guide</code> (and <code>/coins</code> with Coins) for every player.</p>
+    </article>
+    <nav class="pager"><a class="prev" href="actions.html"><small>Previous</small>Player actions</a><a class="next" href="hud.html"><small>Next</small>Boards, HUD and placeholders</a></nav>
+    <footer class="foot">Tempest plugins for Hytale by AtomicTempest. Not made or endorsed by Hypixel Studios. · <a href="settings.md">This page as Markdown</a> · <a href="llms.txt">llms.txt</a></footer>
+  </main>
+  <aside class="toc"><h5>On this page</h5><a href="#admin-settings-casinosettings">Admin settings: CasinoSettings</a><a href="#menu-themes-themes">Menu themes: Themes</a><a href="#free-and-pro-editions-editions">Free and Pro editions: Editions</a><a href="#languages-lang">Languages: Lang</a><a href="#the-help-screen-helptopics">The help screen: HelpTopics</a></aside>
+</div>
+</body>
+</html>

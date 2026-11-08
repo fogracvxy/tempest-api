@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Safety and helpers · Tempest plugins API</title>
+<meta name="description" content="Admin logs, rate limits, play limits, AFK checks, the doctor and crash-safe files.">
+<link rel="stylesheet" href="site.css">
+<script src="site.js"></script>
+</head>
+<body>
+<header class="top">
+  <button class="icon-btn menu-btn" id="menu" type="button" aria-label="Menu">&#9776;</button>
+  <a class="brand" href="index.html"><span class="logo">T</span>Tempest API</a>
+  <span class="version">Core API 19</span>
+  <div class="search"><input id="q" type="search" placeholder="Search the API" autocomplete="off" aria-label="Search"><kbd>Ctrl K</kbd><div class="results" id="results"></div></div>
+  <nav class="top-links"><a href="javadoc.html">Javadoc</a><a href="https://discord.gg/Q9PNVCMZXK" target="_blank" rel="noopener">Discord</a><a href="https://www.curseforge.com/hytale/mods/search?search=tempest" target="_blank" rel="noopener">CurseForge</a></nav>
+  <button class="icon-btn" id="theme" type="button" aria-label="Light or dark">&#9680;</button>
+</header>
+<div class="layout">
+  <aside class="side"><h4>Getting started</h4><a href="index.html">Introduction</a><a href="quick-start.html">Quick start</a><a href="setup.html">Setting up a plugin</a><a href="versions.html">API versions</a><h4>Core</h4><a href="money.html">Money</a><a href="actions.html">Player actions</a><a href="settings.html">Settings and menus</a><a href="hud.html">Boards, HUD and placeholders</a><a href="rewards.html">Rewards, mail and boosts</a><a href="world.html">Map, town and demand</a><a href="safety.html" class="here">Safety and helpers</a><h4>Leveling and skills</h4><a href="levels.html">Player levels</a><a href="skills.html"><span class="badge">NEW</span>Skills (MMO Skill Tree)</a><a href="leveling-mods.html"><span class="badge">NEW</span>Leveling mods for server owners</a><h4>Plugins</h4><a href="quests.html">Quests</a><a href="crates.html">Crates</a><a href="holograms.html">Holograms</a><a href="coinflip.html">Coinflip</a><a href="jobs.html">Jobs</a><a href="projects.html">Town projects</a><a href="pass.html">Battle pass</a><a href="games.html">Lottery, slots and shop</a><h4>More</h4><a href="integrations.html">Integrations</a><a href="content.html">Content mods (JSON)</a><a href="rules.html">Rules of thumb</a><h4>Reference</h4><a href="javadoc.html">Javadoc</a><a href="changelog.html">Changelog</a></aside>
+  <main>
+    <div class="crumbs">Core</div>
+    <h1>Safety and helpers</h1>
+    <p class="lead">Admin logs, rate limits, play limits, AFK checks, the doctor and crash-safe files.</p>
+    <article>
+<h2 id="who-changed-what-adminlog"><a class="anchor" href="#who-changed-what-adminlog" aria-label="Link to this section">#</a>Who changed what: <code>AdminLog</code> <span class="since" title="Core API version 2">API 2+</span></h2>
+<p>Record admin changes so servers with several staff can see who did what. Lines go to <code>universe/mods/atomictempest/admin-log/&lt;day&gt;.log</code>; <code>/tempest log</code> shows the newest. Line breaks in the text are removed, so a typed name cannot add a false line.</p>
+<div class="code"><div class="code-bar"><span>java</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-java">AdminLog.record(player.getUsername(), "Dragons", "Bounty: 250 -&gt; 500");
+AdminLog.record(AdminLog.CONSOLE, "Dragons", "Reset every dragon");</code></pre></div>
+<h2 id="stopping-floods-ratelimit"><a class="anchor" href="#stopping-floods-ratelimit" aria-label="Link to this section">#</a>Stopping floods: <code>RateLimit</code> <span class="since" title="Core API version 2">API 2+</span></h2>
+<p>At most once in a while per key, for announcements, payments and messages a player could repeat:</p>
+<div class="code"><div class="code-bar"><span>java</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-java">if (RateLimit.allow("dragons:announce:" + player, 30_000)) { announce(...); }</code></pre></div>
+<h2 id="a-daily-limit-for-games-of-chance-playlimits"><a class="anchor" href="#a-daily-limit-for-games-of-chance-playlimits" aria-label="Link to this section">#</a>A daily limit for games of chance: <code>PlayLimits</code> <span class="since" title="Core API version 3">API 3+</span></h2>
+<p>The admin sets one daily limit per player for every game of chance together (<code>/tempest</code>, General, "Daily limit for games"; 0 = none). A game counts each stake before it takes the money, and gives it back if the money is not taken or the stake is refunded:</p>
+<div class="code"><div class="code-bar"><span>java</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-java">Message stop = PlayLimits.reserve(player, bet);   // counts the bet, or says why not (shown to the player)
+if (stop != null) { player.sendMessage(stop); return; }
+if (!economy.withdraw(player, bet, "Dragon dice")) { PlayLimits.release(player, bet); return; }</code></pre></div>
+<p><code>PlayLimits.check(player, amount)</code> says why without counting (for a price shown before buying); <code>PlayLimits.leftToday(player)</code> is what the player may still stake today.</p>
+<h2 id="who-is-really-playing-activity"><a class="anchor" href="#who-is-really-playing-activity" aria-label="Link to this section">#</a>Who is really playing: <code>Activity</code> <span class="since" title="Core API version 9">API 9+</span></h2>
+<p>Pay for time played only to players who are there. A player counts as active while they turned their view in the last <code>Activity.AFK_MINUTES</code> (5) minutes; water pushing them or standing in a farm moves them but never turns their head. A player who has just joined counts as active.</p>
+<div class="code"><div class="code-bar"><span>java</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-java">if (Activity.isActive(uuid)) { addMinutePlayed(uuid); }
+Activity.idleMillis(uuid);   // how long they have not turned their view</code></pre></div>
+<p>Tempest Pass (minutes played) and Tempest Events (playtime goals) use it. Check <code>CoreAPI.runningVersion() &gt;= 9</code> first.</p>
+<h2 id="catching-money-from-nothing-doctor"><a class="anchor" href="#catching-money-from-nothing-doctor" aria-label="Link to this section">#</a>Catching money from nothing: <code>Doctor</code> <span class="since" title="Core API version 13">API 13+</span></h2>
+<p><code>/tempest doctor</code> looks through every plugin's settings for ways players could make money from nothing, before they find them. A plugin that pays coins or takes items for coins adds a check, and its prices take part in every check the doctor runs across plugins:</p>
+<div class="code"><div class="code-bar"><span>java</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-java">core.doctor(new Doctor.Check() {                                     // Registrations
+    public void prices(Doctor.Market market) {
+        // where players buy items for coins, and get coins for items, with the settings as they are now
+        market.buy("my stall", "Ingredient_Bar_Iron", 12, 0, "/mystall");        // 0 = no daily limit
+        market.sell("my bounty board", "Ingredient_Bar_Iron", 20, 64, "/bounties");
+        market.play(Doctor.CRATE_OPENS, averageLossPerOpening, "my crate");    // for quests that count openings
+    }
+    public void check(Doctor.Market market, Doctor.Findings findings) {
+        long worth = market.worth("Rock_Gem_Diamond");                // the most any plugin pays for one
+        if (myPrize &gt; myPrice) findings.problem("prize", "My prize is worth more than it costs.", "My price");
+    }
+});</code></pre></div>
+<p>Core itself finds every item bought cheaper in one place than it sells for in another, and every game recipe whose parts, bought at their cheapest, cost less than what it makes sells for (items only admins may craft are left out). A finding is <code>problem</code> (money from nothing), <code>warning</code> (easy to farm) or <code>hint</code>. Its key must stay the same between checks, as the admin can mark it "on purpose". A fix is a command (<code>"/shop"</code>) or the label of a setting in /tempest, which the FIX button searches for. Texts are for admins and may be English. Give the most a player can get (rank perks and running <code>Boosts</code> included): the doctor is there for the worst case. <code>new Doctor.Findings(list)</code> collects findings in a plugin's own tests. Check <code>CoreAPI.runningVersion() &gt;= 13</code> first, and keep the check in a class of its own.</p>
+<h2 id="saving-files-safely-safefiles"><a class="anchor" href="#saving-files-safely-safefiles" aria-label="Link to this section">#</a>Saving files safely: <code>SafeFiles</code></h2>
+<p>All six plugins save through it, and other plugins may too. A save survives a crash or power cut at any moment: the text goes to <code>name.tmp</code> (flushed to disk), the old file becomes <code>name.bak</code>, then the new one takes its place.</p>
+<div class="code"><div class="code-bar"><span>java</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-java">SafeFiles.write(path, gson.toJson(data));                          // throws IOException if it could not save
+MyData data = SafeFiles.load(path, reader -&gt; gson.fromJson(reader, MyData.class));  // null if no copy can be read
+SafeFiles.exists(path);                                            // also true if only the .tmp or .bak is left</code></pre></div>
+<p><code>load</code> uses the newest complete copy; a file that cannot be read is kept as <code>name.broken-&lt;time&gt;</code> and the backup is used instead.</p>
+<h2 id="other-helpers"><a class="anchor" href="#other-helpers" aria-label="Link to this section">#</a>Other helpers</h2>
+<ul><li><code>Currency</code>: the money's name (<code>format</code>, <code>name</code>, <code>singular</code>, <code>plural</code>). Use it instead of writing "copper".</li><li><code>ChatPrefix.of(text, "#RRGGBB")</code>: a coloured chat tag such as "[Dragons]".</li><li><code>ItemIcons.safe(itemId)</code>: an item id that is safe to draw; Coins' coin items fall back to similar game items when Coins is not installed.</li><li><code>CoinStacks.of(amount)</code> (in Coins): the coin items that make up an amount (for dropping coins).</li><li><code>ReservedDrops.spawn(...)</code>: dropped items only one player can pick up for a while.</li><li><code>CraftRestrictions.restrict(itemId, () -&gt; allowed)</code>: admin-only crafting with an on/off switch.</li></ul>
+    </article>
+    <nav class="pager"><a class="prev" href="world.html"><small>Previous</small>Map, town and demand</a><a class="next" href="levels.html"><small>Next</small>Player levels</a></nav>
+    <footer class="foot">Tempest plugins for Hytale by AtomicTempest. Not made or endorsed by Hypixel Studios. · <a href="safety.md">This page as Markdown</a> · <a href="llms.txt">llms.txt</a></footer>
+  </main>
+  <aside class="toc"><h5>On this page</h5><a href="#who-changed-what-adminlog">Who changed what: AdminLog</a><a href="#stopping-floods-ratelimit">Stopping floods: RateLimit</a><a href="#a-daily-limit-for-games-of-chance-playlimits">A daily limit for games of chance: PlayLimits</a><a href="#who-is-really-playing-activity">Who is really playing: Activity</a><a href="#catching-money-from-nothing-doctor">Catching money from nothing: Doctor</a><a href="#saving-files-safely-safefiles">Saving files safely: SafeFiles</a><a href="#other-helpers">Other helpers</a></aside>
+</div>
+</body>
+</html>

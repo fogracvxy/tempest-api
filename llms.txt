@@ -1,0 +1,43 @@
+# Tempest plugins API
+
+> Java API of Tempest Core and the Tempest plugins for Hytale servers: economy, quests, crates, holograms, battle pass, jobs, leveling (Endless Leveling, MMO Skill Tree) and more.
+
+
+## Getting started
+- [Introduction](index.md): Build on Tempest Core and the Tempest plugins for Hytale.
+- [Quick start](quick-start.md): From an empty plugin to one that pays players and reads their level, in five steps.
+- [Setting up a plugin](setup.md): Dependencies, Registrations, config files and which Core is installed.
+- [API versions](versions.md): What each Core API version added, to check before you use it.
+
+## Core
+- [Money](money.md): The server's economy, whichever plugin keeps it, and what only Tempest Economy (Coins) has.
+- [Player actions](actions.md): Hear what players do in every Tempest plugin, and report your own.
+- [Settings and menus](settings.md): A /tempest settings tab for your plugin, menu themes, editions, languages and help pages.
+- [Boards, HUD and placeholders](hud.md): Leaderboards, the money counter and progress bars, placeholders and announcements.
+- [Rewards, mail and boosts](rewards.md): Item and command rewards, the mailbox, boosts for a while and rank perks.
+- [Map, town and demand](world.md): Places on the world map, features the town unlocks and items the server wants.
+- [Safety and helpers](safety.md): Admin logs, rate limits, play limits, AFK checks, the doctor and crash-safe files.
+
+## Leveling and skills
+- [Player levels](levels.md): Levels from Endless Leveling or MMO Skill Tree, through one API.
+- [Skills (MMO Skill Tree)](skills.md): Skill levels, skill XP, achievements, quests and NPC talks.
+- [Leveling mods for server owners](leveling-mods.md): What the Tempest plugins do with Endless Leveling and MMO Skill Tree, alone or together, and where it is set.
+
+## Plugins
+- [Quests](quests.md): Your own kinds of goals, goals shipped with your mod, progress and custom triggers.
+- [Crates](crates.md)
+- [Holograms](holograms.md): Floating text, items, statues and rankings.
+- [Coinflip](coinflip.md): Rooms, and your own kind of room.
+- [Jobs](jobs.md): Pay job work from any mod.
+- [Town projects](projects.md): The buildings players build together, and their states.
+- [Battle pass](pass.md)
+- [Lottery, slots and shop](games.md)
+
+## More
+- [Integrations](integrations.md): Tempest next to other plugins.
+- [Content mods (JSON)](content.md): Add to the Tempest plugins without code.
+- [Rules of thumb](rules.md)
+
+## Reference
+- [Javadoc](javadoc.md): Every class and method of each plugin's API.
+- [Changelog](changelog.md): Every release of the Tempest plugins, newest first.

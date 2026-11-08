@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leveling mods for server owners · Tempest plugins API</title>
+<meta name="description" content="What the Tempest plugins do with Endless Leveling and MMO Skill Tree, alone or together, and where it is set.">
+<link rel="stylesheet" href="site.css">
+<script src="site.js"></script>
+</head>
+<body>
+<header class="top">
+  <button class="icon-btn menu-btn" id="menu" type="button" aria-label="Menu">&#9776;</button>
+  <a class="brand" href="index.html"><span class="logo">T</span>Tempest API</a>
+  <span class="version">Core API 19</span>
+  <div class="search"><input id="q" type="search" placeholder="Search the API" autocomplete="off" aria-label="Search"><kbd>Ctrl K</kbd><div class="results" id="results"></div></div>
+  <nav class="top-links"><a href="javadoc.html">Javadoc</a><a href="https://discord.gg/Q9PNVCMZXK" target="_blank" rel="noopener">Discord</a><a href="https://www.curseforge.com/hytale/mods/search?search=tempest" target="_blank" rel="noopener">CurseForge</a></nav>
+  <button class="icon-btn" id="theme" type="button" aria-label="Light or dark">&#9680;</button>
+</header>
+<div class="layout">
+  <aside class="side"><h4>Getting started</h4><a href="index.html">Introduction</a><a href="quick-start.html">Quick start</a><a href="setup.html">Setting up a plugin</a><a href="versions.html">API versions</a><h4>Core</h4><a href="money.html">Money</a><a href="actions.html">Player actions</a><a href="settings.html">Settings and menus</a><a href="hud.html">Boards, HUD and placeholders</a><a href="rewards.html">Rewards, mail and boosts</a><a href="world.html">Map, town and demand</a><a href="safety.html">Safety and helpers</a><h4>Leveling and skills</h4><a href="levels.html">Player levels</a><a href="skills.html"><span class="badge">NEW</span>Skills (MMO Skill Tree)</a><a href="leveling-mods.html" class="here"><span class="badge">NEW</span>Leveling mods for server owners</a><h4>Plugins</h4><a href="quests.html">Quests</a><a href="crates.html">Crates</a><a href="holograms.html">Holograms</a><a href="coinflip.html">Coinflip</a><a href="jobs.html">Jobs</a><a href="projects.html">Town projects</a><a href="pass.html">Battle pass</a><a href="games.html">Lottery, slots and shop</a><h4>More</h4><a href="integrations.html">Integrations</a><a href="content.html">Content mods (JSON)</a><a href="rules.html">Rules of thumb</a><h4>Reference</h4><a href="javadoc.html">Javadoc</a><a href="changelog.html">Changelog</a></aside>
+  <main>
+    <div class="crumbs">Leveling and skills</div>
+    <h1>Leveling mods for server owners</h1>
+    <p class="lead">What the Tempest plugins do with Endless Leveling and MMO Skill Tree, alone or together, and where it is set.</p>
+    <article>
+<p>Tempest works with <strong>Endless Leveling</strong> (by Airijko) and <strong>MMO Skill Tree</strong> (by Ziggfreed). Nothing of either mod is shipped: Tempest Core finds them through their public APIs within half a minute of the server starting. Without them, nothing changes, and no level requirement ever locks a player out because a mod is missing.</p>
+<h2 id="one-mod-or-both"><a class="anchor" href="#one-mod-or-both" aria-label="Link to this section">#</a>One mod, or both</h2>
+<div class="table"><table><thead><tr><th>Installed</th><th>What happens</th></tr></thead><tbody><tr><td>Endless Leveling only</td><td>Its level counts for everything below; its prestige, dungeons, wave gates, raids, classes and mob levels work too</td></tr><tr><td>MMO Skill Tree only</td><td>Its skills become one level (total, combat, power level or the highest skill, as you choose); skill and achievement rewards work too</td></tr><tr><td>Both</td><td>You choose whose level counts ("Leveling mod" on the Leveling tab). Only that mod's level-ups pay level-up money, so nothing is paid twice. Endless Leveling's dungeons, gates and raids and MMO Skill Tree's skill and achievement rewards keep working. "Double leveling XP" raises both</td></tr></tbody></table></div>
+<h2 id="where-to-set-it-tempest"><a class="anchor" href="#where-to-set-it-tempest" aria-label="Link to this section">#</a>Where to set it: <code>/tempest</code></h2>
+<p>Every amount starts at 0, which is off: installing a mod changes nothing until you choose.</p>
+<div class="table"><table><thead><tr><th>Tab</th><th>Shown</th><th>What is on it</th></tr></thead><tbody><tr><td>Leveling</td><td>With either mod</td><td>Which mod counts (with "In use: ..."), money per level-up and milestones, the level bonus on other rewards, chat lines, boards, XP boosts</td></tr><tr><td>Leveling extras</td><td>With either mod</td><td>Commands at levels, leveling XP from the economy (daily rewards, crates, contracts, the shop, town projects), levels for paying and gambling (stops alts), town bonuses</td></tr><tr><td>Endless Leveling</td><td>Only with Endless Leveling</td><td>Prestige (money, a command, a bonus), dungeon, gate and raid money, mob gold by mob level, elite mobs</td></tr><tr><td>MMO Skill Tree</td><td>Only with MMO Skill Tree</td><td>Which number is "the level", which skill gets Tempest's XP, money and items per skill level and at milestones, achievement and server-first rewards</td></tr><tr><td>Pass leveling, PvP leveling, Events leveling</td><td>With their plugin</td><td>Pass XP for level-ups (and Endless Leveling clears), PvP rewards by level, events that start with raids (Endless Leveling)</td></tr></tbody></table></div>
+<h2 id="what-players-get"><a class="anchor" href="#what-players-get" aria-label="Link to this section">#</a>What players get</h2>
+<div class="table"><table><thead><tr><th>Plugin</th><th>With a leveling mod</th></tr></thead><tbody><tr><td>Core</td><td>Money for level-ups, commands and items at levels, a bonus on other rewards by level, placeholders and a "Highest levels" board</td></tr><tr><td>Quests</td><td>Goals: reach a level; with Endless Leveling also prestige, dungeons, gates, raids and strong mobs; with MMO Skill Tree reach a skill level, gain skill XP, earn achievements, finish its quests, talk to characters. Rewards can give leveling XP (a goal about one skill gives that skill's XP)</td></tr><tr><td>Shop, Crates, Quests</td><td>Items, crates and quests that need a level (and with Endless Leveling a class)</td></tr><tr><td>Pass</td><td>Pass XP for level-ups; tiers can give leveling XP</td></tr><tr><td>Jobs</td><td>Job work gives leveling XP; a job can need a level</td></tr><tr><td>Contracts</td><td>PvP rewards for underdogs and fines for bullies, by level</td></tr><tr><td>Events</td><td>"Double leveling XP" events; with Endless Leveling community goals for dungeons, gates and raids</td></tr></tbody></table></div>
+<h2 id="mmo-skill-tree-rewards"><a class="anchor" href="#mmo-skill-tree-rewards" aria-label="Link to this section">#</a>MMO Skill Tree rewards</h2>
+<div class="table"><table><thead><tr><th>Reward</th><th>How it works</th></tr></thead><tbody><tr><td>Money per skill level</td><td>Paid for every level gained in a skill, more at higher levels; only above the highest level ever paid, so a reset pays nothing again</td></tr><tr><td>Skill milestones</td><td>A bonus, items (what does not fit goes to <code>/mail</code>) and a line for everyone every so many levels</td></tr><tr><td>Only these skills</td><td>Limit the rewards to the skills you list</td></tr><tr><td>Achievements</td><td>Money per achievement and per achievement point, once each</td></tr><tr><td>Server firsts</td><td>A bonus, items and a line for everyone for an achievement only the first player can earn</td></tr></tbody></table></div>
+<p>Placeholders: <code>{leveling_level}</code> (the level that counts), <code>{mmo_total_level}</code>, <code>{mmo_combat_level}</code>, <code>{mmo_power}</code>.</p>
+<div class="callout note"><div class="callout-title">Note</div><p>MMO Skill Tree reads a player when they join, every half minute and after every XP gain. A player who has just joined may show no level for a moment.</p></div>
+    </article>
+    <nav class="pager"><a class="prev" href="skills.html"><small>Previous</small>Skills (MMO Skill Tree)</a><a class="next" href="quests.html"><small>Next</small>Quests</a></nav>
+    <footer class="foot">Tempest plugins for Hytale by AtomicTempest. Not made or endorsed by Hypixel Studios. · <a href="leveling-mods.md">This page as Markdown</a> · <a href="llms.txt">llms.txt</a></footer>
+  </main>
+  <aside class="toc"><h5>On this page</h5><a href="#one-mod-or-both">One mod, or both</a><a href="#where-to-set-it-tempest">Where to set it: /tempest</a><a href="#what-players-get">What players get</a><a href="#mmo-skill-tree-rewards">MMO Skill Tree rewards</a></aside>
+</div>
+</body>
+</html>

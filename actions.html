@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Player actions · Tempest plugins API</title>
+<meta name="description" content="Hear what players do in every Tempest plugin, and report your own.">
+<link rel="stylesheet" href="site.css">
+<script src="site.js"></script>
+</head>
+<body>
+<header class="top">
+  <button class="icon-btn menu-btn" id="menu" type="button" aria-label="Menu">&#9776;</button>
+  <a class="brand" href="index.html"><span class="logo">T</span>Tempest API</a>
+  <span class="version">Core API 19</span>
+  <div class="search"><input id="q" type="search" placeholder="Search the API" autocomplete="off" aria-label="Search"><kbd>Ctrl K</kbd><div class="results" id="results"></div></div>
+  <nav class="top-links"><a href="javadoc.html">Javadoc</a><a href="https://discord.gg/Q9PNVCMZXK" target="_blank" rel="noopener">Discord</a><a href="https://www.curseforge.com/hytale/mods/search?search=tempest" target="_blank" rel="noopener">CurseForge</a></nav>
+  <button class="icon-btn" id="theme" type="button" aria-label="Light or dark">&#9680;</button>
+</header>
+<div class="layout">
+  <aside class="side"><h4>Getting started</h4><a href="index.html">Introduction</a><a href="quick-start.html">Quick start</a><a href="setup.html">Setting up a plugin</a><a href="versions.html">API versions</a><h4>Core</h4><a href="money.html">Money</a><a href="actions.html" class="here">Player actions</a><a href="settings.html">Settings and menus</a><a href="hud.html">Boards, HUD and placeholders</a><a href="rewards.html">Rewards, mail and boosts</a><a href="world.html">Map, town and demand</a><a href="safety.html">Safety and helpers</a><h4>Leveling and skills</h4><a href="levels.html">Player levels</a><a href="skills.html"><span class="badge">NEW</span>Skills (MMO Skill Tree)</a><a href="leveling-mods.html"><span class="badge">NEW</span>Leveling mods for server owners</a><h4>Plugins</h4><a href="quests.html">Quests</a><a href="crates.html">Crates</a><a href="holograms.html">Holograms</a><a href="coinflip.html">Coinflip</a><a href="jobs.html">Jobs</a><a href="projects.html">Town projects</a><a href="pass.html">Battle pass</a><a href="games.html">Lottery, slots and shop</a><h4>More</h4><a href="integrations.html">Integrations</a><a href="content.html">Content mods (JSON)</a><a href="rules.html">Rules of thumb</a><h4>Reference</h4><a href="javadoc.html">Javadoc</a><a href="changelog.html">Changelog</a></aside>
+  <main>
+    <div class="crumbs">Core</div>
+    <h1>Player actions</h1>
+    <p class="lead">Hear what players do in every Tempest plugin, and report your own.</p>
+    <article>
+<p>All in <code>com.atomictempest.core</code>, available whether or not Coins is installed.</p>
+<h2 id="hearing-about-money-walletevents-and-playeractions"><a class="anchor" href="#hearing-about-money-walletevents-and-playeractions" aria-label="Link to this section">#</a>Hearing about money: <code>WalletEvents</code> and <code>PlayerActions</code></h2>
+<div class="code"><div class="code-bar"><span>java</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-java">// Every change of any wallet (after it happened)
+WalletEvents.listen((player, amount, reason, balanceAfter) -&gt; { ... });
+
+// What players do in the economy mods: spins, wins, tickets, shop trades, daily rewards, payments
+PlayerActions.listen((player, action, amount) -&gt; {
+    if (PlayerActions.SLOT_JACKPOT.equals(action)) { ... }
+});
+
+// Report your own (other listeners, such as Quests, may count them)
+PlayerActions.fire(uuid, "mymod:bounty", 250);</code></pre></div>
+<p>Actions: <code>slot_spin</code> (bet), <code>slot_win</code> (winnings, also when dropped as coins), <code>slot_jackpot</code>, <code>lottery_tickets</code> (how many), <code>lottery_win</code>, <code>shop_buy</code> (cost), <code>shop_sell</code> (paid), <code>daily_reward</code>, <code>pay</code>, <code>crate_open</code> (price), <code>coinflip_bet</code> (stake), <code>coinflip_win</code> (paid), <code>coinflip_loss</code> (stake), <code>quest_complete</code> (reward paid; Core API 5, reported by Quests for every quest and achievement finished), <code>contract_deliver</code> (items delivered; Core API 5, reported by Contracts for every delivery to a server order), <code>events_top</code> (the place, 1 to 3, when an event ends), <code>events_helped</code> (a goal reached and the helper paid), <code>trade_done</code> (to each side of a finished trade that moved something; the amount is a number that always stands for the same other player), <code>town_mayor</code> (elected at the end of a term).</p>
+<p>Listeners run on the thread that made the change: keep them quick, and do world or UI work with <code>world.execute(...)</code>.</p>
+<h2 id="reference-every-player-action"><a class="anchor" href="#reference-every-player-action" aria-label="Link to this section">#</a>Reference: every player action</h2>
+<p>Everything the Tempest plugins report through <code>PlayerActions</code> (Core), in one place. Listen once and count what you need; the amount means what the table says. Listeners run on the thread that reported: keep them quick and thread-safe.</p>
+<div class="code"><div class="code-bar"><span>java</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-java">PlayerActions.listen((player, action, amount) -&gt; {
+    switch (action) {
+        case PlayerActions.CRATE_OPEN -&gt; ...;     // a constant on PlayerActions
+        case "jobs_level" -&gt; ...;                 // the other plugins' actions are plain strings
+        default -&gt; { }
+    }
+});</code></pre></div>
+<div class="table"><table><thead><tr><th>Action</th><th>From</th><th>Fires when</th><th>Amount</th></tr></thead><tbody><tr><td><code>slot_spin</code> (<code>PlayerActions.SLOT_SPIN</code>)</td><td>Slots</td><td>A slot machine spin</td><td>The bet</td></tr><tr><td><code>slot_win</code> (<code>SLOT_WIN</code>)</td><td>Slots</td><td>A win, paid or dropped as coins</td><td>The winnings</td></tr><tr><td><code>slot_jackpot</code> (<code>SLOT_JACKPOT</code>)</td><td>Slots</td><td>A jackpot (also reported as a win)</td><td>The winnings</td></tr><tr><td><code>lottery_tickets</code> (<code>LOTTERY_TICKETS</code>)</td><td>Lottery</td><td>Tickets bought</td><td>How many</td></tr><tr><td><code>lottery_win</code> (<code>LOTTERY_WIN</code>)</td><td>Lottery</td><td>A lottery win</td><td>The prize</td></tr><tr><td><code>shop_buy</code> (<code>SHOP_BUY</code>)</td><td>Shop</td><td>Bought from the shop</td><td>What it cost</td></tr><tr><td><code>shop_sell</code> (<code>SHOP_SELL</code>)</td><td>Shop</td><td>Sold to the shop</td><td>What it paid</td></tr><tr><td><code>daily_reward</code> (<code>DAILY_REWARD</code>)</td><td>Coins</td><td>A daily reward claimed</td><td>The reward</td></tr><tr><td><code>pay</code> (<code>PAY</code>)</td><td>Coins</td><td>A payment to another player</td><td>What was paid</td></tr><tr><td><code>crate_open</code> (<code>CRATE_OPEN</code>)</td><td>Crates</td><td>A crate opened</td><td>What it cost (0 when free)</td></tr><tr><td><code>quest_complete</code> (<code>QUEST_COMPLETE</code>, API 5)</td><td>Quests</td><td>A quest or achievement finished</td><td>The reward paid, 0 if none</td></tr><tr><td><code>contract_deliver</code> (<code>CONTRACT_DELIVER</code>, API 5)</td><td>Contracts</td><td>Items delivered to a contract or server order</td><td>How many items</td></tr><tr><td><code>coinflip_bet</code> (<code>CoinflipAPI.ACTION_BET</code>)</td><td>Coinflip</td><td>A stake put into a room</td><td>The stake</td></tr><tr><td><code>coinflip_win</code> (<code>CoinflipAPI.ACTION_WIN</code>)</td><td>Coinflip</td><td>A flip won</td><td>The payout</td></tr><tr><td><code>coinflip_loss</code> (<code>CoinflipAPI.ACTION_LOSS</code>)</td><td>Coinflip</td><td>A flip lost</td><td>The stake</td></tr><tr><td><code>jobs_paid</code></td><td>Jobs</td><td>Pay for job work</td><td>What was paid</td></tr><tr><td><code>jobs_level</code></td><td>Jobs</td><td>A job level reached</td><td>The level</td></tr><tr><td><code>jobs_tree</code></td><td>Jobs</td><td>A whole tree felled as a woodcutter</td><td>1</td></tr><tr><td><code>jobs_found</code></td><td>Jobs</td><td>A new place found as an explorer</td><td>1</td></tr><tr><td><code>events_top</code></td><td>Events</td><td>Finished in an event's top three</td><td>The place (1 to 3)</td></tr><tr><td><code>events_helped</code></td><td>Events</td><td>Helped enough when a goal (or overdrive stage) was reached</td><td>1</td></tr><tr><td><code>projects_donate</code></td><td>Projects</td><td>Items given to a town project</td><td>How many items</td></tr><tr><td><code>projects_coins</code></td><td>Projects</td><td>Coins given to a town project</td><td>The coins</td></tr><tr><td><code>trade_done</code></td><td>Trade</td><td>A finished trade that moved something (to both sides)</td><td>A number that stands for the other player, the same every time</td></tr><tr><td><code>town_mayor</code></td><td>Town</td><td>Elected mayor (not set by an admin)</td><td>1</td></tr><tr><td><code>mmo_skill_level:&lt;id&gt; &lt;name&gt;</code> (<code>Skills.SKILL_LEVEL</code>, API 19)</td><td>Core, with MMO Skill Tree</td><td>A skill's level went up</td><td>The new level</td></tr><tr><td><code>mmo_skill_xp:&lt;id&gt; &lt;name&gt;</code> (<code>Skills.SKILL_XP</code>, API 19)</td><td>Core, with MMO Skill Tree</td><td>Skill XP from play</td><td>The XP</td></tr><tr><td><code>mmo_achievement:&lt;id&gt;</code> (<code>Skills.ACHIEVEMENT</code>, API 19)</td><td>Core, with MMO Skill Tree</td><td>An achievement unlocked</td><td>1</td></tr><tr><td><code>mmo_quest:&lt;id&gt;</code> (<code>Skills.QUEST</code>, API 19)</td><td>Core, with MMO Skill Tree</td><td>One of its quests finished</td><td>1</td></tr><tr><td><code>npc_talk:&lt;character id&gt; &lt;aliases&gt;</code> (<code>Skills.NPC_TALK</code>, API 19)</td><td>Core, with MMO Skill Tree</td><td>A credited conversation with a character</td><td>1</td></tr></tbody></table></div>
+<div class="callout tip"><div class="callout-title">Tip</div><p>Your own plugin can report actions too: <code>PlayerActions.fire(player, "mymod_dragon_slain", 1)</code>. Use a prefix of your own so names never clash; Tempest Quests' custom triggers can count them.</p></div>
+    </article>
+    <nav class="pager"><a class="prev" href="money.html"><small>Previous</small>Money</a><a class="next" href="settings.html"><small>Next</small>Settings and menus</a></nav>
+    <footer class="foot">Tempest plugins for Hytale by AtomicTempest. Not made or endorsed by Hypixel Studios. · <a href="actions.md">This page as Markdown</a> · <a href="llms.txt">llms.txt</a></footer>
+  </main>
+  <aside class="toc"><h5>On this page</h5><a href="#hearing-about-money-walletevents-and-playeractions">Hearing about money: WalletEvents and PlayerActions</a><a href="#reference-every-player-action">Reference: every player action</a></aside>
+</div>
+</body>
+</html>

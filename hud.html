@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Boards, HUD and placeholders · Tempest plugins API</title>
+<meta name="description" content="Leaderboards, the money counter and progress bars, placeholders and announcements.">
+<link rel="stylesheet" href="site.css">
+<script src="site.js"></script>
+</head>
+<body>
+<header class="top">
+  <button class="icon-btn menu-btn" id="menu" type="button" aria-label="Menu">&#9776;</button>
+  <a class="brand" href="index.html"><span class="logo">T</span>Tempest API</a>
+  <span class="version">Core API 19</span>
+  <div class="search"><input id="q" type="search" placeholder="Search the API" autocomplete="off" aria-label="Search"><kbd>Ctrl K</kbd><div class="results" id="results"></div></div>
+  <nav class="top-links"><a href="javadoc.html">Javadoc</a><a href="https://discord.gg/Q9PNVCMZXK" target="_blank" rel="noopener">Discord</a><a href="https://www.curseforge.com/hytale/mods/search?search=tempest" target="_blank" rel="noopener">CurseForge</a></nav>
+  <button class="icon-btn" id="theme" type="button" aria-label="Light or dark">&#9680;</button>
+</header>
+<div class="layout">
+  <aside class="side"><h4>Getting started</h4><a href="index.html">Introduction</a><a href="quick-start.html">Quick start</a><a href="setup.html">Setting up a plugin</a><a href="versions.html">API versions</a><h4>Core</h4><a href="money.html">Money</a><a href="actions.html">Player actions</a><a href="settings.html">Settings and menus</a><a href="hud.html" class="here">Boards, HUD and placeholders</a><a href="rewards.html">Rewards, mail and boosts</a><a href="world.html">Map, town and demand</a><a href="safety.html">Safety and helpers</a><h4>Leveling and skills</h4><a href="levels.html">Player levels</a><a href="skills.html"><span class="badge">NEW</span>Skills (MMO Skill Tree)</a><a href="leveling-mods.html"><span class="badge">NEW</span>Leveling mods for server owners</a><h4>Plugins</h4><a href="quests.html">Quests</a><a href="crates.html">Crates</a><a href="holograms.html">Holograms</a><a href="coinflip.html">Coinflip</a><a href="jobs.html">Jobs</a><a href="projects.html">Town projects</a><a href="pass.html">Battle pass</a><a href="games.html">Lottery, slots and shop</a><h4>More</h4><a href="integrations.html">Integrations</a><a href="content.html">Content mods (JSON)</a><a href="rules.html">Rules of thumb</a><h4>Reference</h4><a href="javadoc.html">Javadoc</a><a href="changelog.html">Changelog</a></aside>
+  <main>
+    <div class="crumbs">Core</div>
+    <h1>Boards, HUD and placeholders</h1>
+    <p class="lead">Leaderboards, the money counter and progress bars, placeholders and announcements.</p>
+    <article>
+<h2 id="leaderboards-leaderboards"><a class="anchor" href="#leaderboards-leaderboards" aria-label="Link to this section">#</a>Leaderboards: <code>Leaderboards</code></h2>
+<p>Shown on Coins' <code>/leaderboards</code> (servers without Coins have no leaderboard screen; registering is still safe).</p>
+<div class="code"><div class="code-bar"><span>java</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-java">Leaderboards.register(new Leaderboards.Board("mymod:dragons", Message.translation("server.mymod.board.title"),
+        Message.translation("server.mymod.board.hint"), "server.mymod.board.count", uuid -&gt; MyMod.dragonsKilled(uuid)));
+// count key: a number with its unit, "{count, plural, one {1 dragon} other {{count} dragons}}"; null = money ("1,250 copper")</code></pre></div>
+<p>The board appears on <code>/leaderboards</code> after the built-in ones. It ranks every player Coins knows; players with 0 are left out. Unregister it in your <code>shutdown()</code>.</p>
+<h2 id="the-coin-counter-hudlines"><a class="anchor" href="#the-coin-counter-hudlines" aria-label="Link to this section">#</a>The coin counter: <code>HudLines</code></h2>
+<div class="code"><div class="code-bar"><span>java</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-java">HudLines.register("mymod:bounty", uuid -&gt; hasBounty(uuid)
+        ? Message.translation("server.mymod.hud.bounty").param("amount", HudLines.format(bounty(uuid))) : null);</code></pre></div>
+<p>Up to three lines show under each player's coin counter; return null to show nothing. Called every two seconds from a timer thread. With the Tempest board on (Core's panel on the right of the screen), every line shows there instead, and each player picks which ones in <code>/board</code>. Give your line a name for that menu (API version 4):</p>
+<div class="code"><div class="code-bar"><span>java</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-java">HudLines.name("mymod:bounty", Message.translation("server.mymod.board.bounty"));   // "Bounty"
+HudLines.keys();  HudLines.nameOf(key);  HudLines.lineFor(key, uuid);              // API version 4</code></pre></div>
+<p>A line that is nice to have but should not push others off a full board can start off; each player switches it on in <code>/board</code> (API version 6; Shop's daily deal does this):</p>
+<div class="code"><div class="code-bar"><span>java</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-java">if (CoreAPI.runningVersion() &gt;= 6) HudLines.startOff("mymod:bounty");</code></pre></div>
+<p>An economy plugin calls <code>HudLines.moneyChanged(player, change)</code> when a balance changes, so the counter shows the new amount and the change at once instead of at its next refresh, and <code>HudLines.refreshMoney()</code> after the currency's name or look changed (Coins does both).</p>
+<h2 id="a-progress-bar-on-the-screen-hudlines-progress"><a class="anchor" href="#a-progress-bar-on-the-screen-hudlines-progress" aria-label="Link to this section">#</a>A progress bar on the screen: <code>HudLines.progress</code> <span class="since" title="Core API version 17">API 17+</span></h2>
+<p>A bar under the money counter for five seconds: an item icon, a short line and how far along (0 to 1). A newer bar replaces the one showing. Shown even while the Tempest board replaces the counter, never when the player hid it with /hud. One HUD for everything, so it never fights another mod's HUD.</p>
+<div class="code"><div class="code-bar"><span>java</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-java">HudLines.progress(uuid, "Tool_Pickaxe_Iron", Message.raw("Miner 14   +6 XP"), 0.42f);
+HudLines.progress(uuid, "Tool_Pickaxe_Iron", Message.raw("Miner 14"), 0.42f, 8000);   // shown for 8 seconds</code></pre></div>
+<h2 id="placeholders-placeholders"><a class="anchor" href="#placeholders-placeholders" aria-label="Link to this section">#</a>Placeholders: <code>Placeholders</code></h2>
+<p>Named values per player, for scoreboards, chat formats and placeholder plugins:</p>
+<div class="code"><div class="code-bar"><span>java</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-java">Placeholders.value(uuid, "coins_balance_formatted");             // "1,250 copper"
+Placeholders.apply(uuid, "Balance: {coins_balance_formatted}");    // {name} and %name% both work
+Placeholders.register("mymod_bounty", uuid -&gt; String.valueOf(bounty(uuid)));</code></pre></div>
+<div class="table"><table><thead><tr><th>Placeholder</th><th>From</th><th>Example</th></tr></thead><tbody><tr><td><code>money_balance</code>, <code>money_balance_formatted</code>, <code>money_balance_short</code>, <code>money_perk</code></td><td>Core (any economy)</td><td><code>1250</code>, <code>1,250 copper</code>, <code>12.5K</code>, <code>VIP</code></td></tr><tr><td><code>coins_balance</code>, <code>coins_balance_formatted</code>, <code>coins_balance_short</code></td><td>Coins</td><td><code>1250</code>, <code>1,250 copper</code>, <code>1,250</code></td></tr><tr><td><code>coins_currency</code>, <code>coins_rank</code>, <code>coins_daily_streak</code>, <code>coins_daily_ready</code></td><td>Coins</td><td><code>copper</code>, <code>3</code>, <code>5</code>, <code>yes</code></td></tr><tr><td><code>lottery_pot</code>, <code>lottery_pot_raw</code>, <code>lottery_time_left</code>, <code>lottery_ticket_price</code>, <code>lottery_tickets</code></td><td>Lottery</td><td><code>5,000 copper</code>, <code>12 minutes</code>, <code>3</code></td></tr><tr><td><code>slots_jackpot</code>, <code>slots_jackpot_raw</code>, <code>slots_bet</code></td><td>SlotMachine</td><td><code>2,400 copper</code>, <code>50 copper</code></td></tr><tr><td><code>achievements_unlocked</code>, <code>achievements_total</code>, <code>quests_active</code>, <code>quests_current</code>, <code>quests_points</code>, <code>quests_rank</code>, <code>quests_streak</code></td><td>Quests</td><td><code>7</code>, <code>19</code>, <code>2</code>, <code>Daily miner  40%</code>, <code>230</code>, <code>Adventurer</code>, <code>3</code></td></tr><tr><td><code>coinflip_wins</code>, <code>coinflip_losses</code>, <code>coinflip_profit</code>, <code>coinflip_profit_formatted</code>, <code>coinflip_staked</code>, <code>coinflip_rooms</code></td><td>Coinflip</td><td><code>12</code>, <code>9</code>, <code>850</code>, <code>850 copper</code>, <code>4000</code>, <code>3</code></td></tr><tr><td><code>events_name</code>, <code>events_time_left</code>, <code>events_goal_percent</code>, <code>events_next</code></td><td>Events</td><td><code>Gold Rush</code>, <code>1h 5m</code>, <code>42</code>, <code>Monster Hunt</code> (empty when nothing is on)</td></tr><tr><td><code>contracts_delivered</code>, <code>contracts_earned</code>, <code>contracts_earned_formatted</code>, <code>contracts_rank</code>, <code>contracts_open</code>, <code>contracts_to_collect</code>, <code>contracts_market_items</code>, <code>contracts_sold</code>, <code>contracts_bounty</code>, <code>contracts_bounties_claimed</code>, <code>contracts_most_wanted</code></td><td>Contracts</td><td><code>120</code>, <code>540</code>, <code>540 copper</code>, <code>Courier</code>, <code>7</code>, <code>10</code>, <code>14</code>, <code>320</code></td></tr><tr><td><code>events_fund_percent</code>, <code>events_fund_total</code>, <code>events_stage</code></td><td>Events</td><td><code>42</code>, <code>10500</code>, <code>2</code> (empty when the fund is off or nothing is on)</td></tr><tr><td><code>town_unlocked</code>, <code>town_total</code>, <code>town_mayor</code></td><td>Town</td><td><code>3</code>, <code>5</code>, <code>Steve</code></td></tr></tbody></table></div>
+<h2 id="announcements-announcements"><a class="anchor" href="#announcements-announcements" aria-label="Link to this section">#</a>Announcements: <code>Announcements</code></h2>
+<p>Big moments (jackpots, big wins, lottery winners, achievements) are posted here for integrations such as the Discord webhook. Post your own: <code>Announcements.post("mymod_boss", "Steve defeated the Dragon!")</code> (shown in Discord when "News from other mods" is on); listen with <code>Announcements.listen((category, text) -&gt; ...)</code>.</p>
+    </article>
+    <nav class="pager"><a class="prev" href="settings.html"><small>Previous</small>Settings and menus</a><a class="next" href="rewards.html"><small>Next</small>Rewards, mail and boosts</a></nav>
+    <footer class="foot">Tempest plugins for Hytale by AtomicTempest. Not made or endorsed by Hypixel Studios. · <a href="hud.md">This page as Markdown</a> · <a href="llms.txt">llms.txt</a></footer>
+  </main>
+  <aside class="toc"><h5>On this page</h5><a href="#leaderboards-leaderboards">Leaderboards: Leaderboards</a><a href="#the-coin-counter-hudlines">The coin counter: HudLines</a><a href="#a-progress-bar-on-the-screen-hudlines-progress">A progress bar on the screen: HudLines.progress</a><a href="#placeholders-placeholders">Placeholders: Placeholders</a><a href="#announcements-announcements">Announcements: Announcements</a></aside>
+</div>
+</body>
+</html>

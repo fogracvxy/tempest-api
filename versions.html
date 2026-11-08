@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>API versions · Tempest plugins API</title>
+<meta name="description" content="What each Core API version added, to check before you use it.">
+<link rel="stylesheet" href="site.css">
+<script src="site.js"></script>
+</head>
+<body>
+<header class="top">
+  <button class="icon-btn menu-btn" id="menu" type="button" aria-label="Menu">&#9776;</button>
+  <a class="brand" href="index.html"><span class="logo">T</span>Tempest API</a>
+  <span class="version">Core API 19</span>
+  <div class="search"><input id="q" type="search" placeholder="Search the API" autocomplete="off" aria-label="Search"><kbd>Ctrl K</kbd><div class="results" id="results"></div></div>
+  <nav class="top-links"><a href="javadoc.html">Javadoc</a><a href="https://discord.gg/Q9PNVCMZXK" target="_blank" rel="noopener">Discord</a><a href="https://www.curseforge.com/hytale/mods/search?search=tempest" target="_blank" rel="noopener">CurseForge</a></nav>
+  <button class="icon-btn" id="theme" type="button" aria-label="Light or dark">&#9680;</button>
+</header>
+<div class="layout">
+  <aside class="side"><h4>Getting started</h4><a href="index.html">Introduction</a><a href="quick-start.html">Quick start</a><a href="setup.html">Setting up a plugin</a><a href="versions.html" class="here">API versions</a><h4>Core</h4><a href="money.html">Money</a><a href="actions.html">Player actions</a><a href="settings.html">Settings and menus</a><a href="hud.html">Boards, HUD and placeholders</a><a href="rewards.html">Rewards, mail and boosts</a><a href="world.html">Map, town and demand</a><a href="safety.html">Safety and helpers</a><h4>Leveling and skills</h4><a href="levels.html">Player levels</a><a href="skills.html"><span class="badge">NEW</span>Skills (MMO Skill Tree)</a><a href="leveling-mods.html"><span class="badge">NEW</span>Leveling mods for server owners</a><h4>Plugins</h4><a href="quests.html">Quests</a><a href="crates.html">Crates</a><a href="holograms.html">Holograms</a><a href="coinflip.html">Coinflip</a><a href="jobs.html">Jobs</a><a href="projects.html">Town projects</a><a href="pass.html">Battle pass</a><a href="games.html">Lottery, slots and shop</a><h4>More</h4><a href="integrations.html">Integrations</a><a href="content.html">Content mods (JSON)</a><a href="rules.html">Rules of thumb</a><h4>Reference</h4><a href="javadoc.html">Javadoc</a><a href="changelog.html">Changelog</a></aside>
+  <main>
+    <div class="crumbs">Getting started</div>
+    <h1>API versions</h1>
+    <p class="lead">What each Core API version added, to check before you use it.</p>
+    <article>
+<h2 id="reference-core-api-versions"><a class="anchor" href="#reference-core-api-versions" aria-label="Link to this section">#</a>Reference: Core API versions</h2>
+<p><code>CoreAPI.API_VERSION</code> is the version a plugin was built against; <code>CoreAPI.runningVersion()</code> is the one installed on the server. Check the running version before touching anything newer than your lowest supported Core, and keep that code in a class of its own.</p>
+<div class="table"><table><thead><tr><th>Version</th><th>Added</th></tr></thead><tbody><tr><td>1</td><td>Core 1.0.0: <code>Registrations</code>, <code>JsonFiles</code>, <code>Economies</code>, <code>CasinoSettings</code>, <code>HelpTopics</code>, <code>HudLines</code>, <code>Leaderboards</code>, <code>Placeholders</code>, <code>PlayerActions</code>, <code>WalletEvents</code> and the rest of the first release</td></tr><tr><td>2</td><td><code>AdminLog</code>, <code>RateLimit</code>, and settings tab groups (<code>tempest.admin.&lt;group&gt;</code>)</td></tr><tr><td>3</td><td><code>PlayLimits</code>, <code>HudLines.compact</code>, <code>Themes</code>, dropdowns and item pickers in settings (<code>Setting.choice</code>, <code>Setting.item</code>), tab icons, <code>ItemIcons.ids</code> and <code>pretty</code></td></tr><tr><td>4</td><td>The Tempest board's line names and keys (<code>HudLines.name</code>, <code>nameOf</code>, <code>keys</code>, <code>lineFor</code>)</td></tr><tr><td>5</td><td><code>Boosts</code> and <code>Registrations.boost</code>; <code>PlayerActions.QUEST_COMPLETE</code> and <code>CONTRACT_DELIVER</code></td></tr><tr><td>6</td><td><code>Mailbox</code> (/mail) and <code>HudLines.startOff</code></td></tr><tr><td>7</td><td><code>MapPlaces</code> and <code>Registrations.mapKind</code></td></tr><tr><td>8</td><td><code>Unlocks</code> and <code>Registrations.unlockFeature</code>, <code>unlockProvider</code>, <code>onUnlock</code></td></tr><tr><td>9</td><td><code>Activity</code> and <code>Perks.highestPercent</code></td></tr><tr><td>10</td><td><code>Perks.Bonus.PASS_XP</code></td></tr><tr><td>11</td><td><code>SettingsTab.defaults</code> (Reset to defaults)</td></tr><tr><td>12</td><td><code>JsonFiles</code> config versions with migrations, and <code>JsonFiles.rename</code></td></tr><tr><td>13</td><td><code>Doctor</code> (/tempest doctor) and <code>Registrations.doctor</code></td></tr><tr><td>14</td><td><code>Levels</code>: player levels from a leveling mod</td></tr><tr><td>15</td><td><code>Levels</code> dungeon, wave gate and raid clears; <code>Boosts.LEVELING_XP</code></td></tr><tr><td>16</td><td><code>Levels</code> XP, level cap, class, race, mob level, parties, raid starts, <code>meets</code>, <code>hasClass</code>, <code>mobGold</code>, <code>mobKilled</code>, <code>playersAtLevel</code>, <code>serverClears</code>, <code>serverPrestige</code>; <code>Registrations.levelingTab</code>, <code>levelingFeature</code>; <code>Unlocks.isUnlocked</code></td></tr><tr><td>17</td><td><code>Demand</code> and <code>Registrations.demandSource</code>; <code>HudLines.progress</code></td></tr><tr><td>18</td><td><code>Rewards</code>: item and command rewards the same in every plugin</td></tr><tr><td>19</td><td><code>Skills</code> (MMO Skill Tree) and its moments as <code>PlayerActions</code>; MMO Skill Tree as a leveling mod next to Endless Leveling; <code>Registrations.endlessTab</code>. Comes with Core 1.6.0, the next release</td></tr></tbody></table></div>
+    </article>
+    <nav class="pager"><a class="prev" href="setup.html"><small>Previous</small>Setting up a plugin</a><a class="next" href="money.html"><small>Next</small>Money</a></nav>
+    <footer class="foot">Tempest plugins for Hytale by AtomicTempest. Not made or endorsed by Hypixel Studios. · <a href="versions.md">This page as Markdown</a> · <a href="llms.txt">llms.txt</a></footer>
+  </main>
+  <aside class="toc"><h5>On this page</h5><a href="#reference-core-api-versions">Reference: Core API versions</a></aside>
+</div>
+</body>
+</html>

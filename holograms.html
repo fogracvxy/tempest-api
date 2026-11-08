@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Holograms · Tempest plugins API</title>
+<meta name="description" content="Floating text, items, statues and rankings.">
+<link rel="stylesheet" href="site.css">
+<script src="site.js"></script>
+</head>
+<body>
+<header class="top">
+  <button class="icon-btn menu-btn" id="menu" type="button" aria-label="Menu">&#9776;</button>
+  <a class="brand" href="index.html"><span class="logo">T</span>Tempest API</a>
+  <span class="version">Core API 19</span>
+  <div class="search"><input id="q" type="search" placeholder="Search the API" autocomplete="off" aria-label="Search"><kbd>Ctrl K</kbd><div class="results" id="results"></div></div>
+  <nav class="top-links"><a href="javadoc.html">Javadoc</a><a href="https://discord.gg/Q9PNVCMZXK" target="_blank" rel="noopener">Discord</a><a href="https://www.curseforge.com/hytale/mods/search?search=tempest" target="_blank" rel="noopener">CurseForge</a></nav>
+  <button class="icon-btn" id="theme" type="button" aria-label="Light or dark">&#9680;</button>
+</header>
+<div class="layout">
+  <aside class="side"><h4>Getting started</h4><a href="index.html">Introduction</a><a href="quick-start.html">Quick start</a><a href="setup.html">Setting up a plugin</a><a href="versions.html">API versions</a><h4>Core</h4><a href="money.html">Money</a><a href="actions.html">Player actions</a><a href="settings.html">Settings and menus</a><a href="hud.html">Boards, HUD and placeholders</a><a href="rewards.html">Rewards, mail and boosts</a><a href="world.html">Map, town and demand</a><a href="safety.html">Safety and helpers</a><h4>Leveling and skills</h4><a href="levels.html">Player levels</a><a href="skills.html"><span class="badge">NEW</span>Skills (MMO Skill Tree)</a><a href="leveling-mods.html"><span class="badge">NEW</span>Leveling mods for server owners</a><h4>Plugins</h4><a href="quests.html">Quests</a><a href="crates.html">Crates</a><a href="holograms.html" class="here">Holograms</a><a href="coinflip.html">Coinflip</a><a href="jobs.html">Jobs</a><a href="projects.html">Town projects</a><a href="pass.html">Battle pass</a><a href="games.html">Lottery, slots and shop</a><h4>More</h4><a href="integrations.html">Integrations</a><a href="content.html">Content mods (JSON)</a><a href="rules.html">Rules of thumb</a><h4>Reference</h4><a href="javadoc.html">Javadoc</a><a href="changelog.html">Changelog</a></aside>
+  <main>
+    <div class="crumbs">Plugins</div>
+    <h1>Holograms</h1>
+    <p class="lead">Floating text, items, statues and rankings.</p>
+    <article>
+<h2 id="holograms-holograms-holograms-plugin"><a class="anchor" href="#holograms-holograms-holograms-plugin" aria-label="Link to this section">#</a>Holograms: <code>Holograms</code> (Holograms plugin)</h2>
+<p>Floating text, coloured text pictures, floating show-only items and player statues, from any plugin (<code>Holograms.API_VERSION</code>, 3). Holograms placed through this API have no limit in either edition; the free edition limits only the ones admins place with <code>/holo</code>. Add <code>"AtomicTempest:Holograms": "*"</code> to your manifest's dependencies (or <code>OptionalDependencies</code>, as Crates does) and compile against the Holograms jar (the Maven repository above, <code>compileOnly</code>).</p>
+<div class="code"><div class="code-bar"><span>java</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-java">Hologram sign = Holograms.text("myplugin", world, new Vector3d(10.5, 66, 4.5),
+        List.of(Message.raw("Welcome!"), Message.translation("server.myplugin.sign.hint")));
+sign.setLines(...);          // players see the new text within a moment
+sign.moveTo(...);  sign.remove();
+FloatingItem gem = Holograms.item("myplugin", world, position, "Rock_Gem_Ruby");
+gem.glow("#FF4060");         // a coloured light on it (null = none)
+gem.moveTo(...);             // on the world thread it moves at once: call it every tick to animate
+Statue champion = Holograms.statue("myplugin", worldName, feet, playerUuid);   // API_VERSION 2
+champion.show(otherUuid);    // another player; null shows nobody
+TextImage banner = Holograms.coloured("myplugin", worldName, feet,
+        () -&gt; List.of(Message.raw("&lt;gradient:#FF4040:#40C0FF&gt;Welcome&lt;/gradient&gt;"), Message.raw("&amp;aShop &amp;7open")));  // API_VERSION 3
+banner.setSize(1.5f);  banner.setFacing(false, yaw);   // a fixed yaw instead of facing every player
+Holograms.texts();           // every plugin's floating text now (API_VERSION 3; /holo menu lists them)
+Colours.strip("&amp;cRed");      // "Red"; Colours.runs(...) splits a line into coloured pieces for menus
+Holograms.removeAll("myplugin");   // in shutdown()</code></pre></div>
+<ul><li>Coloured text (API_VERSION 3): <code>Holograms.coloured</code> draws the lines into a picture (the game's interface font, Nunito Sans, OFL) and hangs it on one flat two-sided model; the picture and model are sent to every player while they play, and to each player who joins. Codes: <code>&amp;c</code> and the other 15 classic colours, <code>&amp;#FF8800</code> or <code>&lt;#FF8800&gt;</code>, <code>&lt;red&gt;</code>..<code>&lt;/red&gt;</code>, <code>&lt;gradient:#F00:#00F&gt;text&lt;/gradient&gt;</code>, <code>&lt;rainbow&gt;text&lt;/rainbow&gt;</code>. Everyone sees the same picture: the server's language, placeholders for nobody (server-wide ones work). A changed text is drawn again at most every 15 s, and only while a player is near. By default it faces every player at once: each player's copy of its turn is rewritten on the way out (the same packet watcher as the languages), 20 times a second while players move. Plain floating text leaves the codes out, since the game draws it in white.</li></ul>
+<ul><li>A statue is a life-size figure of a player as they looked when they last joined (Holograms keeps each player's skin in <code>universe/mods/holograms/skins.json</code>), turning to face the nearest player. It shows nothing for a player Holograms has not seen join. Leaderboard holograms placed with <code>/holo</code> can stand their first place on top ("Statue of 1st" in the menu).</li></ul>
+<ul><li>Lines are <code>Message</code>s: translation keys (with parameters, even nested ones) are shown in each player's language, and placeholders (<code>{lottery_pot}</code>) are filled in for each player. The game draws it in white; for colours use <code>Holograms.coloured</code>. The last line is at the position, the others above it (<code>/tempest</code> → Holograms sets the spacing).</li><li>Entities exist only while a player is within the view distance and the chunk is loaded; they are never saved and vanish by themselves a minute after the plugin stops renewing them. Any thread may call the API.</li><li>How it works: each line is an invisible model (<code>Server/Models/Holograms_Anchor.json</code>) with a <code>Nameplate</code>; an outbound packet watcher swaps the nameplate text in each player's own <code>EntityUpdates</code> for their language. Floating items are item drops without a <code>Velocity</code> (so item physics leave them alone), with <code>PreventPickup</code> and <code>PreventItemMerging</code>.</li><li>Admins place their own with <code>/holo create|edit|move|delete</code> or the <code>/holo menu</code> page (<code>holograms.admin</code>), saved in <code>universe/mods/holograms/holograms.json</code>.</li><li>Lines worked out again on every refresh (only while a player is near; at most every 5 s): <code>Holograms.live("myplugin", worldName, position, () -&gt; List.of(...))</code> or <code>hologram.setSource(...)</code>. The supplier runs on the Holograms timer thread.</li><li>Top lists for leaderboard holograms (<code>/holo create &lt;name&gt; top:&lt;list&gt; [places]</code>): Holograms offers Core's <code>Leaderboards</code> boards and every per-player number placeholder by itself (<code>top:money</code>, <code>top:coins_balance</code>, <code>top:quests:achievements</code>), ranking the players it has seen join. A plugin that knows every player (online or not) can register its own list:</li></ul>
+<div class="code"><div class="code-bar"><span>java</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-java">Rankings.register("mymod_dragons", new Rankings.Ranking() {
+    public Message title() { return Message.translation("server.mymod.board.title"); }
+    public List&lt;Rankings.Entry&gt; top(int count) { ... new Rankings.Entry(name, Message.raw("12 dragons")) ... }
+});
+Rankings.unregister("mymod_dragons");   // in shutdown()</code></pre></div>
+<ul><li>Coloured text is not possible with nameplates; <code>Holograms.coloured</code> draws pictures instead (above).</li></ul>
+    </article>
+    <nav class="pager"><a class="prev" href="crates.html"><small>Previous</small>Crates</a><a class="next" href="coinflip.html"><small>Next</small>Coinflip</a></nav>
+    <footer class="foot">Tempest plugins for Hytale by AtomicTempest. Not made or endorsed by Hypixel Studios. · <a href="holograms.md">This page as Markdown</a> · <a href="llms.txt">llms.txt</a></footer>
+  </main>
+  <aside class="toc"><h5>On this page</h5><a href="#holograms-holograms-holograms-plugin">Holograms: Holograms (Holograms plugin)</a></aside>
+</div>
+</body>
+</html>

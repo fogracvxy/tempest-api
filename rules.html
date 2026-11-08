@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rules of thumb · Tempest plugins API</title>
+<meta name="description" content="Rules of thumb">
+<link rel="stylesheet" href="site.css">
+<script src="site.js"></script>
+</head>
+<body>
+<header class="top">
+  <button class="icon-btn menu-btn" id="menu" type="button" aria-label="Menu">&#9776;</button>
+  <a class="brand" href="index.html"><span class="logo">T</span>Tempest API</a>
+  <span class="version">Core API 19</span>
+  <div class="search"><input id="q" type="search" placeholder="Search the API" autocomplete="off" aria-label="Search"><kbd>Ctrl K</kbd><div class="results" id="results"></div></div>
+  <nav class="top-links"><a href="javadoc.html">Javadoc</a><a href="https://discord.gg/Q9PNVCMZXK" target="_blank" rel="noopener">Discord</a><a href="https://www.curseforge.com/hytale/mods/search?search=tempest" target="_blank" rel="noopener">CurseForge</a></nav>
+  <button class="icon-btn" id="theme" type="button" aria-label="Light or dark">&#9680;</button>
+</header>
+<div class="layout">
+  <aside class="side"><h4>Getting started</h4><a href="index.html">Introduction</a><a href="quick-start.html">Quick start</a><a href="setup.html">Setting up a plugin</a><a href="versions.html">API versions</a><h4>Core</h4><a href="money.html">Money</a><a href="actions.html">Player actions</a><a href="settings.html">Settings and menus</a><a href="hud.html">Boards, HUD and placeholders</a><a href="rewards.html">Rewards, mail and boosts</a><a href="world.html">Map, town and demand</a><a href="safety.html">Safety and helpers</a><h4>Leveling and skills</h4><a href="levels.html">Player levels</a><a href="skills.html"><span class="badge">NEW</span>Skills (MMO Skill Tree)</a><a href="leveling-mods.html"><span class="badge">NEW</span>Leveling mods for server owners</a><h4>Plugins</h4><a href="quests.html">Quests</a><a href="crates.html">Crates</a><a href="holograms.html">Holograms</a><a href="coinflip.html">Coinflip</a><a href="jobs.html">Jobs</a><a href="projects.html">Town projects</a><a href="pass.html">Battle pass</a><a href="games.html">Lottery, slots and shop</a><h4>More</h4><a href="integrations.html">Integrations</a><a href="content.html">Content mods (JSON)</a><a href="rules.html" class="here">Rules of thumb</a><h4>Reference</h4><a href="javadoc.html">Javadoc</a><a href="changelog.html">Changelog</a></aside>
+  <main>
+    <div class="crumbs">More</div>
+    <h1>Rules of thumb</h1>
+    
+    <article>
+<h2 id="rules-of-thumb"><a class="anchor" href="#rules-of-thumb" aria-label="Link to this section">#</a>Rules of thumb</h2>
+<ul><li>Check results: <code>withdraw</code> returns false when the player has too little; give nothing in that case.</li><li>Take first, give second (coins, then items; items, then coins), and pay only for what was really taken.</li><li>A reward that can be had once (a claim, a finished goal): mark it and write it to disk first, then give it; take the mark back only if giving failed. Two clicks, two pages or a crash in between then never give it twice (Pass, Quests).</li><li>Keep one lock per thing (a player's data, a room), and call the economy or another plugin while holding it only when no listener can ever wait for that lock: economies call their listeners (Quests, Pass), and a listener waiting for your lock would freeze both. Coinflip takes stakes under its room lock, which nothing else takes; Pass gives rewards after its player lock is let go.</li><li>Never trust numbers from a page's event data: clamp amounts on the server to what your page offers.</li><li>Never let something be sold back for more than it costs, and keep coin items out of shops.</li></ul>
+<ul><li>Never tie coins to real money.</li><li>Give every coin change a reason.</li><li>Unregister what you registered (leaderboards, HUD lines, help topics, settings tabs, listeners) in <code>shutdown()</code>.</li><li>Prefer <code>PlayerActions</code> over parsing wallet reasons: reasons are for people and may change.</li></ul>
+    </article>
+    <nav class="pager"><a class="prev" href="content.html"><small>Previous</small>Content mods (JSON)</a><a class="next" href="javadoc.html"><small>Next</small>Javadoc</a></nav>
+    <footer class="foot">Tempest plugins for Hytale by AtomicTempest. Not made or endorsed by Hypixel Studios. · <a href="rules.md">This page as Markdown</a> · <a href="llms.txt">llms.txt</a></footer>
+  </main>
+  <aside class="toc"><h5>On this page</h5><a href="#rules-of-thumb">Rules of thumb</a></aside>
+</div>
+</body>
+</html>

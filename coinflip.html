@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Coinflip · Tempest plugins API</title>
+<meta name="description" content="Rooms, and your own kind of room.">
+<link rel="stylesheet" href="site.css">
+<script src="site.js"></script>
+</head>
+<body>
+<header class="top">
+  <button class="icon-btn menu-btn" id="menu" type="button" aria-label="Menu">&#9776;</button>
+  <a class="brand" href="index.html"><span class="logo">T</span>Tempest API</a>
+  <span class="version">Core API 19</span>
+  <div class="search"><input id="q" type="search" placeholder="Search the API" autocomplete="off" aria-label="Search"><kbd>Ctrl K</kbd><div class="results" id="results"></div></div>
+  <nav class="top-links"><a href="javadoc.html">Javadoc</a><a href="https://discord.gg/Q9PNVCMZXK" target="_blank" rel="noopener">Discord</a><a href="https://www.curseforge.com/hytale/mods/search?search=tempest" target="_blank" rel="noopener">CurseForge</a></nav>
+  <button class="icon-btn" id="theme" type="button" aria-label="Light or dark">&#9680;</button>
+</header>
+<div class="layout">
+  <aside class="side"><h4>Getting started</h4><a href="index.html">Introduction</a><a href="quick-start.html">Quick start</a><a href="setup.html">Setting up a plugin</a><a href="versions.html">API versions</a><h4>Core</h4><a href="money.html">Money</a><a href="actions.html">Player actions</a><a href="settings.html">Settings and menus</a><a href="hud.html">Boards, HUD and placeholders</a><a href="rewards.html">Rewards, mail and boosts</a><a href="world.html">Map, town and demand</a><a href="safety.html">Safety and helpers</a><h4>Leveling and skills</h4><a href="levels.html">Player levels</a><a href="skills.html"><span class="badge">NEW</span>Skills (MMO Skill Tree)</a><a href="leveling-mods.html"><span class="badge">NEW</span>Leveling mods for server owners</a><h4>Plugins</h4><a href="quests.html">Quests</a><a href="crates.html">Crates</a><a href="holograms.html">Holograms</a><a href="coinflip.html" class="here">Coinflip</a><a href="jobs.html">Jobs</a><a href="projects.html">Town projects</a><a href="pass.html">Battle pass</a><a href="games.html">Lottery, slots and shop</a><h4>More</h4><a href="integrations.html">Integrations</a><a href="content.html">Content mods (JSON)</a><a href="rules.html">Rules of thumb</a><h4>Reference</h4><a href="javadoc.html">Javadoc</a><a href="changelog.html">Changelog</a></aside>
+  <main>
+    <div class="crumbs">Plugins</div>
+    <h1>Coinflip</h1>
+    <p class="lead">Rooms, and your own kind of room.</p>
+    <article>
+<h2 id="coinflip-coinflipapi-and-roommode-coinflip-plugin"><a class="anchor" href="#coinflip-coinflipapi-and-roommode-coinflip-plugin" aria-label="Link to this section">#</a>Coinflip: <code>CoinflipAPI</code> and <code>RoomMode</code> (Coinflip plugin)</h2>
+<p>Coinflip rooms: a player makes a room with a stake, others join, the coin decides. Add <code>"AtomicTempest:Coinflip": "*"</code> to your manifest's dependencies and compile against the Coinflip jar (the Maven repository above, <code>compileOnly</code>).</p>
+<div class="code"><div class="code-bar"><span>java</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-java">CoinflipAPI flips = CoinflipAPI.get();               // null while Coinflip is not running
+List&lt;Room&gt; open = flips.rooms();                      // open and flipping rooms, oldest first
+CoinflipAPI.Result made = flips.create(player, CoinflipAPI.COINS_1V1, Bet.coins(500, Side.HEADS));
+if (!made.isOk()) player.sendMessage(made.problem());
+flips.join(other, made.room().id(), flips.mode(CoinflipAPI.COINS_1V1).matching(made.room(), other.getUuid()));
+flips.cancel(roomId);                                 // every stake goes back; check who asks first
+flips.stats(uuid).profit();                           // wins, losses, staked, won
+flips.listen(new CoinflipAPI.Listener() {
+    public void flipped(Room room) { ... }            // full: winner fixed, coin in the air
+    public void finished(Room room) { ... room.winner().name() ... room.payout() ... }
+    public void closed(Room room, CoinflipAPI.CloseReason reason) { ... }   // CANCELLED, EXPIRED, RESTART
+});</code></pre></div>
+<ul><li>A <code>Room</code> has an id, its mode, its <code>entries()</code> (player, name, side, value, data; the first made the room), its state (<code>OPEN</code>, <code>FLIPPING</code>, <code>DONE</code>, <code>CLOSED</code>), <code>pot()</code>, <code>fee()</code>, <code>payout()</code>, <code>winner()</code>, and the fairness data: <code>hash()</code> from the start, <code>seed()</code> once the coin has landed, <code>roll()</code> once it is full.</li><li><strong>Provably fair:</strong> the seed is 32 random bytes (hex) from <code>SecureRandom</code>; <code>hash</code> is SHA-256(seed). The roll is the first 13 hex digits of SHA-256(seed + ":" + room id) divided by 16^13 (0 to 1). The mode turns the roll into a winner; the coins mode: under 0.5 is heads.</li><li><strong>Escrow:</strong> stakes are taken when a player makes or joins a room and stay with the room. Open rooms are saved in <code>universe/mods/coinflip/rooms.json</code>: on the next start (after a stop or a crash) their stakes go back, and a flip that was in the air is paid. What cannot be paid or refunded yet (no economy, or the mode's plugin is missing) is kept and tried again every few seconds. Stats are in <code>stats.json</code>.</li><li>Every flip is reported through <code>PlayerActions</code> (<code>coinflip_bet</code>, <code>coinflip_win</code>, <code>coinflip_loss</code>), big wins through <code>Announcements.BIG_WIN</code>, and profit is a <code>Leaderboards</code> board (<code>coinflip:profit</code>).</li></ul>
+<h3 id="your-own-kind-of-room-roommode"><a class="anchor" href="#your-own-kind-of-room-roommode" aria-label="Link to this section">#</a>Your own kind of room: <code>RoomMode</code></h3>
+<p>Coinflip comes with one mode, <code>coins_1v1</code>. A mode decides what players stake, how many play, how the winner is chosen and how the pot is paid; Coinflip does the rest the same for every mode (the room list, joining and watching, escrow bookkeeping, the fair roll, the animation, the fee setting, stats, news). Item rooms valued by Shop prices, jackpot rooms for many players, private invite-only rooms or tournaments are all modes.</p>
+<div class="code"><div class="code-bar"><span>java</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-java">public final class JackpotMode implements RoomMode {
+    public String id() { return "myplugin_jackpot"; }                 // saved with its rooms
+    public Message title() { return Message.translation("server.myplugin.jackpot"); }
+    public int maxPlayers() { return 8; }
+    public Message describe(Room room) { return Message.raw(Currency.format(room.pot())); }
+    public boolean canSee(Room room, UUID viewer) { return true; }    // private rooms: only invited players
+    public Bet matching(Room room, UUID joiner) { return Bet.coins(room.creator().value(), null); }  // null: not from the list
+    public Taken take(PlayerRef player, Room room, Bet bet) {         // room is null when making a room
+        // check the bet, take the stake; nothing may be kept when refused
+        return Economies.get().withdraw(player.getUuid(), bet.amount(), "Jackpot stake")
+                ? Taken.ok(bet) : Taken.refused(Message.raw("Not enough money"));
+    }
+    public boolean refund(Room room, Room.Entry entry) {              // false: tried again later
+        return Economies.get() != null &amp;&amp; Economies.get().deposit(entry.player(), entry.value(), "Jackpot refund");
+    }
+    public Room.Entry pick(Room room, double roll) { ... }            // weighted by entry.value(), say
+    public boolean pay(Room room, Room.Entry winner) {                // false: tried again later
+        return Economies.get() != null &amp;&amp; Economies.get().deposit(winner.player(), room.payout(), "Jackpot win");
+    }
+    public boolean full(Room room) { return room.entries().size() &gt;= maxPlayers(); }  // the default
+}
+
+CoinflipAPI.get().registerMode(new JackpotMode());   // in setup(); unregisterMode("myplugin_jackpot") in shutdown()</code></pre></div>
+<ul><li><code>Bet(amount, side, data)</code>: <code>amount</code> is money (or the worth of what is staked), <code>side</code> is null in modes without sides, <code>data</code> is text for anything else (item ids, an invited player). What <code>take</code> returns becomes the entry: its amount is the entry's <code>value()</code>, used for the pot, stats and news.</li><li><code>fee(room, percent)</code> defaults to the server's fee setting applied to the pot; override it for stakes that are not money.</li><li>Every method may be called from any thread, and a player being refunded or paid may be offline. Rooms of a mode that is not registered stay saved and are settled once it is registered again.</li><li>The Rooms page lists rooms of every mode (with the mode's title on the row) and lets players join with <code>matching</code>; <code>/cf create</code> and the Create room tab make <code>coins_1v1</code> rooms. A mode that needs its own way to make or join rooms (choosing items) calls <code>create</code> and <code>join</code> from its own page or command.</li></ul>
+    </article>
+    <nav class="pager"><a class="prev" href="holograms.html"><small>Previous</small>Holograms</a><a class="next" href="jobs.html"><small>Next</small>Jobs</a></nav>
+    <footer class="foot">Tempest plugins for Hytale by AtomicTempest. Not made or endorsed by Hypixel Studios. · <a href="coinflip.md">This page as Markdown</a> · <a href="llms.txt">llms.txt</a></footer>
+  </main>
+  <aside class="toc"><h5>On this page</h5><a href="#coinflip-coinflipapi-and-roommode-coinflip-plugin">Coinflip: CoinflipAPI and RoomMode (Coinflip plugin)</a><a href="#your-own-kind-of-room-roommode" class="sub">Your own kind of room: RoomMode</a></aside>
+</div>
+</body>
+</html>
