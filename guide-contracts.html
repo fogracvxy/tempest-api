@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contracts and bounties · Tempest plugins docs</title>
+<meta name="description" content="Player contracts, server orders, the market, ranks and bounties.">
+<link rel="stylesheet" href="site.css">
+<script src="site.js"></script>
+</head>
+<body>
+<header class="top">
+  <button class="icon-btn menu-btn" id="menu" type="button" aria-label="Menu">&#9776;</button>
+  <a class="brand" href="index.html"><span class="logo">T</span>Tempest Docs</a>
+  <span class="version">Core API 19</span>
+  <div class="search"><input id="q" type="search" placeholder="Search the docs" autocomplete="off" aria-label="Search"><kbd>Ctrl K</kbd><div class="results" id="results"></div></div>
+  <nav class="top-links"><a href="javadoc.html">Javadoc</a><a href="https://discord.gg/Q9PNVCMZXK" target="_blank" rel="noopener">Discord</a><a href="https://www.curseforge.com/hytale/mods/search?search=tempest" target="_blank" rel="noopener">CurseForge</a></nav>
+  <button class="icon-btn" id="theme" type="button" aria-label="Light or dark">&#9680;</button>
+</header>
+<div class="layout">
+  <aside class="side"><h4>Welcome</h4><a href="index.html">Introduction</a><h4>Server guide</h4><a href="server-guide.html"><span class="badge">NEW</span>Server guide</a><a href="guide-commands.html">All commands and permissions</a><a href="guide-core.html">Core</a><a href="guide-economy.html">Economy (Coins)</a><a href="guide-holograms.html">Holograms</a><a href="guide-shop.html">Shop</a><a href="guide-crates.html">Crates</a><a href="guide-quests.html">Quests</a><a href="guide-pass.html">Battle pass</a><a href="guide-events.html">Events</a><a href="guide-contracts.html" class="here">Contracts and bounties</a><a href="guide-projects.html">Town projects</a><a href="guide-town.html">Town</a><a href="guide-jobs.html">Jobs</a><a href="guide-trade.html">Trade</a><a href="guide-slots.html">Slot machines</a><a href="guide-lottery.html">Lottery</a><a href="guide-coinflip.html">Coinflip</a><a href="leveling-mods.html"><span class="badge">NEW</span>Leveling mods</a><h4>Developers: start here</h4><a href="quick-start.html">Quick start</a><a href="setup.html">Setting up a plugin</a><a href="versions.html">API versions</a><h4>Core API</h4><a href="money.html">Money</a><a href="actions.html">Player actions</a><a href="settings.html">Settings and menus</a><a href="hud.html">Boards, HUD and placeholders</a><a href="rewards.html">Rewards, mail and boosts</a><a href="world.html">Map, town and demand</a><a href="safety.html">Safety and helpers</a><h4>Leveling and skills API</h4><a href="levels.html">Player levels</a><a href="skills.html"><span class="badge">NEW</span>Skills (MMO Skill Tree)</a><h4>Plugin APIs</h4><a href="quests.html">Quests</a><a href="crates.html">Crates</a><a href="holograms.html">Holograms</a><a href="coinflip.html">Coinflip</a><a href="jobs.html">Jobs</a><a href="projects.html">Town projects</a><a href="pass.html">Battle pass</a><a href="games.html">Lottery, slots and shop</a><h4>More</h4><a href="integrations.html">Integrations</a><a href="content.html">Content mods (JSON)</a><a href="rules.html">Rules of thumb</a><h4>Reference</h4><a href="javadoc.html">Javadoc</a><a href="changelog.html">Changelog</a></aside>
+  <main>
+    <div class="crumbs">Server guide</div>
+    <h1>Contracts and bounties</h1>
+    <p class="lead">Player contracts, server orders, the market, ranks and bounties.</p>
+    <article>
+<h2 id="what-players-read-in-guide"><a class="anchor" href="#what-players-read-in-guide" aria-label="Link to this section">#</a>What players read in /guide</h2>
+<p>The <code>/guide</code> pages of this plugin, as a player sees them on a test server (numbers are examples).</p>
+<h3 id="contracts"><a class="anchor" href="#contracts" aria-label="Link to this section">#</a>Contracts</h3>
+<ul><li>The contracts board: the server and other players want items and pay for them. Deliver what you have, or post an order for what you need.</li></ul>
+<p><strong>Delivering</strong></p>
+<ul><li>Open /contracts and press DELIVER on a contract: the items leave your inventory and you are paid at once. Server orders start again every day or week.</li></ul>
+<p><strong>Posting</strong></p>
+<ul><li>In the Post tab, pick an item, how many and the total reward. The reward is taken when you post (plus a 5% fee) and paid to whoever delivers. Collect the items in My contracts; money not used comes back when the contract ends.</li></ul>
+<p><strong>The market</strong></p>
+<ul><li>Put items up for sale in the Market tab: they wait there and buyers pay you at once. Buy with one click, cheapest first; the 7-day prices show what things are worth.</li></ul>
+<p><strong>Bounties</strong></p>
+<ul><li>In the Bounties tab, put money on another player. It is taken when you post (plus a 10% fee) and paid to whoever kills them. If nobody does, it comes back when the bounty ends, without the fee.</li></ul>
+<p><strong>Contractor ranks</strong></p>
+<ul><li>Every item you deliver to a server order counts towards your rank: Courier, Trader, Merchant and Tycoon earn more from server orders.</li></ul>
+<h2 id="commands"><a class="anchor" href="#commands" aria-label="Link to this section">#</a>Commands</h2>
+<div class="table"><table><thead><tr><th>Command</th><th>Who can use it</th><th>What it does</th></tr></thead><tbody><tr><td><code>/contracts</code> (/contract)</td><td>Everyone</td><td>Open the contracts board: deliver items for money, or ask for the items you need</td></tr><tr><td><code>/contracts bounties</code> (/bounty)</td><td>Everyone</td><td>Bounties: put money on a player, or hunt one down</td></tr><tr><td><code>/contracts list</code></td><td><code>contracts.admin</code></td><td>Admins: the board in chat</td></tr><tr><td><code>/contracts mine</code></td><td>Everyone</td><td>Your contracts: collect what was delivered</td></tr><tr><td><code>/contracts post</code></td><td>Everyone</td><td>Post a contract: ask for items and pay for them</td></tr></tbody></table></div>
+<h2 id="settings"><a class="anchor" href="#settings" aria-label="Link to this section">#</a>Settings</h2>
+<p>Every setting is changed in game with <code>/tempest</code> and saved at once; nothing needs a restart. Amounts of 0 are off unless the setting says otherwise.</p>
+<h3 id="contracts-2"><a class="anchor" href="#contracts-2" aria-label="Link to this section">#</a>Contracts</h3>
+<p><code>/tempest</code> → Contracts. Who can change it: <code>tempest.admin</code> or <code>tempest.admin.contracts</code>.</p>
+<p>A contracts board: players and the server post item orders, others deliver and get paid. Server orders are made in /contracts, Manage.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Contracts are on</td><td>Off: nothing can be posted or delivered. Contracts keep their money and items until it is on again.</td><td>On or off</td></tr><tr><td>Server orders</td><td>The server's own orders are on the board. They pay from nothing and take items out of the game.</td><td>On or off</td></tr><tr><td>Contractor rank bonus</td><td>Players who delivered more earn up to 10% more from server orders.</td><td>On or off</td></tr></tbody></table></div>
+<h4 id="players-contracts"><a class="anchor" href="#players-contracts" aria-label="Link to this section">#</a>Players' contracts</h4>
+<p>Players post orders; the reward is taken when they post and paid out as items arrive.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Players may post contracts</td><td></td><td>On or off</td></tr><tr><td>Open contracts per player</td><td></td><td>0 to 100</td></tr><tr><td>Posting fee (%)</td><td>Taken when posting and never given back: it takes money out of the economy.</td><td>0 to 50</td></tr><tr><td>Least pay per item</td><td></td><td>1 to 1000000</td></tr><tr><td>Most items in one contract</td><td></td><td>1 to 1000000</td></tr><tr><td>Largest reward</td><td></td><td>1 to 1000000000</td></tr><tr><td>How long contracts and offers last (hours)</td><td>Players pick one of these. Separate with commas, e.g. 24, 72, 168.</td><td>Text</td></tr><tr><td>Items nobody may ask for or sell</td><td>Item ids separated with commas. Coins never can.</td><td>Text</td></tr></tbody></table></div>
+<h4 id="permissions"><a class="anchor" href="#permissions" aria-label="Link to this section">#</a>Permissions</h4>
+<p>Off: everyone may. On: only players with the permission.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Posting contracts needs contracts.post</td><td></td><td>On or off</td></tr><tr><td>Selling on the market needs contracts.sell</td><td></td><td>On or off</td></tr></tbody></table></div>
+<h4 id="telling-players"><a class="anchor" href="#telling-players" aria-label="Link to this section">#</a>Telling players</h4>
+<p>Chat lines and sounds.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Announce new contracts</td><td>One chat line to everyone (at most once a minute per player), and when server orders start again.</td><td>On or off</td></tr><tr><td>Sounds</td><td></td><td>On or off</td></tr><tr><td>Chat tag</td><td>Tag</td><td>Text</td></tr><tr><td>Tag colour</td><td></td><td>A colour</td></tr></tbody></table></div>
+<h3 id="market-ranks"><a class="anchor" href="#market-ranks" aria-label="Link to this section">#</a>Market &amp; ranks</h3>
+<p><code>/tempest</code> → Market &amp; ranks. Who can change it: <code>tempest.admin</code> or <code>tempest.admin.marketranks</code>.</p>
+<h4 id="market"><a class="anchor" href="#market" aria-label="Link to this section">#</a>Market</h4>
+<p>Players put items up for sale; others buy at once, cheapest first. Prices of the last 7 days are shown.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Market is on</td><td></td><td>On or off</td></tr><tr><td>Sales tax (%)</td><td>Kept from each sale; the seller gets the rest. It takes money out of the economy.</td><td>0 to 50</td></tr><tr><td>Offers per player</td><td></td><td>0 to 100</td></tr><tr><td>Highest price per item</td><td></td><td>1 to 1000000000</td></tr></tbody></table></div>
+<h4 id="contractor-ranks"><a class="anchor" href="#contractor-ranks" aria-label="Link to this section">#</a>Contractor ranks</h4>
+<p>By items delivered; the bonus is on server orders. Leave a name empty for the built-in one in each player's language.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Rank 1 name</td><td>Newcomer</td><td>Text</td></tr><tr><td>Rank 1: bonus (%)</td><td></td><td>0 to 100</td></tr><tr><td>Rank 2 name</td><td>Courier</td><td>Text</td></tr><tr><td>Rank 2: items delivered</td><td></td><td>1 to 10000000</td></tr><tr><td>Rank 2: bonus (%)</td><td></td><td>0 to 100</td></tr><tr><td>Rank 3 name</td><td>Trader</td><td>Text</td></tr><tr><td>Rank 3: items delivered</td><td></td><td>1 to 10000000</td></tr><tr><td>Rank 3: bonus (%)</td><td></td><td>0 to 100</td></tr><tr><td>Rank 4 name</td><td>Merchant</td><td>Text</td></tr><tr><td>Rank 4: items delivered</td><td></td><td>1 to 10000000</td></tr><tr><td>Rank 4: bonus (%)</td><td></td><td>0 to 100</td></tr><tr><td>Rank 5 name</td><td>Tycoon</td><td>Text</td></tr><tr><td>Rank 5: items delivered</td><td></td><td>1 to 10000000</td></tr><tr><td>Rank 5: bonus (%)</td><td></td><td>0 to 100</td></tr></tbody></table></div>
+<h3 id="bounties"><a class="anchor" href="#bounties" aria-label="Link to this section">#</a>Bounties</h3>
+<p><code>/tempest</code> → Bounties. Who can change it: <code>tempest.admin</code> or <code>tempest.admin.bounties</code>.</p>
+<p>Players put money on each other; whoever kills that player collects it. Only for servers where players can fight.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Bounties are on</td><td>Off: the tab is gone and kills pay nothing. Bounties already posted keep their money, and it still comes back when they end.</td><td>On or off</td></tr><tr><td>Smallest bounty</td><td></td><td>1 to 1000000000</td></tr><tr><td>Posting fee (%)</td><td>Taken when posting and never given back: it takes money out of the economy and makes moving money between friends cost something.</td><td>0 to 50</td></tr><tr><td>Bounties per player</td><td>How many players one player may have a bounty on at once. The largest bounty and how long one lasts are in the Contracts tab.</td><td>0 to 100</td></tr></tbody></table></div>
+<h4 id="fair-play"><a class="anchor" href="#fair-play" aria-label="Link to this section">#</a>Fair play</h4>
+<p>Against camping a respawn and friends farming each other.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Protection after a claim (minutes)</td><td>Nobody collects on that player for this long. New bounties can still be posted.</td><td>0 to 1440</td></tr><tr><td>Same hunter, same player (hours)</td><td>One hunter cannot collect on the same player again for this long.</td><td>0 to 720</td></tr></tbody></table></div>
+<h4 id="telling-players-2"><a class="anchor" href="#telling-players-2" aria-label="Link to this section">#</a>Telling players</h4>
+<p>Chat lines and the Tempest board.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Announce bounties</td><td>One chat line to everyone when a bounty is posted or claimed, and in the Discord feed. The player it is on always hears.</td><td>On or off</td></tr><tr><td>Posting bounties needs contracts.bounty</td><td></td><td>On or off</td></tr></tbody></table></div>
+    </article>
+    <nav class="pager"><a class="prev" href="guide-events.html"><small>Previous</small>Events</a><a class="next" href="guide-projects.html"><small>Next</small>Town projects</a></nav>
+    <footer class="foot">Tempest plugins for Hytale by AtomicTempest. Not made or endorsed by Hypixel Studios. · <a href="guide-contracts.md">This page as Markdown</a> · <a href="llms.txt">llms.txt</a></footer>
+  </main>
+  <aside class="toc"><h5>On this page</h5><a href="#what-players-read-in-guide">What players read in /guide</a><a href="#contracts" class="sub">Contracts</a><a href="#commands">Commands</a><a href="#settings">Settings</a><a href="#contracts-2" class="sub">Contracts</a><a href="#market-ranks" class="sub">Market &amp; ranks</a><a href="#bounties" class="sub">Bounties</a></aside>
+</div>
+</body>
+</html>

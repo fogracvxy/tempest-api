@@ -1,6 +1,6 @@
 # Introduction
 
-Build on Tempest Core and the Tempest plugins for Hytale.
+Run the Tempest plugins on your Hytale server, and build on them.
 
 The Tempest plugins can be used from other plugins (Java) and from content mods that have no code (JSON assets). **Core** is the base: everything shared is in `com.atomictempest.core`
 (events, leaderboards, help, settings, HUD lines, perks, and the economy bridge). Each plugin has its own small `api`
@@ -34,6 +34,2984 @@ from any thread unless it says otherwise.
 **Javadoc:** [Coinflip 1.0.3](javadoc/coinflip/) · [Coins 2.4.0](javadoc/coins/) · [Core 1.5.0](javadoc/core/) · [Holograms 1.2.1](javadoc/holograms/) · [Jobs 1.1.0](javadoc/jobs/) · [Lottery 1.1.2](javadoc/lottery/) · [Pass 1.2.1](javadoc/pass/) · [Projects 1.1.0](javadoc/projects/) · [Quests 1.4.0](javadoc/quests/) · [Shop 1.5.0](javadoc/shop/) · [SlotMachine 1.2.2](javadoc/slotmachine/)
 
 **Jars:** from the plugins' CurseForge pages; compile against them with `compileOnly`. **Questions and help:** [Discord](https://discord.gg/Q9PNVCMZXK)
+
+
+# Server guide
+
+How the Tempest plugins work in game, for server owners and admins: commands, permissions, every setting and what players see.
+
+The pages in this section are made from the plugins themselves: the commands, the `/tempest` settings with their
+explanations, and the `/guide` pages players read. They say exactly what the game says.
+
+## Install
+
+1. Put **Tempest Core** in your server's `mods` folder. Every other Tempest plugin needs it.
+2. Put the plugins you want next to it. Each one works on its own; together they connect (quests count crates,
+   events boost the shop, jobs pay more for what contracts want, and so on).
+3. Money comes from **Tempest Economy (Coins)**, or from any economy plugin through VaultUnlocked.
+4. Start the server. Each plugin makes its files under `universe/mods` with safe defaults.
+
+## Two commands to know
+
+| Command | Who | What it opens |
+|---|---|---|
+| `/tempest` | Admins | Every setting of every Tempest plugin, one tab each, with a search box. Changes are saved at once |
+| `/guide` | Everyone | The help pages: what each plugin does and how to start |
+| `/tempest doctor` | Admins | Checks every plugin's settings for money made from nothing (a shop that buys for more than it sells, a quest that pays more than it costs) |
+
+## Permissions
+
+| Permission | Gives |
+|---|---|
+| `tempest.admin` | Every `/tempest` tab |
+| `tempest.admin.<group>` | One plugin's tabs only, e.g. `tempest.admin.jobs` or `tempest.admin.crates` |
+| A plugin's admin permission (`jobs.admin`, `crates.admin`, `holograms.admin`...) | That plugin's admin commands and editors |
+
+Commands that run as the server console (reward commands in quests, the pass, events, jobs and projects) can be set
+only by players with `tempest.admin`, whatever else they have. Every command and the permission it needs:
+[All commands and permissions](guide-commands.html).
+
+## Free and Pro
+
+Some plugins come as a free jar and a Pro jar with the same name. The Pro jar replaces the free one and keeps
+everything the server made. Free limits only stop you making more: they never break what a server already has.
+Core, Economy and the plugins' APIs are always free.
+
+## Languages
+
+Every text players see is in 8 languages (English, German, Spanish, French, Italian, Polish, Brazilian Portuguese and
+Russian). Players get their game's language when Tempest has it; the server-wide language is in `/tempest` → General.
+With a Pro plugin installed, `/tempest texts` lets you reword any text.
+
+
+# All commands and permissions
+
+Every command of every Tempest plugin, and who can use it.
+
+Every command of the Tempest plugins, with the permission it needs. "Everyone" works for every player; a permission means only players or groups given it.
+
+## Core
+
+| Command | Who can use it | What it does |
+|---|---|---|
+| `/board` (/sidebar) | Everyone | Pick what your board on the right of the screen shows, or hide it |
+| `/booster` | `tempest.boosters` | Give a player a booster for a while (admins, crate and vote rewards) |
+| `/guide` (/serverhelp) | Everyone | How the server's shop, crates, quests and money work |
+| `/hud` (/coinhud) | Everyone | Show or hide your money counter (/hud top, left or low moves it) |
+| `/hud left` | Everyone | Money counter in the top left corner |
+| `/hud low` | Everyone | Money counter on the right side, lower down |
+| `/hud top` | Everyone | Money counter in a row along the top, right of centre |
+| `/mail` (/mailbox) | Everyone | Open your mailbox: rewards and items kept for you |
+| `/places` | Everyone | Places on the world map, and what your map shows |
+| `/places add` | `tempest.admin.map` | Adds a place to the map where you stand (admins) |
+| `/serverinfo` (/rules, /info) | Everyone | The server's rules and info |
+| `/tempest` (/casino) | Everyone | Tempest: the settings menu for admins, the help screen for players |
+| `/tempest doctor` | `tempest.admin` | Finds ways players could make money from nothing in the settings (admins) |
+| `/tempest info` | `tempest.admin` | Tempest plugins: versions, editions and the economy (admins) |
+| `/tempest log` | `tempest.admin` | Who changed what: the newest lines of the admin log (admins) |
+| `/tempest report` | `tempest.admin` | Writes a support report to paste when asking for help (admins) |
+| `/tempest settings` | Everyone | Open the Tempest settings menu (admins) |
+| `/tempest texts` | Everyone | Change any text players see (admins) |
+
+## Economy (Coins)
+
+| Command | Who can use it | What it does |
+|---|---|---|
+| `/atm` | `coins.admin.atm` | Admin: get an ATM in a design to place |
+| `/baltop` (/rich) | Everyone | Show the richest players |
+| `/bank` (/banks) | Everyone | Your shared bank accounts |
+| `/bank open` | Everyone | Open one bank by name |
+| `/coins` (/coinhelp) | Everyone | Help for coins, the wallet, banks and daily rewards |
+| `/daily` | Everyone | Open the daily reward calendar |
+| `/economy` (/eco) | `coins.admin.economy` | Admin: the economy screen, and changing balances |
+| `/economy add` | `coins.admin.economy` | Give a player money |
+| `/economy import` | `coins.admin.economy` | Copy every player's balance from another economy (Ecotale, or one through VaultUnlocked) |
+| `/economy set` | `coins.admin.economy` | Set a player's balance to an amount |
+| `/economy take` | `coins.admin.economy` | Take money from a player |
+| `/leaderboards` (/leaderboard, /ranks) | Everyone | The richest players, biggest winners and best traders |
+| `/pay` | Everyone | Send money from your wallet to another player |
+| `/wallet` (/balance, /bal) | Everyone | Open your wallet: balance, coins, payments and history |
+
+## Shop
+
+| Command | Who can use it | What it does |
+|---|---|---|
+| `/sell` | Everyone | Sell items to the shop |
+| `/sell all` | Everyone | Sell every item the shop buys |
+| `/sell hand` | Everyone | Sell the item in your hand |
+| `/shop` | Everyone | Open the shop |
+| `/shop link` | `shop.admin` | Make the block you look at a shop, selling as this stall kind |
+| `/shop stall` | `shop.admin` | Get a stall to place |
+| `/shop unlink` | `shop.admin` | Make the block you look at an ordinary block again |
+
+## Crates
+
+| Command | Who can use it | What it does |
+|---|---|---|
+| `/cratekey` | `crates.admin` | Give a player crate keys |
+| `/crates` (/crate) | Everyone | Open crates for prizes |
+| `/crates log` | `crates.admin` | Admins: a player's newest crate openings, for prize questions |
+| `/keyparty` | `crates.admin` | Give everyone online crate keys after a countdown (Pro) |
+
+## Quests
+
+| Command | Who can use it | What it does |
+|---|---|---|
+| `/achievements` (/achievement, /ach) | Everyone | Your achievements and how close you are |
+| `/quests` (/quest) | Everyone | Your quests and the quest board |
+| `/questtrigger` | `quests.admin` | Count a custom quest trigger for a player |
+
+## Battle pass
+
+| Command | Who can use it | What it does |
+|---|---|---|
+| `/pass` (/battlepass) | Everyone | Open the battle pass: tiers, rewards and your XP |
+| `/pass premium` | `pass.admin` | Give a player the premium track for this season (admins) |
+| `/pass xp` | `pass.admin` | Give a player pass XP, or take it with a negative amount (admins) |
+
+## Events
+
+| Command | Who can use it | What it does |
+|---|---|---|
+| `/events` (/event) | Everyone | Server events: what is on, what is coming, and the community goal |
+| `/events extend` | `events.admin` | More or fewer minutes for the event that is on (admins) |
+| `/events give` (/fund) | Everyone | Put money in the server fund: when it is full, an event starts for everyone |
+| `/events list` | `events.admin` | Every event and the next starts (admins) |
+| `/events start` | `events.admin` | Start an event now (admins) |
+| `/events stop` | `events.admin` | Stop the event that is on (admins) |
+
+## Contracts and bounties
+
+| Command | Who can use it | What it does |
+|---|---|---|
+| `/contracts` (/contract) | Everyone | Open the contracts board: deliver items for money, or ask for the items you need |
+| `/contracts bounties` (/bounty) | Everyone | Bounties: put money on a player, or hunt one down |
+| `/contracts list` | `contracts.admin` | Admins: the board in chat |
+| `/contracts mine` | Everyone | Your contracts: collect what was delivered |
+| `/contracts post` | Everyone | Post a contract: ask for items and pay for them |
+
+## Town projects
+
+| Command | Who can use it | What it does |
+|---|---|---|
+| `/projects` (/project) | Everyone | See the town projects and donate to them |
+| `/projects cancel` | `projects.admin` | Cancel a project: everything goes back |
+| `/projects coins` | `projects.admin` | Set the coin goal of a project |
+| `/projects finish` | `projects.admin` | Finish a project now: the whole building goes up |
+| `/projects list` | `projects.admin` | List every project |
+| `/projects material` | `projects.admin` | Change a material of a project (0 takes it off) |
+| `/projects new` | `projects.admin` | Pick a prefab and place a new project |
+| `/projects out` | Everyone | Leave a plot under construction |
+| `/projects pause` | `projects.admin` | Pause a project |
+| `/projects place` | `projects.admin` | Go back to the plot you are placing |
+| `/projects plan` | `projects.admin` | Mark a plot for a prefab where you stand |
+| `/projects prefabs` | `projects.admin` | Find prefabs by name |
+| `/projects remove` | `projects.admin` | Take an ended project off the list |
+| `/projects resume` | `projects.admin` | Go on with a paused project |
+| `/projects reward` | `projects.admin` | Add a console command run for each donor at the end |
+| `/projects rewarditems` | `projects.admin` | Pro: items every donor gets at the end (none clears them) |
+| `/projects start` | `projects.admin` | Start the project on the marked plot |
+| `/projects stop` | `projects.admin` | Stop a project: what stands stays |
+
+## Town
+
+| Command | Who can use it | What it does |
+|---|---|---|
+| `/mayor` | Everyone | Town: who the mayor is and how to become mayor |
+| `/mayor boost` | Everyone | Mayor: give everyone a boost for a while |
+| `/mayor clear` | Everyone | Admins: the town has no mayor until the term ends |
+| `/mayor fine` | Everyone | Mayor: fine a player who misbehaved |
+| `/mayor reward` | Everyone | Mayor: reward a player who helped the town |
+| `/mayor set` | Everyone | Admins: make an online player mayor until the term ends |
+| `/town` | Everyone | Town: what the town has unlocked and what it still needs |
+| `/town lock` | Everyone | Admins: keep an unlock locked |
+| `/town unlock` | Everyone | Admins: keep an unlock unlocked |
+
+## Jobs
+
+| Command | Who can use it | What it does |
+|---|---|---|
+| `/jobs` | Everyone | Jobs: the jobs, your levels, and how to take one |
+| `/jobs info` | Everyone | Your jobs and what they paid today |
+| `/jobs join` | Everyone | Take a job |
+| `/jobs leave` | Everyone | Leave a job |
+
+## Trade
+
+| Command | Who can use it | What it does |
+|---|---|---|
+| `/trade` | Everyone | Trade with a player: /trade <player>, or accept, deny, toggle, open |
+
+## Slot machines
+
+| Command | Who can use it | What it does |
+|---|---|---|
+| `/jackpot` | Everyone | Show the slot machine jackpot |
+| `/slotbet` | Everyone | Choose how much each slot machine spin costs |
+| `/slotstats` | `slotmachine.admin.stats` | Show slot machine totals and payback |
+| `/slotstats reset` | `slotmachine.admin.stats` | Start the slot machine totals again from zero |
+| `/slottheme` | `slotmachine.admin.theme` | Gives you a slot machine with the chosen theme |
+| `/slottoken` | `slotmachine.admin.token` | Gives you a slot machine token |
+
+## Lottery
+
+| Command | Who can use it | What it does |
+|---|---|---|
+| `/lottery` (/lotto) | Everyone | Buy lottery tickets and check status |
+| `/lottery buy` | Everyone | Buy lottery tickets |
+
+## Coinflip
+
+| Command | Who can use it | What it does |
+|---|---|---|
+| `/coinflip` (/cf) | Everyone | Open the coinflip rooms |
+| `/coinflip cancel` | Everyone | Close your open rooms and get your stakes back |
+| `/coinflip create` | Everyone | Open a room with a stake |
+| `/coinflip join` | Everyone | Join a player's room |
+| `/coinflip list` | Everyone | List the open rooms in chat |
+
+
+# Core
+
+The base: /tempest, /guide, the board, the mailbox, rank perks, the map, boosters.
+
+## What players read in /guide
+
+The `/guide` pages of this plugin, as a player sees them on a test server (numbers are examples).
+
+### Money counter
+
+- The number in the corner of your screen is your balance in copper. When it changes, the gain or loss flashes beside it in green or red.
+- Next to it you may see short notes: a daily reward waiting, the slot machine jackpot, the lottery pot, a quest you are tracking, or what the shop pays for the item in your hand.
+
+**Your counter**
+
+- It is shown, in the "top" position.
+- /hud hides or shows it. /hud top, /hud left and /hud low move it.
+
+
+## Commands
+
+| Command | Who can use it | What it does |
+|---|---|---|
+| `/board` (/sidebar) | Everyone | Pick what your board on the right of the screen shows, or hide it |
+| `/booster` | `tempest.boosters` | Give a player a booster for a while (admins, crate and vote rewards) |
+| `/guide` (/serverhelp) | Everyone | How the server's shop, crates, quests and money work |
+| `/hud` (/coinhud) | Everyone | Show or hide your money counter (/hud top, left or low moves it) |
+| `/hud left` | Everyone | Money counter in the top left corner |
+| `/hud low` | Everyone | Money counter on the right side, lower down |
+| `/hud top` | Everyone | Money counter in a row along the top, right of centre |
+| `/mail` (/mailbox) | Everyone | Open your mailbox: rewards and items kept for you |
+| `/places` | Everyone | Places on the world map, and what your map shows |
+| `/places add` | `tempest.admin.map` | Adds a place to the map where you stand (admins) |
+| `/serverinfo` (/rules, /info) | Everyone | The server's rules and info |
+| `/tempest` (/casino) | Everyone | Tempest: the settings menu for admins, the help screen for players |
+| `/tempest doctor` | `tempest.admin` | Finds ways players could make money from nothing in the settings (admins) |
+| `/tempest info` | `tempest.admin` | Tempest plugins: versions, editions and the economy (admins) |
+| `/tempest log` | `tempest.admin` | Who changed what: the newest lines of the admin log (admins) |
+| `/tempest report` | `tempest.admin` | Writes a support report to paste when asking for help (admins) |
+| `/tempest settings` | Everyone | Open the Tempest settings menu (admins) |
+| `/tempest texts` | Everyone | Change any text players see (admins) |
+
+
+## Settings
+
+Every setting is changed in game with `/tempest` and saved at once; nothing needs a restart. Amounts of 0 are off unless the setting says otherwise.
+
+### General
+
+`/tempest` → General. Who can change it: `tempest.admin` or `tempest.admin.core`.
+
+#### Money
+
+Prices and rewards in every AtomicTempest plugin use the server's economy: Coins when it is installed, otherwise any economy plugin that works with VaultUnlocked.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Show the money counter | Players can still hide theirs with /hud. | On or off |
+| Starting corner | Players can move theirs with /hud. | Top right, Left, Lower right |
+| Short amounts on the counter | Big balances in short, such as 12.5K and 3.2M, so they fit. | On or off |
+
+#### Tempest board
+
+A panel on the right of each player's screen with their name, world and money, the server, and a live line from every Tempest plugin (daily reward, lottery pot, jackpot, tracked quest, pass tier). Each player picks what theirs shows, or hides it, with /board.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Show the board | The plugins' lines move from the money counter to the board. | On or off |
+| Where it starts | Players move theirs in /board. Pick a free side if another plugin has a panel there. | Right, top, Right, middle, Left, top, Left, middle |
+| Size | Players pick their own in /board. | Normal, Small |
+| Hide the money counter with the board | While a player's board shows their money, the counter at the top goes away. | On or off |
+| Board title | Your server's name, in the menu theme's colour. Empty: no title. | Text |
+| Line under the title | Such as your server's address or Discord. Empty: none. | Text |
+| Players may show the time | The time of day in their world. | On or off |
+| Players may show their ping |  | On or off |
+| Players may show their position | Off for servers where coordinates should stay secret. Players switch it on themselves. | On or off |
+| Your own line 1 | "Label \| text": placeholders show other plugins' numbers, such as "Kills \| {myplugin_kills}". Without \| it is one line of text. | Text |
+| Your own line 2 | Empty: none. | Text |
+| Your own line 3 | Empty: none. | Text |
+| Your own line 4 | Empty: none. | Text |
+| Your own line 5 | Empty: none. | Text |
+
+#### Menus
+
+The look of every Tempest menu, for every player.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Menu theme | Tempest gold is the plugins' own look. | Tempest gold, Dark crimson, Elven emerald, Frostbite, Amethyst, Cyberpunk neon, Cozy parchment, Your own colours |
+| Your own: highlights | With "Your own colours": titles and the chosen tab. | A colour |
+| Your own: background | With "Your own colours": laid over each menu. | A colour |
+
+#### New players
+
+| Setting | What it does | Values |
+|---|---|---|
+| Help screen for new players | Opens /guide the first time someone joins. | On or off |
+| What's on, when players join | A few chat lines from the Tempest board: a daily reward waiting, a running event, the lottery pot. Nothing when there is nothing to say. | On or off |
+| Tips for players | One line about something the server has, taken from /guide. Each tip comes once per player, then they stop. | On or off |
+| Minutes between tips |  | 1 to 1440 |
+
+#### Updates
+
+| Setting | What it does | Values |
+|---|---|---|
+| Tell admins about new versions | Once a day the server reads which Tempest versions are out (a small file on our site; nothing about your server is sent). Admins get one line when they join. | On or off |
+
+#### Language
+
+Players see these plugins in the language their game is set to. Hytale does not offer German, Italian or Polish yet: pick one language here and every player gets the plugins in it.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Language | Or the language of each player's game. | Each player's own, English, Deutsch, Español, Français, Italiano, Polski, Português (Brasil), Русский |
+
+#### Games of chance
+
+Slots, Lottery and Coinflip use only money earned in game. A daily limit stops anyone from losing too much in a day; it starts again at midnight.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Daily limit for games | Per player, all games together. 0 = no limit. | 0 to 1000000000 |
+
+
+### Rank Perks
+
+`/tempest` → Rank Perks. Who can change it: `tempest.admin` or `tempest.admin.core`.
+
+#### Rank perks
+
+Give a rank a perk's permission in your ranks plugin (LuckPerms, or Hytale's own permissions) and its players get the bonuses. Leave the permission empty to switch a perk off.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Perk 1 | Name | Text |
+| Permission |  | Text |
+| Daily rewards | Bonus (%) | 0 to 1000 |
+| Quest rewards (%) |  | 0 to 1000 |
+| Shop | Discount (%) | 0 to 90 |
+| Sell bonus (%) |  | 0 to 1000 |
+| Payment fee cut (%) | 100 = this rank pays no fee when paying other players. | 0 to 100 |
+| Pass XP (%) | Tempest Pass, Pro edition: more pass XP for this rank. | 0 to 1000 |
+| Perk 2 | Name | Text |
+| Permission |  | Text |
+| Daily rewards | Bonus (%) | 0 to 1000 |
+| Quest rewards (%) |  | 0 to 1000 |
+| Shop | Discount (%) | 0 to 90 |
+| Sell bonus (%) |  | 0 to 1000 |
+| Payment fee cut (%) | 100 = this rank pays no fee when paying other players. | 0 to 100 |
+| Pass XP (%) | Tempest Pass, Pro edition: more pass XP for this rank. | 0 to 1000 |
+| Perk 3 | Name | Text |
+| Permission |  | Text |
+| Daily rewards | Bonus (%) | 0 to 1000 |
+| Quest rewards (%) |  | 0 to 1000 |
+| Shop | Discount (%) | 0 to 90 |
+| Sell bonus (%) |  | 0 to 1000 |
+| Payment fee cut (%) | 100 = this rank pays no fee when paying other players. | 0 to 100 |
+| Pass XP (%) | Tempest Pass, Pro edition: more pass XP for this rank. | 0 to 1000 |
+| Perk 4 | Name | Text |
+| Permission |  | Text |
+| Daily rewards | Bonus (%) | 0 to 1000 |
+| Quest rewards (%) |  | 0 to 1000 |
+| Shop | Discount (%) | 0 to 90 |
+| Sell bonus (%) |  | 0 to 1000 |
+| Payment fee cut (%) | 100 = this rank pays no fee when paying other players. | 0 to 100 |
+| Pass XP (%) | Tempest Pass, Pro edition: more pass XP for this rank. | 0 to 1000 |
+
+
+### Server info
+
+`/tempest` → Server info. Who can change it: `tempest.admin` or `tempest.admin.core`.
+
+Your own page: rules and anything players should know. It is the first page of /guide (new players see it on their first join when that is on) and /info or /rules opens it.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Show the page |  | On or off |
+| Title |  | Text |
+| Line 1 |  | Text |
+| Line 2 |  | Text |
+| Line 3 |  | Text |
+| Line 4 |  | Text |
+| Line 5 |  | Text |
+| Line 6 |  | Text |
+| Line 7 |  | Text |
+| Line 8 |  | Text |
+| Line 9 |  | Text |
+| Line 10 |  | Text |
+| Line 11 |  | Text |
+| Line 12 |  | Text |
+
+#### Buttons
+
+Up to two buttons under the text, each running a command as the player.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Button 1 text |  | Text |
+| Button 1 command | For example /shop | Text |
+| Button 2 text |  | Text |
+| Button 2 command |  | Text |
+
+
+### World map
+
+`/tempest` → World map. Who can change it: `tempest.admin` or `tempest.admin.map`.
+
+Tempest's places show on every player's map and compass. Each kind of place has its own tab here. Own places: /places add <name>. Change or hide one place: /places.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Show Tempest places on the map |  | On or off |
+| Players may pick what their map shows | With /places each player can leave out kinds of place. | On or off |
+| Players may use /places | Lists the places nearest first. Admins can always use it. | On or off |
+
+
+### Map: Your places
+
+`/tempest` → Map: Your places. Who can change it: `tempest.admin` or `tempest.admin.map`.
+
+#### Your places
+
+How these look on the map and who gets them. To change one of them, use /places.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Show on the map |  | On or off |
+| Icon | A resource pack's own picture: put its file name in map.json. | A list |
+| Colour | White shows the icon as it was drawn. | A colour |
+| Name on the map | Empty: each place's own name. Written here, every one of them shows this. | Text |
+| Big icon |  | On or off |
+| On the compass too |  | On or off |
+| Who sees it (permission) | Empty: everyone. With a permission, only players or ranks who have it. | Text |
+| Shown within (blocks) | Only players this near see them. 0: from anywhere. | 0 to 100000 |
+| Only in these worlds | World names with commas between them. Empty: every world. | Text |
+
+
+### Map: ATMs
+
+`/tempest` → Map: ATMs. Who can change it: `tempest.admin` or `tempest.admin.map`.
+
+#### ATMs
+
+How these look on the map and who gets them. To change one of them, use /places.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Show on the map |  | On or off |
+| Icon | A resource pack's own picture: put its file name in map.json. | A list |
+| Colour | White shows the icon as it was drawn. | A colour |
+| Name on the map | Empty: each place's own name. Written here, every one of them shows this. | Text |
+| Big icon |  | On or off |
+| On the compass too |  | On or off |
+| Who sees it (permission) | Empty: everyone. With a permission, only players or ranks who have it. | Text |
+| Shown within (blocks) | Only players this near see them. 0: from anywhere. | 0 to 100000 |
+| Only in these worlds | World names with commas between them. Empty: every world. | Text |
+
+
+### Map: Slot machines
+
+`/tempest` → Map: Slot machines. Who can change it: `tempest.admin` or `tempest.admin.map`.
+
+#### Slot machines
+
+How these look on the map and who gets them. To change one of them, use /places.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Show on the map |  | On or off |
+| Icon | A resource pack's own picture: put its file name in map.json. | A list |
+| Colour | White shows the icon as it was drawn. | A colour |
+| Name on the map | Empty: each place's own name. Written here, every one of them shows this. | Text |
+| Big icon |  | On or off |
+| On the compass too |  | On or off |
+| Who sees it (permission) | Empty: everyone. With a permission, only players or ranks who have it. | Text |
+| Shown within (blocks) | Only players this near see them. 0: from anywhere. | 0 to 100000 |
+| Only in these worlds | World names with commas between them. Empty: every world. | Text |
+
+
+### Map: Shops
+
+`/tempest` → Map: Shops. Who can change it: `tempest.admin` or `tempest.admin.map`.
+
+#### Shops
+
+How these look on the map and who gets them. To change one of them, use /places.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Show on the map |  | On or off |
+| Icon | A resource pack's own picture: put its file name in map.json. | A list |
+| Colour | White shows the icon as it was drawn. | A colour |
+| Name on the map | Empty: each place's own name. Written here, every one of them shows this. | Text |
+| Big icon |  | On or off |
+| On the compass too |  | On or off |
+| Who sees it (permission) | Empty: everyone. With a permission, only players or ranks who have it. | Text |
+| Shown within (blocks) | Only players this near see them. 0: from anywhere. | 0 to 100000 |
+| Only in these worlds | World names with commas between them. Empty: every world. | Text |
+
+
+### Map: Crates
+
+`/tempest` → Map: Crates. Who can change it: `tempest.admin` or `tempest.admin.map`.
+
+#### Crates
+
+How these look on the map and who gets them. To change one of them, use /places.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Show on the map |  | On or off |
+| Icon | A resource pack's own picture: put its file name in map.json. | A list |
+| Colour | White shows the icon as it was drawn. | A colour |
+| Name on the map | Empty: each place's own name. Written here, every one of them shows this. | Text |
+| Big icon |  | On or off |
+| On the compass too |  | On or off |
+| Who sees it (permission) | Empty: everyone. With a permission, only players or ranks who have it. | Text |
+| Shown within (blocks) | Only players this near see them. 0: from anywhere. | 0 to 100000 |
+| Only in these worlds | World names with commas between them. Empty: every world. | Text |
+
+
+# Economy (Coins)
+
+Wallets, coins, banks, daily rewards and ore and monster gold.
+
+## What players read in /guide
+
+The `/guide` pages of this plugin, as a player sees them on a test server (numbers are examples).
+
+### Welcome
+
+- Coins are the money on this server. You earn them, keep them in your wallet, and spend them on what the server offers.
+- Your balance: 12,901 copper.
+
+**What the coins are worth**
+
+- Every price is counted in copper. The other coins are worth:
+- Coin Iron5,Coin Silver10,Coin Gold50,Coin Emerald100,Coin Diamond500
+
+**On this server**
+
+- -Wallet and ATM
+- -Earning coins
+- -Daily rewards
+- -Money counter
+- -Shared banks
+- -Crates
+- -Leaderboards
+- -Shop
+- -Quests and achievements
+- -Slot machines
+- -Lottery
+- -Coinflip
+- -Server events
+- -Battle pass
+- -Contracts
+- -Jobs
+- -Trade
+- -Town
+- -Town projects
+- Pick a page on the left to read more. Open this screen any time with /coins.
+
+**Admins also read:**
+
+- Your balance: 24,800 copper.
+
+### Wallet and ATM
+
+
+**Your wallet**
+
+- Coins in your wallet are safe. Coins you carry as items are not: you can drop or lose them like anything else in your bags.
+- Open your wallet with /wallet (or /bal), or at any ATM.
+
+**Taking coins out**
+
+- Each coin in the wallet has buttons to take out 1, 10 or 100 of it.
+
+**Putting coins in**
+
+- Press "Put all my coins in" to put every coin you carry into your wallet. You can also hold a coin and right-click.
+
+**Paying someone**
+
+- Press "Pay a player" in the wallet and pick someone who is online, or type /pay <player> <amount>.
+
+**History**
+
+- The bottom of the wallet shows your latest gains and spending.
+
+**ATMs**
+
+- An ATM opens the same wallet, and pays out with a shower of coins. ATMs are shown on your map.
+- Only admins can build ATMs on this server.
+
+**Admins also read:**
+
+
+**Your rank perks: VIP**
+
+- Daily rewards +100%
+- Shop prices -15%
+- Shop sell prices +10%
+- Payment fee -100%
+- Quest rewards +50%
+
+### Earning coins
+
+
+**Fighting**
+
+- Creatures you defeat drop coins. The tougher the creature, the more it drops.
+
+**Mining**
+
+- Ores sometimes drop coins when you mine them. Rarer ores drop more:
+- Copper Ore: 10% chance of 1 copper
+- Iron Ore: 10% chance of 2 copper
+- Silver Ore: 15% chance of 5 copper
+- Gold Ore: 15% chance of 10 copper
+- Cobalt Ore: 20% chance of 20 copper
+- Mithril Ore: 25% chance of 50 copper
+- Adamantite Ore: 30% chance of 100 copper
+- Thorium Ore: 20% chance of 30 copper
+- Onyxium Ore: 25% chance of 60 copper
+- Ores that players placed give no coins.
+
+**Every day**
+
+- Claim a free reward once a day with /daily. Come back on following days for bigger rewards.
+
+**Selling**
+
+- Sell items you do not need at a shop stall. See the Shop page.
+
+**Luck**
+
+- Try the slot machines or the lottery for a big win, but over time luck costs more than it pays.
+
+**Other players**
+
+- Trade with other players and pay each other with /pay or the wallet.
+
+### Daily rewards
+
+- Your reward for day 1 is ready! Open the calendar to claim it.
+
+**How it works**
+
+- Claim once a day with /daily. Each day in a row moves you along the calendar to a bigger reward. Miss a day and you start again from day 1. After day 7 the calendar starts over.
+
+**The rewards**
+
+- Day 1: 50 copper
+- Day 2: 60 copper
+- Day 3: 70 copper
+- Day 4: 80 copper
+- Day 5: 100 copper
+- Day 6: 120 copper
+- Day 7: 250 copper
+
+### Shared banks
+
+
+**Saving up together**
+
+- A shared bank holds coins for a group: a town, a team, friends saving for something big. Open one with /bank (it costs 500 copper) and add your friends by name.
+
+**Who can do what**
+
+- Everyone in the bank can put coins in. Only the owner, and members the owner allows, can take coins out. The history shows who put in and took out what.
+
+**Closing**
+
+- Members can leave whenever they like. When the owner closes the bank, whatever is in it goes to the owner.
+
+**Your banks**
+
+- Steves_Team: 1,000 copper
+
+### Leaderboards
+
+- See who leads the server: the richest players, the top earners, the biggest single wins, and the best at the slot machines, the lottery and the shop, as far as this server has them.
+- Each board shows the top 10, and your own place under it.
+- Open them with /leaderboards (or /ranks).
+
+### All commands
+
+
+**Coinflip**
+
+- /coinflip  (or /cf)  -Open the rooms: join one, watch a flip, or make your own
+- /cf create <amount> [heads|tails]  -Open a room with a stake (heads if you pick no side)
+- /cf join <player>  -Join a player's room with the same stake
+- /cf cancel  -Close your open rooms; your stakes come back
+- /cf list  -List the open rooms in chat
+
+**Coins**
+
+- /coins  -This help screen
+- /wallet  (or /bal)  -Your wallet: withdraw, deposit, pay and history
+- /pay <player> <amount>  -Give money to another player
+- /daily  -The daily reward calendar
+- /baltop  (or /rich)  -The richest players, in chat
+- /bank  -Your shared bank accounts: save up together with friends
+- /leaderboards  (or /ranks)  -Leaderboards: richest, top earners, biggest wins and more
+
+**Contracts**
+
+- /contracts  -Open the contracts board
+
+**General**
+
+- /guide  -This help screen
+- /hud  -Show or hide your money counter; /hud top, left or low moves it
+- /board  -Pick what your board on the right of the screen shows, or hide it
+- /mail  -Your mailbox: rewards that did not fit or came while you were away
+- /info  (or /rules, /serverinfo)  -The server's rules and info, from the admins
+- /places  -Places on the world map, nearest first; pick what your map shows
+
+**Crates**
+
+- /crates  -Open crates for prizes
+- /cratekey <player> <bronze|silver|gold> <amount>  -Give crate keys (admins)
+
+**Events**
+
+- /events  -What is on, what is coming, and the community goal
+
+**Jobs**
+
+- /jobs  -The jobs and your levels
+
+**Lottery**
+
+- /lottery  (or /lotto)  -The current round: pot, tickets and time left
+- /lottery buy <amount>  -Buy tickets for the current round
+
+**Battle pass**
+
+- /pass  -Your tiers, rewards and XP this season
+
+**Town projects**
+
+- /projects  -See the projects and donate
+
+**Quests**
+
+- /quests  -Your quests and the quest board
+- /achievements  (or /ach)  -Your achievements and how close you are
+
+**Shop**
+
+- /shop  -Open the shop (where the server allows it)
+- /sell hand  -Sell the item in your hand (where the server allows /shop)
+- /sell all  -Sell everything the shop buys (where the server allows /shop)
+
+**Slot Machine**
+
+- /jackpot  -How big the jackpot is right now
+- /slotbet  -Choose how much each slot machine spin costs
+
+**Town**
+
+- /town  -What the town has unlocked and what it still needs
+
+**Trade**
+
+- /trade  -Trade with a player
+
+
+## Commands
+
+| Command | Who can use it | What it does |
+|---|---|---|
+| `/atm` | `coins.admin.atm` | Admin: get an ATM in a design to place |
+| `/baltop` (/rich) | Everyone | Show the richest players |
+| `/bank` (/banks) | Everyone | Your shared bank accounts |
+| `/bank open` | Everyone | Open one bank by name |
+| `/coins` (/coinhelp) | Everyone | Help for coins, the wallet, banks and daily rewards |
+| `/daily` | Everyone | Open the daily reward calendar |
+| `/economy` (/eco) | `coins.admin.economy` | Admin: the economy screen, and changing balances |
+| `/economy add` | `coins.admin.economy` | Give a player money |
+| `/economy import` | `coins.admin.economy` | Copy every player's balance from another economy (Ecotale, or one through VaultUnlocked) |
+| `/economy set` | `coins.admin.economy` | Set a player's balance to an amount |
+| `/economy take` | `coins.admin.economy` | Take money from a player |
+| `/leaderboards` (/leaderboard, /ranks) | Everyone | The richest players, biggest winners and best traders |
+| `/pay` | Everyone | Send money from your wallet to another player |
+| `/wallet` (/balance, /bal) | Everyone | Open your wallet: balance, coins, payments and history |
+
+
+## Settings
+
+Every setting is changed in game with `/tempest` and saved at once; nothing needs a restart. Amounts of 0 are off unless the setting says otherwise.
+
+### Coins
+
+`/tempest` → Coins. Who can change it: `tempest.admin` or `tempest.admin.coins`.
+
+#### Earning
+
+Coins players get from playing. Each ore's chance and worth are on the Ore Drops tab.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Mobs drop coins | When a player kills a mob. | On or off |
+| Coins per point of health | Tougher mobs drop more. | 0 to 1000 |
+| Most from one mob | 0 = no limit. | 0 to 1000000000 |
+| Ores drop coins | Ores placed by players never do. | On or off |
+
+#### Payments
+
+Players paying each other with /pay or the wallet's Pay button.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Players can pay each other |  | On or off |
+| Smallest payment |  | 1 to 1000000000 |
+| Fee (%) | Paid on top by the sender. It leaves the game. | 0 to 100 |
+
+#### Leaderboards
+
+/leaderboards and /baltop.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Open to everyone | Off: only admins can see them. | On or off |
+| Players on each board |  | 1 to 50 |
+
+#### Shared banks
+
+Players open a bank with /bank and save up together; the owner decides who may take coins out.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Shared banks | Off: no new banks. Existing ones can still be used and closed. | On or off |
+| Price to open a bank | It leaves the game. 0 = free. | 0 to 1000000000 |
+| Banks one player can own |  | 1 to 100 |
+| Members per bank | Besides the owner. | 1 to 200 |
+
+#### Savings interest
+
+Banks earn a little each day on the lowest balance they had since the last payout. A new bank earns from its second payout; a server that was down pays one day, not the days missed.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Savings interest | Off: no interest. New money: keep the rate low. | On or off |
+| Rate (% a day) |  | 0 to 5 |
+| Highest balance that earns | 0 = no limit. | 0 to 1000000000000 |
+| Most per bank a day | 0 = no limit. | 0 to 1000000000 |
+| Most per owner a day | All banks of one owner together, so many small banks earn no more. 0 = no limit. | 0 to 1000000000 |
+| Payout hour | Server time. | 0 to 23 |
+
+#### Other
+
+#### ATM designs
+
+Crouch and press F on an ATM to change its design, or use /atm <design> to get one to place: classic, vault, teller, royal, crystal. Every design works the same.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Players can craft ATMs | Off: only admins can. | On or off |
+| Keep transaction logs (days) | 0 = forever. Old files are deleted when the server starts. | 0 to 36500 |
+
+
+### Daily Rewards
+
+`/tempest` → Daily Rewards. Who can change it: `tempest.admin` or `tempest.admin.coins`.
+
+#### Daily rewards
+
+A reward for every day a player comes back. Players open the calendar with /daily.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Daily rewards | Off: no rewards and no calendar. | On or off |
+| Open the calendar on join | Only when a reward is waiting. | On or off |
+| Reminder under the coin counter | Shows "Daily reward ready!" | On or off |
+
+#### Timing
+
+| Setting | What it does | Values |
+|---|---|---|
+| Hours between rewards | A bit under 24 lets players claim at the same time each day. | 0.1 to 8760 |
+| Hours before the streak resets | Wait longer and the calendar starts again at day 1. | 0.1 to 8760 |
+
+#### Rewards
+
+What each day of the calendar pays. After day 7 it starts over.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Day 1 | Reward | 0 to 1000000000 |
+| Day 2 | Reward | 0 to 1000000000 |
+| Day 3 | Reward | 0 to 1000000000 |
+| Day 4 | Reward | 0 to 1000000000 |
+| Day 5 | Reward | 0 to 1000000000 |
+| Day 6 | Reward | 0 to 1000000000 |
+| Day 7 (big one) | Reward | 0 to 1000000000 |
+
+
+### Ore Drops
+
+`/tempest` → Ore Drops. Who can change it: `tempest.admin` or `tempest.admin.coins`.
+
+#### Ore drops
+
+The chance that mining an ore also drops coins, and how much. Ores placed by players never drop any.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Copper | Chance (%) | 0 to 100 |
+| Worth |  | 0 to 1000000000 |
+| Iron | Chance (%) | 0 to 100 |
+| Worth |  | 0 to 1000000000 |
+| Silver | Chance (%) | 0 to 100 |
+| Worth |  | 0 to 1000000000 |
+| Gold | Chance (%) | 0 to 100 |
+| Worth |  | 0 to 1000000000 |
+| Cobalt | Chance (%) | 0 to 100 |
+| Worth |  | 0 to 1000000000 |
+| Mithril | Chance (%) | 0 to 100 |
+| Worth |  | 0 to 1000000000 |
+| Adamantite | Chance (%) | 0 to 100 |
+| Worth |  | 0 to 1000000000 |
+| Thorium | Chance (%) | 0 to 100 |
+| Worth |  | 0 to 1000000000 |
+| Onyxium | Chance (%) | 0 to 100 |
+| Worth |  | 0 to 1000000000 |
+| Prisma | Chance (%) | 0 to 100 |
+| Worth |  | 0 to 1000000000 |
+
+
+### Currency
+
+`/tempest` → Currency. Who can change it: `tempest.admin` or `tempest.admin.coins`.
+
+#### Money
+
+What amounts are called in every message.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Name | For 1 | Text |
+| For 2 or more |  | Text |
+
+#### Coins
+
+Each coin's name, and how many of the smallest coin it is worth.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Copper Coin | Name | Text |
+| Iron Coin | Name | Text |
+| Worth |  | 1 to 1000000000000 |
+| Silver Coin | Name | Text |
+| Worth |  | 1 to 1000000000000 |
+| Gold Coin | Name | Text |
+| Worth |  | 1 to 1000000000000 |
+| Emerald Coin | Name | Text |
+| Worth |  | 1 to 1000000000000 |
+| Diamond Coin | Name | Text |
+| Worth |  | 1 to 1000000000000 |
+
+#### Chat tags
+
+The word in front of messages, and its colour. Leave a tag empty to hide it.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Wallet and payments | Tag | Text |
+| Colour |  | A colour |
+| Daily rewards | Tag | Text |
+| Colour |  | A colour |
+| Admin /eco | Tag | Text |
+| Colour |  | A colour |
+
+
+### Integrations
+
+`/tempest` → Integrations. Who can change it: `tempest.admin` or `tempest.admin.coins`.
+
+#### VaultUnlocked
+
+Lets plugins that use VaultUnlocked (player shops, auction houses, jobs, land claims...) pay and charge in these coins. Install VaultUnlocked to use it.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Be the economy for VaultUnlocked plugins | Their payments show in wallets and the /eco log under the plugin's name. | On or off |
+
+#### Cassaforte
+
+Lets plugins that use Cassaforte (SimpleJobs, Towny3D...) pay and charge in these coins, and use the shared banks. Install Cassaforte to use it.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Be the economy for Cassaforte plugins | Cassaforte keeps the first economy that connects; switching off takes a restart. | On or off |
+
+#### Discord
+
+Posts big moments to a Discord channel. In Discord: Edit channel, Integrations, Webhooks, New webhook, Copy webhook URL, and paste it below.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Webhook link | Empty: Discord is off. Keep it secret, anyone with it can post. | Text |
+| Name in Discord |  | Text |
+| Jackpots |  | On or off |
+| Big slot machine wins | The size is set on the Slot Machine tab (Announce wins from). | On or off |
+| Lottery winners |  | On or off |
+| Achievements |  | On or off |
+| News from other mods |  | On or off |
+| Send a test message when saved | Tick, then Save: a test message is posted if the link works. | On or off |
+
+#### Placeholders
+
+For scoreboards, chat formats and placeholder plugins: {coins_balance}, {coins_balance_formatted}, {coins_rank}, {coins_daily_streak}, {lottery_pot}, {lottery_time_left}, {slots_jackpot}, {quests_active}, {achievements_unlocked} and more (see API.md).
+
+
+# Holograms
+
+Floating text and top lists.
+
+## What players read in /guide
+
+- Admins: change, move or delete a hologram; /holo lists them
+- Admins: a new hologram like another, where you stand
+- Admins: floating text where you stand; | starts a new line, {placeholders} work
+- Admins: a menu of all holograms: teleport to, edit and delete them
+- Admins: a live top list where you stand, such as top:money 5; /holo boards lists them
+
+## Commands
+
+All of them need `holograms.admin`.
+
+| Command | What it does |
+|---|---|
+| `/holo boards` | List the top lists a hologram can show |
+| `/holo copy` | Copy a hologram to where you stand |
+| `/holo create` | Make a hologram where you stand |
+| `/holo delete` | Delete a hologram |
+| `/holo edit` | Change a hologram's text |
+| `/holo` | Floating text: list, create, edit, move or delete holograms |
+| `/holo menu` | Open the hologram menu: teleport to, edit and delete holograms |
+| `/holo move` | Move a hologram to where you stand |
+
+
+# Shop
+
+The server shop, stalls and their shelves.
+
+## What players read in /guide
+
+The `/guide` pages of this plugin, as a player sees them on a test server (numbers are examples).
+
+### Shop
+
+
+**Trading**
+
+- Find a shop stall and press F. Stalls are shown on your map.
+- Stalls can sell different things, so look around: a blacksmith has tools and weapons, a farmer has food.
+- Buy takes one item, x10 takes 10. The price is for one item, in copper, paid from your wallet.
+- Every day 3 items are 25% cheaper, the same for everyone. Look for DEAL in the shop: you can buy 16 of each at the deal price a day.
+- Sell gives one item to the shop, All sells every one you carry. "Sell everything the shop buys" sells all of it at once.
+
+**Prices**
+
+- Hold an item: if the shop buys it, what it pays shows next to your coin counter.
+- Worn tools and weapons sell for less.Broken ones cannot be sold until they are repaired.
+
+**Good to know**
+
+- Use the tabs at the top of the shop to see one kind of item at a time.
+- Only admins can build shop stalls on this server.
+
+
+## Commands
+
+| Command | Who can use it | What it does |
+|---|---|---|
+| `/sell` | Everyone | Sell items to the shop |
+| `/sell all` | Everyone | Sell every item the shop buys |
+| `/sell hand` | Everyone | Sell the item in your hand |
+| `/shop` | Everyone | Open the shop |
+| `/shop link` | `shop.admin` | Make the block you look at a shop, selling as this stall kind |
+| `/shop stall` | `shop.admin` | Get a stall to place |
+| `/shop unlink` | `shop.admin` | Make the block you look at an ordinary block again |
+
+
+## Settings
+
+Every setting is changed in game with `/tempest` and saved at once; nothing needs a restart. Amounts of 0 are off unless the setting says otherwise.
+
+### Shop
+
+`/tempest` → Shop. Who can change it: `tempest.admin` or `tempest.admin.shop`.
+
+#### Trading
+
+Items and their prices are set in the shop itself, with Edit shop.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Players can buy |  | On or off |
+| Players can sell |  | On or off |
+| /shop works anywhere | Off: players must go to a shop stall. | On or off |
+
+#### Prices
+
+Change every price at once, for a sale or a good time to sell.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Buy prices (%) | 80 = everything 20% off. | 1 to 10000 |
+| Sell prices (%) | 150 = the shop pays half as much again. | 1 to 10000 |
+| Bulk buy amount | The second amount button. | 2 to 1000 |
+
+#### Supply and demand (Pro)
+
+Prices move with what players trade: each item sold lowers what the shop pays for it, each item bought raises what it costs, and both drift back to the price you set. The shop never pays more or asks less than your set prices, so nobody can buy low and sell high. One item can keep a fixed price, or fall faster or slower: Edit shop, pick the item.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Prices move |  | On or off |
+| Each one sold lowers it (%) | 0.5: after 64 sold the shop pays about 73%. | 0 to 50 |
+| Never under (%) |  | 1 to 100 |
+| Each one bought raises it (%) | 0 = buying never raises prices. | 0 to 50 |
+| Never over (%) |  | 100 to 1000 |
+| Halfway back to normal in (hours) |  | 0.1 to 720 |
+
+#### The shop's menu
+
+What players see. Items, prices and categories are set in the shop itself, with Edit shop.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Title | Empty: "Shop" in each player's language. | Text |
+| Search box |  | On or off |
+| Sort list |  | On or off |
+| Category list |  | On or off |
+| Deals banner |  | On or off |
+| How many a player has |  | On or off |
+| First sorted by |  | The shop's own order, Cheapest first, Dearest first, By name |
+| Items on one page |  | 4 to 60 |
+| Third amount button |  | 2 to 10000 |
+| Most in one purchase |  | 1 to 100000 |
+
+#### Daily deals
+
+A few items are cheaper each day, the same ones for everyone, picked anew at midnight. While an item is a deal, the shop pays no more for it than the deal price, so nobody can buy cheap and sell back.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Deals each day | 0 = no deals. | 0 to 10 |
+| Deal discount (%) |  | 1 to 90 |
+| Deals are picked from | Choose the pool in the shop: Edit shop, pick an item, Daily deal. Items set to Always are a deal every day. | Any item in the shop, Only the deal pool |
+| At the deal price, per player a day | How many of each deal one player may buy cheaper a day; more cost the normal price. 0 = no limit. | 0 to 100000 |
+
+#### Worn items
+
+Tools, weapons and armour that have lost durability.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Worn items sell for less | By how worn they are. Off: full price. | On or off |
+| Refuse below condition (%) | 0 = only broken items are refused. | 0 to 100 |
+
+#### Other
+
+| Setting | What it does | Values |
+|---|---|---|
+| Price tag under the coin counter | What the shop pays for the item in your hand. | On or off |
+| Players can craft stalls | Off: only admins can. | On or off |
+| Chat tag | Tag | Text |
+| Colour |  | A colour |
+
+#### Free edition
+
+The Pro edition adds: more stalls (Apothecary, Fishmonger, Tavern, Mage), prices that move with supply and demand.
+
+
+### Stalls
+
+`/tempest` → Stalls. Who can change it: `tempest.admin` or `tempest.admin.stalls`.
+
+#### Classic
+
+Choose items for it in the shop: Edit shop, pick an item. One stall's own settings: This stall, at that stall.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Title | Empty: the shop's own title. | Text |
+| It sells |  | Everything in the shop, What fits, plus chosen items, Only items chosen for it |
+| Items on its shelves |  | On or off |
+| How many |  | 1 to 3 |
+
+#### Blacksmith
+
+Choose items for it in the shop: Edit shop, pick an item. One stall's own settings: This stall, at that stall.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Title | Empty: the stall's name in each player's language. | Text |
+| It sells |  | Everything in the shop, What fits, plus chosen items, Only items chosen for it |
+| Items on its shelves |  | On or off |
+| How many |  | 1 to 4 |
+
+#### Farmer
+
+Choose items for it in the shop: Edit shop, pick an item. One stall's own settings: This stall, at that stall.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Title | Empty: the stall's name in each player's language. | Text |
+| It sells |  | Everything in the shop, What fits, plus chosen items, Only items chosen for it |
+| Items on its shelves |  | On or off |
+| How many |  | 1 to 4 |
+
+#### Apothecary
+
+Choose items for it in the shop: Edit shop, pick an item. One stall's own settings: This stall, at that stall.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Title | Empty: the stall's name in each player's language. | Text |
+| It sells |  | Everything in the shop, What fits, plus chosen items, Only items chosen for it |
+| Items on its shelves |  | On or off |
+| How many |  | 1 to 3 |
+
+#### Fishmonger
+
+Choose items for it in the shop: Edit shop, pick an item. One stall's own settings: This stall, at that stall.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Title | Empty: the stall's name in each player's language. | Text |
+| It sells |  | Everything in the shop, What fits, plus chosen items, Only items chosen for it |
+| Items on its shelves |  | On or off |
+| How many |  | 1 to 4 |
+
+#### Tavern
+
+Choose items for it in the shop: Edit shop, pick an item. One stall's own settings: This stall, at that stall.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Title | Empty: the stall's name in each player's language. | Text |
+| It sells |  | Everything in the shop, What fits, plus chosen items, Only items chosen for it |
+| Items on its shelves |  | On or off |
+| How many |  | 1 to 3 |
+
+#### Mage
+
+Choose items for it in the shop: Edit shop, pick an item. One stall's own settings: This stall, at that stall.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Title | Empty: the stall's name in each player's language. | Text |
+| It sells |  | Everything in the shop, What fits, plus chosen items, Only items chosen for it |
+| Items on its shelves |  | On or off |
+| How many |  | 1 to 3 |
+
+
+### Stall shelves
+
+`/tempest` → Stall shelves. Who can change it: `tempest.admin` or `tempest.admin.stallshelves`.
+
+#### Living shelves
+
+Real items from what a stall sells stand on it while a player is near. Needs Tempest Holograms (free).
+
+| Setting | What it does | Values |
+|---|---|---|
+| Show items on stalls |  | On or off |
+| Show from (blocks away) | Closer costs less when a server has many stalls. | 4 to 128 |
+| Items stand on the stall | Still 3D models. Off: they hang in the air like dropped items, with the game's rarity beam. | On or off |
+| Item size | 1 is the size of a dropped item; smaller items stand apart on the counter. | 0.2 to 1.5 |
+| Only items marked for the shelves | Mark them in the shop: Edit shop, pick an item, First on the shelves. Off: deals and the rest of the stock fill the shelf. | On or off |
+| A different choice each day | Marked items and deals always come first. | On or off |
+| Today's deals glow |  | On or off |
+| Glow colour |  | A colour |
+
+#### What a sale does
+
+Every stall plays its own animation; these go on top of it.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Sounds |  | On or off |
+| Sparks |  | On or off |
+| The item hops over the counter |  | On or off |
+
+
+# Crates
+
+Crates, keys, prizes and crate blocks.
+
+## What players read in /guide
+
+The `/guide` pages of this plugin, as a player sees them on a test server (numbers are examples).
+
+### Crates
+
+
+**Opening crates**
+
+- Type /crates. Each crate shows its price in copper and the prizes it can give.
+- Press Open: the price comes out of your wallet, the strip spins (or a light runs round the prize board) and stops on your prize.
+- Press x10 to open ten at once for ten times the price: you get all ten prizes straight away, listed by rarity.
+- The prize is decided the moment you pay. Closing the page or pressing Skip does not change it, and you still get it.
+- Some crates need a crate key instead of (or as well as) copper. Keys come from other crates and admins; right-click a key to see the crates.
+- A crate marked (locked) is only for players with a certain rank.
+- Crate blocks in the world open their crate when you press [F] on them. Hold the crate's key to open it at once.
+
+**Prizes**
+
+- Items go into your inventory; what does not fit drops at your feet. Copper go into your wallet.
+- Every crate card shows its rarest prize and its chance.
+- Some crates have a pity: after so many opens in a row without an Epic or better prize, the next one is always Epic or better. The card shows how close you are.
+- Win a Epic prize or better and the whole server hears about it.
+
+
+## Commands
+
+| Command | Who can use it | What it does |
+|---|---|---|
+| `/cratekey` | `crates.admin` | Give a player crate keys |
+| `/crates` (/crate) | Everyone | Open crates for prizes |
+| `/crates log` | `crates.admin` | Admins: a player's newest crate openings, for prize questions |
+| `/keyparty` | `crates.admin` | Give everyone online crate keys after a countdown (Pro) |
+
+
+## Settings
+
+Every setting is changed in game with `/tempest` and saved at once; nothing needs a restart. Amounts of 0 are off unless the setting says otherwise.
+
+### Crates
+
+`/tempest` → Crates. Who can change it: `tempest.admin` or `tempest.admin.crates`.
+
+Make and change crates in /crates with Edit crates.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Crates are open | Off: nobody can open crates. | On or off |
+| Spin time (seconds) | How long the strip runs before it stops on the prize. | 1 to 15 |
+| Prize board time (seconds) | How long the light runs round the prize board (crates with the board style). | 1 to 15 |
+| Sounds | Ticks while the strip runs, and a bigger jingle the rarer the prize. | On or off |
+| Tell everyone about | Wins of this rarity or rarer are told to the whole server and sent to Discord. | No wins, Common wins and rarer, Uncommon wins and rarer, Rare wins and rarer, Epic wins and rarer, Legendary wins only |
+
+#### The menu
+
+What players see in /crates. The order of the crates is set in Edit crates.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Title | Empty: "Crates" in each player's language. | Text |
+| Search box | Over the list of crates. | On or off |
+
+#### Rarities
+
+A prize's rarity comes from its chance. Choose the colours, and from which chance a prize counts as each.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Common |  | A colour |
+| from (%) |  | 0 to 100 |
+| Uncommon |  | A colour |
+| from (%) |  | 0 to 100 |
+| Rare |  | A colour |
+| from (%) |  | 0 to 100 |
+| Epic |  | A colour |
+| from (%) |  | 0 to 100 |
+| Legendary |  | A colour |
+
+#### Chat
+
+| Setting | What it does | Values |
+|---|---|---|
+| Chat tag | Tag | Text |
+| Colour |  | A colour |
+
+#### Free edition
+
+The Pro edition adds: any number of crates, pity counters, Open x10, rank and permission prizes, crates players open free every few hours, key parties for everyone online.
+
+
+### Crate Blocks
+
+`/tempest` → Crate Blocks. Who can change it: `tempest.admin` or `tempest.admin.crateblocks`.
+
+#### Crate blocks
+
+Place a crate block, right-click it with crates.admin and choose its crate.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Text over crate blocks | The crate's name, price or key and how to open it (needs the free Holograms plugin). | On or off |
+| Show the last rare win | A line with who last won a Rare or better prize from that crate. | On or off |
+| Openings play at the block | The lid opens, prizes swirl up and the won one flies to the player, for everyone near. | On or off |
+| Idle show seen from (blocks) | Prizes circle and sparkles rise only while a player is this close. | 4 to 64 |
+| Circling prizes per crate | Each crate's own choice (Edit crates) says whether they circle at all. | 1 to 8 |
+| Circling prizes on the server | At most this many at once, all crate blocks together (0 = none). | 0 to 500 |
+| Seconds for one turn | How slowly the prizes circle the block. | 3 to 60 |
+| Circle size (blocks) |  | 0.4 to 3 |
+| Circle height (blocks) |  | 0 to 3 |
+| Moves per second |  | 2 to 20 |
+| Seconds between sparkles | Fewer moves and sparkles are easier on players' games. | 0.5 to 30 |
+| Text height (blocks) |  | 0.5 to 5 |
+| The won prize lights up | It glows in its rarity's colour as it rises from the chest. | On or off |
+| Players can craft crate blocks | Off: only admins (coins.admin.craft) can craft them. | On or off |
+
+#### Key parties (Pro)
+
+Everyone online gets crate keys at once, after a ten-second countdown in chat. Start one with /keyparty [key] [amount], or have one every few hours.
+
+| Setting | What it does | Values |
+|---|---|---|
+| A key party every (hours) | 0 = only when an admin types /keyparty. | 0 to 168 |
+| Key | bronze, silver, gold or any item id. | Text |
+| Keys each |  | 1 to 64 |
+| Players online for one by itself |  | 1 to 500 |
+
+
+# Quests
+
+Quests, achievements, ranks, the daily sweep and server quests.
+
+## What players read in /guide
+
+The `/guide` pages of this plugin, as a player sees them on a test server (numbers are examples).
+
+### Quests and achievements
+
+
+**Achievements**
+
+- Goals for the whole time you play, like mining 100 ores or hitting the jackpot. They count by themselves, and each pays a reward once. Some are secret until you find them.
+
+**Quests**
+
+- Pick quests from the quest board in /quests: you can do 3 at a time. Daily and weekly quests come back when they reset, so you can earn them again.
+
+**Quest journal**
+
+- Every finished quest and achievement gives quest points: your rank grows from Wanderer to Legend, and higher ranks earn more from quests. Finish 3 daily quests in a day for the daily sweep bonus, bigger for every day in a row. The featured quest of the day pays more.
+
+**Server quests**
+
+- Server quests count everyone's progress together. When the target is reached, everyone who helped enough is paid, and the top helper gets more.
+
+**Progress**
+
+- The bars show how far along you are. When you finish, the reward goes straight into your wallet. Your first quest also shows under your coin counter.
+
+
+## Commands
+
+| Command | Who can use it | What it does |
+|---|---|---|
+| `/achievements` (/achievement, /ach) | Everyone | Your achievements and how close you are |
+| `/quests` (/quest) | Everyone | Your quests and the quest board |
+| `/questtrigger` | `quests.admin` | Count a custom quest trigger for a player |
+
+
+## Settings
+
+Every setting is changed in game with `/tempest` and saved at once; nothing needs a restart. Amounts of 0 are off unless the setting says otherwise.
+
+### Quests
+
+`/tempest` → Quests. Who can change it: `tempest.admin` or `tempest.admin.quests`.
+
+#### Making achievements and quests
+
+Open /quests and use the Edit (admin) tab. Admins need the permission quests.admin.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Players choose their quests | From the quest board. Off: every quest counts at once. | On or off |
+| Most quests at once | While players choose their quests. | 1 to 50 |
+| Play time only while moving | Standing still (AFK) does not count towards play time goals. | On or off |
+
+#### Quest journal
+
+Ranks, the daily sweep, the featured quest and server quests: what brings players back each day.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Quest points and ranks | Every finished goal gives points; Wanderer, Adventurer, Pathfinder, Hero, Champion and Legend. A new rank is told to everyone. | On or off |
+| Ranks raise quest rewards | From +2% for Adventurers to +10% for Legends. | On or off |
+| Daily sweep: daily quests to finish | Finish this many of the day's daily quests for a bonus. 0 = off. | 0 to 20 |
+| Daily sweep bonus |  | 0 to 1000000000 |
+| Streak: more each day in a row (%) |  | 0 to 500 |
+| Streak grows for (days) |  | 1 to 60 |
+| Featured quest pays (times) | One daily quest a day, the same for everyone. 1 = no featured quest. | 1 to 10 |
+| Server quests: top helper gets more (%) |  | 0 to 1000 |
+| Server quests: least share to be paid (%) | Of the target. Players who did less are thanked but not paid, so nobody earns by doing one thing. | 0 to 100 |
+
+#### Achievements
+
+| Setting | What it does | Values |
+|---|---|---|
+| Announce unlocks to everyone | Each goal can override this in the editor. Secret goals stay secret. | On or off |
+
+#### On screen
+
+| Setting | What it does | Values |
+|---|---|---|
+| Big title when something is done | "QUEST COMPLETE" or "ACHIEVEMENT UNLOCKED". | On or off |
+| Pop-up with the icon | A small notice at the side of the screen when something is done. | On or off |
+| Sounds | A short jingle when something is done, and coins when it pays. | On or off |
+| Quest under the coin counter | The player's first quest and how far along it is. | On or off |
+| Chat tag | Tag | Text |
+| Colour |  | A colour |
+
+#### Free edition
+
+The Pro edition adds: any number of achievements and quests, a daily rotation: a few daily quests a day, picked from all of yours.
+
+
+# Battle pass
+
+Seasons, tiers, free and premium rewards.
+
+## What players read in /guide
+
+The `/guide` pages of this plugin, as a player sees them on a test server (numbers are examples).
+
+### Battle pass
+
+- Season 1: 30 tiers. Each tier has a free reward and a premium reward.
+- Earn XP by finishing quests, playing, logging in each day and playing the server's games.
+- Unlock premium in /pass for 5,000 copper of in-game money.
+
+
+## Commands
+
+| Command | Who can use it | What it does |
+|---|---|---|
+| `/pass` (/battlepass) | Everyone | Open the battle pass: tiers, rewards and your XP |
+| `/pass premium` | `pass.admin` | Give a player the premium track for this season (admins) |
+| `/pass xp` | `pass.admin` | Give a player pass XP, or take it with a negative amount (admins) |
+
+
+## Settings
+
+Every setting is changed in game with `/tempest` and saved at once; nothing needs a restart. Amounts of 0 are off unless the setting says otherwise.
+
+### Pass
+
+`/tempest` → Pass. Who can change it: `tempest.admin` or `tempest.admin.pass`.
+
+#### The season
+
+Make the tiers in /pass, Edit tab (permission pass.admin). A new season starts there too.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Pass is on | Off: /pass says so and no XP counts. | On or off |
+| Season name | Shown at the top of /pass. | Text |
+| Season length (days) | From the day it started. 0 = no end. Rewards can still be claimed after it ends. | 0 to 365 |
+| XP for each tier |  | 1 to 1000000 |
+| Premium price | In-game money only. 0 = not for sale; the permission pass.premium always gives it. | 0 to 1000000000 |
+
+#### Where XP comes from
+
+Quests count when the Quests plugin is installed.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Daily quest done |  | 0 to 1000000 |
+| Weekly quest done |  | 0 to 1000000 |
+| One-time quest done |  | 0 to 1000000 |
+| Achievement unlocked |  | 0 to 1000000 |
+| Each minute played |  | 0 to 1000000 |
+| Play XP a day, at most |  | 0 to 1000000 |
+| Play time only while moving | Standing still (AFK) earns nothing. | On or off |
+| First login of the day |  | 0 to 1000000 |
+| Each game played | A slot spin, lottery ticket purchase, crate or coinflip. | 0 to 1000000 |
+| Game XP a day, at most |  | 0 to 1000000 |
+
+#### The /pass page
+
+How players see the tiers. Each player can switch the layout in /pass.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Start in the list view | Off: the track, tiers side by side with a card per reward. On: a row per tier. | On or off |
+| Tiers on a page of the track | 8 fit side by side; more scroll sideways. | 4 to 20 |
+| Animations | The XP bar filling up, glowing rewards, bursts, pop-ups and Claim all turning the cards over. | On or off |
+| Free track's name | Empty: FREE in each player's language. At most 16 letters. | Text |
+| Premium track's name | Empty: PREMIUM in each player's language; for example VIP or Gold. | Text |
+
+#### On screen
+
+| Setting | What it does | Values |
+|---|---|---|
+| Tell everyone when someone finishes | A chat line when a player reaches the last tier. | On or off |
+| Tier under the coin counter |  | On or off |
+| Sounds |  | On or off |
+| Chat tag | Tag | Text |
+| Colour |  | A colour |
+
+#### Pro edition
+
+Thank you for supporting Pass.
+
+
+# Events
+
+Server events with boosts, community goals and the server fund.
+
+## What players read in /guide
+
+The `/guide` pages of this plugin, as a player sees them on a test server (numbers are examples).
+
+### Server events
+
+- Server events make things better for a while: more gold from monsters and ores, bigger rewards, more battle pass XP, better shop prices.
+- Next: Monster Hunt. /events shows when.
+
+**How events work**
+
+- During an event, what you do for its goal counts for the whole server. When the goal is reached, everyone who did at least 1% of it gets the reward. The three players who did the most win prizes at the end.
+
+**Overdrive**
+
+- Some events have stages: after the goal comes a bigger one. Each stage makes every boost stronger and pays the goal reward again.
+
+**The server fund**
+
+- Everyone can put money in the server fund (/events, or /events give 500). When it is full, Gold Rush starts for the whole server.
+
+
+## Commands
+
+| Command | Who can use it | What it does |
+|---|---|---|
+| `/events` (/event) | Everyone | Server events: what is on, what is coming, and the community goal |
+| `/events extend` | `events.admin` | More or fewer minutes for the event that is on (admins) |
+| `/events give` (/fund) | Everyone | Put money in the server fund: when it is full, an event starts for everyone |
+| `/events list` | `events.admin` | Every event and the next starts (admins) |
+| `/events start` | `events.admin` | Start an event now (admins) |
+| `/events stop` | `events.admin` | Stop the event that is on (admins) |
+
+
+## Settings
+
+Every setting is changed in game with `/tempest` and saved at once; nothing needs a restart. Amounts of 0 are off unless the setting says otherwise.
+
+### Events
+
+`/tempest` → Events. Who can change it: `tempest.admin` or `tempest.admin.events`.
+
+Server events boost the Tempest plugins for a while. Make and schedule them in /events, Manage.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Events are on | Off: nothing starts, and a running event stops boosting and counting. | On or off |
+
+#### Telling players
+
+How players hear about events.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Big title on screen | When an event starts, reaches its goal and ends. | On or off |
+| Chat messages |  | On or off |
+| Sounds |  | On or off |
+| Warn before a start (minutes) | Players are told this long before a scheduled event. 0: not told. | 0 to 120 |
+| Show on the board | The event, its time left and the goal on the Tempest board (players can hide it in /board). | On or off |
+| Chat tag | Tag | Text |
+| Tag colour |  | A colour |
+
+#### Server fund
+
+Players put money in together; when it is full, the event below starts for everyone. The money leaves the economy.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Server fund |  | On or off |
+| Event it starts |  | Gold Rush, Monster Hunt, XP Frenzy, Market Day, Lucky Hour |
+| Money to fill it |  | 1 to 1000000000 |
+| Tell everyone about gifts of (% of the fund) | 0: never. | 0 to 100 |
+
+#### Lucky events
+
+Now and then, by chance, an event starts by itself while nothing else is on.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Lucky events |  | On or off |
+| Which event |  | Gold Rush, Monster Hunt, XP Frenzy, Market Day, Lucky Hour |
+| Chance each hour (%) |  | 0 to 100 |
+| Players online at least | Fewer players online: no lucky event, so nobody misses it. | 0 to 500 |
+
+
+# Contracts and bounties
+
+Player contracts, server orders, the market, ranks and bounties.
+
+## What players read in /guide
+
+The `/guide` pages of this plugin, as a player sees them on a test server (numbers are examples).
+
+### Contracts
+
+- The contracts board: the server and other players want items and pay for them. Deliver what you have, or post an order for what you need.
+
+**Delivering**
+
+- Open /contracts and press DELIVER on a contract: the items leave your inventory and you are paid at once. Server orders start again every day or week.
+
+**Posting**
+
+- In the Post tab, pick an item, how many and the total reward. The reward is taken when you post (plus a 5% fee) and paid to whoever delivers. Collect the items in My contracts; money not used comes back when the contract ends.
+
+**The market**
+
+- Put items up for sale in the Market tab: they wait there and buyers pay you at once. Buy with one click, cheapest first; the 7-day prices show what things are worth.
+
+**Bounties**
+
+- In the Bounties tab, put money on another player. It is taken when you post (plus a 10% fee) and paid to whoever kills them. If nobody does, it comes back when the bounty ends, without the fee.
+
+**Contractor ranks**
+
+- Every item you deliver to a server order counts towards your rank: Courier, Trader, Merchant and Tycoon earn more from server orders.
+
+
+## Commands
+
+| Command | Who can use it | What it does |
+|---|---|---|
+| `/contracts` (/contract) | Everyone | Open the contracts board: deliver items for money, or ask for the items you need |
+| `/contracts bounties` (/bounty) | Everyone | Bounties: put money on a player, or hunt one down |
+| `/contracts list` | `contracts.admin` | Admins: the board in chat |
+| `/contracts mine` | Everyone | Your contracts: collect what was delivered |
+| `/contracts post` | Everyone | Post a contract: ask for items and pay for them |
+
+
+## Settings
+
+Every setting is changed in game with `/tempest` and saved at once; nothing needs a restart. Amounts of 0 are off unless the setting says otherwise.
+
+### Contracts
+
+`/tempest` → Contracts. Who can change it: `tempest.admin` or `tempest.admin.contracts`.
+
+A contracts board: players and the server post item orders, others deliver and get paid. Server orders are made in /contracts, Manage.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Contracts are on | Off: nothing can be posted or delivered. Contracts keep their money and items until it is on again. | On or off |
+| Server orders | The server's own orders are on the board. They pay from nothing and take items out of the game. | On or off |
+| Contractor rank bonus | Players who delivered more earn up to 10% more from server orders. | On or off |
+
+#### Players' contracts
+
+Players post orders; the reward is taken when they post and paid out as items arrive.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Players may post contracts |  | On or off |
+| Open contracts per player |  | 0 to 100 |
+| Posting fee (%) | Taken when posting and never given back: it takes money out of the economy. | 0 to 50 |
+| Least pay per item |  | 1 to 1000000 |
+| Most items in one contract |  | 1 to 1000000 |
+| Largest reward |  | 1 to 1000000000 |
+| How long contracts and offers last (hours) | Players pick one of these. Separate with commas, e.g. 24, 72, 168. | Text |
+| Items nobody may ask for or sell | Item ids separated with commas. Coins never can. | Text |
+
+#### Permissions
+
+Off: everyone may. On: only players with the permission.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Posting contracts needs contracts.post |  | On or off |
+| Selling on the market needs contracts.sell |  | On or off |
+
+#### Telling players
+
+Chat lines and sounds.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Announce new contracts | One chat line to everyone (at most once a minute per player), and when server orders start again. | On or off |
+| Sounds |  | On or off |
+| Chat tag | Tag | Text |
+| Tag colour |  | A colour |
+
+
+### Market & ranks
+
+`/tempest` → Market & ranks. Who can change it: `tempest.admin` or `tempest.admin.marketranks`.
+
+#### Market
+
+Players put items up for sale; others buy at once, cheapest first. Prices of the last 7 days are shown.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Market is on |  | On or off |
+| Sales tax (%) | Kept from each sale; the seller gets the rest. It takes money out of the economy. | 0 to 50 |
+| Offers per player |  | 0 to 100 |
+| Highest price per item |  | 1 to 1000000000 |
+
+#### Contractor ranks
+
+By items delivered; the bonus is on server orders. Leave a name empty for the built-in one in each player's language.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Rank 1 name | Newcomer | Text |
+| Rank 1: bonus (%) |  | 0 to 100 |
+| Rank 2 name | Courier | Text |
+| Rank 2: items delivered |  | 1 to 10000000 |
+| Rank 2: bonus (%) |  | 0 to 100 |
+| Rank 3 name | Trader | Text |
+| Rank 3: items delivered |  | 1 to 10000000 |
+| Rank 3: bonus (%) |  | 0 to 100 |
+| Rank 4 name | Merchant | Text |
+| Rank 4: items delivered |  | 1 to 10000000 |
+| Rank 4: bonus (%) |  | 0 to 100 |
+| Rank 5 name | Tycoon | Text |
+| Rank 5: items delivered |  | 1 to 10000000 |
+| Rank 5: bonus (%) |  | 0 to 100 |
+
+
+### Bounties
+
+`/tempest` → Bounties. Who can change it: `tempest.admin` or `tempest.admin.bounties`.
+
+Players put money on each other; whoever kills that player collects it. Only for servers where players can fight.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Bounties are on | Off: the tab is gone and kills pay nothing. Bounties already posted keep their money, and it still comes back when they end. | On or off |
+| Smallest bounty |  | 1 to 1000000000 |
+| Posting fee (%) | Taken when posting and never given back: it takes money out of the economy and makes moving money between friends cost something. | 0 to 50 |
+| Bounties per player | How many players one player may have a bounty on at once. The largest bounty and how long one lasts are in the Contracts tab. | 0 to 100 |
+
+#### Fair play
+
+Against camping a respawn and friends farming each other.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Protection after a claim (minutes) | Nobody collects on that player for this long. New bounties can still be posted. | 0 to 1440 |
+| Same hunter, same player (hours) | One hunter cannot collect on the same player again for this long. | 0 to 720 |
+
+#### Telling players
+
+Chat lines and the Tempest board.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Announce bounties | One chat line to everyone when a bounty is posted or claimed, and in the Discord feed. The player it is on always hears. | On or off |
+| Posting bounties needs contracts.bounty |  | On or off |
+
+
+# Town projects
+
+Buildings the players build together.
+
+## What players read in /guide
+
+The `/guide` pages of this plugin, as a player sees them on a test server (numbers are examples).
+
+### Town projects
+
+- The town builds together: every donation raises the building on its plot, block by block.
+
+**Donating**
+
+- /projects shows what each project needs. GIVE hands over what you carry, up to what is still needed.
+
+**Staying safe**
+
+- Plots under construction cannot be changed by hand. If a block would land on you, you are moved aside; /projects out takes you out of a plot. A cancelled project gives everything back.
+
+
+## Commands
+
+| Command | Who can use it | What it does |
+|---|---|---|
+| `/projects` (/project) | Everyone | See the town projects and donate to them |
+| `/projects cancel` | `projects.admin` | Cancel a project: everything goes back |
+| `/projects coins` | `projects.admin` | Set the coin goal of a project |
+| `/projects finish` | `projects.admin` | Finish a project now: the whole building goes up |
+| `/projects list` | `projects.admin` | List every project |
+| `/projects material` | `projects.admin` | Change a material of a project (0 takes it off) |
+| `/projects new` | `projects.admin` | Pick a prefab and place a new project |
+| `/projects out` | Everyone | Leave a plot under construction |
+| `/projects pause` | `projects.admin` | Pause a project |
+| `/projects place` | `projects.admin` | Go back to the plot you are placing |
+| `/projects plan` | `projects.admin` | Mark a plot for a prefab where you stand |
+| `/projects prefabs` | `projects.admin` | Find prefabs by name |
+| `/projects remove` | `projects.admin` | Take an ended project off the list |
+| `/projects resume` | `projects.admin` | Go on with a paused project |
+| `/projects reward` | `projects.admin` | Add a console command run for each donor at the end |
+| `/projects rewarditems` | `projects.admin` | Pro: items every donor gets at the end (none clears them) |
+| `/projects start` | `projects.admin` | Start the project on the marked plot |
+| `/projects stop` | `projects.admin` | Stop a project: what stands stays |
+
+
+## Settings
+
+Every setting is changed in game with `/tempest` and saved at once; nothing needs a restart. Amounts of 0 are off unless the setting says otherwise.
+
+### Projects
+
+`/tempest` → Projects. Who can change it: `tempest.admin` or `tempest.admin.projects`.
+
+Players donate items and coins, and a building rises block by block on a marked plot. Make one with /projects new: pick a prefab, move its ghost, start.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Projects are on | Off: no donations, and the builders rest. Plots keep their guard, money and items. | On or off |
+| Blocks placed each second | How fast donated blocks go up. Lower it if a big plot slows the server. | 4 to 2000 |
+| Move players out of the way | On: a player a block would land on goes to the nearest safe spot beside the plot. Off: the block waits until they step away. | On or off |
+
+#### New projects
+
+Used when a project starts. Change one project with /projects material and /projects coins.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Materials asked for (%) | 100: one item for each block of the building. | 1 to 1000 |
+| Different items asked for | The most used come first. What only creative mode has is never asked for. Lower this for a shorter list: what is left out, like a single door, goes up for free at the end. | 1 to 64 |
+| Share paid by coins (%) | With a coin goal: how much of the building the coins pay for. | 0 to 100 |
+| Any item of the same kind counts | On: any wood planks count for the planks asked for. The building keeps the blocks of its plan, and a project's page changes this. | On or off |
+| Keep water on the plot | For docks and wells: water that stands on the plot stays, and the blocks of the building go in around it. The placing panel can choose for each project. | On or off |
+
+#### Telling players
+
+What everyone sees.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Announce finished buildings |  | On or off |
+| Progress text over the plot | Needs Tempest Holograms. | On or off |
+| Show the finished building as a ghost | A see-through plan stands on the plot, and the real blocks fill it. Off: no project shows one, whatever is set for it. | On or off |
+| Ghost of a new project | Off: nothing shows on the plot, and real blocks appear as people donate. The placing panel can choose for each project, and so can a project's own page. | Everyone, Only players in creative mode, Off: real blocks only |
+| New projects cannot be walked through | Invisible solid blocks hold the walls that are still to come, so the plan feels solid. Only for a plan everyone sees. Doorways stay open, and a project's page changes it. | On or off |
+| Frame around a plot under way | Everyone near sees where a site is, even with its plan hidden. | On or off |
+| Colour of the frame |  | A colour |
+| How far the frame shows (blocks) |  | 16 to 512 |
+
+#### Pro edition
+
+Thank you for supporting Projects.
+
+
+### Placing
+
+`/tempest` → Placing. Who can change it: `tempest.admin` or `tempest.admin.placing`.
+
+#### The look
+
+What an admin starts with in the placing panel. The VIEW tab changes the ghost, the box and the other plots while placing.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Ghost of the building | The game's own see-through copy of the building. Everyone near sees it. Off: only the outline, which only the admin sees. | On or off |
+| Largest building with a ghost (blocks) | A bigger one starts without its ghost, as all of it is sent to everyone near. It can still be switched on in the panel. | 100 to 400000 |
+| Outline of the plot |  | On or off |
+| Outline thickness (blocks) |  | 0.02 to 1 |
+| Colour when it fits |  | A colour |
+| Colour when it does not |  | A colour |
+| See-through box over the plot (%) | How solid the coloured box around the plot is. 0: no box. | 0 to 100 |
+| Show the plots nearby | Outlines of the other projects, to line a street up. | On or off |
+| Colour of the plots nearby |  | A colour |
+| Red blocks where it goes into something | Only the admin sees them. They show what the building would replace, and in a second colour what stops it from starting. | On or off |
+| Colour of those blocks |  | A colour |
+| Colour of what stops it |  | A colour |
+| How solid those blocks look (%) |  | 5 to 100 |
+
+#### Moving
+
+How the plot moves.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Step sizes | The sizes the STEP button goes through, in blocks, such as 1, 5, 10, 25. | Text |
+| Start on the ground | A new plot settles where it fits the land best. Off: it starts at the admin's feet. | On or off |
+| How far AIM reaches (blocks) |  | 8 to 256 |
+| Gap left by BESIDE (blocks) |  | 0 to 64 |
+
+#### The camera
+
+The views of the placing panel.
+
+| Setting | What it does | Values |
+|---|---|---|
+| View to start in |  | Normal, From the top, From an angle |
+| Closest zoom (blocks) |  | 4 to 64 |
+| Farthest zoom (blocks) |  | 4 to 256 |
+| Zoom step (blocks) |  | 1 to 64 |
+| Zoom to start at (blocks) | A big building starts farther away, so all of it is in view. | 4 to 256 |
+
+
+# Town
+
+Features the town unlocks, and the mayor.
+
+## What players read in /guide
+
+The `/guide` pages of this plugin, as a player sees them on a test server (numbers are examples).
+
+### Town
+
+- The whole server is one town, and it unlocks new features as it grows. /town shows what is unlocked and what is still needed.
+
+**How things unlock**
+
+- Some unlocks wait for a town building to be finished: donate to it with /projects. Others come on a date or after another unlock.
+
+
+## Commands
+
+| Command | Who can use it | What it does |
+|---|---|---|
+| `/mayor` | Everyone | Town: who the mayor is and how to become mayor |
+| `/mayor boost` | Everyone | Mayor: give everyone a boost for a while |
+| `/mayor clear` | Everyone | Admins: the town has no mayor until the term ends |
+| `/mayor fine` | Everyone | Mayor: fine a player who misbehaved |
+| `/mayor reward` | Everyone | Mayor: reward a player who helped the town |
+| `/mayor set` | Everyone | Admins: make an online player mayor until the term ends |
+| `/town` | Everyone | Town: what the town has unlocked and what it still needs |
+| `/town lock` | Everyone | Admins: keep an unlock locked |
+| `/town unlock` | Everyone | Admins: keep an unlock unlocked |
+
+
+## Settings
+
+Every setting is changed in game with `/tempest` and saved at once; nothing needs a restart. Amounts of 0 are off unless the setting says otherwise.
+
+### Town
+
+`/tempest` → Town. Who can change it: `tempest.admin` or `tempest.admin.town`.
+
+The town unlocks features as it grows. Make and change unlocks in /town, MANAGE tab; this tab is for all of them.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Town decides what is unlocked | Off: every feature is on, as if Town were not installed. Unlocks keep their state for when it is on again. | On or off |
+| Players see locked unlocks | On: /town shows what is still locked and what it needs. Off: only what the town has. | On or off |
+
+#### Telling players
+
+When something is unlocked or locked.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Announce in chat |  | On or off |
+| Seconds before announcing it again | Against chat floods. Console commands of an unlock always run. | 5 to 86400 |
+| Chat tag | Tag | Text |
+| Colour of the tag |  | A colour |
+
+#### Mayor
+
+Each term the player who gave most to town projects becomes mayor, with a few small powers you limit here. Only in-game donations count. Players see it all with /mayor; admins can /mayor set or /mayor clear.
+
+| Setting | What it does | Values |
+|---|---|---|
+| The town has a mayor |  | On or off |
+| A term lasts (days) |  | 1 to 90 |
+| Least given to become mayor | In points: one per coin, and the next setting per item. | 0 to 10000000 |
+| Points per item given |  | 0 to 10000 |
+| The mayor's boost | For everyone online, started with /mayor boost. | Jobs pay, Mob coins, Ore coins, Quest reward, Shop sell, Daily reward, Pass xp, Shop discount, Contract pay |
+| Boost (%) |  | 1 to 100 |
+| For (minutes) |  | 1 to 1440 |
+| Boosts each term |  | 0 to 20 |
+| Reward (coins) | /mayor reward <player>: new coins for a player who helped. Never the mayor, each player once a term. | 0 to 1000000 |
+| Rewards each term |  | 0 to 20 |
+| Fine (coins) | /mayor fine <player>: never more than they have, never an admin; only the two of them are told. Every use is in the admin log. | 0 to 1000000 |
+| Fines each term |  | 0 to 20 |
+
+#### Buildings
+
+Tempest Projects is installed: an unlock can wait for a building to be finished.
+
+
+# Jobs
+
+Paid work with job levels.
+
+## What players read in /guide
+
+The `/guide` pages of this plugin, as a player sees them on a test server (numbers are examples).
+
+### Jobs
+
+- Take a job and get paid for your work: mining ores, cutting trees, harvesting crops, hunting mobs.
+- Each job has its own level: the higher it is, the more it pays. /jobs join miner takes one.
+
+
+## Commands
+
+| Command | Who can use it | What it does |
+|---|---|---|
+| `/jobs` | Everyone | Jobs: the jobs, your levels, and how to take one |
+| `/jobs info` | Everyone | Your jobs and what they paid today |
+| `/jobs join` | Everyone | Take a job |
+| `/jobs leave` | Everyone | Leave a job |
+
+
+## Settings
+
+Every setting is changed in game with `/tempest` and saved at once; nothing needs a restart. Amounts of 0 are off unless the setting says otherwise.
+
+### Jobs
+
+`/tempest` → Jobs. Who can change it: `tempest.admin` or `tempest.admin.jobs`.
+
+Players take jobs with /jobs join and are paid for their work, more at higher job levels. What each job pays for is edited on the /jobs page (EDIT tab, for admins).
+
+| Setting | What it does | Values |
+|---|---|---|
+| Jobs is on | Off: no job pays | On or off |
+
+#### Holding jobs
+
+Players with tempest.jobs.slots.2 (up to .10) hold more.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Jobs a player holds |  | 1 to 10 |
+| Keep the level when leaving |  | On or off |
+| Minutes before taking a job again |  | 0 to 43200 |
+
+#### Levels
+
+Job XP for the next level is base x level ^ power.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Highest job level |  | 1 to 1000 |
+| XP base |  | 1 to 1000000 |
+| XP power | 1 is the same XP every level; 1.5 grows | 1 to 3 |
+| More pay per level (%) | Level 50 at 2% pays double | 0 to 100 |
+
+#### Paying
+
+Earnings are added up and paid together, held to the caps.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Pay every (seconds) |  | 1 to 60 |
+| Most a player earns an hour | 0 is no limit | 0 to 1000000000 |
+| Most the server pays an hour | All players together; 0 is no limit | 0 to 1000000000 |
+| Town bonus (%) | With Tempest Town, once an unlock gives jobs:town_bonus | 0 to 1000 |
+| Pay scale | All job pay times this: 0.5 halves it, 2 doubles it | 0.01 to 100 |
+| Highest level without the guild hall | 0 is no such limit; a town unlock (jobs:guild_hall) lifts it | 0 to 1000 |
+
+#### Telling players
+
+| Setting | What it does | Values |
+|---|---|---|
+| Tell level-ups |  | On or off |
+| A chat line for each payment | Off: the money counter shows it | On or off |
+| Job XP bar while working | A bar under the money counter for a few seconds after each payment | On or off |
+| Job XP bar: seconds shown |  | 1 to 60 |
+| Level-up sound |  | SFX_Discovery_Z1_Short, None |
+
+
+### Jobs bonuses
+
+`/tempest` → Jobs bonuses. Who can change it: `tempest.admin` or `tempest.admin.jobsbonuses`.
+
+#### Bonuses
+
+Streaks, felled trees and what the server's contracts want pay more.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Streak: seconds between blocks | 0 is no streaks | 0 to 60 |
+| Streak: more per block (%) |  | 0 to 100 |
+| Streak: the most (%) |  | 0 to 500 |
+| Streak sound |  | On or off |
+| Streak sound | Plays higher with each block | SFX_Crystal_Hit, None |
+| Tool tiers, worst first | Each tier above the first adds a job's tool bonus once | Text |
+| Felled tree: more per log (%) |  | 0 to 100 |
+| Felled tree: the most (%) | 0 is no tree bonus | 0 to 500 |
+| Felled tree: blocks around a log |  | 1 to 8 |
+| Felled tree: blocks above a log |  | 4 to 64 |
+| Wanted by contracts (%) | With Tempest Contracts: work bringing in an item on the board pays this much more | 0 to 1000 |
+| Builder: minutes a block must stand |  | 1 to 120 |
+
+#### Mob farms
+
+Many kills of one kind of mob in one spot pay less and less.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Minutes counted |  | 1 to 240 |
+| Kills that pay in full |  | 1 to 10000 |
+| Size of a spot (blocks) |  | 4 to 256 |
+| Each kill after pays less (%) |  | 0 to 100 |
+| Never under (%) |  | 0 to 100 |
+| Mobs that never pay | Parts of mob names, commas between: Chicken, Dummy | Text |
+
+#### Jobs on this server
+
+Pay tables are edited on the /jobs page (EDIT tab).
+
+| Setting | What it does | Values |
+|---|---|---|
+| Miner job |  | On or off |
+| Woodcutter job |  | On or off |
+| Farmer job |  | On or off |
+| Hunter job |  | On or off |
+| Crafter job |  | On or off |
+| Builder job |  | On or off |
+| Explorer job |  | On or off |
+
+
+# Trade
+
+Safe trades between players.
+
+## What players read in /guide
+
+The `/guide` pages of this plugin, as a player sees them on a test server (numbers are examples).
+
+### Trade
+
+- Trade items and coins safely with another player, in a window where both must agree.
+
+**How to trade**
+
+- /trade <player> asks them; they answer /trade <your name> or /trade accept. In the window, click an item of yours, choose how many and add it; add coins if you like. When both press Ready, a short countdown runs and the trade is done.
+
+**Why nobody can be cheated**
+
+- What you offer is held safely until the trade is done, and goes back if it is cancelled, the window closes or a player leaves. Any change makes both players not ready and stops the countdown, so nobody can swap an item at the last moment.
+
+
+## Commands
+
+| Command | Who can use it | What it does |
+|---|---|---|
+| `/trade` | Everyone | Trade with a player: /trade <player>, or accept, deny, toggle, open |
+
+
+## Settings
+
+Every setting is changed in game with `/tempest` and saved at once; nothing needs a restart. Amounts of 0 are off unless the setting says otherwise.
+
+### Trade
+
+`/tempest` → Trade. Who can change it: `tempest.admin` or `tempest.admin.trade`.
+
+Safe trading between players: a trade window for items and coins, both confirm.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Trade is on | Off: /trade does nothing. | On or off |
+
+#### Where players must be
+
+Trades are safe anywhere: offered items are held by the server until the trade is done.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Players must be near each other | Off: players can trade from anywhere on the server. | On or off |
+| Near means within (blocks) |  | 2 to 1000 |
+| Only in the same world | Always on while players must be near each other. | On or off |
+
+#### Coins
+
+Players can put coins into a trade too (with any economy).
+
+| Setting | What it does | Values |
+|---|---|---|
+| Coins in trades | Off: items only. To switch /pay off, use the Coins tab: Players can pay each other. | On or off |
+| Tax on traded coins (%) | Taken from the coins that change hands and removed from the economy. 0 = none. | 0 to 50 |
+
+#### The trade
+
+What keeps trades fair.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Item slots for each player |  | 1 to 18 |
+| Countdown after both are ready (seconds) | Any change stops it, so nobody can swap an item at the last moment. | 1 to 10 |
+| A request waits (seconds) |  | 10 to 600 |
+| Before asking the same player again (seconds) |  | 0 to 600 |
+| Items that can never be traded | Item ids, with commas. End with * for every id that starts so: Crate_Key_* | Text |
+| Log every trade | In the server log and /tempest log: who gave what to whom. | On or off |
+
+
+# Slot machines
+
+## What players read in /guide
+
+The `/guide` pages of this plugin, as a player sees them on a test server (numbers are examples).
+
+### Slot machines
+
+
+**How to play**
+
+- Walk up to a slot machine and press F. Each spin takes your bet from your wallet; line up three of the same symbol to win.
+
+**Your bet**
+
+- Crouch and press F on a machine, or type /slotbet, to choose your bet: 10, 50, 100 or 500 copper. Yours is 10 right now. Every prize below is your bet times the payout, so a bigger bet wins bigger.
+
+**What three of a kind pay**
+
+- Three cherries: 2 times your bet
+- Three bells: 4 times your bet
+- Three coins: 6 times your bet
+- Three diamonds: 16 times your bet
+
+**The jackpot**
+
+- Three sevens win the jackpot: 10 times your bet plus the whole pot, which is 500 copper right now. Part of every lost spin goes into the pot, so it keeps growing until someone wins it.
+- Bet 500 to win the whole pot. A smaller bet wins a share: 10 wins 2% of it.
+
+**Your winnings**
+
+- Winnings come out of the machine as coins. For 90 seconds only you can pick them up; after that, anyone can.
+
+**Good to know**
+
+- A machine takes one spin at a time. If someone else is spinning, wait for the reels to stop.
+- The machines are a game of luck. Some spins win big, but over many spins they pay back less than you put in.
+- Only admins can build slot machines on this server.
+
+
+## Commands
+
+| Command | Who can use it | What it does |
+|---|---|---|
+| `/jackpot` | Everyone | Show the slot machine jackpot |
+| `/slotbet` | Everyone | Choose how much each slot machine spin costs |
+| `/slotstats` | `slotmachine.admin.stats` | Show slot machine totals and payback |
+| `/slotstats reset` | `slotmachine.admin.stats` | Start the slot machine totals again from zero |
+| `/slottheme` | `slotmachine.admin.theme` | Gives you a slot machine with the chosen theme |
+| `/slottoken` | `slotmachine.admin.token` | Gives you a slot machine token |
+
+
+## Settings
+
+Every setting is changed in game with `/tempest` and saved at once; nothing needs a restart. Amounts of 0 are off unless the setting says otherwise.
+
+### Slot Machine
+
+`/tempest` → Slot Machine. Who can change it: `tempest.admin` or `tempest.admin.slots`.
+
+#### Bets
+
+Players crouch and press F on a machine (or type /slotbet) to choose their bet.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Default bet | New players start here. | 1 to 1000000000 |
+| Bet 2 | 0 = off | 0 to 1000000000 |
+| Bet 3 | 0 = off | 0 to 1000000000 |
+| Bet 4 | 0 = off | 0 to 1000000000 |
+| Bet 5 | 0 = off | 0 to 1000000000 |
+| Show the bet picker on first use | So every player finds out they can choose. | On or off |
+
+#### Winning
+
+| Setting | What it does | Values |
+|---|---|---|
+| Win chance (%) | Line up three of a kind. Prizes are on the Slot Prizes tab. | 0 to 100 |
+| Pay into the wallet | Off: coins pour out of the machine. | On or off |
+| Winner-only pickup (seconds) | Dropped coins belong to the winner this long. 0 = anyone. | 0 to 3600 |
+| Slot token prize (x bet) | For the hand-held slot token item. | 1 to 1000000 |
+
+#### Show
+
+| Setting | What it does | Values |
+|---|---|---|
+| Coin fountain on a win | Coins fly out of the machine (just for show). | On or off |
+| Announce wins from | Tell everyone about wins this big. 0 = off. | 0 to 1000000000000 |
+
+#### Other
+
+| Setting | What it does | Values |
+|---|---|---|
+| Players can craft slot machines | Off: only admins can. | On or off |
+| Chat tag | Tag | Text |
+| Colour |  | A colour |
+
+#### Free edition
+
+The Pro edition adds: machine themes (Medieval, Pirate, Frost, Dragon, Arcane).
+
+
+### Slot Prizes
+
+`/tempest` → Slot Prizes. Who can change it: `tempest.admin` or `tempest.admin.slots`.
+
+#### Symbols
+
+What three of a kind pays (times the bet), and how often it comes up compared with the others.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Cherries | Pays (x bet) | 0.1 to 1000000 |
+| How often |  | 0 to 100000 |
+| Bells | Pays (x bet) | 0.1 to 1000000 |
+| How often |  | 0 to 100000 |
+| Coins | Pays (x bet) | 0.1 to 1000000 |
+| How often |  | 0 to 100000 |
+| Diamonds | Pays (x bet) | 0.1 to 1000000 |
+| How often |  | 0 to 100000 |
+| Sevens | Pays (x bet) | 0.1 to 1000000 |
+| How often |  | 0 to 100000 |
+
+#### Jackpot
+
+Three sevens wins a pot that grows from lost bets.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Progressive jackpot | Off: sevens are an ordinary win. | On or off |
+| Jackpot chance (%) | Per spin. | 0 to 100 |
+| Share of lost bets (%) | Added to the pot from every losing spin. | 0 to 100 |
+| Starting amount | What the pot starts at after it is won. | 0 to 1000000000 |
+| Pot right now |  | 0 to 1000000000000 |
+| Smaller bets win a share | Off: every bet wins the whole pot. | On or off |
+| Announce jackpots | A message and a title for everyone. | On or off |
+| Pot under the coin counter |  | On or off |
+
+
+# Lottery
+
+## What players read in /guide
+
+The `/guide` pages of this plugin, as a player sees them on a test server (numbers are examples).
+
+### Lottery
+
+
+**How it works**
+
+- Buy tickets for 100 copper each. Every 30 minutes one ticket is drawn, and its owner wins the whole pot. The more tickets you have, the better your chance.
+
+**This round**
+
+- Pot: 0 copper
+- Tickets sold: 0. Yours: 0
+- Drawing in: 29 minutes
+
+**Good to know**
+
+- Your tickets are kept if the server restarts. If you are offline when you win, the coins still go to your wallet.
+
+
+## Commands
+
+| Command | Who can use it | What it does |
+|---|---|---|
+| `/lottery` (/lotto) | Everyone | Buy lottery tickets and check status |
+| `/lottery buy` | Everyone | Buy lottery tickets |
+
+
+## Settings
+
+Every setting is changed in game with `/tempest` and saved at once; nothing needs a restart. Amounts of 0 are off unless the setting says otherwise.
+
+### Lottery
+
+`/tempest` → Lottery. Who can change it: `tempest.admin` or `tempest.admin.lottery`.
+
+Players buy tickets; every drawing one ticket wins the pot.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Lottery open | Off: no tickets on sale. Tickets already bought are still drawn. | On or off |
+
+#### Tickets
+
+| Setting | What it does | Values |
+|---|---|---|
+| Ticket price |  | 1 to 1000000000 |
+| Most in one purchase |  | 1 to 1000000 |
+| Most per player | In one round. 0 = no limit. | 0 to 1000000 |
+
+#### Drawings
+
+| Setting | What it does | Values |
+|---|---|---|
+| Time between drawings (seconds) |  | 5 to 604800 |
+| Fewest players | With fewer, the tickets wait for the next drawing. | 1 to 1000 |
+
+#### Prize
+
+| Setting | What it does | Values |
+|---|---|---|
+| Winner's share (%) | The rest leaves the game. | 0 to 100 |
+| Starting pot | Put in by the server at the start of every round. | 0 to 1000000000 |
+
+#### Announcements
+
+| Setting | What it does | Values |
+|---|---|---|
+| Announce ticket sales | "Steve bought 3 tickets. The pot is now ..." | On or off |
+| Announce the winner | Off: only the winner is told. | On or off |
+| Warn before a drawing |  | On or off |
+| Warn how long before (seconds) |  | 5 to 86400 |
+| Pot under the coin counter | With the time left to the drawing. | On or off |
+| Chat tag | Tag | Text |
+| Colour |  | A colour |
+
+
+# Coinflip
+
+## What players read in /guide
+
+The `/guide` pages of this plugin, as a player sees them on a test server (numbers are examples).
+
+### Coinflip
+
+
+**How it works**
+
+- Make a room: pick a stake and a side, heads or tails. Your stake is held while the room is open.
+- Another player joins with the same stake on the other side. The coin flips, and the winner takes the pot.
+- Stakes from 10 copper to 1,000,000 copper.
+- A room nobody joins closes after 30 min and the stake comes back.
+- If the server restarts, open rooms close and their stakes come back. A coin already in the air is paid out.
+
+**Provably fair**
+
+- Every room has a secret seed from the start. Its SHA-256 is shown while the room is open, so it cannot be changed later.
+- After the flip the seed is shown. The roll is the first 13 hex digits of SHA-256(seed:room id) divided by 16^13; under 0.5 is heads.
+
+**You**
+
+- Won 1, lost 2. Profit: +850 copper (staked 2,150 copper in all).
+
+**Admins also read:**
+
+- Won 2, lost 1. Profit: -850 copper (staked 2,150 copper in all).
+
+
+## Commands
+
+| Command | Who can use it | What it does |
+|---|---|---|
+| `/coinflip` (/cf) | Everyone | Open the coinflip rooms |
+| `/coinflip cancel` | Everyone | Close your open rooms and get your stakes back |
+| `/coinflip create` | Everyone | Open a room with a stake |
+| `/coinflip join` | Everyone | Join a player's room |
+| `/coinflip list` | Everyone | List the open rooms in chat |
+
+
+## Settings
+
+Every setting is changed in game with `/tempest` and saved at once; nothing needs a restart. Amounts of 0 are off unless the setting says otherwise.
+
+### Coinflip
+
+`/tempest` → Coinflip. Who can change it: `tempest.admin` or `tempest.admin.coinflip`.
+
+Players stake coins on heads or tails; another player matches the stake and the coin decides.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Coinflip is open | Off: no new rooms and no joining. Open rooms can still be cancelled. | On or off |
+
+#### Stakes
+
+| Setting | What it does | Values |
+|---|---|---|
+| Smallest stake |  | 1 to 1000000000 |
+| Largest stake | 0 = no limit. | 0 to 1000000000000 |
+| Open rooms per player |  | 1 to 20 |
+| Rooms close after (minutes) | A room nobody joins closes and its stake goes back. 0 = never. | 0 to 1440 |
+| House fee (%) | Kept from the pot; it leaves the game. | 0 to 50 |
+
+#### The flip
+
+| Setting | What it does | Values |
+|---|---|---|
+| Flip time (seconds) | How long the coin spins; the winner is paid when it lands. | 1 to 10 |
+| Show the flip to the room's maker | Opens the flip for them when someone joins, unless another page is open. | On or off |
+| Sounds |  | On or off |
+
+#### Announcements
+
+| Setting | What it does | Values |
+|---|---|---|
+| Tell everyone about new rooms |  | On or off |
+| Tell everyone about flips from (pot) | Also sent to Discord. 0 = never. | 0 to 1000000000000 |
+| Chat tag | Tag | Text |
+| Colour |  | A colour |
+
+
+# Leveling mods for server owners
+
+What the Tempest plugins do with Endless Leveling and MMO Skill Tree, alone or together, and where it is set.
+
+Tempest works with **Endless Leveling** (by Airijko) and **MMO Skill Tree** (by Ziggfreed). Nothing of either mod
+is shipped: Tempest Core finds them through their public APIs within half a minute of the server starting. Without
+them, nothing changes, and no level requirement ever locks a player out because a mod is missing.
+
+## One mod, or both
+
+| Installed | What happens |
+|---|---|
+| Endless Leveling only | Its level counts for everything below; its prestige, dungeons, wave gates, raids, classes and mob levels work too |
+| MMO Skill Tree only | Its skills become one level (total, combat, power level or the highest skill, as you choose); skill and achievement rewards work too |
+| Both | You choose whose level counts ("Leveling mod" on the Leveling tab). Only that mod's level-ups pay level-up money, so nothing is paid twice. Endless Leveling's dungeons, gates and raids and MMO Skill Tree's skill and achievement rewards keep working. "Double leveling XP" raises both |
+
+## Where to set it: `/tempest`
+
+Every amount starts at 0, which is off: installing a mod changes nothing until you choose.
+
+| Tab | Shown | What is on it |
+|---|---|---|
+| Leveling | With either mod | Which mod counts (with "In use: ..."), money per level-up and milestones, the level bonus on other rewards, chat lines, boards, XP boosts |
+| Leveling extras | With either mod | Commands at levels, leveling XP from the economy (daily rewards, crates, contracts, the shop, town projects), levels for paying and gambling (stops alts), town bonuses |
+| Endless Leveling | Only with Endless Leveling | Prestige (money, a command, a bonus), dungeon, gate and raid money, mob gold by mob level, elite mobs |
+| MMO Skill Tree | Only with MMO Skill Tree | Which number is "the level", which skill gets Tempest's XP, money and items per skill level and at milestones, achievement and server-first rewards |
+| Pass leveling, PvP leveling, Events leveling | With their plugin | Pass XP for level-ups (and Endless Leveling clears), PvP rewards by level, events that start with raids (Endless Leveling) |
+
+## What players get
+
+| Plugin | With a leveling mod |
+|---|---|
+| Core | Money for level-ups, commands and items at levels, a bonus on other rewards by level, placeholders and a "Highest levels" board |
+| Quests | Goals: reach a level; with Endless Leveling also prestige, dungeons, gates, raids and strong mobs; with MMO Skill Tree reach a skill level, gain skill XP, earn achievements, finish its quests, talk to characters. Rewards can give leveling XP (a goal about one skill gives that skill's XP) |
+| Shop, Crates, Quests | Items, crates and quests that need a level (and with Endless Leveling a class) |
+| Pass | Pass XP for level-ups; tiers can give leveling XP |
+| Jobs | Job work gives leveling XP; a job can need a level |
+| Contracts | PvP rewards for underdogs and fines for bullies, by level |
+| Events | "Double leveling XP" events; with Endless Leveling community goals for dungeons, gates and raids |
+
+## MMO Skill Tree rewards
+
+| Reward | How it works |
+|---|---|
+| Money per skill level | Paid for every level gained in a skill, more at higher levels; only above the highest level ever paid, so a reset pays nothing again |
+| Skill milestones | A bonus, items (what does not fit goes to `/mail`) and a line for everyone every so many levels |
+| Only these skills | Limit the rewards to the skills you list |
+| Achievements | Money per achievement and per achievement point, once each |
+| Server firsts | A bonus, items and a line for everyone for an achievement only the first player can earn |
+
+Placeholders: `{leveling_level}` (the level that counts), `{mmo_total_level}`, `{mmo_combat_level}`, `{mmo_power}`.
+
+> **Note:** MMO Skill Tree reads a player when they join, every half minute and after every XP gain. A player who has
+> just joined may show no level for a moment.
+
+## Every leveling setting
+
+The tabs as a server with both Endless Leveling and MMO Skill Tree shows them; with one mod, only its tabs and the shared ones appear.
+
+### Leveling
+
+`/tempest` → Leveling. Who can change it: `tempest.admin` or `tempest.admin.core`.
+
+#### How leveling works
+
+Tempest reads each player's level from a leveling mod and can pay for it: money for level-ups, commands and items at levels, a bonus on other rewards. Endless Leveling and MMO Skill Tree both work, alone or together. What only one of them has is on its own tab (Endless Leveling, MMO Skill Tree), shown only while it is installed. With both installed, "Leveling mod" picks whose level counts for level-up money, "needs level", the Pass and the board. Every amount starts at 0, which is off.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Leveling mod | Whose level counts. Automatic: Endless Leveling if installed | Automatic, Endless Leveling, MMO Skill Tree |
+
+#### Money for level-ups
+
+Paid each time a player's level goes up. Example: 50 a level, 2 more for each level reached and 500 every 10 levels: going from level 9 to 10 pays 570 (50 + 20 + 500).
+
+| Setting | What it does | Values |
+|---|---|---|
+| Money per level-up | Paid for every level a player gains; 0 is off | 0 to 1000000000 |
+| More for each level reached | Level 30 pays 30 times this on top, so higher levels pay more; 0 is off | 0 to 1000000000 |
+| Milestone every | A bonus at levels 10, 20, 30... with 10; 0 is off | 0 to 10000 |
+| Milestone bonus | Paid on top at each milestone level | 0 to 1000000000 |
+
+#### Level bonus on other rewards
+
+A higher level raises the rewards ticked below, as rank perks do. Example: 2% for every 10 levels makes a level 40 player earn 8% more.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Bonus per 10 levels (%) | 0 is off | 0 to 1000 |
+| Highest bonus (%) | Never more than this, prestige bonus included | 0 to 1000 |
+| Raises mob gold |  | On or off |
+| Raises quest rewards |  | On or off |
+| Raises daily rewards |  | On or off |
+| Raises battle pass XP |  | On or off |
+| Raises what the shop pays | Never above the shop's own buying price | On or off |
+
+#### Chat, boards and XP boosts
+
+What players see, and the "double leveling XP" of Tempest Events, rank perks and boosters (with both mods installed it raises both mods' XP).
+
+| Setting | What it does | Values |
+|---|---|---|
+| Tell players what they got | A chat line with the money for each level-up, skill level or clear | On or off |
+| Leveling leaderboards | Highest levels; with Endless Leveling also prestige, dungeons, gates | On or off |
+| Leveling XP boosts | Off: events, perks and boosters never add leveling XP | On or off |
+| Highest Leveling XP boost (%) | All boosts together never give more than this: 100 is double XP | 0 to 1000 |
+
+
+### Leveling extras
+
+`/tempest` → Leveling extras. Who can change it: `tempest.admin` or `tempest.admin.core`.
+
+More rewards for levels, with any leveling mod (Endless Leveling or MMO Skill Tree). Money for level-ups is on the Leveling tab.
+
+#### Commands at levels
+
+Run by the server console when a player reaches a level: ranks, kits, titles from other plugins. {player}, {uuid} and {level} are filled in. Example: level 25, rank give {player} adept. Level 0 turns a reward off.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Reward 1 at level |  | 0 to 100000 |
+| Reward 1 command |  | Text |
+| Reward 2 at level |  | 0 to 100000 |
+| Reward 2 command |  | Text |
+| Reward 3 at level |  | 0 to 100000 |
+| Reward 3 command |  | Text |
+| Reward 4 at level |  | 0 to 100000 |
+| Reward 4 command |  | Text |
+| Reward 5 at level |  | 0 to 100000 |
+| Reward 5 command |  | Text |
+
+#### Leveling XP from the economy
+
+Leveling XP for what players do in the Tempest plugins, with the leveling mod's own bonuses. With MMO Skill Tree it goes into the skill chosen on its tab. 0 turns one off.
+
+| Setting | What it does | Values |
+|---|---|---|
+| XP per daily reward |  | 0 to 1000000 |
+| XP per crate opened |  | 0 to 1000000 |
+| XP per contract delivery |  | 0 to 1000000 |
+| XP per 100 the shop pays | Selling 500 worth at 2 gives 10 XP | 0 to 1000000 |
+| XP per item given to a town project | Tempest Projects: building the town levels you up | 0 to 1000000 |
+| XP per 100 coins given to a project |  | 0 to 1000000 |
+
+#### Stopping alts
+
+New characters made only to feed money to a main cannot pay or gamble until they reach a level.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Pay other players from level | 0 is off | 0 to 100000 |
+| Games of chance from level | Slots, lottery and coinflip; 0 is off | 0 to 100000 |
+
+#### Town bonuses
+
+With Tempest Town: these work only once a town unlock gives them (its editor, Features). Every other leveling feature can be made to wait for an unlock too.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Town XP bonus (%) | More leveling XP for everyone, e.g. once Training Grounds are built | 0 to 1000 |
+| Town clear money bonus (%) | More money for Endless Leveling dungeon, gate and raid clears | 0 to 10000 |
+| Town mob gold bonus (%) | More gold from every mob | 0 to 1000 |
+
+
+### Endless Leveling
+
+`/tempest` → Endless Leveling. Who can change it: `tempest.admin` or `tempest.admin.core`.
+
+What only Endless Leveling has. This tab shows only while it is installed (also next to MMO Skill Tree); level-up money and everything else about levels is on the Leveling tab. Every amount starts at 0, which is off.
+
+#### Prestige
+
+Rewards each time a player prestiges. Paid while Endless Leveling gives the level (the Leveling tab's choice).
+
+| Setting | What it does | Values |
+|---|---|---|
+| Money per prestige | 0 is off | 0 to 1000000000 |
+| Command at each prestige | Run by the console; {player}, {uuid}, {prestige} filled in; empty is off | Text |
+| Bonus per prestige (%) | 10 makes prestige 3 earn 30% more (rewards ticked on Leveling); 0 is off | 0 to 1000 |
+
+#### Dungeons, gates and raids
+
+Paid when Endless Leveling announces a clear, to every player who was in it. Example: 100 a dungeon and a 20% rank bonus pay 200 for an S rank dungeon.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Money per dungeon clear | Paid to every player in a dungeon when it is cleared; 0 is off | 0 to 1000000000 |
+| Money per wave gate clear | Paid to everyone who fought in a cleared wave gate; 0 is off | 0 to 1000000000 |
+| Gate money per wave | On top, for every wave the gate lasted | 0 to 1000000000 |
+| Fewest waves for gate money | A gate given up sooner pays nothing; 0 pays every gate | 0 to 1000 |
+| Rank bonus (%) | More for each rank above E, for dungeons and gates: 20 makes S pay double | 0 to 1000 |
+| Money per raid clear | Paid to a player who finishes a raid; 0 is off | 0 to 1000000000 |
+| Raid money per wave | On top, for every raid wave finished | 0 to 1000000000 |
+
+#### Mob gold by mob level
+
+Tempest Economy's mob gold grows with Endless Leveling's mob levels. Stronger mobs already have more health and gold follows health, so start low.
+
+| Setting | What it does | Values |
+|---|---|---|
+| More gold per mob level (%) | A level 20 mob at 5% drops double; 0 is off | 0 to 1000 |
+| Most extra gold (%) | However high the mob's level | 0 to 10000 |
+| No gold from mobs this far below | Levels below the killer: stops farming weak mobs; 0 is off | 0 to 10000 |
+
+#### Elite mobs
+
+Mobs from a level on are elite: more gold, and the server hears who defeated one.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Elite from mob level | 0 is off | 0 to 100000 |
+| Elite gold bonus (%) | On top of the gold per mob level | 0 to 10000 |
+| Tell everyone about elite kills |  | On or off |
+
+
+### MMO Skill Tree
+
+`/tempest` → MMO Skill Tree. Who can change it: `tempest.admin` or `tempest.admin.core`.
+
+What only MMO Skill Tree has: its skills and achievements. This tab shows only while it is installed (also next to Endless Leveling); level-up money and everything else about levels is on the Leveling tab. Every amount starts at 0, which is off.
+
+#### One level from many skills
+
+Tempest needs one level per player (for level-up money, "needs level", the Pass, the level board). Choose which of MMO Skill Tree's numbers that is. Used while MMO Skill Tree gives the level (the Leveling tab's "Leveling mod").
+
+| Setting | What it does | Values |
+|---|---|---|
+| The level is | Total, combat or power level (1-200) | Total level, Combat level, Power level (1-200), Highest skill |
+| Leveling XP goes to | Gets XP from quests, crates and the Pass | Last skill used |
+
+#### Skill levels
+
+Money for each level of a skill. Example: 20 a level, 1 more for each level reached and 300 every 10 levels: Mining 9 to 10 pays 330 (20 + 10 + 300). A skill pays only above the highest level ever paid for it: a reset pays nothing again.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Money per skill level | Paid for every level gained in any skill; 0 is off | 0 to 1000000000 |
+| More for each level reached | Mining 30 pays 30 times this on top, so higher levels pay more; 0 is off | 0 to 1000000000 |
+| Skill milestone every | Levels 10, 20, 30... with 10; 0 is no milestones | 0 to 10000 |
+| Milestone bonus | Paid on top at each milestone | 0 to 1000000000 |
+| Milestone items | e.g. Ingredient_Bar_Iron x16, Food_Bread x5; what does not fit goes to /mail | Text |
+| Tell everyone at milestones | "Steve reached Mining level 50!" for the whole server | On or off |
+| Only these skills | Skills that pay, by id or name, with commas (Mining, Swords); blank is every skill | Text |
+
+#### Achievements
+
+Money when a player earns an MMO Skill Tree achievement, once per achievement. Server firsts (achievements only the first player can earn) can pay more.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Money per achievement | 0 is off | 0 to 1000000000 |
+| Money per achievement point | Times the achievement's points: harder achievements pay more; 0 is off | 0 to 1000000000 |
+| Server first bonus | On top, for a server first; 0 is off | 0 to 1000000000 |
+| Server first items | Given for a server first, e.g. Ingredient_Bar_Gold x10 | Text |
+| Tell everyone about server firsts | "Steve is the first on the server to earn Dragon Slayer!" | On or off |
+
+
+### Pass leveling
+
+`/tempest` → Pass leveling. Who can change it: `tempest.admin` or `tempest.admin.pass`.
+
+#### Pass XP from leveling
+
+Battle pass XP for what players do in the server's leveling mod (Endless Leveling or MMO Skill Tree; dungeons, gates and raids only with Endless Leveling). 0 turns one off.
+
+| Setting | What it does | Values |
+|---|---|---|
+| XP per level-up | For every level a player gains, in the mod chosen on Core's Leveling tab | 0 to 1000000 |
+| XP per prestige | Endless Leveling only | 0 to 1000000 |
+| XP per dungeon clear | Endless Leveling only: to every player in the dungeon | 0 to 1000000 |
+| XP per wave gate clear | Endless Leveling only: to everyone who fought in the gate | 0 to 1000000 |
+| XP per raid clear | Endless Leveling only | 0 to 1000000 |
+| Most of this XP a day | All of the above together, per player; 0 is no limit | 0 to 1000000 |
+
+
+### Jobs leveling
+
+`/tempest` → Jobs leveling. Who can change it: `tempest.admin` or `tempest.admin.jobsleveling`.
+
+#### Jobs with a leveling mod
+
+Work gives leveling XP too (Endless Leveling, or MMO Skill Tree in the skill chosen on its tab); with Endless Leveling, stronger mobs also pay hunters more.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Leveling XP per job XP | 0.5 gives 5 leveling XP for 10 job XP; 0 is off | 0 to 1000 |
+| Hunter pay per mob level (%) | Endless Leveling only: a level 20 mob at 2% pays 40% more; 0 is off | 0 to 100 |
+
+
+### PvP leveling
+
+`/tempest` → PvP leveling. Who can change it: `tempest.admin` or `tempest.admin.pvpleveling`.
+
+#### PvP with levels
+
+Levels from the server's leveling mod (Endless Leveling or MMO Skill Tree) decide what a PvP kill is worth. Everything here is off at 0.
+
+#### Bounties
+
+Who may claim a bounty.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Bounty level gap | A hunter this many levels above the target cannot claim it: no bounty farming on new players | 0 to 10000 |
+| No bounties between party members | Endless Leveling parties: friends cannot claim bounties on each other | On or off |
+
+#### Underdog reward
+
+The server pays a player who defeats someone of a higher level. Party members never count.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Reward per level above | For each level the defeated player was higher | 0 to 1000000000 |
+| Lowest level gap | Fewer levels between them pay nothing | 0 to 10000 |
+| Most for one kill | 0 is no limit | 0 to 1000000000 |
+| Hours before the same pair pays again | Stops two players trading kills for money | 0 to 720 |
+| Most a player gets a day | All underdog rewards together; 0 is no limit | 0 to 1000000000 |
+
+#### Bully fine
+
+A player who defeats someone far below their level pays them. The money moves from the killer to the victim, never made.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Fine per level below | For each level the victim was lower | 0 to 1000000000 |
+| Lowest level gap for a fine |  | 0 to 10000 |
+| Highest fine | Never more than the killer has; 0 is no limit | 0 to 1000000000 |
+
+
+### Events leveling
+
+`/tempest` → Events leveling. Who can change it: `tempest.admin` or `tempest.admin.eventsleveling`.
+
+#### Events with Endless Leveling
+
+Only with Endless Leveling: community goals for dungeons, wave gates and raids are in each event's editor (/events, Manage). Here: an event that starts by itself with every raid.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Start an event when a raid starts | Only when no other event is on. Events must be switched on. | On or off |
+| Event it starts |  | Gold Rush, Monster Hunt, XP Frenzy, Market Day, Lucky Hour |
+| For how long (minutes) | 0: the event's own length | 0 to 10080 |
 
 
 # Quick start
@@ -1050,62 +4028,6 @@ PlayerActions.listen((player, action, amount) -> {
 > **Note:** Levels are read when a player joins, every half minute and after every XP gain; a player who has just
 > joined may have none for a moment. Core pays its own skill-level and achievement rewards (the MMO Skill Tree tab),
 > each level and each achievement once ever.
-
-
-# Leveling mods for server owners
-
-What the Tempest plugins do with Endless Leveling and MMO Skill Tree, alone or together, and where it is set.
-
-Tempest works with **Endless Leveling** (by Airijko) and **MMO Skill Tree** (by Ziggfreed). Nothing of either mod
-is shipped: Tempest Core finds them through their public APIs within half a minute of the server starting. Without
-them, nothing changes, and no level requirement ever locks a player out because a mod is missing.
-
-## One mod, or both
-
-| Installed | What happens |
-|---|---|
-| Endless Leveling only | Its level counts for everything below; its prestige, dungeons, wave gates, raids, classes and mob levels work too |
-| MMO Skill Tree only | Its skills become one level (total, combat, power level or the highest skill, as you choose); skill and achievement rewards work too |
-| Both | You choose whose level counts ("Leveling mod" on the Leveling tab). Only that mod's level-ups pay level-up money, so nothing is paid twice. Endless Leveling's dungeons, gates and raids and MMO Skill Tree's skill and achievement rewards keep working. "Double leveling XP" raises both |
-
-## Where to set it: `/tempest`
-
-Every amount starts at 0, which is off: installing a mod changes nothing until you choose.
-
-| Tab | Shown | What is on it |
-|---|---|---|
-| Leveling | With either mod | Which mod counts (with "In use: ..."), money per level-up and milestones, the level bonus on other rewards, chat lines, boards, XP boosts |
-| Leveling extras | With either mod | Commands at levels, leveling XP from the economy (daily rewards, crates, contracts, the shop, town projects), levels for paying and gambling (stops alts), town bonuses |
-| Endless Leveling | Only with Endless Leveling | Prestige (money, a command, a bonus), dungeon, gate and raid money, mob gold by mob level, elite mobs |
-| MMO Skill Tree | Only with MMO Skill Tree | Which number is "the level", which skill gets Tempest's XP, money and items per skill level and at milestones, achievement and server-first rewards |
-| Pass leveling, PvP leveling, Events leveling | With their plugin | Pass XP for level-ups (and Endless Leveling clears), PvP rewards by level, events that start with raids (Endless Leveling) |
-
-## What players get
-
-| Plugin | With a leveling mod |
-|---|---|
-| Core | Money for level-ups, commands and items at levels, a bonus on other rewards by level, placeholders and a "Highest levels" board |
-| Quests | Goals: reach a level; with Endless Leveling also prestige, dungeons, gates, raids and strong mobs; with MMO Skill Tree reach a skill level, gain skill XP, earn achievements, finish its quests, talk to characters. Rewards can give leveling XP (a goal about one skill gives that skill's XP) |
-| Shop, Crates, Quests | Items, crates and quests that need a level (and with Endless Leveling a class) |
-| Pass | Pass XP for level-ups; tiers can give leveling XP |
-| Jobs | Job work gives leveling XP; a job can need a level |
-| Contracts | PvP rewards for underdogs and fines for bullies, by level |
-| Events | "Double leveling XP" events; with Endless Leveling community goals for dungeons, gates and raids |
-
-## MMO Skill Tree rewards
-
-| Reward | How it works |
-|---|---|
-| Money per skill level | Paid for every level gained in a skill, more at higher levels; only above the highest level ever paid, so a reset pays nothing again |
-| Skill milestones | A bonus, items (what does not fit goes to `/mail`) and a line for everyone every so many levels |
-| Only these skills | Limit the rewards to the skills you list |
-| Achievements | Money per achievement and per achievement point, once each |
-| Server firsts | A bonus, items and a line for everyone for an achievement only the first player can earn |
-
-Placeholders: `{leveling_level}` (the level that counts), `{mmo_total_level}`, `{mmo_combat_level}`, `{mmo_power}`.
-
-> **Note:** MMO Skill Tree reads a player when they join, every half minute and after every XP gain. A player who has
-> just joined may show no level for a moment.
 
 
 # Quests

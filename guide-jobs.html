@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jobs · Tempest plugins docs</title>
+<meta name="description" content="Paid work with job levels.">
+<link rel="stylesheet" href="site.css">
+<script src="site.js"></script>
+</head>
+<body>
+<header class="top">
+  <button class="icon-btn menu-btn" id="menu" type="button" aria-label="Menu">&#9776;</button>
+  <a class="brand" href="index.html"><span class="logo">T</span>Tempest Docs</a>
+  <span class="version">Core API 19</span>
+  <div class="search"><input id="q" type="search" placeholder="Search the docs" autocomplete="off" aria-label="Search"><kbd>Ctrl K</kbd><div class="results" id="results"></div></div>
+  <nav class="top-links"><a href="javadoc.html">Javadoc</a><a href="https://discord.gg/Q9PNVCMZXK" target="_blank" rel="noopener">Discord</a><a href="https://www.curseforge.com/hytale/mods/search?search=tempest" target="_blank" rel="noopener">CurseForge</a></nav>
+  <button class="icon-btn" id="theme" type="button" aria-label="Light or dark">&#9680;</button>
+</header>
+<div class="layout">
+  <aside class="side"><h4>Welcome</h4><a href="index.html">Introduction</a><h4>Server guide</h4><a href="server-guide.html"><span class="badge">NEW</span>Server guide</a><a href="guide-commands.html">All commands and permissions</a><a href="guide-core.html">Core</a><a href="guide-economy.html">Economy (Coins)</a><a href="guide-holograms.html">Holograms</a><a href="guide-shop.html">Shop</a><a href="guide-crates.html">Crates</a><a href="guide-quests.html">Quests</a><a href="guide-pass.html">Battle pass</a><a href="guide-events.html">Events</a><a href="guide-contracts.html">Contracts and bounties</a><a href="guide-projects.html">Town projects</a><a href="guide-town.html">Town</a><a href="guide-jobs.html" class="here">Jobs</a><a href="guide-trade.html">Trade</a><a href="guide-slots.html">Slot machines</a><a href="guide-lottery.html">Lottery</a><a href="guide-coinflip.html">Coinflip</a><a href="leveling-mods.html"><span class="badge">NEW</span>Leveling mods</a><h4>Developers: start here</h4><a href="quick-start.html">Quick start</a><a href="setup.html">Setting up a plugin</a><a href="versions.html">API versions</a><h4>Core API</h4><a href="money.html">Money</a><a href="actions.html">Player actions</a><a href="settings.html">Settings and menus</a><a href="hud.html">Boards, HUD and placeholders</a><a href="rewards.html">Rewards, mail and boosts</a><a href="world.html">Map, town and demand</a><a href="safety.html">Safety and helpers</a><h4>Leveling and skills API</h4><a href="levels.html">Player levels</a><a href="skills.html"><span class="badge">NEW</span>Skills (MMO Skill Tree)</a><h4>Plugin APIs</h4><a href="quests.html">Quests</a><a href="crates.html">Crates</a><a href="holograms.html">Holograms</a><a href="coinflip.html">Coinflip</a><a href="jobs.html">Jobs</a><a href="projects.html">Town projects</a><a href="pass.html">Battle pass</a><a href="games.html">Lottery, slots and shop</a><h4>More</h4><a href="integrations.html">Integrations</a><a href="content.html">Content mods (JSON)</a><a href="rules.html">Rules of thumb</a><h4>Reference</h4><a href="javadoc.html">Javadoc</a><a href="changelog.html">Changelog</a></aside>
+  <main>
+    <div class="crumbs">Server guide</div>
+    <h1>Jobs</h1>
+    <p class="lead">Paid work with job levels.</p>
+    <article>
+<h2 id="what-players-read-in-guide"><a class="anchor" href="#what-players-read-in-guide" aria-label="Link to this section">#</a>What players read in /guide</h2>
+<p>The <code>/guide</code> pages of this plugin, as a player sees them on a test server (numbers are examples).</p>
+<h3 id="jobs"><a class="anchor" href="#jobs" aria-label="Link to this section">#</a>Jobs</h3>
+<ul><li>Take a job and get paid for your work: mining ores, cutting trees, harvesting crops, hunting mobs.</li><li>Each job has its own level: the higher it is, the more it pays. /jobs join miner takes one.</li></ul>
+<h2 id="commands"><a class="anchor" href="#commands" aria-label="Link to this section">#</a>Commands</h2>
+<div class="table"><table><thead><tr><th>Command</th><th>Who can use it</th><th>What it does</th></tr></thead><tbody><tr><td><code>/jobs</code></td><td>Everyone</td><td>Jobs: the jobs, your levels, and how to take one</td></tr><tr><td><code>/jobs info</code></td><td>Everyone</td><td>Your jobs and what they paid today</td></tr><tr><td><code>/jobs join</code></td><td>Everyone</td><td>Take a job</td></tr><tr><td><code>/jobs leave</code></td><td>Everyone</td><td>Leave a job</td></tr></tbody></table></div>
+<h2 id="settings"><a class="anchor" href="#settings" aria-label="Link to this section">#</a>Settings</h2>
+<p>Every setting is changed in game with <code>/tempest</code> and saved at once; nothing needs a restart. Amounts of 0 are off unless the setting says otherwise.</p>
+<h3 id="jobs-2"><a class="anchor" href="#jobs-2" aria-label="Link to this section">#</a>Jobs</h3>
+<p><code>/tempest</code> → Jobs. Who can change it: <code>tempest.admin</code> or <code>tempest.admin.jobs</code>.</p>
+<p>Players take jobs with /jobs join and are paid for their work, more at higher job levels. What each job pays for is edited on the /jobs page (EDIT tab, for admins).</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Jobs is on</td><td>Off: no job pays</td><td>On or off</td></tr></tbody></table></div>
+<h4 id="holding-jobs"><a class="anchor" href="#holding-jobs" aria-label="Link to this section">#</a>Holding jobs</h4>
+<p>Players with tempest.jobs.slots.2 (up to .10) hold more.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Jobs a player holds</td><td></td><td>1 to 10</td></tr><tr><td>Keep the level when leaving</td><td></td><td>On or off</td></tr><tr><td>Minutes before taking a job again</td><td></td><td>0 to 43200</td></tr></tbody></table></div>
+<h4 id="levels"><a class="anchor" href="#levels" aria-label="Link to this section">#</a>Levels</h4>
+<p>Job XP for the next level is base x level ^ power.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Highest job level</td><td></td><td>1 to 1000</td></tr><tr><td>XP base</td><td></td><td>1 to 1000000</td></tr><tr><td>XP power</td><td>1 is the same XP every level; 1.5 grows</td><td>1 to 3</td></tr><tr><td>More pay per level (%)</td><td>Level 50 at 2% pays double</td><td>0 to 100</td></tr></tbody></table></div>
+<h4 id="paying"><a class="anchor" href="#paying" aria-label="Link to this section">#</a>Paying</h4>
+<p>Earnings are added up and paid together, held to the caps.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Pay every (seconds)</td><td></td><td>1 to 60</td></tr><tr><td>Most a player earns an hour</td><td>0 is no limit</td><td>0 to 1000000000</td></tr><tr><td>Most the server pays an hour</td><td>All players together; 0 is no limit</td><td>0 to 1000000000</td></tr><tr><td>Town bonus (%)</td><td>With Tempest Town, once an unlock gives jobs:town_bonus</td><td>0 to 1000</td></tr><tr><td>Pay scale</td><td>All job pay times this: 0.5 halves it, 2 doubles it</td><td>0.01 to 100</td></tr><tr><td>Highest level without the guild hall</td><td>0 is no such limit; a town unlock (jobs:guild_hall) lifts it</td><td>0 to 1000</td></tr></tbody></table></div>
+<h4 id="telling-players"><a class="anchor" href="#telling-players" aria-label="Link to this section">#</a>Telling players</h4>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Tell level-ups</td><td></td><td>On or off</td></tr><tr><td>A chat line for each payment</td><td>Off: the money counter shows it</td><td>On or off</td></tr><tr><td>Job XP bar while working</td><td>A bar under the money counter for a few seconds after each payment</td><td>On or off</td></tr><tr><td>Job XP bar: seconds shown</td><td></td><td>1 to 60</td></tr><tr><td>Level-up sound</td><td></td><td>SFX_Discovery_Z1_Short, None</td></tr></tbody></table></div>
+<h3 id="jobs-bonuses"><a class="anchor" href="#jobs-bonuses" aria-label="Link to this section">#</a>Jobs bonuses</h3>
+<p><code>/tempest</code> → Jobs bonuses. Who can change it: <code>tempest.admin</code> or <code>tempest.admin.jobsbonuses</code>.</p>
+<h4 id="bonuses"><a class="anchor" href="#bonuses" aria-label="Link to this section">#</a>Bonuses</h4>
+<p>Streaks, felled trees and what the server's contracts want pay more.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Streak: seconds between blocks</td><td>0 is no streaks</td><td>0 to 60</td></tr><tr><td>Streak: more per block (%)</td><td></td><td>0 to 100</td></tr><tr><td>Streak: the most (%)</td><td></td><td>0 to 500</td></tr><tr><td>Streak sound</td><td></td><td>On or off</td></tr><tr><td>Streak sound</td><td>Plays higher with each block</td><td>SFX_Crystal_Hit, None</td></tr><tr><td>Tool tiers, worst first</td><td>Each tier above the first adds a job's tool bonus once</td><td>Text</td></tr><tr><td>Felled tree: more per log (%)</td><td></td><td>0 to 100</td></tr><tr><td>Felled tree: the most (%)</td><td>0 is no tree bonus</td><td>0 to 500</td></tr><tr><td>Felled tree: blocks around a log</td><td></td><td>1 to 8</td></tr><tr><td>Felled tree: blocks above a log</td><td></td><td>4 to 64</td></tr><tr><td>Wanted by contracts (%)</td><td>With Tempest Contracts: work bringing in an item on the board pays this much more</td><td>0 to 1000</td></tr><tr><td>Builder: minutes a block must stand</td><td></td><td>1 to 120</td></tr></tbody></table></div>
+<h4 id="mob-farms"><a class="anchor" href="#mob-farms" aria-label="Link to this section">#</a>Mob farms</h4>
+<p>Many kills of one kind of mob in one spot pay less and less.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Minutes counted</td><td></td><td>1 to 240</td></tr><tr><td>Kills that pay in full</td><td></td><td>1 to 10000</td></tr><tr><td>Size of a spot (blocks)</td><td></td><td>4 to 256</td></tr><tr><td>Each kill after pays less (%)</td><td></td><td>0 to 100</td></tr><tr><td>Never under (%)</td><td></td><td>0 to 100</td></tr><tr><td>Mobs that never pay</td><td>Parts of mob names, commas between: Chicken, Dummy</td><td>Text</td></tr></tbody></table></div>
+<h4 id="jobs-on-this-server"><a class="anchor" href="#jobs-on-this-server" aria-label="Link to this section">#</a>Jobs on this server</h4>
+<p>Pay tables are edited on the /jobs page (EDIT tab).</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Miner job</td><td></td><td>On or off</td></tr><tr><td>Woodcutter job</td><td></td><td>On or off</td></tr><tr><td>Farmer job</td><td></td><td>On or off</td></tr><tr><td>Hunter job</td><td></td><td>On or off</td></tr><tr><td>Crafter job</td><td></td><td>On or off</td></tr><tr><td>Builder job</td><td></td><td>On or off</td></tr><tr><td>Explorer job</td><td></td><td>On or off</td></tr></tbody></table></div>
+    </article>
+    <nav class="pager"><a class="prev" href="guide-town.html"><small>Previous</small>Town</a><a class="next" href="guide-trade.html"><small>Next</small>Trade</a></nav>
+    <footer class="foot">Tempest plugins for Hytale by AtomicTempest. Not made or endorsed by Hypixel Studios. · <a href="guide-jobs.md">This page as Markdown</a> · <a href="llms.txt">llms.txt</a></footer>
+  </main>
+  <aside class="toc"><h5>On this page</h5><a href="#what-players-read-in-guide">What players read in /guide</a><a href="#jobs" class="sub">Jobs</a><a href="#commands">Commands</a><a href="#settings">Settings</a><a href="#jobs-2" class="sub">Jobs</a><a href="#jobs-bonuses" class="sub">Jobs bonuses</a></aside>
+</div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Town · Tempest plugins docs</title>
+<meta name="description" content="Features the town unlocks, and the mayor.">
+<link rel="stylesheet" href="site.css">
+<script src="site.js"></script>
+</head>
+<body>
+<header class="top">
+  <button class="icon-btn menu-btn" id="menu" type="button" aria-label="Menu">&#9776;</button>
+  <a class="brand" href="index.html"><span class="logo">T</span>Tempest Docs</a>
+  <span class="version">Core API 19</span>
+  <div class="search"><input id="q" type="search" placeholder="Search the docs" autocomplete="off" aria-label="Search"><kbd>Ctrl K</kbd><div class="results" id="results"></div></div>
+  <nav class="top-links"><a href="javadoc.html">Javadoc</a><a href="https://discord.gg/Q9PNVCMZXK" target="_blank" rel="noopener">Discord</a><a href="https://www.curseforge.com/hytale/mods/search?search=tempest" target="_blank" rel="noopener">CurseForge</a></nav>
+  <button class="icon-btn" id="theme" type="button" aria-label="Light or dark">&#9680;</button>
+</header>
+<div class="layout">
+  <aside class="side"><h4>Welcome</h4><a href="index.html">Introduction</a><h4>Server guide</h4><a href="server-guide.html"><span class="badge">NEW</span>Server guide</a><a href="guide-commands.html">All commands and permissions</a><a href="guide-core.html">Core</a><a href="guide-economy.html">Economy (Coins)</a><a href="guide-holograms.html">Holograms</a><a href="guide-shop.html">Shop</a><a href="guide-crates.html">Crates</a><a href="guide-quests.html">Quests</a><a href="guide-pass.html">Battle pass</a><a href="guide-events.html">Events</a><a href="guide-contracts.html">Contracts and bounties</a><a href="guide-projects.html">Town projects</a><a href="guide-town.html" class="here">Town</a><a href="guide-jobs.html">Jobs</a><a href="guide-trade.html">Trade</a><a href="guide-slots.html">Slot machines</a><a href="guide-lottery.html">Lottery</a><a href="guide-coinflip.html">Coinflip</a><a href="leveling-mods.html"><span class="badge">NEW</span>Leveling mods</a><h4>Developers: start here</h4><a href="quick-start.html">Quick start</a><a href="setup.html">Setting up a plugin</a><a href="versions.html">API versions</a><h4>Core API</h4><a href="money.html">Money</a><a href="actions.html">Player actions</a><a href="settings.html">Settings and menus</a><a href="hud.html">Boards, HUD and placeholders</a><a href="rewards.html">Rewards, mail and boosts</a><a href="world.html">Map, town and demand</a><a href="safety.html">Safety and helpers</a><h4>Leveling and skills API</h4><a href="levels.html">Player levels</a><a href="skills.html"><span class="badge">NEW</span>Skills (MMO Skill Tree)</a><h4>Plugin APIs</h4><a href="quests.html">Quests</a><a href="crates.html">Crates</a><a href="holograms.html">Holograms</a><a href="coinflip.html">Coinflip</a><a href="jobs.html">Jobs</a><a href="projects.html">Town projects</a><a href="pass.html">Battle pass</a><a href="games.html">Lottery, slots and shop</a><h4>More</h4><a href="integrations.html">Integrations</a><a href="content.html">Content mods (JSON)</a><a href="rules.html">Rules of thumb</a><h4>Reference</h4><a href="javadoc.html">Javadoc</a><a href="changelog.html">Changelog</a></aside>
+  <main>
+    <div class="crumbs">Server guide</div>
+    <h1>Town</h1>
+    <p class="lead">Features the town unlocks, and the mayor.</p>
+    <article>
+<h2 id="what-players-read-in-guide"><a class="anchor" href="#what-players-read-in-guide" aria-label="Link to this section">#</a>What players read in /guide</h2>
+<p>The <code>/guide</code> pages of this plugin, as a player sees them on a test server (numbers are examples).</p>
+<h3 id="town"><a class="anchor" href="#town" aria-label="Link to this section">#</a>Town</h3>
+<ul><li>The whole server is one town, and it unlocks new features as it grows. /town shows what is unlocked and what is still needed.</li></ul>
+<p><strong>How things unlock</strong></p>
+<ul><li>Some unlocks wait for a town building to be finished: donate to it with /projects. Others come on a date or after another unlock.</li></ul>
+<h2 id="commands"><a class="anchor" href="#commands" aria-label="Link to this section">#</a>Commands</h2>
+<div class="table"><table><thead><tr><th>Command</th><th>Who can use it</th><th>What it does</th></tr></thead><tbody><tr><td><code>/mayor</code></td><td>Everyone</td><td>Town: who the mayor is and how to become mayor</td></tr><tr><td><code>/mayor boost</code></td><td>Everyone</td><td>Mayor: give everyone a boost for a while</td></tr><tr><td><code>/mayor clear</code></td><td>Everyone</td><td>Admins: the town has no mayor until the term ends</td></tr><tr><td><code>/mayor fine</code></td><td>Everyone</td><td>Mayor: fine a player who misbehaved</td></tr><tr><td><code>/mayor reward</code></td><td>Everyone</td><td>Mayor: reward a player who helped the town</td></tr><tr><td><code>/mayor set</code></td><td>Everyone</td><td>Admins: make an online player mayor until the term ends</td></tr><tr><td><code>/town</code></td><td>Everyone</td><td>Town: what the town has unlocked and what it still needs</td></tr><tr><td><code>/town lock</code></td><td>Everyone</td><td>Admins: keep an unlock locked</td></tr><tr><td><code>/town unlock</code></td><td>Everyone</td><td>Admins: keep an unlock unlocked</td></tr></tbody></table></div>
+<h2 id="settings"><a class="anchor" href="#settings" aria-label="Link to this section">#</a>Settings</h2>
+<p>Every setting is changed in game with <code>/tempest</code> and saved at once; nothing needs a restart. Amounts of 0 are off unless the setting says otherwise.</p>
+<h3 id="town-2"><a class="anchor" href="#town-2" aria-label="Link to this section">#</a>Town</h3>
+<p><code>/tempest</code> → Town. Who can change it: <code>tempest.admin</code> or <code>tempest.admin.town</code>.</p>
+<p>The town unlocks features as it grows. Make and change unlocks in /town, MANAGE tab; this tab is for all of them.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Town decides what is unlocked</td><td>Off: every feature is on, as if Town were not installed. Unlocks keep their state for when it is on again.</td><td>On or off</td></tr><tr><td>Players see locked unlocks</td><td>On: /town shows what is still locked and what it needs. Off: only what the town has.</td><td>On or off</td></tr></tbody></table></div>
+<h4 id="telling-players"><a class="anchor" href="#telling-players" aria-label="Link to this section">#</a>Telling players</h4>
+<p>When something is unlocked or locked.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Announce in chat</td><td></td><td>On or off</td></tr><tr><td>Seconds before announcing it again</td><td>Against chat floods. Console commands of an unlock always run.</td><td>5 to 86400</td></tr><tr><td>Chat tag</td><td>Tag</td><td>Text</td></tr><tr><td>Colour of the tag</td><td></td><td>A colour</td></tr></tbody></table></div>
+<h4 id="mayor"><a class="anchor" href="#mayor" aria-label="Link to this section">#</a>Mayor</h4>
+<p>Each term the player who gave most to town projects becomes mayor, with a few small powers you limit here. Only in-game donations count. Players see it all with /mayor; admins can /mayor set or /mayor clear.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>The town has a mayor</td><td></td><td>On or off</td></tr><tr><td>A term lasts (days)</td><td></td><td>1 to 90</td></tr><tr><td>Least given to become mayor</td><td>In points: one per coin, and the next setting per item.</td><td>0 to 10000000</td></tr><tr><td>Points per item given</td><td></td><td>0 to 10000</td></tr><tr><td>The mayor's boost</td><td>For everyone online, started with /mayor boost.</td><td>Jobs pay, Mob coins, Ore coins, Quest reward, Shop sell, Daily reward, Pass xp, Shop discount, Contract pay</td></tr><tr><td>Boost (%)</td><td></td><td>1 to 100</td></tr><tr><td>For (minutes)</td><td></td><td>1 to 1440</td></tr><tr><td>Boosts each term</td><td></td><td>0 to 20</td></tr><tr><td>Reward (coins)</td><td>/mayor reward &lt;player&gt;: new coins for a player who helped. Never the mayor, each player once a term.</td><td>0 to 1000000</td></tr><tr><td>Rewards each term</td><td></td><td>0 to 20</td></tr><tr><td>Fine (coins)</td><td>/mayor fine &lt;player&gt;: never more than they have, never an admin; only the two of them are told. Every use is in the admin log.</td><td>0 to 1000000</td></tr><tr><td>Fines each term</td><td></td><td>0 to 20</td></tr></tbody></table></div>
+<h4 id="buildings"><a class="anchor" href="#buildings" aria-label="Link to this section">#</a>Buildings</h4>
+<p>Tempest Projects is installed: an unlock can wait for a building to be finished.</p>
+    </article>
+    <nav class="pager"><a class="prev" href="guide-projects.html"><small>Previous</small>Town projects</a><a class="next" href="guide-jobs.html"><small>Next</small>Jobs</a></nav>
+    <footer class="foot">Tempest plugins for Hytale by AtomicTempest. Not made or endorsed by Hypixel Studios. · <a href="guide-town.md">This page as Markdown</a> · <a href="llms.txt">llms.txt</a></footer>
+  </main>
+  <aside class="toc"><h5>On this page</h5><a href="#what-players-read-in-guide">What players read in /guide</a><a href="#town" class="sub">Town</a><a href="#commands">Commands</a><a href="#settings">Settings</a><a href="#town-2" class="sub">Town</a></aside>
+</div>
+</body>
+</html>

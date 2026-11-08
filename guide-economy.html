@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Economy (Coins) · Tempest plugins docs</title>
+<meta name="description" content="Wallets, coins, banks, daily rewards and ore and monster gold.">
+<link rel="stylesheet" href="site.css">
+<script src="site.js"></script>
+</head>
+<body>
+<header class="top">
+  <button class="icon-btn menu-btn" id="menu" type="button" aria-label="Menu">&#9776;</button>
+  <a class="brand" href="index.html"><span class="logo">T</span>Tempest Docs</a>
+  <span class="version">Core API 19</span>
+  <div class="search"><input id="q" type="search" placeholder="Search the docs" autocomplete="off" aria-label="Search"><kbd>Ctrl K</kbd><div class="results" id="results"></div></div>
+  <nav class="top-links"><a href="javadoc.html">Javadoc</a><a href="https://discord.gg/Q9PNVCMZXK" target="_blank" rel="noopener">Discord</a><a href="https://www.curseforge.com/hytale/mods/search?search=tempest" target="_blank" rel="noopener">CurseForge</a></nav>
+  <button class="icon-btn" id="theme" type="button" aria-label="Light or dark">&#9680;</button>
+</header>
+<div class="layout">
+  <aside class="side"><h4>Welcome</h4><a href="index.html">Introduction</a><h4>Server guide</h4><a href="server-guide.html"><span class="badge">NEW</span>Server guide</a><a href="guide-commands.html">All commands and permissions</a><a href="guide-core.html">Core</a><a href="guide-economy.html" class="here">Economy (Coins)</a><a href="guide-holograms.html">Holograms</a><a href="guide-shop.html">Shop</a><a href="guide-crates.html">Crates</a><a href="guide-quests.html">Quests</a><a href="guide-pass.html">Battle pass</a><a href="guide-events.html">Events</a><a href="guide-contracts.html">Contracts and bounties</a><a href="guide-projects.html">Town projects</a><a href="guide-town.html">Town</a><a href="guide-jobs.html">Jobs</a><a href="guide-trade.html">Trade</a><a href="guide-slots.html">Slot machines</a><a href="guide-lottery.html">Lottery</a><a href="guide-coinflip.html">Coinflip</a><a href="leveling-mods.html"><span class="badge">NEW</span>Leveling mods</a><h4>Developers: start here</h4><a href="quick-start.html">Quick start</a><a href="setup.html">Setting up a plugin</a><a href="versions.html">API versions</a><h4>Core API</h4><a href="money.html">Money</a><a href="actions.html">Player actions</a><a href="settings.html">Settings and menus</a><a href="hud.html">Boards, HUD and placeholders</a><a href="rewards.html">Rewards, mail and boosts</a><a href="world.html">Map, town and demand</a><a href="safety.html">Safety and helpers</a><h4>Leveling and skills API</h4><a href="levels.html">Player levels</a><a href="skills.html"><span class="badge">NEW</span>Skills (MMO Skill Tree)</a><h4>Plugin APIs</h4><a href="quests.html">Quests</a><a href="crates.html">Crates</a><a href="holograms.html">Holograms</a><a href="coinflip.html">Coinflip</a><a href="jobs.html">Jobs</a><a href="projects.html">Town projects</a><a href="pass.html">Battle pass</a><a href="games.html">Lottery, slots and shop</a><h4>More</h4><a href="integrations.html">Integrations</a><a href="content.html">Content mods (JSON)</a><a href="rules.html">Rules of thumb</a><h4>Reference</h4><a href="javadoc.html">Javadoc</a><a href="changelog.html">Changelog</a></aside>
+  <main>
+    <div class="crumbs">Server guide</div>
+    <h1>Economy (Coins)</h1>
+    <p class="lead">Wallets, coins, banks, daily rewards and ore and monster gold.</p>
+    <article>
+<h2 id="what-players-read-in-guide"><a class="anchor" href="#what-players-read-in-guide" aria-label="Link to this section">#</a>What players read in /guide</h2>
+<p>The <code>/guide</code> pages of this plugin, as a player sees them on a test server (numbers are examples).</p>
+<h3 id="welcome"><a class="anchor" href="#welcome" aria-label="Link to this section">#</a>Welcome</h3>
+<ul><li>Coins are the money on this server. You earn them, keep them in your wallet, and spend them on what the server offers.</li><li>Your balance: 12,901 copper.</li></ul>
+<p><strong>What the coins are worth</strong></p>
+<ul><li>Every price is counted in copper. The other coins are worth:</li><li>Coin Iron5,Coin Silver10,Coin Gold50,Coin Emerald100,Coin Diamond500</li></ul>
+<p><strong>On this server</strong></p>
+<ul><li>-Wallet and ATM</li><li>-Earning coins</li><li>-Daily rewards</li><li>-Money counter</li><li>-Shared banks</li><li>-Crates</li><li>-Leaderboards</li><li>-Shop</li><li>-Quests and achievements</li><li>-Slot machines</li><li>-Lottery</li><li>-Coinflip</li><li>-Server events</li><li>-Battle pass</li><li>-Contracts</li><li>-Jobs</li><li>-Trade</li><li>-Town</li><li>-Town projects</li><li>Pick a page on the left to read more. Open this screen any time with /coins.</li></ul>
+<p><strong>Admins also read:</strong></p>
+<ul><li>Your balance: 24,800 copper.</li></ul>
+<h3 id="wallet-and-atm"><a class="anchor" href="#wallet-and-atm" aria-label="Link to this section">#</a>Wallet and ATM</h3>
+<p><strong>Your wallet</strong></p>
+<ul><li>Coins in your wallet are safe. Coins you carry as items are not: you can drop or lose them like anything else in your bags.</li><li>Open your wallet with /wallet (or /bal), or at any ATM.</li></ul>
+<p><strong>Taking coins out</strong></p>
+<ul><li>Each coin in the wallet has buttons to take out 1, 10 or 100 of it.</li></ul>
+<p><strong>Putting coins in</strong></p>
+<ul><li>Press "Put all my coins in" to put every coin you carry into your wallet. You can also hold a coin and right-click.</li></ul>
+<p><strong>Paying someone</strong></p>
+<ul><li>Press "Pay a player" in the wallet and pick someone who is online, or type /pay &lt;player&gt; &lt;amount&gt;.</li></ul>
+<p><strong>History</strong></p>
+<ul><li>The bottom of the wallet shows your latest gains and spending.</li></ul>
+<p><strong>ATMs</strong></p>
+<ul><li>An ATM opens the same wallet, and pays out with a shower of coins. ATMs are shown on your map.</li><li>Only admins can build ATMs on this server.</li></ul>
+<p><strong>Admins also read:</strong></p>
+<p><strong>Your rank perks: VIP</strong></p>
+<ul><li>Daily rewards +100%</li><li>Shop prices -15%</li><li>Shop sell prices +10%</li><li>Payment fee -100%</li><li>Quest rewards +50%</li></ul>
+<h3 id="earning-coins"><a class="anchor" href="#earning-coins" aria-label="Link to this section">#</a>Earning coins</h3>
+<p><strong>Fighting</strong></p>
+<ul><li>Creatures you defeat drop coins. The tougher the creature, the more it drops.</li></ul>
+<p><strong>Mining</strong></p>
+<ul><li>Ores sometimes drop coins when you mine them. Rarer ores drop more:</li><li>Copper Ore: 10% chance of 1 copper</li><li>Iron Ore: 10% chance of 2 copper</li><li>Silver Ore: 15% chance of 5 copper</li><li>Gold Ore: 15% chance of 10 copper</li><li>Cobalt Ore: 20% chance of 20 copper</li><li>Mithril Ore: 25% chance of 50 copper</li><li>Adamantite Ore: 30% chance of 100 copper</li><li>Thorium Ore: 20% chance of 30 copper</li><li>Onyxium Ore: 25% chance of 60 copper</li><li>Ores that players placed give no coins.</li></ul>
+<p><strong>Every day</strong></p>
+<ul><li>Claim a free reward once a day with /daily. Come back on following days for bigger rewards.</li></ul>
+<p><strong>Selling</strong></p>
+<ul><li>Sell items you do not need at a shop stall. See the Shop page.</li></ul>
+<p><strong>Luck</strong></p>
+<ul><li>Try the slot machines or the lottery for a big win, but over time luck costs more than it pays.</li></ul>
+<p><strong>Other players</strong></p>
+<ul><li>Trade with other players and pay each other with /pay or the wallet.</li></ul>
+<h3 id="daily-rewards"><a class="anchor" href="#daily-rewards" aria-label="Link to this section">#</a>Daily rewards</h3>
+<ul><li>Your reward for day 1 is ready! Open the calendar to claim it.</li></ul>
+<p><strong>How it works</strong></p>
+<ul><li>Claim once a day with /daily. Each day in a row moves you along the calendar to a bigger reward. Miss a day and you start again from day 1. After day 7 the calendar starts over.</li></ul>
+<p><strong>The rewards</strong></p>
+<ul><li>Day 1: 50 copper</li><li>Day 2: 60 copper</li><li>Day 3: 70 copper</li><li>Day 4: 80 copper</li><li>Day 5: 100 copper</li><li>Day 6: 120 copper</li><li>Day 7: 250 copper</li></ul>
+<h3 id="shared-banks"><a class="anchor" href="#shared-banks" aria-label="Link to this section">#</a>Shared banks</h3>
+<p><strong>Saving up together</strong></p>
+<ul><li>A shared bank holds coins for a group: a town, a team, friends saving for something big. Open one with /bank (it costs 500 copper) and add your friends by name.</li></ul>
+<p><strong>Who can do what</strong></p>
+<ul><li>Everyone in the bank can put coins in. Only the owner, and members the owner allows, can take coins out. The history shows who put in and took out what.</li></ul>
+<p><strong>Closing</strong></p>
+<ul><li>Members can leave whenever they like. When the owner closes the bank, whatever is in it goes to the owner.</li></ul>
+<p><strong>Your banks</strong></p>
+<ul><li>Steves_Team: 1,000 copper</li></ul>
+<h3 id="leaderboards"><a class="anchor" href="#leaderboards" aria-label="Link to this section">#</a>Leaderboards</h3>
+<ul><li>See who leads the server: the richest players, the top earners, the biggest single wins, and the best at the slot machines, the lottery and the shop, as far as this server has them.</li><li>Each board shows the top 10, and your own place under it.</li><li>Open them with /leaderboards (or /ranks).</li></ul>
+<h3 id="all-commands"><a class="anchor" href="#all-commands" aria-label="Link to this section">#</a>All commands</h3>
+<p><strong>Coinflip</strong></p>
+<ul><li>/coinflip  (or /cf)  -Open the rooms: join one, watch a flip, or make your own</li><li>/cf create &lt;amount&gt; [heads|tails]  -Open a room with a stake (heads if you pick no side)</li><li>/cf join &lt;player&gt;  -Join a player's room with the same stake</li><li>/cf cancel  -Close your open rooms; your stakes come back</li><li>/cf list  -List the open rooms in chat</li></ul>
+<p><strong>Coins</strong></p>
+<ul><li>/coins  -This help screen</li><li>/wallet  (or /bal)  -Your wallet: withdraw, deposit, pay and history</li><li>/pay &lt;player&gt; &lt;amount&gt;  -Give money to another player</li><li>/daily  -The daily reward calendar</li><li>/baltop  (or /rich)  -The richest players, in chat</li><li>/bank  -Your shared bank accounts: save up together with friends</li><li>/leaderboards  (or /ranks)  -Leaderboards: richest, top earners, biggest wins and more</li></ul>
+<p><strong>Contracts</strong></p>
+<ul><li>/contracts  -Open the contracts board</li></ul>
+<p><strong>General</strong></p>
+<ul><li>/guide  -This help screen</li><li>/hud  -Show or hide your money counter; /hud top, left or low moves it</li><li>/board  -Pick what your board on the right of the screen shows, or hide it</li><li>/mail  -Your mailbox: rewards that did not fit or came while you were away</li><li>/info  (or /rules, /serverinfo)  -The server's rules and info, from the admins</li><li>/places  -Places on the world map, nearest first; pick what your map shows</li></ul>
+<p><strong>Crates</strong></p>
+<ul><li>/crates  -Open crates for prizes</li><li>/cratekey &lt;player&gt; &lt;bronze|silver|gold&gt; &lt;amount&gt;  -Give crate keys (admins)</li></ul>
+<p><strong>Events</strong></p>
+<ul><li>/events  -What is on, what is coming, and the community goal</li></ul>
+<p><strong>Jobs</strong></p>
+<ul><li>/jobs  -The jobs and your levels</li></ul>
+<p><strong>Lottery</strong></p>
+<ul><li>/lottery  (or /lotto)  -The current round: pot, tickets and time left</li><li>/lottery buy &lt;amount&gt;  -Buy tickets for the current round</li></ul>
+<p><strong>Battle pass</strong></p>
+<ul><li>/pass  -Your tiers, rewards and XP this season</li></ul>
+<p><strong>Town projects</strong></p>
+<ul><li>/projects  -See the projects and donate</li></ul>
+<p><strong>Quests</strong></p>
+<ul><li>/quests  -Your quests and the quest board</li><li>/achievements  (or /ach)  -Your achievements and how close you are</li></ul>
+<p><strong>Shop</strong></p>
+<ul><li>/shop  -Open the shop (where the server allows it)</li><li>/sell hand  -Sell the item in your hand (where the server allows /shop)</li><li>/sell all  -Sell everything the shop buys (where the server allows /shop)</li></ul>
+<p><strong>Slot Machine</strong></p>
+<ul><li>/jackpot  -How big the jackpot is right now</li><li>/slotbet  -Choose how much each slot machine spin costs</li></ul>
+<p><strong>Town</strong></p>
+<ul><li>/town  -What the town has unlocked and what it still needs</li></ul>
+<p><strong>Trade</strong></p>
+<ul><li>/trade  -Trade with a player</li></ul>
+<h2 id="commands"><a class="anchor" href="#commands" aria-label="Link to this section">#</a>Commands</h2>
+<div class="table"><table><thead><tr><th>Command</th><th>Who can use it</th><th>What it does</th></tr></thead><tbody><tr><td><code>/atm</code></td><td><code>coins.admin.atm</code></td><td>Admin: get an ATM in a design to place</td></tr><tr><td><code>/baltop</code> (/rich)</td><td>Everyone</td><td>Show the richest players</td></tr><tr><td><code>/bank</code> (/banks)</td><td>Everyone</td><td>Your shared bank accounts</td></tr><tr><td><code>/bank open</code></td><td>Everyone</td><td>Open one bank by name</td></tr><tr><td><code>/coins</code> (/coinhelp)</td><td>Everyone</td><td>Help for coins, the wallet, banks and daily rewards</td></tr><tr><td><code>/daily</code></td><td>Everyone</td><td>Open the daily reward calendar</td></tr><tr><td><code>/economy</code> (/eco)</td><td><code>coins.admin.economy</code></td><td>Admin: the economy screen, and changing balances</td></tr><tr><td><code>/economy add</code></td><td><code>coins.admin.economy</code></td><td>Give a player money</td></tr><tr><td><code>/economy import</code></td><td><code>coins.admin.economy</code></td><td>Copy every player's balance from another economy (Ecotale, or one through VaultUnlocked)</td></tr><tr><td><code>/economy set</code></td><td><code>coins.admin.economy</code></td><td>Set a player's balance to an amount</td></tr><tr><td><code>/economy take</code></td><td><code>coins.admin.economy</code></td><td>Take money from a player</td></tr><tr><td><code>/leaderboards</code> (/leaderboard, /ranks)</td><td>Everyone</td><td>The richest players, biggest winners and best traders</td></tr><tr><td><code>/pay</code></td><td>Everyone</td><td>Send money from your wallet to another player</td></tr><tr><td><code>/wallet</code> (/balance, /bal)</td><td>Everyone</td><td>Open your wallet: balance, coins, payments and history</td></tr></tbody></table></div>
+<h2 id="settings"><a class="anchor" href="#settings" aria-label="Link to this section">#</a>Settings</h2>
+<p>Every setting is changed in game with <code>/tempest</code> and saved at once; nothing needs a restart. Amounts of 0 are off unless the setting says otherwise.</p>
+<h3 id="coins"><a class="anchor" href="#coins" aria-label="Link to this section">#</a>Coins</h3>
+<p><code>/tempest</code> → Coins. Who can change it: <code>tempest.admin</code> or <code>tempest.admin.coins</code>.</p>
+<h4 id="earning"><a class="anchor" href="#earning" aria-label="Link to this section">#</a>Earning</h4>
+<p>Coins players get from playing. Each ore's chance and worth are on the Ore Drops tab.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Mobs drop coins</td><td>When a player kills a mob.</td><td>On or off</td></tr><tr><td>Coins per point of health</td><td>Tougher mobs drop more.</td><td>0 to 1000</td></tr><tr><td>Most from one mob</td><td>0 = no limit.</td><td>0 to 1000000000</td></tr><tr><td>Ores drop coins</td><td>Ores placed by players never do.</td><td>On or off</td></tr></tbody></table></div>
+<h4 id="payments"><a class="anchor" href="#payments" aria-label="Link to this section">#</a>Payments</h4>
+<p>Players paying each other with /pay or the wallet's Pay button.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Players can pay each other</td><td></td><td>On or off</td></tr><tr><td>Smallest payment</td><td></td><td>1 to 1000000000</td></tr><tr><td>Fee (%)</td><td>Paid on top by the sender. It leaves the game.</td><td>0 to 100</td></tr></tbody></table></div>
+<h4 id="leaderboards-2"><a class="anchor" href="#leaderboards-2" aria-label="Link to this section">#</a>Leaderboards</h4>
+<p>/leaderboards and /baltop.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Open to everyone</td><td>Off: only admins can see them.</td><td>On or off</td></tr><tr><td>Players on each board</td><td></td><td>1 to 50</td></tr></tbody></table></div>
+<h4 id="shared-banks-2"><a class="anchor" href="#shared-banks-2" aria-label="Link to this section">#</a>Shared banks</h4>
+<p>Players open a bank with /bank and save up together; the owner decides who may take coins out.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Shared banks</td><td>Off: no new banks. Existing ones can still be used and closed.</td><td>On or off</td></tr><tr><td>Price to open a bank</td><td>It leaves the game. 0 = free.</td><td>0 to 1000000000</td></tr><tr><td>Banks one player can own</td><td></td><td>1 to 100</td></tr><tr><td>Members per bank</td><td>Besides the owner.</td><td>1 to 200</td></tr></tbody></table></div>
+<h4 id="savings-interest"><a class="anchor" href="#savings-interest" aria-label="Link to this section">#</a>Savings interest</h4>
+<p>Banks earn a little each day on the lowest balance they had since the last payout. A new bank earns from its second payout; a server that was down pays one day, not the days missed.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Savings interest</td><td>Off: no interest. New money: keep the rate low.</td><td>On or off</td></tr><tr><td>Rate (% a day)</td><td></td><td>0 to 5</td></tr><tr><td>Highest balance that earns</td><td>0 = no limit.</td><td>0 to 1000000000000</td></tr><tr><td>Most per bank a day</td><td>0 = no limit.</td><td>0 to 1000000000</td></tr><tr><td>Most per owner a day</td><td>All banks of one owner together, so many small banks earn no more. 0 = no limit.</td><td>0 to 1000000000</td></tr><tr><td>Payout hour</td><td>Server time.</td><td>0 to 23</td></tr></tbody></table></div>
+<h4 id="other"><a class="anchor" href="#other" aria-label="Link to this section">#</a>Other</h4>
+<h4 id="atm-designs"><a class="anchor" href="#atm-designs" aria-label="Link to this section">#</a>ATM designs</h4>
+<p>Crouch and press F on an ATM to change its design, or use /atm &lt;design&gt; to get one to place: classic, vault, teller, royal, crystal. Every design works the same.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Players can craft ATMs</td><td>Off: only admins can.</td><td>On or off</td></tr><tr><td>Keep transaction logs (days)</td><td>0 = forever. Old files are deleted when the server starts.</td><td>0 to 36500</td></tr></tbody></table></div>
+<h3 id="daily-rewards-2"><a class="anchor" href="#daily-rewards-2" aria-label="Link to this section">#</a>Daily Rewards</h3>
+<p><code>/tempest</code> → Daily Rewards. Who can change it: <code>tempest.admin</code> or <code>tempest.admin.coins</code>.</p>
+<h4 id="daily-rewards-3"><a class="anchor" href="#daily-rewards-3" aria-label="Link to this section">#</a>Daily rewards</h4>
+<p>A reward for every day a player comes back. Players open the calendar with /daily.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Daily rewards</td><td>Off: no rewards and no calendar.</td><td>On or off</td></tr><tr><td>Open the calendar on join</td><td>Only when a reward is waiting.</td><td>On or off</td></tr><tr><td>Reminder under the coin counter</td><td>Shows "Daily reward ready!"</td><td>On or off</td></tr></tbody></table></div>
+<h4 id="timing"><a class="anchor" href="#timing" aria-label="Link to this section">#</a>Timing</h4>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Hours between rewards</td><td>A bit under 24 lets players claim at the same time each day.</td><td>0.1 to 8760</td></tr><tr><td>Hours before the streak resets</td><td>Wait longer and the calendar starts again at day 1.</td><td>0.1 to 8760</td></tr></tbody></table></div>
+<h4 id="rewards"><a class="anchor" href="#rewards" aria-label="Link to this section">#</a>Rewards</h4>
+<p>What each day of the calendar pays. After day 7 it starts over.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Day 1</td><td>Reward</td><td>0 to 1000000000</td></tr><tr><td>Day 2</td><td>Reward</td><td>0 to 1000000000</td></tr><tr><td>Day 3</td><td>Reward</td><td>0 to 1000000000</td></tr><tr><td>Day 4</td><td>Reward</td><td>0 to 1000000000</td></tr><tr><td>Day 5</td><td>Reward</td><td>0 to 1000000000</td></tr><tr><td>Day 6</td><td>Reward</td><td>0 to 1000000000</td></tr><tr><td>Day 7 (big one)</td><td>Reward</td><td>0 to 1000000000</td></tr></tbody></table></div>
+<h3 id="ore-drops"><a class="anchor" href="#ore-drops" aria-label="Link to this section">#</a>Ore Drops</h3>
+<p><code>/tempest</code> → Ore Drops. Who can change it: <code>tempest.admin</code> or <code>tempest.admin.coins</code>.</p>
+<h4 id="ore-drops-2"><a class="anchor" href="#ore-drops-2" aria-label="Link to this section">#</a>Ore drops</h4>
+<p>The chance that mining an ore also drops coins, and how much. Ores placed by players never drop any.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Copper</td><td>Chance (%)</td><td>0 to 100</td></tr><tr><td>Worth</td><td></td><td>0 to 1000000000</td></tr><tr><td>Iron</td><td>Chance (%)</td><td>0 to 100</td></tr><tr><td>Worth</td><td></td><td>0 to 1000000000</td></tr><tr><td>Silver</td><td>Chance (%)</td><td>0 to 100</td></tr><tr><td>Worth</td><td></td><td>0 to 1000000000</td></tr><tr><td>Gold</td><td>Chance (%)</td><td>0 to 100</td></tr><tr><td>Worth</td><td></td><td>0 to 1000000000</td></tr><tr><td>Cobalt</td><td>Chance (%)</td><td>0 to 100</td></tr><tr><td>Worth</td><td></td><td>0 to 1000000000</td></tr><tr><td>Mithril</td><td>Chance (%)</td><td>0 to 100</td></tr><tr><td>Worth</td><td></td><td>0 to 1000000000</td></tr><tr><td>Adamantite</td><td>Chance (%)</td><td>0 to 100</td></tr><tr><td>Worth</td><td></td><td>0 to 1000000000</td></tr><tr><td>Thorium</td><td>Chance (%)</td><td>0 to 100</td></tr><tr><td>Worth</td><td></td><td>0 to 1000000000</td></tr><tr><td>Onyxium</td><td>Chance (%)</td><td>0 to 100</td></tr><tr><td>Worth</td><td></td><td>0 to 1000000000</td></tr><tr><td>Prisma</td><td>Chance (%)</td><td>0 to 100</td></tr><tr><td>Worth</td><td></td><td>0 to 1000000000</td></tr></tbody></table></div>
+<h3 id="currency"><a class="anchor" href="#currency" aria-label="Link to this section">#</a>Currency</h3>
+<p><code>/tempest</code> → Currency. Who can change it: <code>tempest.admin</code> or <code>tempest.admin.coins</code>.</p>
+<h4 id="money"><a class="anchor" href="#money" aria-label="Link to this section">#</a>Money</h4>
+<p>What amounts are called in every message.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Name</td><td>For 1</td><td>Text</td></tr><tr><td>For 2 or more</td><td></td><td>Text</td></tr></tbody></table></div>
+<h4 id="coins-2"><a class="anchor" href="#coins-2" aria-label="Link to this section">#</a>Coins</h4>
+<p>Each coin's name, and how many of the smallest coin it is worth.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Copper Coin</td><td>Name</td><td>Text</td></tr><tr><td>Iron Coin</td><td>Name</td><td>Text</td></tr><tr><td>Worth</td><td></td><td>1 to 1000000000000</td></tr><tr><td>Silver Coin</td><td>Name</td><td>Text</td></tr><tr><td>Worth</td><td></td><td>1 to 1000000000000</td></tr><tr><td>Gold Coin</td><td>Name</td><td>Text</td></tr><tr><td>Worth</td><td></td><td>1 to 1000000000000</td></tr><tr><td>Emerald Coin</td><td>Name</td><td>Text</td></tr><tr><td>Worth</td><td></td><td>1 to 1000000000000</td></tr><tr><td>Diamond Coin</td><td>Name</td><td>Text</td></tr><tr><td>Worth</td><td></td><td>1 to 1000000000000</td></tr></tbody></table></div>
+<h4 id="chat-tags"><a class="anchor" href="#chat-tags" aria-label="Link to this section">#</a>Chat tags</h4>
+<p>The word in front of messages, and its colour. Leave a tag empty to hide it.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Wallet and payments</td><td>Tag</td><td>Text</td></tr><tr><td>Colour</td><td></td><td>A colour</td></tr><tr><td>Daily rewards</td><td>Tag</td><td>Text</td></tr><tr><td>Colour</td><td></td><td>A colour</td></tr><tr><td>Admin /eco</td><td>Tag</td><td>Text</td></tr><tr><td>Colour</td><td></td><td>A colour</td></tr></tbody></table></div>
+<h3 id="integrations"><a class="anchor" href="#integrations" aria-label="Link to this section">#</a>Integrations</h3>
+<p><code>/tempest</code> → Integrations. Who can change it: <code>tempest.admin</code> or <code>tempest.admin.coins</code>.</p>
+<h4 id="vaultunlocked"><a class="anchor" href="#vaultunlocked" aria-label="Link to this section">#</a>VaultUnlocked</h4>
+<p>Lets plugins that use VaultUnlocked (player shops, auction houses, jobs, land claims...) pay and charge in these coins. Install VaultUnlocked to use it.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Be the economy for VaultUnlocked plugins</td><td>Their payments show in wallets and the /eco log under the plugin's name.</td><td>On or off</td></tr></tbody></table></div>
+<h4 id="cassaforte"><a class="anchor" href="#cassaforte" aria-label="Link to this section">#</a>Cassaforte</h4>
+<p>Lets plugins that use Cassaforte (SimpleJobs, Towny3D...) pay and charge in these coins, and use the shared banks. Install Cassaforte to use it.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Be the economy for Cassaforte plugins</td><td>Cassaforte keeps the first economy that connects; switching off takes a restart.</td><td>On or off</td></tr></tbody></table></div>
+<h4 id="discord"><a class="anchor" href="#discord" aria-label="Link to this section">#</a>Discord</h4>
+<p>Posts big moments to a Discord channel. In Discord: Edit channel, Integrations, Webhooks, New webhook, Copy webhook URL, and paste it below.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Webhook link</td><td>Empty: Discord is off. Keep it secret, anyone with it can post.</td><td>Text</td></tr><tr><td>Name in Discord</td><td></td><td>Text</td></tr><tr><td>Jackpots</td><td></td><td>On or off</td></tr><tr><td>Big slot machine wins</td><td>The size is set on the Slot Machine tab (Announce wins from).</td><td>On or off</td></tr><tr><td>Lottery winners</td><td></td><td>On or off</td></tr><tr><td>Achievements</td><td></td><td>On or off</td></tr><tr><td>News from other mods</td><td></td><td>On or off</td></tr><tr><td>Send a test message when saved</td><td>Tick, then Save: a test message is posted if the link works.</td><td>On or off</td></tr></tbody></table></div>
+<h4 id="placeholders"><a class="anchor" href="#placeholders" aria-label="Link to this section">#</a>Placeholders</h4>
+<p>For scoreboards, chat formats and placeholder plugins: {coins_balance}, {coins_balance_formatted}, {coins_rank}, {coins_daily_streak}, {lottery_pot}, {lottery_time_left}, {slots_jackpot}, {quests_active}, {achievements_unlocked} and more (see API.md).</p>
+    </article>
+    <nav class="pager"><a class="prev" href="guide-core.html"><small>Previous</small>Core</a><a class="next" href="guide-holograms.html"><small>Next</small>Holograms</a></nav>
+    <footer class="foot">Tempest plugins for Hytale by AtomicTempest. Not made or endorsed by Hypixel Studios. · <a href="guide-economy.md">This page as Markdown</a> · <a href="llms.txt">llms.txt</a></footer>
+  </main>
+  <aside class="toc"><h5>On this page</h5><a href="#what-players-read-in-guide">What players read in /guide</a><a href="#welcome" class="sub">Welcome</a><a href="#wallet-and-atm" class="sub">Wallet and ATM</a><a href="#earning-coins" class="sub">Earning coins</a><a href="#daily-rewards" class="sub">Daily rewards</a><a href="#shared-banks" class="sub">Shared banks</a><a href="#leaderboards" class="sub">Leaderboards</a><a href="#all-commands" class="sub">All commands</a><a href="#commands">Commands</a><a href="#settings">Settings</a><a href="#coins" class="sub">Coins</a><a href="#daily-rewards-2" class="sub">Daily Rewards</a><a href="#ore-drops" class="sub">Ore Drops</a><a href="#currency" class="sub">Currency</a><a href="#integrations" class="sub">Integrations</a></aside>
+</div>
+</body>
+</html>

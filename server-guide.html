@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Server guide · Tempest plugins docs</title>
+<meta name="description" content="How the Tempest plugins work in game, for server owners and admins: commands, permissions, every setting and what players see.">
+<link rel="stylesheet" href="site.css">
+<script src="site.js"></script>
+</head>
+<body>
+<header class="top">
+  <button class="icon-btn menu-btn" id="menu" type="button" aria-label="Menu">&#9776;</button>
+  <a class="brand" href="index.html"><span class="logo">T</span>Tempest Docs</a>
+  <span class="version">Core API 19</span>
+  <div class="search"><input id="q" type="search" placeholder="Search the docs" autocomplete="off" aria-label="Search"><kbd>Ctrl K</kbd><div class="results" id="results"></div></div>
+  <nav class="top-links"><a href="javadoc.html">Javadoc</a><a href="https://discord.gg/Q9PNVCMZXK" target="_blank" rel="noopener">Discord</a><a href="https://www.curseforge.com/hytale/mods/search?search=tempest" target="_blank" rel="noopener">CurseForge</a></nav>
+  <button class="icon-btn" id="theme" type="button" aria-label="Light or dark">&#9680;</button>
+</header>
+<div class="layout">
+  <aside class="side"><h4>Welcome</h4><a href="index.html">Introduction</a><h4>Server guide</h4><a href="server-guide.html" class="here"><span class="badge">NEW</span>Server guide</a><a href="guide-commands.html">All commands and permissions</a><a href="guide-core.html">Core</a><a href="guide-economy.html">Economy (Coins)</a><a href="guide-holograms.html">Holograms</a><a href="guide-shop.html">Shop</a><a href="guide-crates.html">Crates</a><a href="guide-quests.html">Quests</a><a href="guide-pass.html">Battle pass</a><a href="guide-events.html">Events</a><a href="guide-contracts.html">Contracts and bounties</a><a href="guide-projects.html">Town projects</a><a href="guide-town.html">Town</a><a href="guide-jobs.html">Jobs</a><a href="guide-trade.html">Trade</a><a href="guide-slots.html">Slot machines</a><a href="guide-lottery.html">Lottery</a><a href="guide-coinflip.html">Coinflip</a><a href="leveling-mods.html"><span class="badge">NEW</span>Leveling mods</a><h4>Developers: start here</h4><a href="quick-start.html">Quick start</a><a href="setup.html">Setting up a plugin</a><a href="versions.html">API versions</a><h4>Core API</h4><a href="money.html">Money</a><a href="actions.html">Player actions</a><a href="settings.html">Settings and menus</a><a href="hud.html">Boards, HUD and placeholders</a><a href="rewards.html">Rewards, mail and boosts</a><a href="world.html">Map, town and demand</a><a href="safety.html">Safety and helpers</a><h4>Leveling and skills API</h4><a href="levels.html">Player levels</a><a href="skills.html"><span class="badge">NEW</span>Skills (MMO Skill Tree)</a><h4>Plugin APIs</h4><a href="quests.html">Quests</a><a href="crates.html">Crates</a><a href="holograms.html">Holograms</a><a href="coinflip.html">Coinflip</a><a href="jobs.html">Jobs</a><a href="projects.html">Town projects</a><a href="pass.html">Battle pass</a><a href="games.html">Lottery, slots and shop</a><h4>More</h4><a href="integrations.html">Integrations</a><a href="content.html">Content mods (JSON)</a><a href="rules.html">Rules of thumb</a><h4>Reference</h4><a href="javadoc.html">Javadoc</a><a href="changelog.html">Changelog</a></aside>
+  <main>
+    <div class="crumbs">Server guide</div>
+    <h1>Server guide</h1>
+    <p class="lead">How the Tempest plugins work in game, for server owners and admins: commands, permissions, every setting and what players see.</p>
+    <article>
+<p>The pages in this section are made from the plugins themselves: the commands, the <code>/tempest</code> settings with their explanations, and the <code>/guide</code> pages players read. They say exactly what the game says.</p>
+<h2 id="install"><a class="anchor" href="#install" aria-label="Link to this section">#</a>Install</h2>
+<ol><li>Put <strong>Tempest Core</strong> in your server's <code>mods</code> folder. Every other Tempest plugin needs it.</li><li>Put the plugins you want next to it. Each one works on its own; together they connect (quests count crates, events boost the shop, jobs pay more for what contracts want, and so on).</li><li>Money comes from <strong>Tempest Economy (Coins)</strong>, or from any economy plugin through VaultUnlocked.</li><li>Start the server. Each plugin makes its files under <code>universe/mods</code> with safe defaults.</li></ol>
+<h2 id="two-commands-to-know"><a class="anchor" href="#two-commands-to-know" aria-label="Link to this section">#</a>Two commands to know</h2>
+<div class="table"><table><thead><tr><th>Command</th><th>Who</th><th>What it opens</th></tr></thead><tbody><tr><td><code>/tempest</code></td><td>Admins</td><td>Every setting of every Tempest plugin, one tab each, with a search box. Changes are saved at once</td></tr><tr><td><code>/guide</code></td><td>Everyone</td><td>The help pages: what each plugin does and how to start</td></tr><tr><td><code>/tempest doctor</code></td><td>Admins</td><td>Checks every plugin's settings for money made from nothing (a shop that buys for more than it sells, a quest that pays more than it costs)</td></tr></tbody></table></div>
+<h2 id="permissions"><a class="anchor" href="#permissions" aria-label="Link to this section">#</a>Permissions</h2>
+<div class="table"><table><thead><tr><th>Permission</th><th>Gives</th></tr></thead><tbody><tr><td><code>tempest.admin</code></td><td>Every <code>/tempest</code> tab</td></tr><tr><td><code>tempest.admin.&lt;group&gt;</code></td><td>One plugin's tabs only, e.g. <code>tempest.admin.jobs</code> or <code>tempest.admin.crates</code></td></tr><tr><td>A plugin's admin permission (<code>jobs.admin</code>, <code>crates.admin</code>, <code>holograms.admin</code>...)</td><td>That plugin's admin commands and editors</td></tr></tbody></table></div>
+<p>Commands that run as the server console (reward commands in quests, the pass, events, jobs and projects) can be set only by players with <code>tempest.admin</code>, whatever else they have. Every command and the permission it needs: <a href="guide-commands.html">All commands and permissions</a>.</p>
+<h2 id="free-and-pro"><a class="anchor" href="#free-and-pro" aria-label="Link to this section">#</a>Free and Pro</h2>
+<p>Some plugins come as a free jar and a Pro jar with the same name. The Pro jar replaces the free one and keeps everything the server made. Free limits only stop you making more: they never break what a server already has. Core, Economy and the plugins' APIs are always free.</p>
+<h2 id="languages"><a class="anchor" href="#languages" aria-label="Link to this section">#</a>Languages</h2>
+<p>Every text players see is in 8 languages (English, German, Spanish, French, Italian, Polish, Brazilian Portuguese and Russian). Players get their game's language when Tempest has it; the server-wide language is in <code>/tempest</code> → General. With a Pro plugin installed, <code>/tempest texts</code> lets you reword any text.</p>
+    </article>
+    <nav class="pager"><a class="prev" href="index.html"><small>Previous</small>Introduction</a><a class="next" href="guide-commands.html"><small>Next</small>All commands and permissions</a></nav>
+    <footer class="foot">Tempest plugins for Hytale by AtomicTempest. Not made or endorsed by Hypixel Studios. · <a href="server-guide.md">This page as Markdown</a> · <a href="llms.txt">llms.txt</a></footer>
+  </main>
+  <aside class="toc"><h5>On this page</h5><a href="#install">Install</a><a href="#two-commands-to-know">Two commands to know</a><a href="#permissions">Permissions</a><a href="#free-and-pro">Free and Pro</a><a href="#languages">Languages</a></aside>
+</div>
+</body>
+</html>

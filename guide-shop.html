@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shop · Tempest plugins docs</title>
+<meta name="description" content="The server shop, stalls and their shelves.">
+<link rel="stylesheet" href="site.css">
+<script src="site.js"></script>
+</head>
+<body>
+<header class="top">
+  <button class="icon-btn menu-btn" id="menu" type="button" aria-label="Menu">&#9776;</button>
+  <a class="brand" href="index.html"><span class="logo">T</span>Tempest Docs</a>
+  <span class="version">Core API 19</span>
+  <div class="search"><input id="q" type="search" placeholder="Search the docs" autocomplete="off" aria-label="Search"><kbd>Ctrl K</kbd><div class="results" id="results"></div></div>
+  <nav class="top-links"><a href="javadoc.html">Javadoc</a><a href="https://discord.gg/Q9PNVCMZXK" target="_blank" rel="noopener">Discord</a><a href="https://www.curseforge.com/hytale/mods/search?search=tempest" target="_blank" rel="noopener">CurseForge</a></nav>
+  <button class="icon-btn" id="theme" type="button" aria-label="Light or dark">&#9680;</button>
+</header>
+<div class="layout">
+  <aside class="side"><h4>Welcome</h4><a href="index.html">Introduction</a><h4>Server guide</h4><a href="server-guide.html"><span class="badge">NEW</span>Server guide</a><a href="guide-commands.html">All commands and permissions</a><a href="guide-core.html">Core</a><a href="guide-economy.html">Economy (Coins)</a><a href="guide-holograms.html">Holograms</a><a href="guide-shop.html" class="here">Shop</a><a href="guide-crates.html">Crates</a><a href="guide-quests.html">Quests</a><a href="guide-pass.html">Battle pass</a><a href="guide-events.html">Events</a><a href="guide-contracts.html">Contracts and bounties</a><a href="guide-projects.html">Town projects</a><a href="guide-town.html">Town</a><a href="guide-jobs.html">Jobs</a><a href="guide-trade.html">Trade</a><a href="guide-slots.html">Slot machines</a><a href="guide-lottery.html">Lottery</a><a href="guide-coinflip.html">Coinflip</a><a href="leveling-mods.html"><span class="badge">NEW</span>Leveling mods</a><h4>Developers: start here</h4><a href="quick-start.html">Quick start</a><a href="setup.html">Setting up a plugin</a><a href="versions.html">API versions</a><h4>Core API</h4><a href="money.html">Money</a><a href="actions.html">Player actions</a><a href="settings.html">Settings and menus</a><a href="hud.html">Boards, HUD and placeholders</a><a href="rewards.html">Rewards, mail and boosts</a><a href="world.html">Map, town and demand</a><a href="safety.html">Safety and helpers</a><h4>Leveling and skills API</h4><a href="levels.html">Player levels</a><a href="skills.html"><span class="badge">NEW</span>Skills (MMO Skill Tree)</a><h4>Plugin APIs</h4><a href="quests.html">Quests</a><a href="crates.html">Crates</a><a href="holograms.html">Holograms</a><a href="coinflip.html">Coinflip</a><a href="jobs.html">Jobs</a><a href="projects.html">Town projects</a><a href="pass.html">Battle pass</a><a href="games.html">Lottery, slots and shop</a><h4>More</h4><a href="integrations.html">Integrations</a><a href="content.html">Content mods (JSON)</a><a href="rules.html">Rules of thumb</a><h4>Reference</h4><a href="javadoc.html">Javadoc</a><a href="changelog.html">Changelog</a></aside>
+  <main>
+    <div class="crumbs">Server guide</div>
+    <h1>Shop</h1>
+    <p class="lead">The server shop, stalls and their shelves.</p>
+    <article>
+<h2 id="what-players-read-in-guide"><a class="anchor" href="#what-players-read-in-guide" aria-label="Link to this section">#</a>What players read in /guide</h2>
+<p>The <code>/guide</code> pages of this plugin, as a player sees them on a test server (numbers are examples).</p>
+<h3 id="shop"><a class="anchor" href="#shop" aria-label="Link to this section">#</a>Shop</h3>
+<p><strong>Trading</strong></p>
+<ul><li>Find a shop stall and press F. Stalls are shown on your map.</li><li>Stalls can sell different things, so look around: a blacksmith has tools and weapons, a farmer has food.</li><li>Buy takes one item, x10 takes 10. The price is for one item, in copper, paid from your wallet.</li><li>Every day 3 items are 25% cheaper, the same for everyone. Look for DEAL in the shop: you can buy 16 of each at the deal price a day.</li><li>Sell gives one item to the shop, All sells every one you carry. "Sell everything the shop buys" sells all of it at once.</li></ul>
+<p><strong>Prices</strong></p>
+<ul><li>Hold an item: if the shop buys it, what it pays shows next to your coin counter.</li><li>Worn tools and weapons sell for less.Broken ones cannot be sold until they are repaired.</li></ul>
+<p><strong>Good to know</strong></p>
+<ul><li>Use the tabs at the top of the shop to see one kind of item at a time.</li><li>Only admins can build shop stalls on this server.</li></ul>
+<h2 id="commands"><a class="anchor" href="#commands" aria-label="Link to this section">#</a>Commands</h2>
+<div class="table"><table><thead><tr><th>Command</th><th>Who can use it</th><th>What it does</th></tr></thead><tbody><tr><td><code>/sell</code></td><td>Everyone</td><td>Sell items to the shop</td></tr><tr><td><code>/sell all</code></td><td>Everyone</td><td>Sell every item the shop buys</td></tr><tr><td><code>/sell hand</code></td><td>Everyone</td><td>Sell the item in your hand</td></tr><tr><td><code>/shop</code></td><td>Everyone</td><td>Open the shop</td></tr><tr><td><code>/shop link</code></td><td><code>shop.admin</code></td><td>Make the block you look at a shop, selling as this stall kind</td></tr><tr><td><code>/shop stall</code></td><td><code>shop.admin</code></td><td>Get a stall to place</td></tr><tr><td><code>/shop unlink</code></td><td><code>shop.admin</code></td><td>Make the block you look at an ordinary block again</td></tr></tbody></table></div>
+<h2 id="settings"><a class="anchor" href="#settings" aria-label="Link to this section">#</a>Settings</h2>
+<p>Every setting is changed in game with <code>/tempest</code> and saved at once; nothing needs a restart. Amounts of 0 are off unless the setting says otherwise.</p>
+<h3 id="shop-2"><a class="anchor" href="#shop-2" aria-label="Link to this section">#</a>Shop</h3>
+<p><code>/tempest</code> → Shop. Who can change it: <code>tempest.admin</code> or <code>tempest.admin.shop</code>.</p>
+<h4 id="trading"><a class="anchor" href="#trading" aria-label="Link to this section">#</a>Trading</h4>
+<p>Items and their prices are set in the shop itself, with Edit shop.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Players can buy</td><td></td><td>On or off</td></tr><tr><td>Players can sell</td><td></td><td>On or off</td></tr><tr><td>/shop works anywhere</td><td>Off: players must go to a shop stall.</td><td>On or off</td></tr></tbody></table></div>
+<h4 id="prices"><a class="anchor" href="#prices" aria-label="Link to this section">#</a>Prices</h4>
+<p>Change every price at once, for a sale or a good time to sell.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Buy prices (%)</td><td>80 = everything 20% off.</td><td>1 to 10000</td></tr><tr><td>Sell prices (%)</td><td>150 = the shop pays half as much again.</td><td>1 to 10000</td></tr><tr><td>Bulk buy amount</td><td>The second amount button.</td><td>2 to 1000</td></tr></tbody></table></div>
+<h4 id="supply-and-demand-pro"><a class="anchor" href="#supply-and-demand-pro" aria-label="Link to this section">#</a>Supply and demand (Pro)</h4>
+<p>Prices move with what players trade: each item sold lowers what the shop pays for it, each item bought raises what it costs, and both drift back to the price you set. The shop never pays more or asks less than your set prices, so nobody can buy low and sell high. One item can keep a fixed price, or fall faster or slower: Edit shop, pick the item.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Prices move</td><td></td><td>On or off</td></tr><tr><td>Each one sold lowers it (%)</td><td>0.5: after 64 sold the shop pays about 73%.</td><td>0 to 50</td></tr><tr><td>Never under (%)</td><td></td><td>1 to 100</td></tr><tr><td>Each one bought raises it (%)</td><td>0 = buying never raises prices.</td><td>0 to 50</td></tr><tr><td>Never over (%)</td><td></td><td>100 to 1000</td></tr><tr><td>Halfway back to normal in (hours)</td><td></td><td>0.1 to 720</td></tr></tbody></table></div>
+<h4 id="the-shop-s-menu"><a class="anchor" href="#the-shop-s-menu" aria-label="Link to this section">#</a>The shop's menu</h4>
+<p>What players see. Items, prices and categories are set in the shop itself, with Edit shop.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Title</td><td>Empty: "Shop" in each player's language.</td><td>Text</td></tr><tr><td>Search box</td><td></td><td>On or off</td></tr><tr><td>Sort list</td><td></td><td>On or off</td></tr><tr><td>Category list</td><td></td><td>On or off</td></tr><tr><td>Deals banner</td><td></td><td>On or off</td></tr><tr><td>How many a player has</td><td></td><td>On or off</td></tr><tr><td>First sorted by</td><td></td><td>The shop's own order, Cheapest first, Dearest first, By name</td></tr><tr><td>Items on one page</td><td></td><td>4 to 60</td></tr><tr><td>Third amount button</td><td></td><td>2 to 10000</td></tr><tr><td>Most in one purchase</td><td></td><td>1 to 100000</td></tr></tbody></table></div>
+<h4 id="daily-deals"><a class="anchor" href="#daily-deals" aria-label="Link to this section">#</a>Daily deals</h4>
+<p>A few items are cheaper each day, the same ones for everyone, picked anew at midnight. While an item is a deal, the shop pays no more for it than the deal price, so nobody can buy cheap and sell back.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Deals each day</td><td>0 = no deals.</td><td>0 to 10</td></tr><tr><td>Deal discount (%)</td><td></td><td>1 to 90</td></tr><tr><td>Deals are picked from</td><td>Choose the pool in the shop: Edit shop, pick an item, Daily deal. Items set to Always are a deal every day.</td><td>Any item in the shop, Only the deal pool</td></tr><tr><td>At the deal price, per player a day</td><td>How many of each deal one player may buy cheaper a day; more cost the normal price. 0 = no limit.</td><td>0 to 100000</td></tr></tbody></table></div>
+<h4 id="worn-items"><a class="anchor" href="#worn-items" aria-label="Link to this section">#</a>Worn items</h4>
+<p>Tools, weapons and armour that have lost durability.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Worn items sell for less</td><td>By how worn they are. Off: full price.</td><td>On or off</td></tr><tr><td>Refuse below condition (%)</td><td>0 = only broken items are refused.</td><td>0 to 100</td></tr></tbody></table></div>
+<h4 id="other"><a class="anchor" href="#other" aria-label="Link to this section">#</a>Other</h4>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Price tag under the coin counter</td><td>What the shop pays for the item in your hand.</td><td>On or off</td></tr><tr><td>Players can craft stalls</td><td>Off: only admins can.</td><td>On or off</td></tr><tr><td>Chat tag</td><td>Tag</td><td>Text</td></tr><tr><td>Colour</td><td></td><td>A colour</td></tr></tbody></table></div>
+<h4 id="free-edition"><a class="anchor" href="#free-edition" aria-label="Link to this section">#</a>Free edition</h4>
+<p>The Pro edition adds: more stalls (Apothecary, Fishmonger, Tavern, Mage), prices that move with supply and demand.</p>
+<h3 id="stalls"><a class="anchor" href="#stalls" aria-label="Link to this section">#</a>Stalls</h3>
+<p><code>/tempest</code> → Stalls. Who can change it: <code>tempest.admin</code> or <code>tempest.admin.stalls</code>.</p>
+<h4 id="classic"><a class="anchor" href="#classic" aria-label="Link to this section">#</a>Classic</h4>
+<p>Choose items for it in the shop: Edit shop, pick an item. One stall's own settings: This stall, at that stall.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Title</td><td>Empty: the shop's own title.</td><td>Text</td></tr><tr><td>It sells</td><td></td><td>Everything in the shop, What fits, plus chosen items, Only items chosen for it</td></tr><tr><td>Items on its shelves</td><td></td><td>On or off</td></tr><tr><td>How many</td><td></td><td>1 to 3</td></tr></tbody></table></div>
+<h4 id="blacksmith"><a class="anchor" href="#blacksmith" aria-label="Link to this section">#</a>Blacksmith</h4>
+<p>Choose items for it in the shop: Edit shop, pick an item. One stall's own settings: This stall, at that stall.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Title</td><td>Empty: the stall's name in each player's language.</td><td>Text</td></tr><tr><td>It sells</td><td></td><td>Everything in the shop, What fits, plus chosen items, Only items chosen for it</td></tr><tr><td>Items on its shelves</td><td></td><td>On or off</td></tr><tr><td>How many</td><td></td><td>1 to 4</td></tr></tbody></table></div>
+<h4 id="farmer"><a class="anchor" href="#farmer" aria-label="Link to this section">#</a>Farmer</h4>
+<p>Choose items for it in the shop: Edit shop, pick an item. One stall's own settings: This stall, at that stall.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Title</td><td>Empty: the stall's name in each player's language.</td><td>Text</td></tr><tr><td>It sells</td><td></td><td>Everything in the shop, What fits, plus chosen items, Only items chosen for it</td></tr><tr><td>Items on its shelves</td><td></td><td>On or off</td></tr><tr><td>How many</td><td></td><td>1 to 4</td></tr></tbody></table></div>
+<h4 id="apothecary"><a class="anchor" href="#apothecary" aria-label="Link to this section">#</a>Apothecary</h4>
+<p>Choose items for it in the shop: Edit shop, pick an item. One stall's own settings: This stall, at that stall.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Title</td><td>Empty: the stall's name in each player's language.</td><td>Text</td></tr><tr><td>It sells</td><td></td><td>Everything in the shop, What fits, plus chosen items, Only items chosen for it</td></tr><tr><td>Items on its shelves</td><td></td><td>On or off</td></tr><tr><td>How many</td><td></td><td>1 to 3</td></tr></tbody></table></div>
+<h4 id="fishmonger"><a class="anchor" href="#fishmonger" aria-label="Link to this section">#</a>Fishmonger</h4>
+<p>Choose items for it in the shop: Edit shop, pick an item. One stall's own settings: This stall, at that stall.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Title</td><td>Empty: the stall's name in each player's language.</td><td>Text</td></tr><tr><td>It sells</td><td></td><td>Everything in the shop, What fits, plus chosen items, Only items chosen for it</td></tr><tr><td>Items on its shelves</td><td></td><td>On or off</td></tr><tr><td>How many</td><td></td><td>1 to 4</td></tr></tbody></table></div>
+<h4 id="tavern"><a class="anchor" href="#tavern" aria-label="Link to this section">#</a>Tavern</h4>
+<p>Choose items for it in the shop: Edit shop, pick an item. One stall's own settings: This stall, at that stall.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Title</td><td>Empty: the stall's name in each player's language.</td><td>Text</td></tr><tr><td>It sells</td><td></td><td>Everything in the shop, What fits, plus chosen items, Only items chosen for it</td></tr><tr><td>Items on its shelves</td><td></td><td>On or off</td></tr><tr><td>How many</td><td></td><td>1 to 3</td></tr></tbody></table></div>
+<h4 id="mage"><a class="anchor" href="#mage" aria-label="Link to this section">#</a>Mage</h4>
+<p>Choose items for it in the shop: Edit shop, pick an item. One stall's own settings: This stall, at that stall.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Title</td><td>Empty: the stall's name in each player's language.</td><td>Text</td></tr><tr><td>It sells</td><td></td><td>Everything in the shop, What fits, plus chosen items, Only items chosen for it</td></tr><tr><td>Items on its shelves</td><td></td><td>On or off</td></tr><tr><td>How many</td><td></td><td>1 to 3</td></tr></tbody></table></div>
+<h3 id="stall-shelves"><a class="anchor" href="#stall-shelves" aria-label="Link to this section">#</a>Stall shelves</h3>
+<p><code>/tempest</code> → Stall shelves. Who can change it: <code>tempest.admin</code> or <code>tempest.admin.stallshelves</code>.</p>
+<h4 id="living-shelves"><a class="anchor" href="#living-shelves" aria-label="Link to this section">#</a>Living shelves</h4>
+<p>Real items from what a stall sells stand on it while a player is near. Needs Tempest Holograms (free).</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Show items on stalls</td><td></td><td>On or off</td></tr><tr><td>Show from (blocks away)</td><td>Closer costs less when a server has many stalls.</td><td>4 to 128</td></tr><tr><td>Items stand on the stall</td><td>Still 3D models. Off: they hang in the air like dropped items, with the game's rarity beam.</td><td>On or off</td></tr><tr><td>Item size</td><td>1 is the size of a dropped item; smaller items stand apart on the counter.</td><td>0.2 to 1.5</td></tr><tr><td>Only items marked for the shelves</td><td>Mark them in the shop: Edit shop, pick an item, First on the shelves. Off: deals and the rest of the stock fill the shelf.</td><td>On or off</td></tr><tr><td>A different choice each day</td><td>Marked items and deals always come first.</td><td>On or off</td></tr><tr><td>Today's deals glow</td><td></td><td>On or off</td></tr><tr><td>Glow colour</td><td></td><td>A colour</td></tr></tbody></table></div>
+<h4 id="what-a-sale-does"><a class="anchor" href="#what-a-sale-does" aria-label="Link to this section">#</a>What a sale does</h4>
+<p>Every stall plays its own animation; these go on top of it.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Sounds</td><td></td><td>On or off</td></tr><tr><td>Sparks</td><td></td><td>On or off</td></tr><tr><td>The item hops over the counter</td><td></td><td>On or off</td></tr></tbody></table></div>
+    </article>
+    <nav class="pager"><a class="prev" href="guide-holograms.html"><small>Previous</small>Holograms</a><a class="next" href="guide-crates.html"><small>Next</small>Crates</a></nav>
+    <footer class="foot">Tempest plugins for Hytale by AtomicTempest. Not made or endorsed by Hypixel Studios. · <a href="guide-shop.md">This page as Markdown</a> · <a href="llms.txt">llms.txt</a></footer>
+  </main>
+  <aside class="toc"><h5>On this page</h5><a href="#what-players-read-in-guide">What players read in /guide</a><a href="#shop" class="sub">Shop</a><a href="#commands">Commands</a><a href="#settings">Settings</a><a href="#shop-2" class="sub">Shop</a><a href="#stalls" class="sub">Stalls</a><a href="#stall-shelves" class="sub">Stall shelves</a></aside>
+</div>
+</body>
+</html>

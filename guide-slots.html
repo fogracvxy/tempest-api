@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Slot machines · Tempest plugins docs</title>
+<meta name="description" content="Slot machines">
+<link rel="stylesheet" href="site.css">
+<script src="site.js"></script>
+</head>
+<body>
+<header class="top">
+  <button class="icon-btn menu-btn" id="menu" type="button" aria-label="Menu">&#9776;</button>
+  <a class="brand" href="index.html"><span class="logo">T</span>Tempest Docs</a>
+  <span class="version">Core API 19</span>
+  <div class="search"><input id="q" type="search" placeholder="Search the docs" autocomplete="off" aria-label="Search"><kbd>Ctrl K</kbd><div class="results" id="results"></div></div>
+  <nav class="top-links"><a href="javadoc.html">Javadoc</a><a href="https://discord.gg/Q9PNVCMZXK" target="_blank" rel="noopener">Discord</a><a href="https://www.curseforge.com/hytale/mods/search?search=tempest" target="_blank" rel="noopener">CurseForge</a></nav>
+  <button class="icon-btn" id="theme" type="button" aria-label="Light or dark">&#9680;</button>
+</header>
+<div class="layout">
+  <aside class="side"><h4>Welcome</h4><a href="index.html">Introduction</a><h4>Server guide</h4><a href="server-guide.html"><span class="badge">NEW</span>Server guide</a><a href="guide-commands.html">All commands and permissions</a><a href="guide-core.html">Core</a><a href="guide-economy.html">Economy (Coins)</a><a href="guide-holograms.html">Holograms</a><a href="guide-shop.html">Shop</a><a href="guide-crates.html">Crates</a><a href="guide-quests.html">Quests</a><a href="guide-pass.html">Battle pass</a><a href="guide-events.html">Events</a><a href="guide-contracts.html">Contracts and bounties</a><a href="guide-projects.html">Town projects</a><a href="guide-town.html">Town</a><a href="guide-jobs.html">Jobs</a><a href="guide-trade.html">Trade</a><a href="guide-slots.html" class="here">Slot machines</a><a href="guide-lottery.html">Lottery</a><a href="guide-coinflip.html">Coinflip</a><a href="leveling-mods.html"><span class="badge">NEW</span>Leveling mods</a><h4>Developers: start here</h4><a href="quick-start.html">Quick start</a><a href="setup.html">Setting up a plugin</a><a href="versions.html">API versions</a><h4>Core API</h4><a href="money.html">Money</a><a href="actions.html">Player actions</a><a href="settings.html">Settings and menus</a><a href="hud.html">Boards, HUD and placeholders</a><a href="rewards.html">Rewards, mail and boosts</a><a href="world.html">Map, town and demand</a><a href="safety.html">Safety and helpers</a><h4>Leveling and skills API</h4><a href="levels.html">Player levels</a><a href="skills.html"><span class="badge">NEW</span>Skills (MMO Skill Tree)</a><h4>Plugin APIs</h4><a href="quests.html">Quests</a><a href="crates.html">Crates</a><a href="holograms.html">Holograms</a><a href="coinflip.html">Coinflip</a><a href="jobs.html">Jobs</a><a href="projects.html">Town projects</a><a href="pass.html">Battle pass</a><a href="games.html">Lottery, slots and shop</a><h4>More</h4><a href="integrations.html">Integrations</a><a href="content.html">Content mods (JSON)</a><a href="rules.html">Rules of thumb</a><h4>Reference</h4><a href="javadoc.html">Javadoc</a><a href="changelog.html">Changelog</a></aside>
+  <main>
+    <div class="crumbs">Server guide</div>
+    <h1>Slot machines</h1>
+    
+    <article>
+<h2 id="what-players-read-in-guide"><a class="anchor" href="#what-players-read-in-guide" aria-label="Link to this section">#</a>What players read in /guide</h2>
+<p>The <code>/guide</code> pages of this plugin, as a player sees them on a test server (numbers are examples).</p>
+<h3 id="slot-machines"><a class="anchor" href="#slot-machines" aria-label="Link to this section">#</a>Slot machines</h3>
+<p><strong>How to play</strong></p>
+<ul><li>Walk up to a slot machine and press F. Each spin takes your bet from your wallet; line up three of the same symbol to win.</li></ul>
+<p><strong>Your bet</strong></p>
+<ul><li>Crouch and press F on a machine, or type /slotbet, to choose your bet: 10, 50, 100 or 500 copper. Yours is 10 right now. Every prize below is your bet times the payout, so a bigger bet wins bigger.</li></ul>
+<p><strong>What three of a kind pay</strong></p>
+<ul><li>Three cherries: 2 times your bet</li><li>Three bells: 4 times your bet</li><li>Three coins: 6 times your bet</li><li>Three diamonds: 16 times your bet</li></ul>
+<p><strong>The jackpot</strong></p>
+<ul><li>Three sevens win the jackpot: 10 times your bet plus the whole pot, which is 500 copper right now. Part of every lost spin goes into the pot, so it keeps growing until someone wins it.</li><li>Bet 500 to win the whole pot. A smaller bet wins a share: 10 wins 2% of it.</li></ul>
+<p><strong>Your winnings</strong></p>
+<ul><li>Winnings come out of the machine as coins. For 90 seconds only you can pick them up; after that, anyone can.</li></ul>
+<p><strong>Good to know</strong></p>
+<ul><li>A machine takes one spin at a time. If someone else is spinning, wait for the reels to stop.</li><li>The machines are a game of luck. Some spins win big, but over many spins they pay back less than you put in.</li><li>Only admins can build slot machines on this server.</li></ul>
+<h2 id="commands"><a class="anchor" href="#commands" aria-label="Link to this section">#</a>Commands</h2>
+<div class="table"><table><thead><tr><th>Command</th><th>Who can use it</th><th>What it does</th></tr></thead><tbody><tr><td><code>/jackpot</code></td><td>Everyone</td><td>Show the slot machine jackpot</td></tr><tr><td><code>/slotbet</code></td><td>Everyone</td><td>Choose how much each slot machine spin costs</td></tr><tr><td><code>/slotstats</code></td><td><code>slotmachine.admin.stats</code></td><td>Show slot machine totals and payback</td></tr><tr><td><code>/slotstats reset</code></td><td><code>slotmachine.admin.stats</code></td><td>Start the slot machine totals again from zero</td></tr><tr><td><code>/slottheme</code></td><td><code>slotmachine.admin.theme</code></td><td>Gives you a slot machine with the chosen theme</td></tr><tr><td><code>/slottoken</code></td><td><code>slotmachine.admin.token</code></td><td>Gives you a slot machine token</td></tr></tbody></table></div>
+<h2 id="settings"><a class="anchor" href="#settings" aria-label="Link to this section">#</a>Settings</h2>
+<p>Every setting is changed in game with <code>/tempest</code> and saved at once; nothing needs a restart. Amounts of 0 are off unless the setting says otherwise.</p>
+<h3 id="slot-machine"><a class="anchor" href="#slot-machine" aria-label="Link to this section">#</a>Slot Machine</h3>
+<p><code>/tempest</code> → Slot Machine. Who can change it: <code>tempest.admin</code> or <code>tempest.admin.slots</code>.</p>
+<h4 id="bets"><a class="anchor" href="#bets" aria-label="Link to this section">#</a>Bets</h4>
+<p>Players crouch and press F on a machine (or type /slotbet) to choose their bet.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Default bet</td><td>New players start here.</td><td>1 to 1000000000</td></tr><tr><td>Bet 2</td><td>0 = off</td><td>0 to 1000000000</td></tr><tr><td>Bet 3</td><td>0 = off</td><td>0 to 1000000000</td></tr><tr><td>Bet 4</td><td>0 = off</td><td>0 to 1000000000</td></tr><tr><td>Bet 5</td><td>0 = off</td><td>0 to 1000000000</td></tr><tr><td>Show the bet picker on first use</td><td>So every player finds out they can choose.</td><td>On or off</td></tr></tbody></table></div>
+<h4 id="winning"><a class="anchor" href="#winning" aria-label="Link to this section">#</a>Winning</h4>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Win chance (%)</td><td>Line up three of a kind. Prizes are on the Slot Prizes tab.</td><td>0 to 100</td></tr><tr><td>Pay into the wallet</td><td>Off: coins pour out of the machine.</td><td>On or off</td></tr><tr><td>Winner-only pickup (seconds)</td><td>Dropped coins belong to the winner this long. 0 = anyone.</td><td>0 to 3600</td></tr><tr><td>Slot token prize (x bet)</td><td>For the hand-held slot token item.</td><td>1 to 1000000</td></tr></tbody></table></div>
+<h4 id="show"><a class="anchor" href="#show" aria-label="Link to this section">#</a>Show</h4>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Coin fountain on a win</td><td>Coins fly out of the machine (just for show).</td><td>On or off</td></tr><tr><td>Announce wins from</td><td>Tell everyone about wins this big. 0 = off.</td><td>0 to 1000000000000</td></tr></tbody></table></div>
+<h4 id="other"><a class="anchor" href="#other" aria-label="Link to this section">#</a>Other</h4>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Players can craft slot machines</td><td>Off: only admins can.</td><td>On or off</td></tr><tr><td>Chat tag</td><td>Tag</td><td>Text</td></tr><tr><td>Colour</td><td></td><td>A colour</td></tr></tbody></table></div>
+<h4 id="free-edition"><a class="anchor" href="#free-edition" aria-label="Link to this section">#</a>Free edition</h4>
+<p>The Pro edition adds: machine themes (Medieval, Pirate, Frost, Dragon, Arcane).</p>
+<h3 id="slot-prizes"><a class="anchor" href="#slot-prizes" aria-label="Link to this section">#</a>Slot Prizes</h3>
+<p><code>/tempest</code> → Slot Prizes. Who can change it: <code>tempest.admin</code> or <code>tempest.admin.slots</code>.</p>
+<h4 id="symbols"><a class="anchor" href="#symbols" aria-label="Link to this section">#</a>Symbols</h4>
+<p>What three of a kind pays (times the bet), and how often it comes up compared with the others.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Cherries</td><td>Pays (x bet)</td><td>0.1 to 1000000</td></tr><tr><td>How often</td><td></td><td>0 to 100000</td></tr><tr><td>Bells</td><td>Pays (x bet)</td><td>0.1 to 1000000</td></tr><tr><td>How often</td><td></td><td>0 to 100000</td></tr><tr><td>Coins</td><td>Pays (x bet)</td><td>0.1 to 1000000</td></tr><tr><td>How often</td><td></td><td>0 to 100000</td></tr><tr><td>Diamonds</td><td>Pays (x bet)</td><td>0.1 to 1000000</td></tr><tr><td>How often</td><td></td><td>0 to 100000</td></tr><tr><td>Sevens</td><td>Pays (x bet)</td><td>0.1 to 1000000</td></tr><tr><td>How often</td><td></td><td>0 to 100000</td></tr></tbody></table></div>
+<h4 id="jackpot"><a class="anchor" href="#jackpot" aria-label="Link to this section">#</a>Jackpot</h4>
+<p>Three sevens wins a pot that grows from lost bets.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Progressive jackpot</td><td>Off: sevens are an ordinary win.</td><td>On or off</td></tr><tr><td>Jackpot chance (%)</td><td>Per spin.</td><td>0 to 100</td></tr><tr><td>Share of lost bets (%)</td><td>Added to the pot from every losing spin.</td><td>0 to 100</td></tr><tr><td>Starting amount</td><td>What the pot starts at after it is won.</td><td>0 to 1000000000</td></tr><tr><td>Pot right now</td><td></td><td>0 to 1000000000000</td></tr><tr><td>Smaller bets win a share</td><td>Off: every bet wins the whole pot.</td><td>On or off</td></tr><tr><td>Announce jackpots</td><td>A message and a title for everyone.</td><td>On or off</td></tr><tr><td>Pot under the coin counter</td><td></td><td>On or off</td></tr></tbody></table></div>
+    </article>
+    <nav class="pager"><a class="prev" href="guide-trade.html"><small>Previous</small>Trade</a><a class="next" href="guide-lottery.html"><small>Next</small>Lottery</a></nav>
+    <footer class="foot">Tempest plugins for Hytale by AtomicTempest. Not made or endorsed by Hypixel Studios. · <a href="guide-slots.md">This page as Markdown</a> · <a href="llms.txt">llms.txt</a></footer>
+  </main>
+  <aside class="toc"><h5>On this page</h5><a href="#what-players-read-in-guide">What players read in /guide</a><a href="#slot-machines" class="sub">Slot machines</a><a href="#commands">Commands</a><a href="#settings">Settings</a><a href="#slot-machine" class="sub">Slot Machine</a><a href="#slot-prizes" class="sub">Slot Prizes</a></aside>
+</div>
+</body>
+</html>

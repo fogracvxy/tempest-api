@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Coinflip · Tempest plugins docs</title>
+<meta name="description" content="Coinflip">
+<link rel="stylesheet" href="site.css">
+<script src="site.js"></script>
+</head>
+<body>
+<header class="top">
+  <button class="icon-btn menu-btn" id="menu" type="button" aria-label="Menu">&#9776;</button>
+  <a class="brand" href="index.html"><span class="logo">T</span>Tempest Docs</a>
+  <span class="version">Core API 19</span>
+  <div class="search"><input id="q" type="search" placeholder="Search the docs" autocomplete="off" aria-label="Search"><kbd>Ctrl K</kbd><div class="results" id="results"></div></div>
+  <nav class="top-links"><a href="javadoc.html">Javadoc</a><a href="https://discord.gg/Q9PNVCMZXK" target="_blank" rel="noopener">Discord</a><a href="https://www.curseforge.com/hytale/mods/search?search=tempest" target="_blank" rel="noopener">CurseForge</a></nav>
+  <button class="icon-btn" id="theme" type="button" aria-label="Light or dark">&#9680;</button>
+</header>
+<div class="layout">
+  <aside class="side"><h4>Welcome</h4><a href="index.html">Introduction</a><h4>Server guide</h4><a href="server-guide.html"><span class="badge">NEW</span>Server guide</a><a href="guide-commands.html">All commands and permissions</a><a href="guide-core.html">Core</a><a href="guide-economy.html">Economy (Coins)</a><a href="guide-holograms.html">Holograms</a><a href="guide-shop.html">Shop</a><a href="guide-crates.html">Crates</a><a href="guide-quests.html">Quests</a><a href="guide-pass.html">Battle pass</a><a href="guide-events.html">Events</a><a href="guide-contracts.html">Contracts and bounties</a><a href="guide-projects.html">Town projects</a><a href="guide-town.html">Town</a><a href="guide-jobs.html">Jobs</a><a href="guide-trade.html">Trade</a><a href="guide-slots.html">Slot machines</a><a href="guide-lottery.html">Lottery</a><a href="guide-coinflip.html" class="here">Coinflip</a><a href="leveling-mods.html"><span class="badge">NEW</span>Leveling mods</a><h4>Developers: start here</h4><a href="quick-start.html">Quick start</a><a href="setup.html">Setting up a plugin</a><a href="versions.html">API versions</a><h4>Core API</h4><a href="money.html">Money</a><a href="actions.html">Player actions</a><a href="settings.html">Settings and menus</a><a href="hud.html">Boards, HUD and placeholders</a><a href="rewards.html">Rewards, mail and boosts</a><a href="world.html">Map, town and demand</a><a href="safety.html">Safety and helpers</a><h4>Leveling and skills API</h4><a href="levels.html">Player levels</a><a href="skills.html"><span class="badge">NEW</span>Skills (MMO Skill Tree)</a><h4>Plugin APIs</h4><a href="quests.html">Quests</a><a href="crates.html">Crates</a><a href="holograms.html">Holograms</a><a href="coinflip.html">Coinflip</a><a href="jobs.html">Jobs</a><a href="projects.html">Town projects</a><a href="pass.html">Battle pass</a><a href="games.html">Lottery, slots and shop</a><h4>More</h4><a href="integrations.html">Integrations</a><a href="content.html">Content mods (JSON)</a><a href="rules.html">Rules of thumb</a><h4>Reference</h4><a href="javadoc.html">Javadoc</a><a href="changelog.html">Changelog</a></aside>
+  <main>
+    <div class="crumbs">Server guide</div>
+    <h1>Coinflip</h1>
+    
+    <article>
+<h2 id="what-players-read-in-guide"><a class="anchor" href="#what-players-read-in-guide" aria-label="Link to this section">#</a>What players read in /guide</h2>
+<p>The <code>/guide</code> pages of this plugin, as a player sees them on a test server (numbers are examples).</p>
+<h3 id="coinflip"><a class="anchor" href="#coinflip" aria-label="Link to this section">#</a>Coinflip</h3>
+<p><strong>How it works</strong></p>
+<ul><li>Make a room: pick a stake and a side, heads or tails. Your stake is held while the room is open.</li><li>Another player joins with the same stake on the other side. The coin flips, and the winner takes the pot.</li><li>Stakes from 10 copper to 1,000,000 copper.</li><li>A room nobody joins closes after 30 min and the stake comes back.</li><li>If the server restarts, open rooms close and their stakes come back. A coin already in the air is paid out.</li></ul>
+<p><strong>Provably fair</strong></p>
+<ul><li>Every room has a secret seed from the start. Its SHA-256 is shown while the room is open, so it cannot be changed later.</li><li>After the flip the seed is shown. The roll is the first 13 hex digits of SHA-256(seed:room id) divided by 16^13; under 0.5 is heads.</li></ul>
+<p><strong>You</strong></p>
+<ul><li>Won 1, lost 2. Profit: +850 copper (staked 2,150 copper in all).</li></ul>
+<p><strong>Admins also read:</strong></p>
+<ul><li>Won 2, lost 1. Profit: -850 copper (staked 2,150 copper in all).</li></ul>
+<h2 id="commands"><a class="anchor" href="#commands" aria-label="Link to this section">#</a>Commands</h2>
+<div class="table"><table><thead><tr><th>Command</th><th>Who can use it</th><th>What it does</th></tr></thead><tbody><tr><td><code>/coinflip</code> (/cf)</td><td>Everyone</td><td>Open the coinflip rooms</td></tr><tr><td><code>/coinflip cancel</code></td><td>Everyone</td><td>Close your open rooms and get your stakes back</td></tr><tr><td><code>/coinflip create</code></td><td>Everyone</td><td>Open a room with a stake</td></tr><tr><td><code>/coinflip join</code></td><td>Everyone</td><td>Join a player's room</td></tr><tr><td><code>/coinflip list</code></td><td>Everyone</td><td>List the open rooms in chat</td></tr></tbody></table></div>
+<h2 id="settings"><a class="anchor" href="#settings" aria-label="Link to this section">#</a>Settings</h2>
+<p>Every setting is changed in game with <code>/tempest</code> and saved at once; nothing needs a restart. Amounts of 0 are off unless the setting says otherwise.</p>
+<h3 id="coinflip-2"><a class="anchor" href="#coinflip-2" aria-label="Link to this section">#</a>Coinflip</h3>
+<p><code>/tempest</code> → Coinflip. Who can change it: <code>tempest.admin</code> or <code>tempest.admin.coinflip</code>.</p>
+<p>Players stake coins on heads or tails; another player matches the stake and the coin decides.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Coinflip is open</td><td>Off: no new rooms and no joining. Open rooms can still be cancelled.</td><td>On or off</td></tr></tbody></table></div>
+<h4 id="stakes"><a class="anchor" href="#stakes" aria-label="Link to this section">#</a>Stakes</h4>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Smallest stake</td><td></td><td>1 to 1000000000</td></tr><tr><td>Largest stake</td><td>0 = no limit.</td><td>0 to 1000000000000</td></tr><tr><td>Open rooms per player</td><td></td><td>1 to 20</td></tr><tr><td>Rooms close after (minutes)</td><td>A room nobody joins closes and its stake goes back. 0 = never.</td><td>0 to 1440</td></tr><tr><td>House fee (%)</td><td>Kept from the pot; it leaves the game.</td><td>0 to 50</td></tr></tbody></table></div>
+<h4 id="the-flip"><a class="anchor" href="#the-flip" aria-label="Link to this section">#</a>The flip</h4>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Flip time (seconds)</td><td>How long the coin spins; the winner is paid when it lands.</td><td>1 to 10</td></tr><tr><td>Show the flip to the room's maker</td><td>Opens the flip for them when someone joins, unless another page is open.</td><td>On or off</td></tr><tr><td>Sounds</td><td></td><td>On or off</td></tr></tbody></table></div>
+<h4 id="announcements"><a class="anchor" href="#announcements" aria-label="Link to this section">#</a>Announcements</h4>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Tell everyone about new rooms</td><td></td><td>On or off</td></tr><tr><td>Tell everyone about flips from (pot)</td><td>Also sent to Discord. 0 = never.</td><td>0 to 1000000000000</td></tr><tr><td>Chat tag</td><td>Tag</td><td>Text</td></tr><tr><td>Colour</td><td></td><td>A colour</td></tr></tbody></table></div>
+    </article>
+    <nav class="pager"><a class="prev" href="guide-lottery.html"><small>Previous</small>Lottery</a><a class="next" href="leveling-mods.html"><small>Next</small>Leveling mods</a></nav>
+    <footer class="foot">Tempest plugins for Hytale by AtomicTempest. Not made or endorsed by Hypixel Studios. · <a href="guide-coinflip.md">This page as Markdown</a> · <a href="llms.txt">llms.txt</a></footer>
+  </main>
+  <aside class="toc"><h5>On this page</h5><a href="#what-players-read-in-guide">What players read in /guide</a><a href="#coinflip" class="sub">Coinflip</a><a href="#commands">Commands</a><a href="#settings">Settings</a><a href="#coinflip-2" class="sub">Coinflip</a></aside>
+</div>
+</body>
+</html>

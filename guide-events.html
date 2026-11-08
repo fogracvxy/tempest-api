@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Events · Tempest plugins docs</title>
+<meta name="description" content="Server events with boosts, community goals and the server fund.">
+<link rel="stylesheet" href="site.css">
+<script src="site.js"></script>
+</head>
+<body>
+<header class="top">
+  <button class="icon-btn menu-btn" id="menu" type="button" aria-label="Menu">&#9776;</button>
+  <a class="brand" href="index.html"><span class="logo">T</span>Tempest Docs</a>
+  <span class="version">Core API 19</span>
+  <div class="search"><input id="q" type="search" placeholder="Search the docs" autocomplete="off" aria-label="Search"><kbd>Ctrl K</kbd><div class="results" id="results"></div></div>
+  <nav class="top-links"><a href="javadoc.html">Javadoc</a><a href="https://discord.gg/Q9PNVCMZXK" target="_blank" rel="noopener">Discord</a><a href="https://www.curseforge.com/hytale/mods/search?search=tempest" target="_blank" rel="noopener">CurseForge</a></nav>
+  <button class="icon-btn" id="theme" type="button" aria-label="Light or dark">&#9680;</button>
+</header>
+<div class="layout">
+  <aside class="side"><h4>Welcome</h4><a href="index.html">Introduction</a><h4>Server guide</h4><a href="server-guide.html"><span class="badge">NEW</span>Server guide</a><a href="guide-commands.html">All commands and permissions</a><a href="guide-core.html">Core</a><a href="guide-economy.html">Economy (Coins)</a><a href="guide-holograms.html">Holograms</a><a href="guide-shop.html">Shop</a><a href="guide-crates.html">Crates</a><a href="guide-quests.html">Quests</a><a href="guide-pass.html">Battle pass</a><a href="guide-events.html" class="here">Events</a><a href="guide-contracts.html">Contracts and bounties</a><a href="guide-projects.html">Town projects</a><a href="guide-town.html">Town</a><a href="guide-jobs.html">Jobs</a><a href="guide-trade.html">Trade</a><a href="guide-slots.html">Slot machines</a><a href="guide-lottery.html">Lottery</a><a href="guide-coinflip.html">Coinflip</a><a href="leveling-mods.html"><span class="badge">NEW</span>Leveling mods</a><h4>Developers: start here</h4><a href="quick-start.html">Quick start</a><a href="setup.html">Setting up a plugin</a><a href="versions.html">API versions</a><h4>Core API</h4><a href="money.html">Money</a><a href="actions.html">Player actions</a><a href="settings.html">Settings and menus</a><a href="hud.html">Boards, HUD and placeholders</a><a href="rewards.html">Rewards, mail and boosts</a><a href="world.html">Map, town and demand</a><a href="safety.html">Safety and helpers</a><h4>Leveling and skills API</h4><a href="levels.html">Player levels</a><a href="skills.html"><span class="badge">NEW</span>Skills (MMO Skill Tree)</a><h4>Plugin APIs</h4><a href="quests.html">Quests</a><a href="crates.html">Crates</a><a href="holograms.html">Holograms</a><a href="coinflip.html">Coinflip</a><a href="jobs.html">Jobs</a><a href="projects.html">Town projects</a><a href="pass.html">Battle pass</a><a href="games.html">Lottery, slots and shop</a><h4>More</h4><a href="integrations.html">Integrations</a><a href="content.html">Content mods (JSON)</a><a href="rules.html">Rules of thumb</a><h4>Reference</h4><a href="javadoc.html">Javadoc</a><a href="changelog.html">Changelog</a></aside>
+  <main>
+    <div class="crumbs">Server guide</div>
+    <h1>Events</h1>
+    <p class="lead">Server events with boosts, community goals and the server fund.</p>
+    <article>
+<h2 id="what-players-read-in-guide"><a class="anchor" href="#what-players-read-in-guide" aria-label="Link to this section">#</a>What players read in /guide</h2>
+<p>The <code>/guide</code> pages of this plugin, as a player sees them on a test server (numbers are examples).</p>
+<h3 id="server-events"><a class="anchor" href="#server-events" aria-label="Link to this section">#</a>Server events</h3>
+<ul><li>Server events make things better for a while: more gold from monsters and ores, bigger rewards, more battle pass XP, better shop prices.</li><li>Next: Monster Hunt. /events shows when.</li></ul>
+<p><strong>How events work</strong></p>
+<ul><li>During an event, what you do for its goal counts for the whole server. When the goal is reached, everyone who did at least 1% of it gets the reward. The three players who did the most win prizes at the end.</li></ul>
+<p><strong>Overdrive</strong></p>
+<ul><li>Some events have stages: after the goal comes a bigger one. Each stage makes every boost stronger and pays the goal reward again.</li></ul>
+<p><strong>The server fund</strong></p>
+<ul><li>Everyone can put money in the server fund (/events, or /events give 500). When it is full, Gold Rush starts for the whole server.</li></ul>
+<h2 id="commands"><a class="anchor" href="#commands" aria-label="Link to this section">#</a>Commands</h2>
+<div class="table"><table><thead><tr><th>Command</th><th>Who can use it</th><th>What it does</th></tr></thead><tbody><tr><td><code>/events</code> (/event)</td><td>Everyone</td><td>Server events: what is on, what is coming, and the community goal</td></tr><tr><td><code>/events extend</code></td><td><code>events.admin</code></td><td>More or fewer minutes for the event that is on (admins)</td></tr><tr><td><code>/events give</code> (/fund)</td><td>Everyone</td><td>Put money in the server fund: when it is full, an event starts for everyone</td></tr><tr><td><code>/events list</code></td><td><code>events.admin</code></td><td>Every event and the next starts (admins)</td></tr><tr><td><code>/events start</code></td><td><code>events.admin</code></td><td>Start an event now (admins)</td></tr><tr><td><code>/events stop</code></td><td><code>events.admin</code></td><td>Stop the event that is on (admins)</td></tr></tbody></table></div>
+<h2 id="settings"><a class="anchor" href="#settings" aria-label="Link to this section">#</a>Settings</h2>
+<p>Every setting is changed in game with <code>/tempest</code> and saved at once; nothing needs a restart. Amounts of 0 are off unless the setting says otherwise.</p>
+<h3 id="events"><a class="anchor" href="#events" aria-label="Link to this section">#</a>Events</h3>
+<p><code>/tempest</code> → Events. Who can change it: <code>tempest.admin</code> or <code>tempest.admin.events</code>.</p>
+<p>Server events boost the Tempest plugins for a while. Make and schedule them in /events, Manage.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Events are on</td><td>Off: nothing starts, and a running event stops boosting and counting.</td><td>On or off</td></tr></tbody></table></div>
+<h4 id="telling-players"><a class="anchor" href="#telling-players" aria-label="Link to this section">#</a>Telling players</h4>
+<p>How players hear about events.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Big title on screen</td><td>When an event starts, reaches its goal and ends.</td><td>On or off</td></tr><tr><td>Chat messages</td><td></td><td>On or off</td></tr><tr><td>Sounds</td><td></td><td>On or off</td></tr><tr><td>Warn before a start (minutes)</td><td>Players are told this long before a scheduled event. 0: not told.</td><td>0 to 120</td></tr><tr><td>Show on the board</td><td>The event, its time left and the goal on the Tempest board (players can hide it in /board).</td><td>On or off</td></tr><tr><td>Chat tag</td><td>Tag</td><td>Text</td></tr><tr><td>Tag colour</td><td></td><td>A colour</td></tr></tbody></table></div>
+<h4 id="server-fund"><a class="anchor" href="#server-fund" aria-label="Link to this section">#</a>Server fund</h4>
+<p>Players put money in together; when it is full, the event below starts for everyone. The money leaves the economy.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Server fund</td><td></td><td>On or off</td></tr><tr><td>Event it starts</td><td></td><td>Gold Rush, Monster Hunt, XP Frenzy, Market Day, Lucky Hour</td></tr><tr><td>Money to fill it</td><td></td><td>1 to 1000000000</td></tr><tr><td>Tell everyone about gifts of (% of the fund)</td><td>0: never.</td><td>0 to 100</td></tr></tbody></table></div>
+<h4 id="lucky-events"><a class="anchor" href="#lucky-events" aria-label="Link to this section">#</a>Lucky events</h4>
+<p>Now and then, by chance, an event starts by itself while nothing else is on.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Lucky events</td><td></td><td>On or off</td></tr><tr><td>Which event</td><td></td><td>Gold Rush, Monster Hunt, XP Frenzy, Market Day, Lucky Hour</td></tr><tr><td>Chance each hour (%)</td><td></td><td>0 to 100</td></tr><tr><td>Players online at least</td><td>Fewer players online: no lucky event, so nobody misses it.</td><td>0 to 500</td></tr></tbody></table></div>
+    </article>
+    <nav class="pager"><a class="prev" href="guide-pass.html"><small>Previous</small>Battle pass</a><a class="next" href="guide-contracts.html"><small>Next</small>Contracts and bounties</a></nav>
+    <footer class="foot">Tempest plugins for Hytale by AtomicTempest. Not made or endorsed by Hypixel Studios. · <a href="guide-events.md">This page as Markdown</a> · <a href="llms.txt">llms.txt</a></footer>
+  </main>
+  <aside class="toc"><h5>On this page</h5><a href="#what-players-read-in-guide">What players read in /guide</a><a href="#server-events" class="sub">Server events</a><a href="#commands">Commands</a><a href="#settings">Settings</a><a href="#events" class="sub">Events</a></aside>
+</div>
+</body>
+</html>

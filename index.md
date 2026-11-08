@@ -1,6 +1,6 @@
 # Introduction
 
-Build on Tempest Core and the Tempest plugins for Hytale.
+Run the Tempest plugins on your Hytale server, and build on them.
 
 The Tempest plugins can be used from other plugins (Java) and from content mods that have no code (JSON assets). **Core** is the base: everything shared is in `com.atomictempest.core`
 (events, leaderboards, help, settings, HUD lines, perks, and the economy bridge). Each plugin has its own small `api`

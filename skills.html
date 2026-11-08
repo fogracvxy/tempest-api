@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Skills (MMO Skill Tree) · Tempest plugins API</title>
+<title>Skills (MMO Skill Tree) · Tempest plugins docs</title>
 <meta name="description" content="Skill levels, skill XP, achievements, quests and NPC talks.">
 <link rel="stylesheet" href="site.css">
 <script src="site.js"></script>
@@ -11,16 +11,16 @@
 <body>
 <header class="top">
   <button class="icon-btn menu-btn" id="menu" type="button" aria-label="Menu">&#9776;</button>
-  <a class="brand" href="index.html"><span class="logo">T</span>Tempest API</a>
+  <a class="brand" href="index.html"><span class="logo">T</span>Tempest Docs</a>
   <span class="version">Core API 19</span>
-  <div class="search"><input id="q" type="search" placeholder="Search the API" autocomplete="off" aria-label="Search"><kbd>Ctrl K</kbd><div class="results" id="results"></div></div>
+  <div class="search"><input id="q" type="search" placeholder="Search the docs" autocomplete="off" aria-label="Search"><kbd>Ctrl K</kbd><div class="results" id="results"></div></div>
   <nav class="top-links"><a href="javadoc.html">Javadoc</a><a href="https://discord.gg/Q9PNVCMZXK" target="_blank" rel="noopener">Discord</a><a href="https://www.curseforge.com/hytale/mods/search?search=tempest" target="_blank" rel="noopener">CurseForge</a></nav>
   <button class="icon-btn" id="theme" type="button" aria-label="Light or dark">&#9680;</button>
 </header>
 <div class="layout">
-  <aside class="side"><h4>Getting started</h4><a href="index.html">Introduction</a><a href="quick-start.html">Quick start</a><a href="setup.html">Setting up a plugin</a><a href="versions.html">API versions</a><h4>Core</h4><a href="money.html">Money</a><a href="actions.html">Player actions</a><a href="settings.html">Settings and menus</a><a href="hud.html">Boards, HUD and placeholders</a><a href="rewards.html">Rewards, mail and boosts</a><a href="world.html">Map, town and demand</a><a href="safety.html">Safety and helpers</a><h4>Leveling and skills</h4><a href="levels.html">Player levels</a><a href="skills.html" class="here"><span class="badge">NEW</span>Skills (MMO Skill Tree)</a><a href="leveling-mods.html"><span class="badge">NEW</span>Leveling mods for server owners</a><h4>Plugins</h4><a href="quests.html">Quests</a><a href="crates.html">Crates</a><a href="holograms.html">Holograms</a><a href="coinflip.html">Coinflip</a><a href="jobs.html">Jobs</a><a href="projects.html">Town projects</a><a href="pass.html">Battle pass</a><a href="games.html">Lottery, slots and shop</a><h4>More</h4><a href="integrations.html">Integrations</a><a href="content.html">Content mods (JSON)</a><a href="rules.html">Rules of thumb</a><h4>Reference</h4><a href="javadoc.html">Javadoc</a><a href="changelog.html">Changelog</a></aside>
+  <aside class="side"><h4>Welcome</h4><a href="index.html">Introduction</a><h4>Server guide</h4><a href="server-guide.html"><span class="badge">NEW</span>Server guide</a><a href="guide-commands.html">All commands and permissions</a><a href="guide-core.html">Core</a><a href="guide-economy.html">Economy (Coins)</a><a href="guide-holograms.html">Holograms</a><a href="guide-shop.html">Shop</a><a href="guide-crates.html">Crates</a><a href="guide-quests.html">Quests</a><a href="guide-pass.html">Battle pass</a><a href="guide-events.html">Events</a><a href="guide-contracts.html">Contracts and bounties</a><a href="guide-projects.html">Town projects</a><a href="guide-town.html">Town</a><a href="guide-jobs.html">Jobs</a><a href="guide-trade.html">Trade</a><a href="guide-slots.html">Slot machines</a><a href="guide-lottery.html">Lottery</a><a href="guide-coinflip.html">Coinflip</a><a href="leveling-mods.html"><span class="badge">NEW</span>Leveling mods</a><h4>Developers: start here</h4><a href="quick-start.html">Quick start</a><a href="setup.html">Setting up a plugin</a><a href="versions.html">API versions</a><h4>Core API</h4><a href="money.html">Money</a><a href="actions.html">Player actions</a><a href="settings.html">Settings and menus</a><a href="hud.html">Boards, HUD and placeholders</a><a href="rewards.html">Rewards, mail and boosts</a><a href="world.html">Map, town and demand</a><a href="safety.html">Safety and helpers</a><h4>Leveling and skills API</h4><a href="levels.html">Player levels</a><a href="skills.html" class="here"><span class="badge">NEW</span>Skills (MMO Skill Tree)</a><h4>Plugin APIs</h4><a href="quests.html">Quests</a><a href="crates.html">Crates</a><a href="holograms.html">Holograms</a><a href="coinflip.html">Coinflip</a><a href="jobs.html">Jobs</a><a href="projects.html">Town projects</a><a href="pass.html">Battle pass</a><a href="games.html">Lottery, slots and shop</a><h4>More</h4><a href="integrations.html">Integrations</a><a href="content.html">Content mods (JSON)</a><a href="rules.html">Rules of thumb</a><h4>Reference</h4><a href="javadoc.html">Javadoc</a><a href="changelog.html">Changelog</a></aside>
   <main>
-    <div class="crumbs">Leveling and skills</div>
+    <div class="crumbs">Leveling and skills API</div>
     <h1>Skills (MMO Skill Tree)</h1>
     <p class="lead">Skill levels, skill XP, achievements, quests and NPC talks.</p>
     <article>
@@ -43,7 +43,7 @@
 });</code></pre></div>
 <div class="callout note"><div class="callout-title">Note</div><p>Levels are read when a player joins, every half minute and after every XP gain; a player who has just joined may have none for a moment. Core pays its own skill-level and achievement rewards (the MMO Skill Tree tab), each level and each achievement once ever.</p></div>
     </article>
-    <nav class="pager"><a class="prev" href="levels.html"><small>Previous</small>Player levels</a><a class="next" href="leveling-mods.html"><small>Next</small>Leveling mods for server owners</a></nav>
+    <nav class="pager"><a class="prev" href="levels.html"><small>Previous</small>Player levels</a><a class="next" href="quests.html"><small>Next</small>Quests</a></nav>
     <footer class="foot">Tempest plugins for Hytale by AtomicTempest. Not made or endorsed by Hypixel Studios. · <a href="skills.md">This page as Markdown</a> · <a href="llms.txt">llms.txt</a></footer>
   </main>
   <aside class="toc"><h5>On this page</h5><a href="#skills-skills">Skills: Skills</a><a href="#its-moments-as-playeractions" class="sub">Its moments, as PlayerActions</a></aside>

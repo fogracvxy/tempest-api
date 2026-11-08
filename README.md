@@ -1,6 +1,7 @@
-# Tempest plugins API
+# Tempest Docs
 
-The developer guide and API reference for the Tempest plugins for Hytale: Core, Economy, Holograms, Shop, Crates,
+The server guide (every command, permission and setting, and what players see) and the developer guide and API
+reference for the Tempest plugins for Hytale: Core, Economy, Holograms, Shop, Crates,
 Quests, Pass, Slots, Lottery, Coinflip, Events, Contracts, Projects, Town, Jobs and Trade, with player levels and
 skills from Endless Leveling and MMO Skill Tree.
 

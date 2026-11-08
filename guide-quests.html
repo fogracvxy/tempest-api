@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quests · Tempest plugins docs</title>
+<meta name="description" content="Quests, achievements, ranks, the daily sweep and server quests.">
+<link rel="stylesheet" href="site.css">
+<script src="site.js"></script>
+</head>
+<body>
+<header class="top">
+  <button class="icon-btn menu-btn" id="menu" type="button" aria-label="Menu">&#9776;</button>
+  <a class="brand" href="index.html"><span class="logo">T</span>Tempest Docs</a>
+  <span class="version">Core API 19</span>
+  <div class="search"><input id="q" type="search" placeholder="Search the docs" autocomplete="off" aria-label="Search"><kbd>Ctrl K</kbd><div class="results" id="results"></div></div>
+  <nav class="top-links"><a href="javadoc.html">Javadoc</a><a href="https://discord.gg/Q9PNVCMZXK" target="_blank" rel="noopener">Discord</a><a href="https://www.curseforge.com/hytale/mods/search?search=tempest" target="_blank" rel="noopener">CurseForge</a></nav>
+  <button class="icon-btn" id="theme" type="button" aria-label="Light or dark">&#9680;</button>
+</header>
+<div class="layout">
+  <aside class="side"><h4>Welcome</h4><a href="index.html">Introduction</a><h4>Server guide</h4><a href="server-guide.html"><span class="badge">NEW</span>Server guide</a><a href="guide-commands.html">All commands and permissions</a><a href="guide-core.html">Core</a><a href="guide-economy.html">Economy (Coins)</a><a href="guide-holograms.html">Holograms</a><a href="guide-shop.html">Shop</a><a href="guide-crates.html">Crates</a><a href="guide-quests.html" class="here">Quests</a><a href="guide-pass.html">Battle pass</a><a href="guide-events.html">Events</a><a href="guide-contracts.html">Contracts and bounties</a><a href="guide-projects.html">Town projects</a><a href="guide-town.html">Town</a><a href="guide-jobs.html">Jobs</a><a href="guide-trade.html">Trade</a><a href="guide-slots.html">Slot machines</a><a href="guide-lottery.html">Lottery</a><a href="guide-coinflip.html">Coinflip</a><a href="leveling-mods.html"><span class="badge">NEW</span>Leveling mods</a><h4>Developers: start here</h4><a href="quick-start.html">Quick start</a><a href="setup.html">Setting up a plugin</a><a href="versions.html">API versions</a><h4>Core API</h4><a href="money.html">Money</a><a href="actions.html">Player actions</a><a href="settings.html">Settings and menus</a><a href="hud.html">Boards, HUD and placeholders</a><a href="rewards.html">Rewards, mail and boosts</a><a href="world.html">Map, town and demand</a><a href="safety.html">Safety and helpers</a><h4>Leveling and skills API</h4><a href="levels.html">Player levels</a><a href="skills.html"><span class="badge">NEW</span>Skills (MMO Skill Tree)</a><h4>Plugin APIs</h4><a href="quests.html">Quests</a><a href="crates.html">Crates</a><a href="holograms.html">Holograms</a><a href="coinflip.html">Coinflip</a><a href="jobs.html">Jobs</a><a href="projects.html">Town projects</a><a href="pass.html">Battle pass</a><a href="games.html">Lottery, slots and shop</a><h4>More</h4><a href="integrations.html">Integrations</a><a href="content.html">Content mods (JSON)</a><a href="rules.html">Rules of thumb</a><h4>Reference</h4><a href="javadoc.html">Javadoc</a><a href="changelog.html">Changelog</a></aside>
+  <main>
+    <div class="crumbs">Server guide</div>
+    <h1>Quests</h1>
+    <p class="lead">Quests, achievements, ranks, the daily sweep and server quests.</p>
+    <article>
+<h2 id="what-players-read-in-guide"><a class="anchor" href="#what-players-read-in-guide" aria-label="Link to this section">#</a>What players read in /guide</h2>
+<p>The <code>/guide</code> pages of this plugin, as a player sees them on a test server (numbers are examples).</p>
+<h3 id="quests-and-achievements"><a class="anchor" href="#quests-and-achievements" aria-label="Link to this section">#</a>Quests and achievements</h3>
+<p><strong>Achievements</strong></p>
+<ul><li>Goals for the whole time you play, like mining 100 ores or hitting the jackpot. They count by themselves, and each pays a reward once. Some are secret until you find them.</li></ul>
+<p><strong>Quests</strong></p>
+<ul><li>Pick quests from the quest board in /quests: you can do 3 at a time. Daily and weekly quests come back when they reset, so you can earn them again.</li></ul>
+<p><strong>Quest journal</strong></p>
+<ul><li>Every finished quest and achievement gives quest points: your rank grows from Wanderer to Legend, and higher ranks earn more from quests. Finish 3 daily quests in a day for the daily sweep bonus, bigger for every day in a row. The featured quest of the day pays more.</li></ul>
+<p><strong>Server quests</strong></p>
+<ul><li>Server quests count everyone's progress together. When the target is reached, everyone who helped enough is paid, and the top helper gets more.</li></ul>
+<p><strong>Progress</strong></p>
+<ul><li>The bars show how far along you are. When you finish, the reward goes straight into your wallet. Your first quest also shows under your coin counter.</li></ul>
+<h2 id="commands"><a class="anchor" href="#commands" aria-label="Link to this section">#</a>Commands</h2>
+<div class="table"><table><thead><tr><th>Command</th><th>Who can use it</th><th>What it does</th></tr></thead><tbody><tr><td><code>/achievements</code> (/achievement, /ach)</td><td>Everyone</td><td>Your achievements and how close you are</td></tr><tr><td><code>/quests</code> (/quest)</td><td>Everyone</td><td>Your quests and the quest board</td></tr><tr><td><code>/questtrigger</code></td><td><code>quests.admin</code></td><td>Count a custom quest trigger for a player</td></tr></tbody></table></div>
+<h2 id="settings"><a class="anchor" href="#settings" aria-label="Link to this section">#</a>Settings</h2>
+<p>Every setting is changed in game with <code>/tempest</code> and saved at once; nothing needs a restart. Amounts of 0 are off unless the setting says otherwise.</p>
+<h3 id="quests"><a class="anchor" href="#quests" aria-label="Link to this section">#</a>Quests</h3>
+<p><code>/tempest</code> → Quests. Who can change it: <code>tempest.admin</code> or <code>tempest.admin.quests</code>.</p>
+<h4 id="making-achievements-and-quests"><a class="anchor" href="#making-achievements-and-quests" aria-label="Link to this section">#</a>Making achievements and quests</h4>
+<p>Open /quests and use the Edit (admin) tab. Admins need the permission quests.admin.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Players choose their quests</td><td>From the quest board. Off: every quest counts at once.</td><td>On or off</td></tr><tr><td>Most quests at once</td><td>While players choose their quests.</td><td>1 to 50</td></tr><tr><td>Play time only while moving</td><td>Standing still (AFK) does not count towards play time goals.</td><td>On or off</td></tr></tbody></table></div>
+<h4 id="quest-journal"><a class="anchor" href="#quest-journal" aria-label="Link to this section">#</a>Quest journal</h4>
+<p>Ranks, the daily sweep, the featured quest and server quests: what brings players back each day.</p>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Quest points and ranks</td><td>Every finished goal gives points; Wanderer, Adventurer, Pathfinder, Hero, Champion and Legend. A new rank is told to everyone.</td><td>On or off</td></tr><tr><td>Ranks raise quest rewards</td><td>From +2% for Adventurers to +10% for Legends.</td><td>On or off</td></tr><tr><td>Daily sweep: daily quests to finish</td><td>Finish this many of the day's daily quests for a bonus. 0 = off.</td><td>0 to 20</td></tr><tr><td>Daily sweep bonus</td><td></td><td>0 to 1000000000</td></tr><tr><td>Streak: more each day in a row (%)</td><td></td><td>0 to 500</td></tr><tr><td>Streak grows for (days)</td><td></td><td>1 to 60</td></tr><tr><td>Featured quest pays (times)</td><td>One daily quest a day, the same for everyone. 1 = no featured quest.</td><td>1 to 10</td></tr><tr><td>Server quests: top helper gets more (%)</td><td></td><td>0 to 1000</td></tr><tr><td>Server quests: least share to be paid (%)</td><td>Of the target. Players who did less are thanked but not paid, so nobody earns by doing one thing.</td><td>0 to 100</td></tr></tbody></table></div>
+<h4 id="achievements"><a class="anchor" href="#achievements" aria-label="Link to this section">#</a>Achievements</h4>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Announce unlocks to everyone</td><td>Each goal can override this in the editor. Secret goals stay secret.</td><td>On or off</td></tr></tbody></table></div>
+<h4 id="on-screen"><a class="anchor" href="#on-screen" aria-label="Link to this section">#</a>On screen</h4>
+<div class="table"><table><thead><tr><th>Setting</th><th>What it does</th><th>Values</th></tr></thead><tbody><tr><td>Big title when something is done</td><td>"QUEST COMPLETE" or "ACHIEVEMENT UNLOCKED".</td><td>On or off</td></tr><tr><td>Pop-up with the icon</td><td>A small notice at the side of the screen when something is done.</td><td>On or off</td></tr><tr><td>Sounds</td><td>A short jingle when something is done, and coins when it pays.</td><td>On or off</td></tr><tr><td>Quest under the coin counter</td><td>The player's first quest and how far along it is.</td><td>On or off</td></tr><tr><td>Chat tag</td><td>Tag</td><td>Text</td></tr><tr><td>Colour</td><td></td><td>A colour</td></tr></tbody></table></div>
+<h4 id="free-edition"><a class="anchor" href="#free-edition" aria-label="Link to this section">#</a>Free edition</h4>
+<p>The Pro edition adds: any number of achievements and quests, a daily rotation: a few daily quests a day, picked from all of yours.</p>
+    </article>
+    <nav class="pager"><a class="prev" href="guide-crates.html"><small>Previous</small>Crates</a><a class="next" href="guide-pass.html"><small>Next</small>Battle pass</a></nav>
+    <footer class="foot">Tempest plugins for Hytale by AtomicTempest. Not made or endorsed by Hypixel Studios. · <a href="guide-quests.md">This page as Markdown</a> · <a href="llms.txt">llms.txt</a></footer>
+  </main>
+  <aside class="toc"><h5>On this page</h5><a href="#what-players-read-in-guide">What players read in /guide</a><a href="#quests-and-achievements" class="sub">Quests and achievements</a><a href="#commands">Commands</a><a href="#settings">Settings</a><a href="#quests" class="sub">Quests</a></aside>
+</div>
+</body>
+</html>
