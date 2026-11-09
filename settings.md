@@ -20,6 +20,16 @@ Your tab appears in `/tempest` for admins (permission `tempest.admin`), up to 40
 (`tempest.admin.dragons`); give it yourself when your plugin has more than one tab, so one permission covers them all
 (API 2): `new SettingsTab("Dragon Loot", "dragons", settings, config::save)`.
 
+A longer explanation goes behind a yellow (?) beside the label, shown when the admin points at it, and a setting
+that runs something as the server console (a command) should need more than the tab's own permission (API 20):
+
+```java
+Setting.number("Bounty", 0, 1_000_000, 0, () -> config.bounty, v -> config.bounty = (long) v)
+        .info("What a player earns for each dragon they kill. 0: no bounty."),
+Setting.text("Command per kill", true, () -> config.command, v -> config.command = v)
+        .permission("tempest.admin")   // staff with only tempest.admin.dragons see it but cannot change it
+```
+
 Where there are only a few right answers, give admins a dropdown instead of a number or a code (API 3):
 
 ```java
@@ -34,6 +44,27 @@ Setting.choice("Crate", () -> crateChoices(), true, () -> config.crate, v -> con
 A dropdown only saves one of its own entries. Give your tab an icon for the menu's side bar (API 3):
 `new SettingsTab("Dragons", settings, config::save).icon("Weapon_Sword_Iron")`. The side bar lists Core's tabs, then
 plugins with several tabs under their name, then the rest under "Plugins".
+
+Show a row only when it means something (API 22). The menu hides and shows it the moment the admin changes the field
+it follows, before saving; a hidden row keeps its value and is saved as it is. On a heading, the rule covers its whole
+section, up to the next heading:
+
+```java
+Setting.toggle("Announce kills", () -> config.announce, v -> config.announce = v),
+Setting.text("Announcement", true, () -> config.text, v -> config.text = v)
+        .shownWhenOn("Announce kills"),                           // only while that toggle is on
+Setting.number("Bonus (%)", 0, 100, 0, () -> config.bonus, v -> config.bonus = v)
+        .shownWhenAboveZero("Bounty"),                            // only while that number is above 0
+Setting.color("Own colour", () -> config.own, v -> config.own = v)
+        .shownWhenChosen("Style", "own"),                         // only while that dropdown has this value
+Setting.heading("Dragon riders", "").shownWhen(() -> RidersMod.installed()),  // a whole section, while a mod is there
+Setting.number("XP per prestige", 0, 1000, 0, () -> config.prestigeXp, v -> config.prestigeXp = v)
+        .shownWhen(() -> Levels.has(Levels.PRESTIGE))             // only with a leveling mod that has prestige
+```
+
+The rule names the other field by its label in the same tab. A rule that names a field the tab does not have, or that
+fails, shows the row: hiding a setting by mistake is worse than showing one. Guard it for older Cores
+(`CoreAPI.runningVersion() >= 22`), as Tempest Pass does in `PassLevels.rules`.
 
 A Reset to defaults button (API 11): give the tab the same settings built on a fresh config. An admin clicks it twice,
 every value is copied over, logged and saved through your save action. Guard it for older Cores:

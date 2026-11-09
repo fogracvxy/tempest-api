@@ -31,6 +31,6 @@ levels, skills and what happens in them, without depending on either mod.
 Every API class has a version constant that goes up when something is added. Everything in these APIs is safe to call
 from any thread unless it says otherwise.
 
-**Javadoc:** [Coinflip 1.0.3](javadoc/coinflip/) · [Coins 2.4.0](javadoc/coins/) · [Core 1.5.0](javadoc/core/) · [Holograms 1.2.1](javadoc/holograms/) · [Jobs 1.1.0](javadoc/jobs/) · [Lottery 1.1.2](javadoc/lottery/) · [Pass 1.2.1](javadoc/pass/) · [Projects 1.1.0](javadoc/projects/) · [Quests 1.4.0](javadoc/quests/) · [Shop 1.5.0](javadoc/shop/) · [SlotMachine 1.2.2](javadoc/slotmachine/)
+**Javadoc:** [Coinflip 1.0.4](javadoc/coinflip/) · [Coins 2.4.1](javadoc/coins/) · [Core 1.6.0](javadoc/core/) · [Holograms 1.2.2](javadoc/holograms/) · [Jobs 1.1.1](javadoc/jobs/) · [Lottery 1.1.3](javadoc/lottery/) · [Pass 1.3.0](javadoc/pass/) · [Projects 1.1.1](javadoc/projects/) · [Quests 1.5.0](javadoc/quests/) · [Shop 1.5.1](javadoc/shop/) · [SlotMachine 1.2.3](javadoc/slotmachine/)
 
 **Jars:** from the plugins' CurseForge pages; compile against them with `compileOnly`. **Questions and help:** [Discord](https://discord.gg/Q9PNVCMZXK)

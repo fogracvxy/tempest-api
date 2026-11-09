@@ -63,11 +63,11 @@ The tabs as a server with both Endless Leveling and MMO Skill Tree shows them; w
 
 #### How leveling works
 
-Tempest reads each player's level from a leveling mod and can pay for it: money for level-ups, commands and items at levels, a bonus on other rewards. Endless Leveling and MMO Skill Tree both work, alone or together. What only one of them has is on its own tab (Endless Leveling, MMO Skill Tree), shown only while it is installed. With both installed, "Leveling mod" picks whose level counts for level-up money, "needs level", the Pass and the board. Every amount starts at 0, which is off.
+Tempest reads each player's level from a leveling mod and can pay for it: money for level-ups, commands and items at levels, a bonus on other rewards. Endless Leveling, RPG Leveling and MMO Skill Tree all work, alone or together, and so does any mod that links itself to Tempest. What only one of them has is on its own tab, shown only while it is installed. With several installed, "Leveling mod" picks whose level counts for level-up money, "needs level", the Pass and the board. Every amount starts at 0, which is off.
 
 | Setting | What it does | Values |
 |---|---|---|
-| Leveling mod | Whose level counts. Automatic: Endless Leveling if installed | Automatic, Endless Leveling, MMO Skill Tree |
+| Leveling mod | Whose level counts. Automatic: a linked mod, else Endless Leveling, RPG Leveling, MMO Skill Tree | Automatic, Endless Leveling, RPG Leveling, MMO Skill Tree |
 
 #### Money for level-ups
 
@@ -110,11 +110,11 @@ What players see, and the "double leveling XP" of Tempest Events, rank perks and
 
 `/tempest` → Leveling extras. Who can change it: `tempest.admin` or `tempest.admin.core`.
 
-More rewards for levels, with any leveling mod (Endless Leveling or MMO Skill Tree). Money for level-ups is on the Leveling tab.
+More rewards for levels, with any leveling mod (Endless Leveling, RPG Leveling or MMO Skill Tree). Money for level-ups is on the Leveling tab.
 
 #### Commands at levels
 
-Run by the server console when a player reaches a level: ranks, kits, titles from other plugins. {player}, {uuid} and {level} are filled in. Example: level 25, rank give {player} adept. Level 0 turns a reward off.
+Run by the server console when a player reaches a level: ranks, kits, titles from other plugins. {player}, {uuid} and {level} are filled in. Example: level 25, rank give {player} adept. Level 0 turns a reward off. Only a full admin (tempest.admin) can change the commands.
 
 | Setting | What it does | Values |
 |---|---|---|
@@ -151,6 +151,26 @@ New characters made only to feed money to a main cannot pay or gamble until they
 | Pay other players from level | 0 is off | 0 to 100000 |
 | Games of chance from level | Slots, lottery and coinflip; 0 is off | 0 to 100000 |
 
+#### Mob gold by mob level
+
+Tempest Economy's mob gold grows with the mob's level, with a leveling mod that gives mobs levels (Endless Leveling, RPG Leveling). Stronger mobs already have more health and gold follows health, so start low. Nothing changes with a mod without mob levels.
+
+| Setting | What it does | Values |
+|---|---|---|
+| More gold per mob level (%) | A level 20 mob at 5% drops double; 0 is off | 0 to 1000 |
+| Most extra gold (%) | However high the mob's level | 0 to 10000 |
+| No gold from mobs this far below | Levels below the killer: stops farming weak mobs; 0 is off | 0 to 10000 |
+
+#### Elite mobs
+
+Mobs from a level on are elite: more gold, and the server hears who defeated one.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Elite from mob level | 0 is off | 0 to 100000 |
+| Elite gold bonus (%) | On top of the gold per mob level | 0 to 10000 |
+| Tell everyone about elite kills | On: when a player defeats an elite mob, the whole server reads a line such as "Steve defeated an elite level 60 Trork Warlord!". Nothing happens while "Elite from mob level" is 0. | On or off |
+
 #### Town bonuses
 
 With Tempest Town: these work only once a town unlock gives them (its editor, Features). Every other leveling feature can be made to wait for an unlock too.
@@ -175,7 +195,7 @@ Rewards each time a player prestiges. Paid while Endless Leveling gives the leve
 | Setting | What it does | Values |
 |---|---|---|
 | Money per prestige | 0 is off | 0 to 1000000000 |
-| Command at each prestige | Run by the console; {player}, {uuid}, {prestige} filled in; empty is off | Text |
+| Command at each prestige | Run by the console; {player}, {uuid}, {prestige} filled in; empty is off Run by the server console each time a player prestiges, such as: rank give {player} veteran. Only a full admin (tempest.admin) can change it, as it runs with every power. | Text |
 | Bonus per prestige (%) | 10 makes prestige 3 earn 30% more (rewards ticked on Leveling); 0 is off | 0 to 1000 |
 
 #### Dungeons, gates and raids
@@ -191,26 +211,6 @@ Paid when Endless Leveling announces a clear, to every player who was in it. Exa
 | Rank bonus (%) | More for each rank above E, for dungeons and gates: 20 makes S pay double | 0 to 1000 |
 | Money per raid clear | Paid to a player who finishes a raid; 0 is off | 0 to 1000000000 |
 | Raid money per wave | On top, for every raid wave finished | 0 to 1000000000 |
-
-#### Mob gold by mob level
-
-Tempest Economy's mob gold grows with Endless Leveling's mob levels. Stronger mobs already have more health and gold follows health, so start low.
-
-| Setting | What it does | Values |
-|---|---|---|
-| More gold per mob level (%) | A level 20 mob at 5% drops double; 0 is off | 0 to 1000 |
-| Most extra gold (%) | However high the mob's level | 0 to 10000 |
-| No gold from mobs this far below | Levels below the killer: stops farming weak mobs; 0 is off | 0 to 10000 |
-
-#### Elite mobs
-
-Mobs from a level on are elite: more gold, and the server hears who defeated one.
-
-| Setting | What it does | Values |
-|---|---|---|
-| Elite from mob level | 0 is off | 0 to 100000 |
-| Elite gold bonus (%) | On top of the gold per mob level | 0 to 10000 |
-| Tell everyone about elite kills | On: when a player defeats an elite mob, the whole server reads a line such as "Steve defeated an elite level 60 Trork Warlord!". Nothing happens while "Elite from mob level" is 0. | On or off |
 
 
 ### MMO Skill Tree
@@ -261,7 +261,7 @@ Money when a player earns an MMO Skill Tree achievement, once per achievement. S
 
 #### Pass XP from leveling
 
-Battle pass XP for what players do in the server's leveling mod (Endless Leveling or MMO Skill Tree; dungeons, gates and raids only with Endless Leveling). 0 turns one off.
+Battle pass XP for what players do in the server's leveling mod (Endless Leveling, RPG Leveling or MMO Skill Tree; dungeons, gates and raids only with Endless Leveling). 0 turns one off.
 
 | Setting | What it does | Values |
 |---|---|---|
@@ -293,7 +293,7 @@ Work gives leveling XP too (Endless Leveling, or MMO Skill Tree in the skill cho
 
 #### PvP with levels
 
-Levels from the server's leveling mod (Endless Leveling or MMO Skill Tree) decide what a PvP kill is worth. Everything here is off at 0.
+Levels from the server's leveling mod (Endless Leveling, RPG Leveling or MMO Skill Tree) decide what a PvP kill is worth. Everything here is off at 0.
 
 #### Bounties
 

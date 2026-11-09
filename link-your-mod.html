@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Link your mod to Tempest · Tempest plugins docs</title>
+<meta name="description" content="Link your mod to Tempest">
+<link rel="stylesheet" href="site.css">
+<script src="site.js"></script>
+</head>
+<body>
+<header class="top">
+  <button class="icon-btn menu-btn" id="menu" type="button" aria-label="Menu">&#9776;</button>
+  <a class="brand" href="index.html"><span class="logo">T</span>Tempest Docs</a>
+  <span class="version">Core API 22</span>
+  <div class="search"><input id="q" type="search" placeholder="Search the docs" autocomplete="off" aria-label="Search"><kbd>Ctrl K</kbd><div class="results" id="results"></div></div>
+  <nav class="top-links"><a href="javadoc.html">Javadoc</a><a href="https://discord.gg/Q9PNVCMZXK" target="_blank" rel="noopener">Discord</a><a href="https://www.curseforge.com/hytale/mods/search?search=tempest" target="_blank" rel="noopener">CurseForge</a></nav>
+  <button class="icon-btn" id="theme" type="button" aria-label="Light or dark">&#9680;</button>
+</header>
+<div class="layout">
+  <aside class="side"><h4>Welcome</h4><a href="index.html">Introduction</a><h4>Server guide</h4><a href="server-guide.html"><span class="badge">NEW</span>Server guide</a><a href="guide-commands.html">All commands and permissions</a><a href="guide-core.html">Core</a><a href="guide-economy.html">Economy (Coins)</a><a href="guide-holograms.html">Holograms</a><a href="guide-shop.html">Shop</a><a href="guide-crates.html">Crates</a><a href="guide-quests.html">Quests</a><a href="guide-pass.html">Battle pass</a><a href="guide-events.html">Events</a><a href="guide-contracts.html">Contracts and bounties</a><a href="guide-projects.html">Town projects</a><a href="guide-town.html">Town</a><a href="guide-jobs.html">Jobs</a><a href="guide-trade.html">Trade</a><a href="guide-slots.html">Slot machines</a><a href="guide-lottery.html">Lottery</a><a href="guide-coinflip.html">Coinflip</a><a href="leveling-mods.html"><span class="badge">NEW</span>Leveling mods</a><h4>Developers: start here</h4><a href="quick-start.html">Quick start</a><a href="link-your-mod.html" class="here"><span class="badge">NEW</span>Link your mod to Tempest</a><a href="setup.html">Setting up a plugin</a><a href="versions.html">API versions</a><h4>Core API</h4><a href="money.html">Money</a><a href="actions.html">Player actions</a><a href="settings.html">Settings and menus</a><a href="hud.html">Boards, HUD and placeholders</a><a href="rewards.html">Rewards, mail and boosts</a><a href="world.html">Map, town and demand</a><a href="safety.html">Safety and helpers</a><h4>Leveling and skills API</h4><a href="levels.html">Player levels</a><a href="skills.html"><span class="badge">NEW</span>Skills (MMO Skill Tree)</a><h4>Plugin APIs</h4><a href="quests.html">Quests</a><a href="crates.html">Crates</a><a href="holograms.html">Holograms</a><a href="coinflip.html">Coinflip</a><a href="jobs.html">Jobs</a><a href="projects.html">Town projects</a><a href="pass.html">Battle pass</a><a href="games.html">Lottery, slots and shop</a><h4>More</h4><a href="integrations.html">Integrations</a><a href="content.html">Content mods (JSON)</a><a href="rules.html">Rules of thumb</a><h4>Reference</h4><a href="javadoc.html">Javadoc</a><a href="changelog.html">Changelog</a></aside>
+  <main>
+    <div class="crumbs">Developers: start here</div>
+    <h1>Link your mod to Tempest</h1>
+    
+    <article>
+<h1 id="link-your-mod-to-tempest"><a class="anchor" href="#link-your-mod-to-tempest" aria-label="Link to this section">#</a>Link your mod to Tempest</h1>
+<p>You make a leveling, party, claims or gameplay mod and want it to work with the whole Tempest suite (quests, the battle pass, events, jobs, crates, the shop, rewards, the board). You do not need to add support for sixteen plugins: you talk to <strong>Tempest Core</strong> once, and every Tempest plugin sees it.</p>
+<p>Everything here is optional for you and for the server: declare Core as an <strong>optional</strong> dependency, check that it runs, and your mod works the same without it.</p>
+<div class="code"><div class="code-bar"><span>json</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-json">"OptionalDependencies": { "AtomicTempest:Core": "*" }</code></pre></div>
+<div class="code"><div class="code-bar"><span>java</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-java">boolean tempest = CoreAPI.runningVersion() &gt;= 14;   // Core is there and new enough (see API versions)</code></pre></div>
+<p>Keep every call to Tempest in one class of yours, loaded only when Core runs, so your mod never needs Core's classes.</p>
+<h2 id="a-leveling-mod-your-levels-in-the-whole-suite"><a class="anchor" href="#a-leveling-mod-your-levels-in-the-whole-suite" aria-label="Link to this section">#</a>A leveling mod: your levels in the whole suite</h2>
+<p>Implement <code>Levels.Leveling</code> and register it. From then on Tempest's level rewards, level and class limits on shop items, crates and quests, "reach level" quests, battle pass XP, the level board and Tempest's own XP (jobs, quests, crates, contracts, projects) all use your mod.</p>
+<div class="code"><div class="code-bar"><span>java</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-java">final class TempestLink implements Levels.Leveling {
+    public String name() { return "My Leveling"; }
+    public int level(UUID player) { return MyLeveling.level(player); }
+    public int prestige(UUID player) { return 0; }                        // 0 when your mod has none
+    public boolean giveXp(UUID player, double amount, String reason) {     // Tempest giving your XP
+        return MyLeveling.addXp(player, amount);                           // with your own bonuses and cap
+    }
+    // Optional, all with defaults: xp, xpForNext, levelCap, playerClass, secondClass, race, classTier, mobLevel, inPartyWith
+}
+
+// In setup() or start(), while Core runs:
+TempestLink link = new TempestLink();
+Levels.register(link);
+// In shutdown():
+Levels.unregister(link);</code></pre></div>
+<p>Tell Tempest when a player levels up (once per level-up, even when several levels were crossed):</p>
+<div class="code"><div class="code-bar"><span>java</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-java">Levels.fireLevelUp(uuid, oldLevel, newLevel);
+Levels.firePrestige(uuid, oldPrestige, newPrestige);   // if your mod has prestige</code></pre></div>
+<p>Your mod then shows by its <code>name()</code> in the admin's "Leveling mod" choice on the /tempest Leveling tab (Core API 21), next to Endless Leveling, RPG Leveling and MMO Skill Tree, which Core links by itself. So a server with several leveling mods picks the one that gives "the level". On "Automatic" a registered mod comes first. Keep <code>name()</code> the same between versions: the admin's choice is kept by it.</p>
+<p>If your mod has classes with tiers, return the tier from <code>classTier(player)</code> (API 21): quests and items can then ask for it. Say what your mod has with <code>has(feature)</code> (API 22): return false for <code>Levels.PRESTIGE</code>, <code>Levels.MOB_LEVELS</code> and the others it lacks, and the admin's menus hide the settings that would do nothing on their server.</p>
+<h2 id="any-mod-count-in-quests-the-pass-and-events"><a class="anchor" href="#any-mod-count-in-quests-the-pass-and-events" aria-label="Link to this section">#</a>Any mod: count in quests, the pass and events</h2>
+<p>Report what players do in your mod. Tempest Quests can turn any of these into a goal, and other Tempest plugins listen too:</p>
+<div class="code"><div class="code-bar"><span>java</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-java">PlayerActions.fire(uuid, "mymod:boss_kill", 1);     // your own name, "mod:what"
+QuestsAPI.trigger(uuid, "visit_shrine", 1);         // a "Custom trigger" goal the admin made in /quests</code></pre></div>
+<p><code>QuestsAPI</code> belongs to Tempest Quests: declare <code>"AtomicTempest:Quests": "*"</code> as an optional dependency too, and call it only when <code>QuestsAPI.isAvailable()</code> (the <strong>Quests</strong> page).</p>
+<p>Hear what players do in the Tempest plugins (a shop purchase, a quest finished, a job level, a crate opened), with the full list on the <strong>Player actions</strong> page:</p>
+<div class="code"><div class="code-bar"><span>java</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-java">PlayerActions.listen((player, action, amount) -&gt; { ... });</code></pre></div>
+<h2 id="money"><a class="anchor" href="#money" aria-label="Link to this section">#</a>Money</h2>
+<p>Use the server's economy, whichever plugin keeps it, through <code>Economies.get()</code> (the <strong>Money</strong> page). Tempest Economy also registers as VaultUnlocked's and Cassaforte's economy, so a mod that already uses those works with Tempest coins without any of this.</p>
+<h2 id="rewards-announcements-settings"><a class="anchor" href="#rewards-announcements-settings" aria-label="Link to this section">#</a>Rewards, announcements, settings</h2>
+<div class="table"><table><thead><tr><th>Want</th><th>Use</th><th>Page</th></tr></thead><tbody><tr><td>Give items safely (a full inventory goes to the mailbox)</td><td><code>Rewards.giveItems</code></td><td>Rewards, mail and boosts</td></tr><tr><td>A big moment on the server's Discord (Tempest Economy posts it when Discord is set up)</td><td><code>Announcements.post("mymod", text)</code></td><td>Boards, HUD and placeholders</td></tr><tr><td>A tab in the server's <code>/tempest</code> settings, with rows that show only when they mean something (<code>shownWhenOn</code>...)</td><td><code>CasinoSettings.register(new SettingsTab(...))</code></td><td>Settings and menus</td></tr><tr><td>Places on the world map</td><td><code>MapPlaces</code></td><td>Map, town and demand</td></tr><tr><td>A line on the player's Tempest board</td><td><code>HudLines</code></td><td>Boards, HUD and placeholders</td></tr></tbody></table></div>
+<h2 id="rules-that-keep-servers-safe"><a class="anchor" href="#rules-that-keep-servers-safe" aria-label="Link to this section">#</a>Rules that keep servers safe</h2>
+<ul><li>Check <code>CoreAPI.runningVersion()</code> before using anything newer than the version you built against.</li><li>Unregister everything you registered in <code>shutdown()</code>: servers reload plugins.</li><li>Event listeners run on the thread that fired them: keep them quick; do world work with <code>world.execute(...)</code>.</li><li>Never give money or items twice for one thing: Tempest's own rewards are saved before they are given; do the same.</li></ul>
+<p>Questions or something missing: ask on our Discord. We add what mod authors need, and say so in <strong>API versions</strong>.</p>
+    </article>
+    <nav class="pager"><a class="prev" href="quick-start.html"><small>Previous</small>Quick start</a><a class="next" href="setup.html"><small>Next</small>Setting up a plugin</a></nav>
+    <footer class="foot">Tempest plugins for Hytale by AtomicTempest. Not made or endorsed by Hypixel Studios. · <a href="link-your-mod.md">This page as Markdown</a> · <a href="llms.txt">llms.txt</a></footer>
+  </main>
+  <aside class="toc"><h5>On this page</h5><a href="#a-leveling-mod-your-levels-in-the-whole-suite">A leveling mod: your levels in the whole suite</a><a href="#any-mod-count-in-quests-the-pass-and-events">Any mod: count in quests, the pass and events</a><a href="#money">Money</a><a href="#rewards-announcements-settings">Rewards, announcements, settings</a><a href="#rules-that-keep-servers-safe">Rules that keep servers safe</a></aside>
+</div>
+</body>
+</html>

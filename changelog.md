@@ -2,6 +2,102 @@
 
 Every release of the Tempest plugins, newest first.
 
+## 2026-11-09
+
+### Core 1.6.0
+
+- settings rows show only when they mean something, live as the admin changes them (API 22)
+- mob gold by level and elite mobs work with RPG Leveling; texts name all three leveling mods
+- a rank perk "Leveling XP (%)" raises leveling XP in any leveling mod
+- RPG Leveling as a leveling mod, class tiers, and linked mods in the admin's choice (API 21)
+- console commands and granted permissions need tempest.admin (#193)
+- (?) icon with a longer explanation on /tempest settings rows
+- leveling settings split by mod, with clearer explanations
+- Skills, MMO Skill Tree's skills for every plugin (API 19)
+- MMO Skill Tree skill-level and achievement rewards; both leveling mods work side by side
+- works with MMO Skill Tree as a leveling mod, next to Endless Leveling
+
+### Holograms 1.2.2
+
+- console commands and granted permissions need tempest.admin (#193)
+
+### Coins 2.4.1
+
+- explanations behind the (?) for every setting that had none
+
+### Lottery 1.1.3
+
+- explanations behind the (?) for every setting that had none
+
+### SlotMachine 1.2.3
+
+- explanations behind the (?) for every setting that had none
+
+### Shop 1.5.1
+
+- explanations behind the (?) for every setting that had none
+
+### Quests 1.5.0
+
+- mob gold by level and elite mobs work with RPG Leveling; texts name all three leveling mods
+- explanations behind the (?) for every setting that had none
+- goals for MMO Skill Tree skills, achievements, quests and NPC talks
+- leveling settings name Endless Leveling or MMO Skill Tree, whichever applies
+
+### Crates 1.4.1
+
+- console commands and granted permissions need tempest.admin (#193)
+- explanations behind the (?) for every setting that had none
+
+### Coinflip 1.0.4
+
+- explanations behind the (?) for every setting that had none
+- StopTest's stuck refund ignores interrupts, so it guards the stop fix
+
+### Pass 1.3.0
+
+- settings rows show only when they mean something, live as the admin changes them (API 22)
+- mob gold by level and elite mobs work with RPG Leveling; texts name all three leveling mods
+- explanations behind the (?) for every setting that had none
+- leveling settings say which mod they need
+- leveling settings name Endless Leveling or MMO Skill Tree, whichever applies
+
+### Events 1.2.1
+
+- explanations behind the (?) for every setting that had none
+- leveling settings say which mod they need
+- leveling settings name Endless Leveling or MMO Skill Tree, whichever applies
+
+### Contracts 1.3.1
+
+- mob gold by level and elite mobs work with RPG Leveling; texts name all three leveling mods
+- console commands and granted permissions need tempest.admin (#193)
+- explanations behind the (?) for every setting that had none
+- leveling settings say which mod they need
+- leveling settings name Endless Leveling or MMO Skill Tree, whichever applies
+
+### Projects 1.1.1
+
+- explanations behind the (?) for every setting that had none
+
+### Town 1.2.2
+
+- console commands and granted permissions need tempest.admin (#193)
+- explanations behind the (?) for every setting that had none
+
+### Jobs 1.1.1
+
+- mob gold by level and elite mobs work with RPG Leveling; texts name all three leveling mods
+- the pay table's money, XP and X button in one line
+- the level reward rows in the job editor fit their hints
+- explanations behind the (?) for every setting that had none
+- leveling settings say which mod they need
+- leveling settings name Endless Leveling or MMO Skill Tree, whichever applies
+
+### Trade 1.0.2
+
+- explanations behind the (?) for every setting that had none
+
 ## 2026-11-08
 
 ### Core 1.5.0

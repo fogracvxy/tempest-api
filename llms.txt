@@ -29,6 +29,7 @@
 
 ## Developers: start here
 - [Quick start](quick-start.md): From an empty plugin to one that pays players and reads their level, in five steps.
+- [Link your mod to Tempest](link-your-mod.md)
 - [Setting up a plugin](setup.md): Dependencies, Registrations, config files and which Core is installed.
 - [API versions](versions.md): What each Core API version added, to check before you use it.
 

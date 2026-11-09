@@ -140,6 +140,7 @@ Give a rank a perk's permission in your ranks plugin (LuckPerms, or Hytale's own
 | Sell bonus (%) | Players with this perk get this much more when they sell to the shop. A sale never pays more than the item costs to buy, so it cannot be turned into a money loop. | 0 to 1000 |
 | Payment fee cut (%) | 100 = this rank pays no fee when paying other players. | 0 to 100 |
 | Pass XP (%) | Tempest Pass, Pro edition: more pass XP for this rank. | 0 to 1000 |
+| Leveling XP (%) | More XP in the leveling mod (Endless Leveling, RPG Leveling, MMO Skill Tree) for this rank. Adds to the Leveling XP boost, with events and boosters, up to the highest boost set on the Leveling tab. Does nothing without a leveling mod. | 0 to 1000 |
 | Perk 2 | Name | Text |
 | Permission | The permission that gives this perk, such as tempest.perk.vip. Give it to a rank in your ranks plugin (LuckPerms or Hytale's own permissions). Empty: this perk is off. A player with several perks gets the best of each bonus. | Text |
 | Daily rewards | Bonus (%) | 0 to 1000 |
@@ -148,6 +149,7 @@ Give a rank a perk's permission in your ranks plugin (LuckPerms, or Hytale's own
 | Sell bonus (%) | Players with this perk get this much more when they sell to the shop. A sale never pays more than the item costs to buy, so it cannot be turned into a money loop. | 0 to 1000 |
 | Payment fee cut (%) | 100 = this rank pays no fee when paying other players. | 0 to 100 |
 | Pass XP (%) | Tempest Pass, Pro edition: more pass XP for this rank. | 0 to 1000 |
+| Leveling XP (%) | More XP in the leveling mod (Endless Leveling, RPG Leveling, MMO Skill Tree) for this rank. Adds to the Leveling XP boost, with events and boosters, up to the highest boost set on the Leveling tab. Does nothing without a leveling mod. | 0 to 1000 |
 | Perk 3 | Name | Text |
 | Permission | The permission that gives this perk, such as tempest.perk.vip. Give it to a rank in your ranks plugin (LuckPerms or Hytale's own permissions). Empty: this perk is off. A player with several perks gets the best of each bonus. | Text |
 | Daily rewards | Bonus (%) | 0 to 1000 |
@@ -156,6 +158,7 @@ Give a rank a perk's permission in your ranks plugin (LuckPerms, or Hytale's own
 | Sell bonus (%) | Players with this perk get this much more when they sell to the shop. A sale never pays more than the item costs to buy, so it cannot be turned into a money loop. | 0 to 1000 |
 | Payment fee cut (%) | 100 = this rank pays no fee when paying other players. | 0 to 100 |
 | Pass XP (%) | Tempest Pass, Pro edition: more pass XP for this rank. | 0 to 1000 |
+| Leveling XP (%) | More XP in the leveling mod (Endless Leveling, RPG Leveling, MMO Skill Tree) for this rank. Adds to the Leveling XP boost, with events and boosters, up to the highest boost set on the Leveling tab. Does nothing without a leveling mod. | 0 to 1000 |
 | Perk 4 | Name | Text |
 | Permission | The permission that gives this perk, such as tempest.perk.vip. Give it to a rank in your ranks plugin (LuckPerms or Hytale's own permissions). Empty: this perk is off. A player with several perks gets the best of each bonus. | Text |
 | Daily rewards | Bonus (%) | 0 to 1000 |
@@ -164,6 +167,7 @@ Give a rank a perk's permission in your ranks plugin (LuckPerms, or Hytale's own
 | Sell bonus (%) | Players with this perk get this much more when they sell to the shop. A sale never pays more than the item costs to buy, so it cannot be turned into a money loop. | 0 to 1000 |
 | Payment fee cut (%) | 100 = this rank pays no fee when paying other players. | 0 to 100 |
 | Pass XP (%) | Tempest Pass, Pro edition: more pass XP for this rank. | 0 to 1000 |
+| Leveling XP (%) | More XP in the leveling mod (Endless Leveling, RPG Leveling, MMO Skill Tree) for this rank. Adds to the Leveling XP boost, with events and boosters, up to the highest boost set on the Leveling tab. Does nothing without a leveling mod. | 0 to 1000 |
 
 
 ### Server info

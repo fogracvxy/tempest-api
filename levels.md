@@ -4,16 +4,17 @@ Levels from Endless Leveling or MMO Skill Tree, through one API.
 
 ## Player levels: `Levels` (API version 14)
 
-Player levels from whichever leveling mod the server runs, as `Economies` is for money: **Endless Leveling** or **MMO
-Skill Tree**, found by themselves through their public APIs (nothing of them is shipped). With both installed, the admin
-picks the one that gives "the level" on the /tempest Leveling tab. Another mod's bridge can `Levels.register` its own
-`Leveling`, which then comes first.
+Player levels from whichever leveling mod the server runs, as `Economies` is for money: **Endless Leveling**, **RPG
+Leveling** (since 21) or **MMO Skill Tree**, found by themselves through their public APIs (nothing of them is shipped).
+Another mod's bridge can `Levels.register` its own `Leveling`. With several installed, the admin picks the one that gives
+"the level" on the /tempest Leveling tab, registered mods included (since 21); on "Automatic" a registered mod comes
+first, then Endless Leveling, RPG Leveling, MMO Skill Tree.
 
 ```java
 Levels.Leveling leveling = Levels.get();            // null without a leveling mod
 if (leveling != null) {
     int level = leveling.level(uuid);
-    int prestige = leveling.prestige(uuid);          // 0 with MMO Skill Tree
+    int prestige = leveling.prestige(uuid);          // 0 with MMO Skill Tree and RPG Leveling
     leveling.giveXp(uuid, 250, "Quest: Miner");      // with the mod's own bonuses and level cap
 }
 if (!Levels.meets(uuid, 20)) { ... }                 // true without a leveling mod: nobody is locked out by a missing mod
@@ -27,26 +28,28 @@ if (!Levels.meets(uuid, 20)) { ... }                 // true without a leveling 
 | Method | Returns | Since | What it does |
 |---|---|---|---|
 | `get()` | `Leveling` | 14 | The leveling mod in use, or null. Asked again on every call |
-| `register(leveling)` / `unregister(leveling)` | | 14 | A bridge for another leveling mod; it is preferred over the ones Core finds |
+| `register(leveling)` / `unregister(leveling)` | | 14 | A bridge for another leveling mod. Since 21 several may register, each a choice in the admin's "Leveling mod"; on "Automatic" the first comes before the ones Core finds |
 | `listen(listener)` / `stopListening(listener)` | | 14 | Hear level-ups, prestige and clears (below) |
 | `available()` | `boolean` | 16 | A leveling mod runs |
 | `level(uuid)` | `int` | 16 | The player's level, 0 without a leveling mod |
 | `meets(uuid, minLevel)` | `boolean` | 16 | The player has at least this level; true without a leveling mod |
 | `hasClass(uuid, wanted)` | `boolean` | 16 | The player's class (or second class) is this one; true without a mod or a class |
-| `mobLevel(ref, store, buffer)` | `int` | 16 | A mob's level (Endless Leveling), 0 when not known. On the mob's world thread |
+| `classTier(uuid)` | `int` | 21 | The tier of the player's class (RPG Leveling: 0 to 4), 0 without |
+| `has(feature)` | `boolean` | 22 | The mod in use has `PRESTIGE`, `CLASSES`, `CLASS_TIERS`, `RACES`, `MOB_LEVELS`, `CLEARS` or `PARTIES`; false without a mod. For settings and editors that show only what means something |
+| `mobLevel(ref, store, buffer)` | `int` | 16 | A mob's level (Endless Leveling, RPG Leveling), 0 when not known. On the mob's world thread |
 | `mobGold(amount, killer, mobLevel)` | `long` | 16 | Mob gold raised by the mob's level, as the admin set it |
 | `mobKilled(killer, mobName, mobLevel)` | | 16 | Tell Core of a kill (elite mob announcements) |
 | `playersAtLevel(level)` | `int` | 16 | Players seen at this level or higher (for town conditions) |
 | `serverClears()` / `serverPrestige()` | `long` | 16 | Dungeons, gates and raids cleared by everyone; everyone's highest prestige added up |
 | `pretty(id)` | `String` | 16 | "dark_knight" becomes "Dark Knight" |
-| `describe()` | `String` | 14 | "Endless Leveling", "MMO Skill Tree" or "none" |
+| `describe()` | `String` | 14 | "Endless Leveling", "RPG Leveling", "MMO Skill Tree", a registered mod's name, or "none" |
 | `fireLevelUp`, `firePrestige`, `fireDungeonCleared`, `fireGateCleared`, `fireRaidCleared`, `fireRaidStarted` | | 14-16 | For a bridge: tell Core and every listener |
 
 ### `Levels.Leveling` (one leveling mod)
 
 | Method | Returns | Since | What it does |
 |---|---|---|---|
-| `name()` | `String` | 14 | "Endless Leveling", "MMO Skill Tree" |
+| `name()` | `String` | 14 | "Endless Leveling", "RPG Leveling", "MMO Skill Tree"; a registered mod's name is its choice in the admin's dropdown |
 | `level(uuid)` / `prestige(uuid)` | `int` | 14 | Level and prestige (0 when the mod does not know the player) |
 | `giveXp(uuid, amount, reason)` | `boolean` | 14 | XP with the mod's bonuses and cap; false when it could not |
 | `xp(uuid)` / `xpForNext(uuid)` | `double` | 16 | XP toward the next level, and what it needs (0 when the mod does not say) |
@@ -54,6 +57,8 @@ if (!Levels.meets(uuid, 20)) { ... }                 // true without a leveling 
 | `playerClass(uuid)` / `secondClass(uuid)` / `race(uuid)` | `String` | 16 | Class, second class and race ids ("mage"), "" for none |
 | `mobLevel(ref, store, buffer)` | `int` | 16 | A mob's level, on its world thread |
 | `inPartyWith(one, other)` | `boolean` | 16 | The two players are in one party |
+| `classTier(uuid)` | `int` | 21 | The tier of the player's class, 0 for none or a mod without tiers |
+| `has(feature)` | `boolean` | 22 | Whether this mod has a feature (`Levels.PRESTIGE`...). Default true, so a linked mod that does not say hides nothing |
 
 ### `Levels.Listener` events
 

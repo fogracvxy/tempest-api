@@ -28,4 +28,7 @@ code in a class of its own.
 | 16 | `Levels` XP, level cap, class, race, mob level, parties, raid starts, `meets`, `hasClass`, `mobGold`, `mobKilled`, `playersAtLevel`, `serverClears`, `serverPrestige`; `Registrations.levelingTab`, `levelingFeature`; `Unlocks.isUnlocked` |
 | 17 | `Demand` and `Registrations.demandSource`; `HudLines.progress` |
 | 18 | `Rewards`: item and command rewards the same in every plugin |
-| 19 | `Skills` (MMO Skill Tree) and its moments as `PlayerActions`; MMO Skill Tree as a leveling mod next to Endless Leveling; `Registrations.endlessTab`. Comes with Core 1.6.0, the next release |
+| 19 | `Skills` (MMO Skill Tree) and its moments as `PlayerActions`; MMO Skill Tree as a leveling mod next to Endless Leveling; `Registrations.endlessTab` |
+| 20 | `Setting.info` (a (?) explanation beside a setting) and `Setting.permission` (a setting only players with that permission may change) |
+| 21 | RPG Leveling found by `Levels`; `Leveling.classTier`, `Levels.classTier`; several mods may `Levels.register`, each a choice in the admin's "Leveling mod"; `Perks.Bonus.LEVELING_XP` |
+| 22 | Show-when rules on settings (`shownWhen`, `shownWhenOn`, `shownWhenAboveZero`, `shownWhenChosen`), followed live in the menu; `Levels.has`, `Leveling.has`. Comes with Core 1.6.0, the next release |
