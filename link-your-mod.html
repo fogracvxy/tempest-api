@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Link your mod to Tempest · Tempest plugins docs</title>
-<meta name="description" content="Link your mod to Tempest: the Tempest plugins for Hytale servers, with the server guide and the Java API.">
+<meta name="description" content="Make your leveling, party, claims or gameplay mod work with all 16 Tempest plugins by talking to Tempest Core once.">
 <meta name="theme-color" content="#F1C40F">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png">
@@ -12,7 +12,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Tempest plugins for Hytale">
 <meta property="og:title" content="Link your mod to Tempest · Tempest plugins docs">
-<meta property="og:description" content="Link your mod to Tempest: the Tempest plugins for Hytale servers, with the server guide and the Java API.">
+<meta property="og:description" content="Make your leveling, party, claims or gameplay mod work with all 16 Tempest plugins by talking to Tempest Core once.">
 <meta property="og:url" content="https://fogracvxy.github.io/tempest-api/link-your-mod.html">
 <meta property="og:image" content="https://fogracvxy.github.io/tempest-api/assets/og-image.jpg">
 <meta property="og:image:width" content="1200">
@@ -37,9 +37,8 @@
   <main>
     <div class="crumbs">Developers: start here</div>
     <h1>Link your mod to Tempest</h1>
-    
+    <p class="lead">Make your leveling, party, claims or gameplay mod work with all 16 Tempest plugins by talking to Tempest Core once.</p>
     <article>
-<h1 id="link-your-mod-to-tempest"><a class="anchor" href="#link-your-mod-to-tempest" aria-label="Link to this section">#</a>Link your mod to Tempest</h1>
 <p>You make a leveling, party, claims or gameplay mod and want it to work with the whole Tempest suite (quests, the battle pass, events, jobs, crates, the shop, rewards, the board). You do not need to add support for sixteen plugins: you talk to <strong>Tempest Core</strong> once, and every Tempest plugin sees it.</p>
 <p>Everything here is optional for you and for the server: declare Core as an <strong>optional</strong> dependency, check that it runs, and your mod works the same without it.</p>
 <div class="code"><div class="code-bar"><span>json</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-json">"OptionalDependencies": { "AtomicTempest:Core": "*" }</code></pre></div>

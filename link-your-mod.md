@@ -1,6 +1,6 @@
 # Link your mod to Tempest
 
-# Link your mod to Tempest
+Make your leveling, party, claims or gameplay mod work with all 16 Tempest plugins by talking to Tempest Core once.
 
 You make a leveling, party, claims or gameplay mod and want it to work with the whole Tempest suite (quests, the battle
 pass, events, jobs, crates, the shop, rewards, the board). You do not need to add support for sixteen plugins: you talk
