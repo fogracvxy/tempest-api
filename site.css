@@ -23,8 +23,7 @@ a:hover { text-decoration: underline; }
   background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
 .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; color: var(--text); white-space: nowrap; }
 .brand:hover { text-decoration: none; }
-.logo { width: 26px; height: 26px; border-radius: 7px; background: linear-gradient(135deg, #f97316, #b91c1c);
-  display: grid; place-items: center; color: #fff; font-size: 15px; }
+.logo { width: 26px; height: 26px; border-radius: 7px; display: block; object-fit: cover; }
 .version { font-size: 12px; font-weight: 600; color: var(--accent); background: var(--accent-soft); border-radius: 999px; padding: 2px 9px; }
 .search { position: relative; margin-left: auto; width: min(360px, 40vw); }
 .search input { width: 100%; height: 34px; border-radius: 8px; border: 1px solid var(--line); background: var(--bg-soft);
