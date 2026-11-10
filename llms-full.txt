@@ -24,9 +24,14 @@ package.
 | Pass | `AtomicTempest:Pass` | `com.atomictempest.pass.api.PassAPI` |
 | Jobs | `AtomicTempest:Jobs` | `com.atomictempest.jobs.api.JobsAPI` |
 | Trade | `AtomicTempest:Trade` | no API of its own: the `trade_done` action |
+| Claims | `AtomicTempest:Claims` | no API of its own: it answers Core's `Claims` (below) for every plugin, the `claims_claim` and `claims_party` actions, and the `claims_party`, `claims_chunks`, `claims_limit`, `claims_bank` and `claims_here` placeholders |
 
 With **Endless Leveling** or **MMO Skill Tree** installed, Core's `Levels` and `Skills` give every plugin player
 levels, skills and what happens in them, without depending on either mod.
+
+The economy can be **Tempest Economy (Coins)** or any economy registered with **VaultUnlocked** (GlymeraMerchant,
+Ecotale...): Core's `Economies` hides which. Land claims come from **Tempest Claims** or, read-only, **Simple Claims**:
+Core's `Claims` hides which.
 
 Every API class has a version constant that goes up when something is added. Everything in these APIs is safe to call
 from any thread unless it says otherwise.
@@ -107,6 +112,13 @@ Every command of the Tempest plugins, with the permission it needs. "Everyone" w
 | `/serverinfo` (/rules, /info) | Everyone | The server's rules and info |
 | `/tempest` (/casino) | Everyone | Tempest: the settings menu for admins, the help screen for players |
 | `/tempest doctor` | `tempest.admin` | Finds ways players could make money from nothing in the settings (admins) |
+| `/tempest hub` | `tempest.admin` | The Tempest hub: every plugin in one place, and protection for your spawn |
+| `/tempest hub corner` | `tempest.admin` | Mark a corner of an area to protect |
+| `/tempest hub place` | `tempest.admin` | Build the Tempest hub in front of you |
+| `/tempest hub protect` | `tempest.admin` | Turn the hub's protection on or off |
+| `/tempest hub protect-area` | `tempest.admin` | Protect the area between your two corners |
+| `/tempest hub remove` | `tempest.admin` | Remove the hub and put the ground back |
+| `/tempest hub unprotect-area` | `tempest.admin` | Stop protecting an area |
 | `/tempest info` | `tempest.admin` | Tempest plugins: versions, editions and the economy (admins) |
 | `/tempest log` | `tempest.admin` | Who changed what: the newest lines of the admin log (admins) |
 | `/tempest report` | `tempest.admin` | Writes a support report to paste when asking for help (admins) |
@@ -242,6 +254,49 @@ Every command of the Tempest plugins, with the permission it needs. "Everyone" w
 |---|---|---|
 | `/trade` | Everyone | Trade with a player: /trade <player>, or accept, deny, toggle, open |
 
+## Claims
+
+| Command | Who can use it | What it does |
+|---|---|---|
+| `/claims` | Everyone | Your party and its land |
+| `/claims admin` | `tempest.admin.claims` | For admins: give chunks, disband, bypass |
+| `/claims ally` | Everyone | Trust another party on your land |
+| `/claims auto` | Everyone | Claim while you walk, on or off |
+| `/claims bank` | Everyone | Keep the party's money in one of your /bank accounts |
+| `/claims buy` | Everyone | Buy one more chunk for your limit |
+| `/claims cancel` | Everyone | Stop the claim waiting for /claims confirm |
+| `/claims claim` | Everyone | Claim the chunk you stand in |
+| `/claims claimat` | Everyone | Claim a chunk by its numbers (the map uses this) |
+| `/claims color` | Everyone | The colour of your party: /claims color #4FC3F7 |
+| `/claims confirm` | Everyone | Claim the chunk /claims claim showed you |
+| `/claims create` | Everyone | Found a party |
+| `/claims demote` | Everyone | Make an assistant a member again |
+| `/claims deposit` | Everyone | Put money into the party bank |
+| `/claims disband` | Everyone | End your party and free its land |
+| `/claims forgive` | Everyone | Forgive a member's tax debt (owner or assistant) |
+| `/claims info` | Everyone | Your party and its land in chat |
+| `/claims invite` | Everyone | Invite a player to your party |
+| `/claims join` | Everyone | Join a party that invited you or is open |
+| `/claims kick` | Everyone | Remove a member from your party |
+| `/claims leave` | Everyone | Leave your party |
+| `/claims list` | Everyone | The parties with the most land |
+| `/claims map` | Everyone | A map of the claims around you |
+| `/claims open` | Everyone | Let anyone join your party, on or off |
+| `/claims paytax` | Everyone | Pay what you owe your party in taxes |
+| `/claims promote` | Everyone | Make a member an assistant |
+| `/claims rule` | Everyone | Change a rule: /claims rule visitor doors on |
+| `/claims rules` | Everyone | Who may do what on your land |
+| `/claims select` | Everyone | Pick a chunk to claim (the map uses this) |
+| `/claims show` | Everyone | Outline the claimed land around you |
+| `/claims tax` | Everyone | The tax each member pays the party each time (0 = none) |
+| `/claims trust` | Everyone | Trust one player on your land |
+| `/claims unally` | Everyone | Stop trusting a party |
+| `/claims unclaim` | Everyone | Give back the chunk you stand in |
+| `/claims unlinkbank` | Everyone | Keep the party's money in Claims again |
+| `/claims untrust` | Everyone | Stop trusting a player |
+| `/claims withdraw` | Everyone | Take money out of the party bank (owner) |
+| `/claims worktax` | Everyone | The party's share of members' job pay, in percent |
+
 ## Slot machines
 
 | Command | Who can use it | What it does |
@@ -307,6 +362,13 @@ The `/guide` pages of this plugin, as a player sees them on a test server (numbe
 | `/serverinfo` (/rules, /info) | Everyone | The server's rules and info |
 | `/tempest` (/casino) | Everyone | Tempest: the settings menu for admins, the help screen for players |
 | `/tempest doctor` | `tempest.admin` | Finds ways players could make money from nothing in the settings (admins) |
+| `/tempest hub` | `tempest.admin` | The Tempest hub: every plugin in one place, and protection for your spawn |
+| `/tempest hub corner` | `tempest.admin` | Mark a corner of an area to protect |
+| `/tempest hub place` | `tempest.admin` | Build the Tempest hub in front of you |
+| `/tempest hub protect` | `tempest.admin` | Turn the hub's protection on or off |
+| `/tempest hub protect-area` | `tempest.admin` | Protect the area between your two corners |
+| `/tempest hub remove` | `tempest.admin` | Remove the hub and put the ground back |
+| `/tempest hub unprotect-area` | `tempest.admin` | Stop protecting an area |
 | `/tempest info` | `tempest.admin` | Tempest plugins: versions, editions and the economy (admins) |
 | `/tempest log` | `tempest.admin` | Who changed what: the newest lines of the admin log (admins) |
 | `/tempest report` | `tempest.admin` | Writes a support report to paste when asking for help (admins) |
@@ -596,6 +658,27 @@ How these look on the map and who gets them. To change one of them, use /places.
 | Only in these worlds | World names with commas between them. Empty: every world. | Text |
 
 
+### Map: Claims
+
+`/tempest` → Map: Claims. Who can change it: `tempest.admin` or `tempest.admin.map`.
+
+#### Claims
+
+How these look on the map and who gets them. To change one of them, use /places.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Show on the map | Shows every place of this kind on players' maps. Off: they are hidden, but stay known, so switching it on brings them back. | On or off |
+| Icon | A resource pack's own picture: put its file name in map.json. | A list |
+| Colour | White shows the icon as it was drawn. | A colour |
+| Name on the map | Empty: each place's own name. Written here, every one of them shows this. | Text |
+| Big icon | A larger icon on the map, for places players should find easily. | On or off |
+| On the compass too | These places also show on the compass at the top of the screen, not only on the map. | On or off |
+| Who sees it (permission) | Empty: everyone. With a permission, only players or ranks who have it. | Text |
+| Shown within (blocks) | Only players this near see them. 0: from anywhere. | 0 to 100000 |
+| Only in these worlds | World names with commas between them. Empty: every world. | Text |
+
+
 # Economy (Coins)
 
 Wallets, coins, banks, daily rewards and ore and monster gold.
@@ -633,6 +716,7 @@ The `/guide` pages of this plugin, as a player sees them on a test server (numbe
 - -Contracts
 - -Jobs
 - -Trade
+- -Land claims
 - -Town
 - -Town projects
 - Pick a page on the left to read more. Open this screen any time with /coins.
@@ -763,6 +847,10 @@ The `/guide` pages of this plugin, as a player sees them on a test server (numbe
 
 ### All commands
 
+
+**Claims**
+
+- /claims  -Your party and its land
 
 **Coinflip**
 
@@ -2370,6 +2458,299 @@ What keeps trades fair.
 | Log every trade | In the server log and /tempest log: who gave what to whom. | On or off |
 
 
+# Claims
+
+Land claims for parties: protection, the claim page and map, taxes and upkeep.
+
+## What players read in /guide
+
+The `/guide` pages of this plugin, as a player sees them on a test server (numbers are examples).
+
+### Land claims
+
+- A party claims chunks of the world (32 x 32 blocks, from the ground to the sky). On claimed land only the party decides who may build, break, open chests and fight.
+
+**Getting started**
+
+- /claims create <name> founds your party. Stand where you want land and type /claims claim. /claims shows how much land you hold and may hold; /claims map shows what is around you. Invite friends with /claims invite <player>.
+
+**Rules and allies**
+
+- /claims rules shows who may do what: members, allies and visitors, each for building, breaking, using blocks, chests, doors, benches, seats and picking up items. Change a cell with /claims rule. /claims ally <party> and /claims trust <player> make allies. Shops, ATMs, crates and slot machines stay usable for everyone.
+
+**More land**
+
+- A party may hold more land with more members, with chunks you buy (/claims buy) or earn as rewards, and with what the server gives for levels, ranks and town buildings. Where the server asks for upkeep, keep money in the party bank with /claims deposit.
+
+
+## Commands
+
+| Command | Who can use it | What it does |
+|---|---|---|
+| `/claims` | Everyone | Your party and its land |
+| `/claims admin` | `tempest.admin.claims` | For admins: give chunks, disband, bypass |
+| `/claims ally` | Everyone | Trust another party on your land |
+| `/claims auto` | Everyone | Claim while you walk, on or off |
+| `/claims bank` | Everyone | Keep the party's money in one of your /bank accounts |
+| `/claims buy` | Everyone | Buy one more chunk for your limit |
+| `/claims cancel` | Everyone | Stop the claim waiting for /claims confirm |
+| `/claims claim` | Everyone | Claim the chunk you stand in |
+| `/claims claimat` | Everyone | Claim a chunk by its numbers (the map uses this) |
+| `/claims color` | Everyone | The colour of your party: /claims color #4FC3F7 |
+| `/claims confirm` | Everyone | Claim the chunk /claims claim showed you |
+| `/claims create` | Everyone | Found a party |
+| `/claims demote` | Everyone | Make an assistant a member again |
+| `/claims deposit` | Everyone | Put money into the party bank |
+| `/claims disband` | Everyone | End your party and free its land |
+| `/claims forgive` | Everyone | Forgive a member's tax debt (owner or assistant) |
+| `/claims info` | Everyone | Your party and its land in chat |
+| `/claims invite` | Everyone | Invite a player to your party |
+| `/claims join` | Everyone | Join a party that invited you or is open |
+| `/claims kick` | Everyone | Remove a member from your party |
+| `/claims leave` | Everyone | Leave your party |
+| `/claims list` | Everyone | The parties with the most land |
+| `/claims map` | Everyone | A map of the claims around you |
+| `/claims open` | Everyone | Let anyone join your party, on or off |
+| `/claims paytax` | Everyone | Pay what you owe your party in taxes |
+| `/claims promote` | Everyone | Make a member an assistant |
+| `/claims rule` | Everyone | Change a rule: /claims rule visitor doors on |
+| `/claims rules` | Everyone | Who may do what on your land |
+| `/claims select` | Everyone | Pick a chunk to claim (the map uses this) |
+| `/claims show` | Everyone | Outline the claimed land around you |
+| `/claims tax` | Everyone | The tax each member pays the party each time (0 = none) |
+| `/claims trust` | Everyone | Trust one player on your land |
+| `/claims unally` | Everyone | Stop trusting a party |
+| `/claims unclaim` | Everyone | Give back the chunk you stand in |
+| `/claims unlinkbank` | Everyone | Keep the party's money in Claims again |
+| `/claims untrust` | Everyone | Stop trusting a player |
+| `/claims withdraw` | Everyone | Take money out of the party bank (owner) |
+| `/claims worktax` | Everyone | The party's share of members' job pay, in percent |
+
+
+## Settings
+
+Every setting is changed in game with `/tempest` and saved at once; nothing needs a restart. Amounts of 0 are off unless the setting says otherwise.
+
+### Claims
+
+`/tempest` → Claims. Who can change it: `tempest.admin` or `tempest.admin.claims`.
+
+Parties claim chunks (32 x 32 blocks, full height) and decide who may do what there.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Claims is on | Off: nothing is protected and /claims does nothing. The land is kept. | On or off |
+
+#### How much land
+
+A party's limit is the sum of the parts below, up to the hard limit. /claims shows each party its own.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Chunks for a new party | How many chunks a party of one player may claim. | 0 to 1000 |
+| More for each other member | Added for every member after the first. When a member leaves, land already claimed is kept; the party just cannot claim more. | 0 to 100 |
+| Hard limit for any party | No party ever holds more than this, whatever it bought or earned. | 1 to 10000 |
+| Chunks for a party with a VIP | Counts while a member with the permission tempest.claims.vip is online. 0 = off. | 0 to 1000 |
+| Chunks from the town | Every party gets these once Tempest Town unlocks "More land for every party". Needs Tempest Town with an unlock that gives the feature "Claims: more land for every party". Without Tempest Town nothing is added. | 0 to 1000 |
+
+#### Parties
+
+Players found a party with /claims create, invite others, and choose allies.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Most members in a party |  | 1 to 200 |
+| Most allies of a party | Allied parties and single trusted players together. | 0 to 100 |
+
+#### Where
+
+Rules that keep the map tidy.
+
+| Setting | What it does | Values |
+|---|---|---|
+| New land must touch the party's land | The first chunk in a world can be anywhere. | On or off |
+| Free chunks between two parties | 0 = parties may claim side by side. A party that allied another lets it come close. | 0 to 8 |
+| Worlds where nobody may claim | World names, with commas. | Text |
+| Players can claim while walking | /claims auto: every new chunk the player walks into is claimed, while the limit and money last. | On or off |
+
+#### What players see
+
+Messages, the map and creatures.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Tell players whose land they enter |  | On or off |
+| Parties on the world map | One marker per party, in the middle of its land. | On or off |
+| Land coloured on the world map | Claimed chunks tinted in their party's colour, with a border where the land ends. Painted over the game's own map when a player opens it (M). Worlds that use another mod's map are left alone. | On or off |
+| Claim from the world map | Flags on the free chunks a player could claim next; right-click one on the map (M) to claim it. | On or off |
+| Map menu command starts with / | Off (the default): the game adds the / itself. Switch on only if claiming from the map says the command is unknown. | On or off |
+| Claiming asks to confirm | /claims claim outlines the chunk and its cost first; /claims confirm claims it. | On or off |
+| Creatures may change claimed land | Off: blocks broken or placed by anything that is not a player are stopped on claimed land. | On or off |
+| Release land after days without a member online | 0 = never. The land of a party is released when none of its members was online for this many days. The party itself stays. | 0 to 3650 |
+
+
+### Claims money
+
+`/tempest` → Claims money. Who can change it: `tempest.admin` or `tempest.admin.claims`.
+
+#### Prices
+
+All optional (0 = free), with any economy. What players pay leaves the economy.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Founding a party |  | 0 to 1000000000 |
+| Claiming a chunk | The price of a party's first chunk. | 0 to 1000000000 |
+| Each next chunk costs more (%) |  | 0 to 100 |
+| Given back when unclaiming (%) | A share of what that chunk cost, never more: claiming and unclaiming earns nothing. | 0 to 100 |
+
+#### Buying more land
+
+/claims buy raises a player's own limit by one chunk; it counts in the party they are in.
+
+| Setting | What it does | Values |
+|---|---|---|
+| An extra chunk | 0 = chunks cannot be bought. | 0 to 1000000000 |
+| Each next one costs more (%) |  | 0 to 100 |
+| Most a player can buy |  | 0 to 10000 |
+
+#### Upkeep
+
+A daily cost for holding land, paid from the party bank (/claims deposit).
+
+| Setting | What it does | Values |
+|---|---|---|
+| Upkeep per chunk each day | 0 = off. Taken once a day from the party bank. A party that cannot pay falls to ruins: its land stays protected but it cannot claim more. It is restored the day its bank can pay again. | 0 to 1000000 |
+| Days in ruins before the land is released |  | 1 to 365 |
+
+
+### Claims taxes
+
+`/tempest` → Claims taxes. Who can change it: `tempest.admin` or `tempest.admin.claims`.
+
+#### Party taxes
+
+Parties set their own taxes with /claims tax and /claims worktax, up to these caps.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Highest tax per member | Each time taxes are collected. 0 = parties cannot ask one. Each time taxes are collected, every member pays the party's tax from their wallet into the party bank. The owner never pays; assistants pay only if the party says so. | 0 to 1000000000 |
+| Highest work tax (%) | A share of what members earn in Tempest Jobs. 0 = off. Taken from the member's wallet right after a job pays them, into the party bank. Needs Tempest Jobs. | 0 to 50 |
+| Collect taxes every (hours) | Members pay the party's tax automatically this often, from their wallets. 24 = once a day. | 1 to 336 |
+| Missed payments before the party acts | Missed in a row. 0 = never: the debt only grows. A member who cannot pay owes the tax and is told how many payments they missed. Paying the debt (/claims paytax) starts the count again. | 0 to 100 |
+| Then the member | Suspended members stay in the party but have a visitor's rights on its land until they pay their debt with /claims paytax, or a leader forgives them (/claims forgive). | Is suspended (visitor rights until they pay), Is removed from the party, Only owes more |
+
+#### Party money in /bank
+
+With Tempest Economy, a party can keep its money in one of its owner's banks.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Parties may link a /bank account | /claims bank <name>: taxes and deposits go into that bank, upkeep is paid from it, and it earns the bank's savings interest. Takes effect for new links at once; a server restart switches existing links off when this is off. Only the bank's owner, who must also own the party, can link it. | On or off |
+
+
+### Claims rules
+
+`/tempest` → Claims rules. Who can change it: `tempest.admin` or `tempest.admin.claims`.
+
+#### Members
+
+What they may do on the party's land unless the party changes it.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Members: place blocks |  | On or off |
+| Members: break blocks |  | On or off |
+| Members: use blocks |  | On or off |
+| Members: open chests |  | On or off |
+| Members: open doors |  | On or off |
+| Members: use benches |  | On or off |
+| Members: sit and sleep |  | On or off |
+| Members: pick up items |  | On or off |
+
+#### Allies
+
+What they may do on the party's land unless the party changes it.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Allies: place blocks |  | On or off |
+| Allies: break blocks |  | On or off |
+| Allies: use blocks |  | On or off |
+| Allies: open chests |  | On or off |
+| Allies: open doors |  | On or off |
+| Allies: use benches |  | On or off |
+| Allies: sit and sleep |  | On or off |
+| Allies: pick up items |  | On or off |
+
+#### Visitors
+
+Everyone who is not a member or an ally. Parties can change the cells that are not locked.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Visitors: place blocks |  | On or off |
+| Visitors: break blocks |  | On or off |
+| Visitors: use blocks |  | On or off |
+| Visitors: open chests |  | On or off |
+| Visitors: open doors |  | On or off |
+| Visitors: use benches |  | On or off |
+| Visitors: sit and sleep |  | On or off |
+| Visitors: pick up items |  | On or off |
+| Visitors: PvP is on |  | On or off |
+
+
+### Claims rule locks
+
+`/tempest` → Claims rule locks. Who can change it: `tempest.admin` or `tempest.admin.claims`.
+
+#### Members
+
+On: parties cannot change this cell; the server's default always applies.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Members: place blocks |  | On or off |
+| Members: break blocks |  | On or off |
+| Members: use blocks |  | On or off |
+| Members: open chests |  | On or off |
+| Members: open doors |  | On or off |
+| Members: use benches |  | On or off |
+| Members: sit and sleep |  | On or off |
+| Members: pick up items |  | On or off |
+
+#### Allies
+
+On: parties cannot change this cell; the server's default always applies.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Allies: place blocks |  | On or off |
+| Allies: break blocks |  | On or off |
+| Allies: use blocks |  | On or off |
+| Allies: open chests |  | On or off |
+| Allies: open doors |  | On or off |
+| Allies: use benches |  | On or off |
+| Allies: sit and sleep |  | On or off |
+| Allies: pick up items |  | On or off |
+
+#### Visitors
+
+On: parties cannot change this cell; the server's default always applies.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Visitors: place blocks |  | On or off |
+| Visitors: break blocks |  | On or off |
+| Visitors: use blocks |  | On or off |
+| Visitors: open chests |  | On or off |
+| Visitors: open doors |  | On or off |
+| Visitors: use benches |  | On or off |
+| Visitors: sit and sleep |  | On or off |
+| Visitors: pick up items |  | On or off |
+| Visitors: PvP is on |  | On or off |
+
+
 # Slot machines
 
 ## What players read in /guide
@@ -3018,6 +3399,51 @@ Only with Endless Leveling: community goals for dungeons, wave gates and raids a
 | For how long (minutes) | 0: the event's own length | 0 to 10080 |
 
 
+# Economies for server owners
+
+Which economy the Tempest plugins pay into: Tempest Economy, or one you already run through VaultUnlocked (GlymeraMerchant, Ecotale and others).
+
+Every Tempest plugin pays and charges through Tempest Core, never through an economy directly. Core uses the first of
+these that runs:
+
+| Order | Economy | What you need |
+|---|---|---|
+| 1 | **Tempest Economy** (Coins) | Its jar in `mods`. Wallets, coin items, banks (`/bank`), ATMs, daily rewards, mob and ore gold |
+| 2 | **Any economy through VaultUnlocked** | [VaultUnlocked](https://github.com/TheNewEconomy/VaultUnlocked-Hytale) in `mods`, next to an economy mod that registers with it |
+| none | No economy | The plugins run; prices, paid rewards, taxes and upkeep simply wait |
+
+`/tempest` → General shows which one is in use ("Coins", "VaultUnlocked: GlymeraMerchant"...).
+
+## Using the economy you already have
+
+Install **VaultUnlocked** and your economy mod, and leave Tempest Economy (Coins) out: with Coins installed, Coins is
+the economy (and it registers itself with VaultUnlocked for other mods).
+
+| Economy mod | Works | Notes |
+|---|---|---|
+| **GlymeraMerchant** | Yes, tested in game | Registers with VaultUnlocked by itself. Jobs pay, shop prices, crate keys, quest rewards, claim prices and party taxes all use its gold |
+| **Ecotale** | Yes | Through VaultUnlocked |
+| Any other VaultUnlocked economy | Yes | It must register an economy with VaultUnlocked |
+
+**What changes without Tempest Economy:** the money counter on the board, coin items, `/bank`, ATMs, daily rewards
+and mob and ore gold are part of Tempest Economy, so they are not there; your economy mod shows its own balance. A
+Tempest Claims party keeps its money inside Claims instead of a `/bank` account.
+
+**Amounts:** Tempest works in whole coins. An economy with decimals is asked for whole amounts; what it reports is
+rounded down.
+
+## For economy mod authors
+
+Register your economy with VaultUnlocked (`Economy` from the Vault2 API) and every Tempest plugin uses it, with no
+work on either side. If you would rather link directly, Tempest Core takes one economy:
+
+```java
+Economies.register(myEconomy);     // an implementation of com.atomictempest.core.economy.Economy
+```
+
+It is preferred over VaultUnlocked; call `Economies.unregister` when your plugin stops. See [Money](money.html).
+
+
 # Quick start
 
 From an empty plugin to one that pays players and reads their level, in five steps.
@@ -3343,7 +3769,9 @@ code in a class of its own.
 | 19 | `Skills` (MMO Skill Tree) and its moments as `PlayerActions`; MMO Skill Tree as a leveling mod next to Endless Leveling; `Registrations.endlessTab` |
 | 20 | `Setting.info` (a (?) explanation beside a setting) and `Setting.permission` (a setting only players with that permission may change) |
 | 21 | RPG Leveling found by `Levels`; `Leveling.classTier`, `Levels.classTier`; several mods may `Levels.register`, each a choice in the admin's "Leveling mod"; `Perks.Bonus.LEVELING_XP` |
-| 22 | Show-when rules on settings (`shownWhen`, `shownWhenOn`, `shownWhenAboveZero`, `shownWhenChosen`), followed live in the menu; `Levels.has`, `Leveling.has`. Comes with Core 1.6.0, the next release |
+| 22 | Show-when rules on settings (`shownWhen`, `shownWhenOn`, `shownWhenAboveZero`, `shownWhenChosen`), followed live in the menu; `Levels.has`, `Leveling.has` |
+| 23 | `Hub`: the Tempest hub (`/tempest hub`); plugins add their row and signs with `Registrations.hubArea` and `hubPage`. Comes with the next Core release |
+| 24 | `Claims`: land claims for every plugin (who owns a place, what a player may do there), answered by Tempest Claims or read from Simple Claims; `Registrations.claimsProvider` and `publicBlocks`. Comes with the next Core release |
 
 
 # Money
@@ -3381,7 +3809,18 @@ coins.setBalance(uuid, 1000);                        // "Set by an admin" in the
 coins.transfer(from, to, 50, "Trade");               // "Paid: Trade" / "Received: Trade"
 coins.paidAsCoins(uuid, 250, "Slot machine win");    // VERSION 4: you paid coin items instead of the wallet
 List<ItemStack> items = CoinStacks.of(1250);         // coin items worth an amount, most valuable first
+
+// VERSION 5: shared banks (/bank) for other plugins
+CoinsAPI.BankView bank = coins.bank("Harbour");       // by name, or coins.bank(id); null when there is none
+coins.bankCanUse(bank.id(), player);                 // its owner or a member
+coins.bankCanWithdraw(bank.id(), player);            // its owner, or a member the owner allows
+coins.bankDeposit(bank.id(), 120, "Taxes");          // coins your plugin already holds go in
+coins.bankWithdraw(bank.id(), 40, "Upkeep");         // coins come out for your plugin
 ```
+
+The bank's history shows your reason. Tempest Claims keeps a party's money in a bank this way, so it earns the
+bank's savings interest. Check `CoinsAPI.VERSION >= 5` at compile time and catch `LinkageError` around these calls
+when your plugin may meet an older Coins.
 
 When your plugin pays out coin items instead of money (dropped, put in a tray), call `paidAsCoins` with the reason you
 would give a wallet change: the balance does not change, but the economy screen (`/eco`) and the leaderboards count
@@ -3482,6 +3921,8 @@ PlayerActions.listen((player, action, amount) -> {
 | `projects_coins` | Projects | Coins given to a town project | The coins |
 | `trade_done` | Trade | A finished trade that moved something (to both sides) | A number that stands for the other player, the same every time |
 | `town_mayor` | Town | Elected mayor (not set by an admin) | 1 |
+| `claims_claim` | Claims | A chunk claimed for the player's party | A number that stands for the chunk, the same every time |
+| `claims_party` | Claims | Founded or joined a party | 1 |
 | `mmo_skill_level:<id> <name>` (`Skills.SKILL_LEVEL`, API 19) | Core, with MMO Skill Tree | A skill's level went up | The new level |
 | `mmo_skill_xp:<id> <name>` (`Skills.SKILL_XP`, API 19) | Core, with MMO Skill Tree | Skill XP from play | The XP |
 | `mmo_achievement:<id>` (`Skills.ACHIEVEMENT`, API 19) | Core, with MMO Skill Tree | An achievement unlocked | 1 |
@@ -3837,9 +4278,47 @@ whoever has it. Cap what you pay players with it, so someone with a discount can
 Check `CoreAPI.runningVersion() >= 10` before using it.
 
 
-# Map, town and demand
+# Land claims
 
-Places on the world map, features the town unlocks and items the server wants.
+Who owns a place and what a player may do there, from Tempest Claims or Simple Claims.
+
+## Land claims: `Claims` (Core, API version 24)
+
+One question for every plugin: *who owns this place, and may this player do this here?* Tempest Claims answers when it
+runs; else Simple Claims is read through a read-only link (it switches itself off, with a Doctor note, if that mod
+changes); else nobody owns anything and everything is allowed. No plugin talks to a claims mod directly.
+
+```java
+if (!Claims.may(player, world, x, y, z, Claims.Action.BUILD)) { ... }   // true without a claims plugin
+Claims.Owner owner = Claims.ownerAt(world, x, y, z);                    // null in the wilderness
+boolean theirs = Claims.isMemberAt(player, world, x, y, z);            // owner or member of the party there
+Claims.Owner party = Claims.ownerOf(player);                            // the player's party, or null
+int chunks = Claims.chunksOf(player);                                   // how much land that party holds
+```
+
+| | |
+|---|---|
+| `Claims.Action` | `BUILD`, `BREAK`, `USE`, `CONTAINERS`, `DOORS`, `BENCHES`, `SEATS`, `PICKUP`, `DROP`, `PVP`, `ANIMALS`, `ENTER` |
+| `Claims.Owner` | `id` (stays the same), `name`, `color` ("#RRGGBB"), `kind` (`claims` or `simpleclaims`) |
+| `Claims.available()`, `providerId()` | Whether a claims plugin answers, and which |
+| `Claims.chunk(position)`, `chunkKey(x, z)` | A block or position as a chunk (32 blocks; by floor, so -0.5 is chunk -1) |
+| `Claims.may` when the claims plugin fails | `false`: a broken claims plugin never opens anyone's land |
+
+**Your blocks inside claims.** A block of yours that checks for itself who may use it (a stall, a machine) should stay
+usable for visitors on claimed land, but never breakable by them:
+
+```java
+core.publicBlocks(id -> MyBlock.isMine(id));   // Registrations; matched by your own exact test, never by words in a name
+```
+
+Tempest's stalls, ATMs, crate blocks and slot machines do this. **Your own claims plugin** answers for the suite with
+`core.claimsProvider(new Claims.Provider() { ... })`: `ownerAt`, `may`, `isMember`, and optionally `ownerOf` and
+`chunks`. Answer from memory and never throw.
+
+
+# Map, hub, town and demand
+
+Places on the world map, the Tempest hub, features the town unlocks and items the server wants.
 
 ## Places on the world map: `MapPlaces` (API version 7)
 
@@ -3865,6 +4344,25 @@ MapPlaces.refresh();   // after a change that should show at once
 are kept under it. The second argument of `Kind` is what admins read in `/tempest`; the third is what players read.
 Icons are files in `Common/UI/WorldMap/MapMarkers`, so an asset pack can add its own: `MapPlaces.ICONS` lists what every
 server has. Paint them white with a dark edge and the admin's colour tints them.
+
+
+## The Tempest hub: `Hub` (API version 23)
+
+`/tempest hub place` builds a spawn area with a row for every plugin's blocks and a sign for every page; `remove` puts
+the ground back. Add your plugin's row and pages in `setup()` (guard it: `CoreAPI.runningVersion() >= 23`):
+
+```java
+core.hubArea(new Hub.Area("dragons", "Dragons", 50, () -> List.of(
+        new Hub.Block("Dragon_Altar", "Altar", new Hub.Placed() {
+            public void placed(String world, Vector3i pos) { altars.add(world, pos); }    // as if a player placed it
+            public void removed(String world, Vector3i pos) { altars.remove(world, pos); }
+        }))));
+core.hubPage(new Hub.Page("Dragons", "dragons", 50));   // a sign that runs /dragons for whoever clicks it
+```
+
+Rows are built from the lowest order (Shop 10, Slots 20, ATMs 30, Crates 40). The blocks are asked for when the hub is
+built. `removed` gets the position of each of your blocks, so find yours by position. Names and signs need Tempest
+Holograms; without it the blocks work and the pages open with their commands.
 
 
 ## Features the town unlocks: `Unlocks` (API version 8)

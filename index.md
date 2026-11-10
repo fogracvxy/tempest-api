@@ -24,9 +24,14 @@ package.
 | Pass | `AtomicTempest:Pass` | `com.atomictempest.pass.api.PassAPI` |
 | Jobs | `AtomicTempest:Jobs` | `com.atomictempest.jobs.api.JobsAPI` |
 | Trade | `AtomicTempest:Trade` | no API of its own: the `trade_done` action |
+| Claims | `AtomicTempest:Claims` | no API of its own: it answers Core's `Claims` (below) for every plugin, the `claims_claim` and `claims_party` actions, and the `claims_party`, `claims_chunks`, `claims_limit`, `claims_bank` and `claims_here` placeholders |
 
 With **Endless Leveling** or **MMO Skill Tree** installed, Core's `Levels` and `Skills` give every plugin player
 levels, skills and what happens in them, without depending on either mod.
+
+The economy can be **Tempest Economy (Coins)** or any economy registered with **VaultUnlocked** (GlymeraMerchant,
+Ecotale...): Core's `Economies` hides which. Land claims come from **Tempest Claims** or, read-only, **Simple Claims**:
+Core's `Claims` hides which.
 
 Every API class has a version constant that goes up when something is added. Everything in these APIs is safe to call
 from any thread unless it says otherwise.

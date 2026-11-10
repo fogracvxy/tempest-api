@@ -31,4 +31,6 @@ code in a class of its own.
 | 19 | `Skills` (MMO Skill Tree) and its moments as `PlayerActions`; MMO Skill Tree as a leveling mod next to Endless Leveling; `Registrations.endlessTab` |
 | 20 | `Setting.info` (a (?) explanation beside a setting) and `Setting.permission` (a setting only players with that permission may change) |
 | 21 | RPG Leveling found by `Levels`; `Leveling.classTier`, `Levels.classTier`; several mods may `Levels.register`, each a choice in the admin's "Leveling mod"; `Perks.Bonus.LEVELING_XP` |
-| 22 | Show-when rules on settings (`shownWhen`, `shownWhenOn`, `shownWhenAboveZero`, `shownWhenChosen`), followed live in the menu; `Levels.has`, `Leveling.has`. Comes with Core 1.6.0, the next release |
+| 22 | Show-when rules on settings (`shownWhen`, `shownWhenOn`, `shownWhenAboveZero`, `shownWhenChosen`), followed live in the menu; `Levels.has`, `Leveling.has` |
+| 23 | `Hub`: the Tempest hub (`/tempest hub`); plugins add their row and signs with `Registrations.hubArea` and `hubPage`. Comes with the next Core release |
+| 24 | `Claims`: land claims for every plugin (who owns a place, what a player may do there), answered by Tempest Claims or read from Simple Claims; `Registrations.claimsProvider` and `publicBlocks`. Comes with the next Core release |

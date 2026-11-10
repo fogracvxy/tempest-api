@@ -21,6 +21,13 @@ Every command of the Tempest plugins, with the permission it needs. "Everyone" w
 | `/serverinfo` (/rules, /info) | Everyone | The server's rules and info |
 | `/tempest` (/casino) | Everyone | Tempest: the settings menu for admins, the help screen for players |
 | `/tempest doctor` | `tempest.admin` | Finds ways players could make money from nothing in the settings (admins) |
+| `/tempest hub` | `tempest.admin` | The Tempest hub: every plugin in one place, and protection for your spawn |
+| `/tempest hub corner` | `tempest.admin` | Mark a corner of an area to protect |
+| `/tempest hub place` | `tempest.admin` | Build the Tempest hub in front of you |
+| `/tempest hub protect` | `tempest.admin` | Turn the hub's protection on or off |
+| `/tempest hub protect-area` | `tempest.admin` | Protect the area between your two corners |
+| `/tempest hub remove` | `tempest.admin` | Remove the hub and put the ground back |
+| `/tempest hub unprotect-area` | `tempest.admin` | Stop protecting an area |
 | `/tempest info` | `tempest.admin` | Tempest plugins: versions, editions and the economy (admins) |
 | `/tempest log` | `tempest.admin` | Who changed what: the newest lines of the admin log (admins) |
 | `/tempest report` | `tempest.admin` | Writes a support report to paste when asking for help (admins) |
@@ -155,6 +162,49 @@ Every command of the Tempest plugins, with the permission it needs. "Everyone" w
 | Command | Who can use it | What it does |
 |---|---|---|
 | `/trade` | Everyone | Trade with a player: /trade <player>, or accept, deny, toggle, open |
+
+## Claims
+
+| Command | Who can use it | What it does |
+|---|---|---|
+| `/claims` | Everyone | Your party and its land |
+| `/claims admin` | `tempest.admin.claims` | For admins: give chunks, disband, bypass |
+| `/claims ally` | Everyone | Trust another party on your land |
+| `/claims auto` | Everyone | Claim while you walk, on or off |
+| `/claims bank` | Everyone | Keep the party's money in one of your /bank accounts |
+| `/claims buy` | Everyone | Buy one more chunk for your limit |
+| `/claims cancel` | Everyone | Stop the claim waiting for /claims confirm |
+| `/claims claim` | Everyone | Claim the chunk you stand in |
+| `/claims claimat` | Everyone | Claim a chunk by its numbers (the map uses this) |
+| `/claims color` | Everyone | The colour of your party: /claims color #4FC3F7 |
+| `/claims confirm` | Everyone | Claim the chunk /claims claim showed you |
+| `/claims create` | Everyone | Found a party |
+| `/claims demote` | Everyone | Make an assistant a member again |
+| `/claims deposit` | Everyone | Put money into the party bank |
+| `/claims disband` | Everyone | End your party and free its land |
+| `/claims forgive` | Everyone | Forgive a member's tax debt (owner or assistant) |
+| `/claims info` | Everyone | Your party and its land in chat |
+| `/claims invite` | Everyone | Invite a player to your party |
+| `/claims join` | Everyone | Join a party that invited you or is open |
+| `/claims kick` | Everyone | Remove a member from your party |
+| `/claims leave` | Everyone | Leave your party |
+| `/claims list` | Everyone | The parties with the most land |
+| `/claims map` | Everyone | A map of the claims around you |
+| `/claims open` | Everyone | Let anyone join your party, on or off |
+| `/claims paytax` | Everyone | Pay what you owe your party in taxes |
+| `/claims promote` | Everyone | Make a member an assistant |
+| `/claims rule` | Everyone | Change a rule: /claims rule visitor doors on |
+| `/claims rules` | Everyone | Who may do what on your land |
+| `/claims select` | Everyone | Pick a chunk to claim (the map uses this) |
+| `/claims show` | Everyone | Outline the claimed land around you |
+| `/claims tax` | Everyone | The tax each member pays the party each time (0 = none) |
+| `/claims trust` | Everyone | Trust one player on your land |
+| `/claims unally` | Everyone | Stop trusting a party |
+| `/claims unclaim` | Everyone | Give back the chunk you stand in |
+| `/claims unlinkbank` | Everyone | Keep the party's money in Claims again |
+| `/claims untrust` | Everyone | Stop trusting a player |
+| `/claims withdraw` | Everyone | Take money out of the party bank (owner) |
+| `/claims worktax` | Everyone | The party's share of members' job pay, in percent |
 
 ## Slot machines
 

@@ -22,10 +22,12 @@
 - [Town](guide-town.md): Features the town unlocks, and the mayor.
 - [Jobs](guide-jobs.md): Paid work with job levels.
 - [Trade](guide-trade.md): Safe trades between players.
+- [Claims](guide-claims.md): Land claims for parties: protection, the claim page and map, taxes and upkeep.
 - [Slot machines](guide-slots.md)
 - [Lottery](guide-lottery.md)
 - [Coinflip](guide-coinflip.md)
 - [Leveling mods for server owners](leveling-mods.md): What the Tempest plugins do with Endless Leveling and MMO Skill Tree, alone or together, and where it is set.
+- [Economies for server owners](economies.md): Which economy the Tempest plugins pay into: Tempest Economy, or one you already run through VaultUnlocked (GlymeraMerchant, Ecotale and others).
 
 ## Developers: start here
 - [Quick start](quick-start.md): From an empty plugin to one that pays players and reads their level, in five steps.
@@ -39,7 +41,8 @@
 - [Settings and menus](settings.md): A /tempest settings tab for your plugin, menu themes, editions, languages and help pages.
 - [Boards, HUD and placeholders](hud.md): Leaderboards, the money counter and progress bars, placeholders and announcements.
 - [Rewards, mail and boosts](rewards.md): Item and command rewards, the mailbox, boosts for a while and rank perks.
-- [Map, town and demand](world.md): Places on the world map, features the town unlocks and items the server wants.
+- [Land claims](claims.md): Who owns a place and what a player may do there, from Tempest Claims or Simple Claims.
+- [Map, hub, town and demand](world.md): Places on the world map, the Tempest hub, features the town unlocks and items the server wants.
 - [Safety and helpers](safety.md): Admin logs, rate limits, play limits, AFK checks, the doctor and crash-safe files.
 
 ## Leveling and skills API

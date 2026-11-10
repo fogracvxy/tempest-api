@@ -66,6 +66,13 @@ loadScripts(document, 'script');</script>
 <li><a href="#setBalance(java.util.UUID,long)" tabindex="0">setBalance(UUID, long)</a></li>
 <li><a href="#transfer(java.util.UUID,java.util.UUID,long,java.lang.String)" tabindex="0">transfer(UUID, UUID, long, String)</a></li>
 <li><a href="#paidAsCoins(java.util.UUID,long,java.lang.String)" tabindex="0">paidAsCoins(UUID, long, String)</a></li>
+<li><a href="#bank(java.lang.String)" tabindex="0">bank(String)</a></li>
+<li><a href="#bank(java.util.UUID)" tabindex="0">bank(UUID)</a></li>
+<li><a href="#bankCanUse(java.util.UUID,java.util.UUID)" tabindex="0">bankCanUse(UUID, UUID)</a></li>
+<li><a href="#bankCanWithdraw(java.util.UUID,java.util.UUID)" tabindex="0">bankCanWithdraw(UUID, UUID)</a></li>
+<li><a href="#bankDeposit(java.util.UUID,long,java.lang.String)" tabindex="0">bankDeposit(UUID, long, String)</a></li>
+<li><a href="#bankWithdraw(java.util.UUID,long,java.lang.String)" tabindex="0">bankWithdraw(UUID, long, String)</a></li>
+<li><a href="#bankNote(java.util.UUID,java.lang.String,com.hypixel.hytale.server.core.Message)" tabindex="0">bankNote(UUID, String, Message)</a></li>
 <li><a href="#get()" tabindex="0">get()</a></li>
 </ol>
 </li>
@@ -112,9 +119,14 @@ history with the reason you give. Everything here is safe to call from any threa
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Interface</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code>static final class&nbsp;</code></div>
-<div class="col-second even-row-color"><code><a href="CoinsAPI.Holder.html" class="type-name-link" title="class in com.atomictempest.coins.api">CoinsAPI.Holder</a></code></div>
+<div class="col-first even-row-color"><code>static final record&nbsp;</code></div>
+<div class="col-second even-row-color"><code><a href="CoinsAPI.BankView.html" class="type-name-link" title="class in com.atomictempest.coins.api">CoinsAPI.BankView</a></code></div>
 <div class="col-last even-row-color">
+<div class="block">A shared bank (/bank) as other plugins see it: a copy, read at the moment it was asked for.</div>
+</div>
+<div class="col-first odd-row-color"><code>static final class&nbsp;</code></div>
+<div class="col-second odd-row-color"><code><a href="CoinsAPI.Holder.html" class="type-name-link" title="class in com.atomictempest.coins.api">CoinsAPI.Holder</a></code></div>
+<div class="col-last odd-row-color">
 <div class="block">Set by Coins when it starts and cleared when it stops; not for other plugins.</div>
 </div>
 </div>
@@ -148,31 +160,76 @@ history with the reason you give. Everything here is safe to call from any threa
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab1"><code>static <a href="CoinsAPI.html" title="interface in com.atomictempest.coins.api">CoinsAPI</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1"><code><a href="#get()" class="member-name-link">get</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1">
-<div class="block">Coins while it is running, else null.</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="CoinsAPI.BankView.html" title="class in com.atomictempest.coins.api">CoinsAPI.BankView</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#bank(java.lang.String)" class="member-name-link">bank</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">A bank by its name (any case), or null.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#paidAsCoins(java.util.UUID,long,java.lang.String)" class="member-name-link">paidAsCoins</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;player,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default <a href="CoinsAPI.BankView.html" title="class in com.atomictempest.coins.api">CoinsAPI.BankView</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#bank(java.util.UUID)" class="member-name-link">bank</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;id)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">A bank by its id, or null when it was closed.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#bankCanUse(java.util.UUID,java.util.UUID)" class="member-name-link">bankCanUse</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;bankId,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;player)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">Whether the player owns the bank or is one of its members.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#bankCanWithdraw(java.util.UUID,java.util.UUID)" class="member-name-link">bankCanWithdraw</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;bankId,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;player)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">Whether the player may take coins out of the bank (its owner, or a member the owner allows).</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#bankDeposit(java.util.UUID,long,java.lang.String)" class="member-name-link">bankDeposit</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;bankId,
  long&nbsp;amount,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;reason)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">Puts coins your plugin already holds into a bank (taxes it collected, money moved from your own account).</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#bankNote(java.util.UUID,java.lang.String,com.hypixel.hytale.server.core.Message)" class="member-name-link">bankNote</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;bankId,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;plugin,
+ com.hypixel.hytale.server.core.Message&nbsp;note)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">A short note your plugin shows on a bank's page and card in /bank, such as "Treasury of Red Dragons (Claims)",
+so its members see what the bank is linked to.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#bankWithdraw(java.util.UUID,long,java.lang.String)" class="member-name-link">bankWithdraw</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;bankId,
+ long&nbsp;amount,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;reason)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
+<div class="block">Takes coins out of a bank for your plugin (a fee, an upkeep): they leave the bank, and your plugin decides
+where they go.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1"><code>static <a href="CoinsAPI.html" title="interface in com.atomictempest.coins.api">CoinsAPI</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1"><code><a href="#get()" class="member-name-link">get</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1">
+<div class="block">Coins while it is running, else null.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#paidAsCoins(java.util.UUID,long,java.lang.String)" class="member-name-link">paidAsCoins</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;player,
+ long&nbsp;amount,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;reason)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Records coins your plugin paid out as coin items instead of into the wallet (a machine's tray, a drop), so
 the economy screen and the leaderboards count them.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#setBalance(java.util.UUID,long)" class="member-name-link">setBalance</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;player,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#setBalance(java.util.UUID,long)" class="member-name-link">setBalance</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;player,
  long&nbsp;amount)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Sets a balance outright (never below 0).</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#transfer(java.util.UUID,java.util.UUID,long,java.lang.String)" class="member-name-link">transfer</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;from,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#transfer(java.util.UUID,java.util.UUID,long,java.lang.String)" class="member-name-link">transfer</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;from,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;to,
  long&nbsp;amount,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;reason)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Moves money from one player to another.</div>
 </div>
 </div>
@@ -256,6 +313,89 @@ the economy screen and the leaderboards count them. The balance does not change.
 <dt>Parameters:</dt>
 <dd><code>reason</code> - as for a wallet change, such as "Slot machine win"; it decides the kind the economy screen shows</dd>
 </dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="bank(java.lang.String)">
+<h3>bank</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="CoinsAPI.BankView.html" title="class in com.atomictempest.coins.api">CoinsAPI.BankView</a></span>&nbsp;<span class="element-name">bank</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</span></div>
+<div class="block">A bank by its name (any case), or null. Since VERSION 5.</div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="bank(java.util.UUID)">
+<h3>bank</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type"><a href="CoinsAPI.BankView.html" title="class in com.atomictempest.coins.api">CoinsAPI.BankView</a></span>&nbsp;<span class="element-name">bank</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;id)</span></div>
+<div class="block">A bank by its id, or null when it was closed. Since VERSION 5.</div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="bankCanUse(java.util.UUID,java.util.UUID)">
+<h3>bankCanUse</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">bankCanUse</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;bankId,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;player)</span></div>
+<div class="block">Whether the player owns the bank or is one of its members. Since VERSION 5.</div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="bankCanWithdraw(java.util.UUID,java.util.UUID)">
+<h3>bankCanWithdraw</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">bankCanWithdraw</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;bankId,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;player)</span></div>
+<div class="block">Whether the player may take coins out of the bank (its owner, or a member the owner allows). Since VERSION 5.</div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="bankDeposit(java.util.UUID,long,java.lang.String)">
+<h3>bankDeposit</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">bankDeposit</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;bankId,
+ long&nbsp;amount,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;reason)</span></div>
+<div class="block">Puts coins your plugin already holds into a bank (taxes it collected, money moved from your own account). The
+bank's history shows the reason. Since VERSION 5.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>false, adding nothing, when the bank is closed or full, or the amount is below 0</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="bankWithdraw(java.util.UUID,long,java.lang.String)">
+<h3>bankWithdraw</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">bankWithdraw</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;bankId,
+ long&nbsp;amount,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;reason)</span></div>
+<div class="block">Takes coins out of a bank for your plugin (a fee, an upkeep): they leave the bank, and your plugin decides
+where they go. Since VERSION 5.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>false, taking nothing, when the bank is closed or has too little</dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="bankNote(java.util.UUID,java.lang.String,com.hypixel.hytale.server.core.Message)">
+<h3>bankNote</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">bankNote</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;bankId,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;plugin,
+ com.hypixel.hytale.server.core.Message&nbsp;note)</span></div>
+<div class="block">A short note your plugin shows on a bank's page and card in /bank, such as "Treasury of Red Dragons (Claims)",
+so its members see what the bank is linked to. One note per plugin and bank; null takes it away. Kept until the
+server stops: set it again when your plugin starts. Since VERSION 5.</div>
 </div>
 </section>
 </li>

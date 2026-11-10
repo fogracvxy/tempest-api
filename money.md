@@ -33,7 +33,18 @@ coins.setBalance(uuid, 1000);                        // "Set by an admin" in the
 coins.transfer(from, to, 50, "Trade");               // "Paid: Trade" / "Received: Trade"
 coins.paidAsCoins(uuid, 250, "Slot machine win");    // VERSION 4: you paid coin items instead of the wallet
 List<ItemStack> items = CoinStacks.of(1250);         // coin items worth an amount, most valuable first
+
+// VERSION 5: shared banks (/bank) for other plugins
+CoinsAPI.BankView bank = coins.bank("Harbour");       // by name, or coins.bank(id); null when there is none
+coins.bankCanUse(bank.id(), player);                 // its owner or a member
+coins.bankCanWithdraw(bank.id(), player);            // its owner, or a member the owner allows
+coins.bankDeposit(bank.id(), 120, "Taxes");          // coins your plugin already holds go in
+coins.bankWithdraw(bank.id(), 40, "Upkeep");         // coins come out for your plugin
 ```
+
+The bank's history shows your reason. Tempest Claims keeps a party's money in a bank this way, so it earns the
+bank's savings interest. Check `CoinsAPI.VERSION >= 5` at compile time and catch `LinkageError` around these calls
+when your plugin may meet an older Coins.
 
 When your plugin pays out coin items instead of money (dropped, put in a tray), call `paidAsCoins` with the reason you
 would give a wallet change: the balance does not change, but the economy screen (`/eco`) and the leaderboards count

@@ -72,11 +72,15 @@ loadScripts(document, 'script');</script>
 <li><a href="#hudLine(java.lang.String,java.util.function.Function)" tabindex="0">hudLine(String, Function)</a></li>
 <li><a href="#placeholder(java.lang.String,java.util.function.Function)" tabindex="0">placeholder(String, Function)</a></li>
 <li><a href="#boost(java.lang.String,com.atomictempest.core.Boosts.Source)" tabindex="0">boost(String, Boosts.Source)</a></li>
+<li><a href="#hubArea(com.atomictempest.core.Hub.Area)" tabindex="0">hubArea(Hub.Area)</a></li>
+<li><a href="#hubPage(com.atomictempest.core.Hub.Page)" tabindex="0">hubPage(Hub.Page)</a></li>
 <li><a href="#unlockFeature(com.atomictempest.core.Unlocks.Feature)" tabindex="0">unlockFeature(Unlocks.Feature)</a></li>
 <li><a href="#unlockProvider(java.lang.String,com.atomictempest.core.Unlocks.Provider)" tabindex="0">unlockProvider(String, Unlocks.Provider)</a></li>
 <li><a href="#demandSource(java.lang.String,com.atomictempest.core.Demand.Source)" tabindex="0">demandSource(String, Demand.Source)</a></li>
 <li><a href="#onUnlock(com.atomictempest.core.Unlocks.Listener)" tabindex="0">onUnlock(Unlocks.Listener)</a></li>
 <li><a href="#mapKind(com.atomictempest.core.MapPlaces.Kind)" tabindex="0">mapKind(MapPlaces.Kind)</a></li>
+<li><a href="#claimsProvider(com.atomictempest.core.Claims.Provider)" tabindex="0">claimsProvider(Claims.Provider)</a></li>
+<li><a href="#publicBlocks(java.util.function.Predicate)" tabindex="0">publicBlocks(Predicate)</a></li>
 <li><a href="#doctor(com.atomictempest.core.Doctor.Check)" tabindex="0">doctor(Doctor.Check)</a></li>
 <li><a href="#leaderboard(com.atomictempest.core.Leaderboards.Board)" tabindex="0">leaderboard(Leaderboards.Board)</a></li>
 <li><a href="#onWallet(com.atomictempest.core.WalletEvents.Listener)" tabindex="0">onWallet(WalletEvents.Listener)</a></li>
@@ -175,121 +179,141 @@ are still undone.</div>
 <div class="block">A source of boosts (<a href="Boosts.html" title="class in com.atomictempest.core"><code>Boosts</code></a>), unregistered by close().</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#close()" class="member-name-link">close</a>()</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#claimsProvider(com.atomictempest.core.Claims.Provider)" class="member-name-link">claimsProvider</a><wbr>(<a href="Claims.Provider.html" title="interface in com.atomictempest.core">Claims.Provider</a>&nbsp;provider)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">A claims plugin that answers <a href="Claims.html" title="class in com.atomictempest.core"><code>Claims</code></a> (API 24), removed by close().</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#close()" class="member-name-link">close</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Undoes everything, newest first.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#demandSource(java.lang.String,com.atomictempest.core.Demand.Source)" class="member-name-link">demandSource</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#demandSource(java.lang.String,com.atomictempest.core.Demand.Source)" class="member-name-link">demandSource</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id,
  <a href="Demand.Source.html" title="interface in com.atomictempest.core">Demand.Source</a>&nbsp;source)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Items this plugin wants now (<a href="Demand.html" title="class in com.atomictempest.core"><code>Demand</code></a>, API version 17), removed by close().</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#doctor(com.atomictempest.core.Doctor.Check)" class="member-name-link">doctor</a><wbr>(<a href="Doctor.Check.html" title="interface in com.atomictempest.core">Doctor.Check</a>&nbsp;check)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#doctor(com.atomictempest.core.Doctor.Check)" class="member-name-link">doctor</a><wbr>(<a href="Doctor.Check.html" title="interface in com.atomictempest.core">Doctor.Check</a>&nbsp;check)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Adds a check to the Tempest doctor (/tempest doctor, API 13).</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#edition(boolean,java.util.List,java.lang.String)" class="member-name-link">edition</a><wbr>(boolean&nbsp;pro,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#edition(boolean,java.util.List,java.lang.String)" class="member-name-link">edition</a><wbr>(boolean&nbsp;pro,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;proAdds,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;licensedTo)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">This plugin's edition, for plugins with a free and a Pro jar (see <a href="Editions.html" title="class in com.atomictempest.core"><code>Editions</code></a>).</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#endlessTab(com.atomictempest.core.settings.SettingsTab)" class="member-name-link">endlessTab</a><wbr>(<a href="settings/SettingsTab.html" title="class in com.atomictempest.core.settings">SettingsTab</a>&nbsp;tab)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#endlessTab(com.atomictempest.core.settings.SettingsTab)" class="member-name-link">endlessTab</a><wbr>(<a href="settings/SettingsTab.html" title="class in com.atomictempest.core.settings">SettingsTab</a>&nbsp;tab)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">A /tempest tab shown only while Endless Leveling runs: options for what only it has (prestige, dungeons, wave
 gates, raids, mob levels).</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#every(long,java.util.concurrent.TimeUnit,java.lang.Runnable)" class="member-name-link">every</a><wbr>(long&nbsp;period,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#every(long,java.util.concurrent.TimeUnit,java.lang.Runnable)" class="member-name-link">every</a><wbr>(long&nbsp;period,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/TimeUnit.html" title="class or interface in java.util.concurrent" class="external-link">TimeUnit</a>&nbsp;unit,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Runnable.html" title="class or interface in java.lang" class="external-link">Runnable</a>&nbsp;task)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Runs the task every period, the first time after one period, on this plugin's own timer thread (a daemon, so it
 never keeps the server from stopping).</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#helpCommand(java.lang.String,java.lang.String,com.hypixel.hytale.server.core.Message)" class="member-name-link">helpCommand</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;mod,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#helpCommand(java.lang.String,java.lang.String,com.hypixel.hytale.server.core.Message)" class="member-name-link">helpCommand</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;mod,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;usage,
  com.hypixel.hytale.server.core.Message&nbsp;whatItDoes)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">A line on the help screen's command page, under the mod's name (the translation key of its name).</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#helpTopic(com.atomictempest.core.help.HelpTopic)" class="member-name-link">helpTopic</a><wbr>(<a href="help/HelpTopic.html" title="class in com.atomictempest.core.help">HelpTopic</a>&nbsp;topic)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#helpTopic(com.atomictempest.core.help.HelpTopic)" class="member-name-link">helpTopic</a><wbr>(<a href="help/HelpTopic.html" title="class in com.atomictempest.core.help">HelpTopic</a>&nbsp;topic)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">A page of the help screen (/guide).</div>
 </div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hubArea(com.atomictempest.core.Hub.Area)" class="member-name-link">hubArea</a><wbr>(<a href="Hub.Area.html" title="class in com.atomictempest.core">Hub.Area</a>&nbsp;area)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">A plugin's row in the Tempest hub (<a href="Hub.html" title="class in com.atomictempest.core"><code>Hub</code></a>), removed by close().</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hudLine(java.lang.String,java.util.function.Function)" class="member-name-link">hudLine</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;key,
- <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>, com.hypixel.hytale.server.core.Message&gt;&nbsp;line)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hubPage(com.atomictempest.core.Hub.Page)" class="member-name-link">hubPage</a><wbr>(<a href="Hub.Page.html" title="class in com.atomictempest.core">Hub.Page</a>&nbsp;page)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">A page sign in the Tempest hub (<a href="Hub.html" title="class in com.atomictempest.core"><code>Hub</code></a>), removed by close().</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hudLine(java.lang.String,java.util.function.Function)" class="member-name-link">hudLine</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;key,
+ <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>, com.hypixel.hytale.server.core.Message&gt;&nbsp;line)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">A line under the money counter.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#later(long,java.util.concurrent.TimeUnit,java.lang.Runnable)" class="member-name-link">later</a><wbr>(long&nbsp;delay,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#later(long,java.util.concurrent.TimeUnit,java.lang.Runnable)" class="member-name-link">later</a><wbr>(long&nbsp;delay,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/TimeUnit.html" title="class or interface in java.util.concurrent" class="external-link">TimeUnit</a>&nbsp;unit,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Runnable.html" title="class or interface in java.lang" class="external-link">Runnable</a>&nbsp;task)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Runs the task once after the delay, on this plugin's timer thread.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#leaderboard(com.atomictempest.core.Leaderboards.Board)" class="member-name-link">leaderboard</a><wbr>(<a href="Leaderboards.Board.html" title="class in com.atomictempest.core">Leaderboards.Board</a>&nbsp;board)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#levelingFeature(com.atomictempest.core.Unlocks.Feature)" class="member-name-link">levelingFeature</a><wbr>(<a href="Unlocks.Feature.html" title="class in com.atomictempest.core">Unlocks.Feature</a>&nbsp;feature)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#leaderboard(com.atomictempest.core.Leaderboards.Board)" class="member-name-link">leaderboard</a><wbr>(<a href="Leaderboards.Board.html" title="class in com.atomictempest.core">Leaderboards.Board</a>&nbsp;board)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#levelingFeature(com.atomictempest.core.Unlocks.Feature)" class="member-name-link">levelingFeature</a><wbr>(<a href="Unlocks.Feature.html" title="class in com.atomictempest.core">Unlocks.Feature</a>&nbsp;feature)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">A town unlock feature that means something only with a leveling mod: offered in Tempest Town's editor only while
 Endless Leveling runs.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#levelingTab(com.atomictempest.core.settings.SettingsTab)" class="member-name-link">levelingTab</a><wbr>(<a href="settings/SettingsTab.html" title="class in com.atomictempest.core.settings">SettingsTab</a>&nbsp;tab)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#levelingTab(com.atomictempest.core.settings.SettingsTab)" class="member-name-link">levelingTab</a><wbr>(<a href="settings/SettingsTab.html" title="class in com.atomictempest.core.settings">SettingsTab</a>&nbsp;tab)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">A /tempest tab that is shown only while a leveling mod (Endless Leveling) runs: its options mean nothing without
 one.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#mapKind(com.atomictempest.core.MapPlaces.Kind)" class="member-name-link">mapKind</a><wbr>(<a href="MapPlaces.Kind.html" title="class in com.atomictempest.core">MapPlaces.Kind</a>&nbsp;kind)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#mapKind(com.atomictempest.core.MapPlaces.Kind)" class="member-name-link">mapKind</a><wbr>(<a href="MapPlaces.Kind.html" title="class in com.atomictempest.core">MapPlaces.Kind</a>&nbsp;kind)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">A kind of place on the world map (<a href="MapPlaces.html" title="class in com.atomictempest.core"><code>MapPlaces</code></a>), with its tab in /tempest.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onAction(com.atomictempest.core.PlayerActions.Listener)" class="member-name-link">onAction</a><wbr>(<a href="PlayerActions.Listener.html" title="interface in com.atomictempest.core">PlayerActions.Listener</a>&nbsp;listener)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onAction(com.atomictempest.core.PlayerActions.Listener)" class="member-name-link">onAction</a><wbr>(<a href="PlayerActions.Listener.html" title="interface in com.atomictempest.core">PlayerActions.Listener</a>&nbsp;listener)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Hears what players do in the economy plugins.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onAnnouncement(com.atomictempest.core.Announcements.Listener)" class="member-name-link">onAnnouncement</a><wbr>(<a href="Announcements.Listener.html" title="interface in com.atomictempest.core">Announcements.Listener</a>&nbsp;listener)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onAnnouncement(com.atomictempest.core.Announcements.Listener)" class="member-name-link">onAnnouncement</a><wbr>(<a href="Announcements.Listener.html" title="interface in com.atomictempest.core">Announcements.Listener</a>&nbsp;listener)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Hears notable moments (jackpots, big wins) to pass on outside the game.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onClose(java.lang.Runnable)" class="member-name-link">onClose</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Runnable.html" title="class or interface in java.lang" class="external-link">Runnable</a>&nbsp;action)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onClose(java.lang.Runnable)" class="member-name-link">onClose</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Runnable.html" title="class or interface in java.lang" class="external-link">Runnable</a>&nbsp;action)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Something to do in close(), such as saving.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onUnlock(com.atomictempest.core.Unlocks.Listener)" class="member-name-link">onUnlock</a><wbr>(<a href="Unlocks.Listener.html" title="interface in com.atomictempest.core">Unlocks.Listener</a>&nbsp;listener)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onUnlock(com.atomictempest.core.Unlocks.Listener)" class="member-name-link">onUnlock</a><wbr>(<a href="Unlocks.Listener.html" title="interface in com.atomictempest.core">Unlocks.Listener</a>&nbsp;listener)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Hears features switched on or off (<a href="Unlocks.html" title="class in com.atomictempest.core"><code>Unlocks</code></a>), removed by close().</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onWallet(com.atomictempest.core.WalletEvents.Listener)" class="member-name-link">onWallet</a><wbr>(<a href="WalletEvents.Listener.html" title="interface in com.atomictempest.core">WalletEvents.Listener</a>&nbsp;listener)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onWallet(com.atomictempest.core.WalletEvents.Listener)" class="member-name-link">onWallet</a><wbr>(<a href="WalletEvents.Listener.html" title="interface in com.atomictempest.core">WalletEvents.Listener</a>&nbsp;listener)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Hears about every change to any wallet.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#placeholder(java.lang.String,java.util.function.Function)" class="member-name-link">placeholder</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#placeholder(java.lang.String,java.util.function.Function)" class="member-name-link">placeholder</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/Function.html" title="class or interface in java.util.function" class="external-link">Function</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;value)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">A named value per player, for scoreboards and chat formats.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#plugin()" class="member-name-link">plugin</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#plugin()" class="member-name-link">plugin</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#publicBlocks(java.util.function.Predicate)" class="member-name-link">publicBlocks</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/Predicate.html" title="class or interface in java.util.function" class="external-link">Predicate</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;isBlock)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">This plugin's blocks every visitor may use in any claim (<a href="Claims.html#publicBlocks(java.lang.String,java.util.function.Predicate)"><code>Claims.publicBlocks(String, Predicate)</code></a>, API 24).</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#restrictCraft(java.lang.String,java.util.function.BooleanSupplier)" class="member-name-link">restrictCraft</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;itemId,
  <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/BooleanSupplier.html" title="class or interface in java.util.function" class="external-link">BooleanSupplier</a>&nbsp;allowedForEveryone)</code></div>
@@ -449,6 +473,24 @@ Endless Leveling runs. Since API_VERSION 16.</div>
 </section>
 </li>
 <li>
+<section class="detail" id="hubArea(com.atomictempest.core.Hub.Area)">
+<h3>hubArea</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">hubArea</span><wbr><span class="parameters">(<a href="Hub.Area.html" title="class in com.atomictempest.core">Hub.Area</a>&nbsp;area)</span></div>
+<div class="block">A plugin's row in the Tempest hub (<a href="Hub.html" title="class in com.atomictempest.core"><code>Hub</code></a>), removed by close(). Since API_VERSION 23.</div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="hubPage(com.atomictempest.core.Hub.Page)">
+<h3>hubPage</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">hubPage</span><wbr><span class="parameters">(<a href="Hub.Page.html" title="class in com.atomictempest.core">Hub.Page</a>&nbsp;page)</span></div>
+<div class="block">A page sign in the Tempest hub (<a href="Hub.html" title="class in com.atomictempest.core"><code>Hub</code></a>), removed by close(). Since API_VERSION 23.</div>
+</div>
+</section>
+</li>
+<li>
 <section class="detail" id="unlockFeature(com.atomictempest.core.Unlocks.Feature)">
 <h3>unlockFeature</h3>
 <div class="horizontal-scroll">
@@ -492,6 +534,24 @@ Endless Leveling runs. Since API_VERSION 16.</div>
 <div class="horizontal-scroll">
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">mapKind</span><wbr><span class="parameters">(<a href="MapPlaces.Kind.html" title="class in com.atomictempest.core">MapPlaces.Kind</a>&nbsp;kind)</span></div>
 <div class="block">A kind of place on the world map (<a href="MapPlaces.html" title="class in com.atomictempest.core"><code>MapPlaces</code></a>), with its tab in /tempest.</div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="claimsProvider(com.atomictempest.core.Claims.Provider)">
+<h3>claimsProvider</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">claimsProvider</span><wbr><span class="parameters">(<a href="Claims.Provider.html" title="interface in com.atomictempest.core">Claims.Provider</a>&nbsp;provider)</span></div>
+<div class="block">A claims plugin that answers <a href="Claims.html" title="class in com.atomictempest.core"><code>Claims</code></a> (API 24), removed by close().</div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="publicBlocks(java.util.function.Predicate)">
+<h3>publicBlocks</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">publicBlocks</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/Predicate.html" title="class or interface in java.util.function" class="external-link">Predicate</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;isBlock)</span></div>
+<div class="block">This plugin's blocks every visitor may use in any claim (<a href="Claims.html#publicBlocks(java.lang.String,java.util.function.Predicate)"><code>Claims.publicBlocks(String, Predicate)</code></a>, API 24).</div>
 </div>
 </section>
 </li>

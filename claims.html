@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Land claims · Tempest plugins docs</title>
+<meta name="description" content="Who owns a place and what a player may do there, from Tempest Claims or Simple Claims.">
+<meta name="theme-color" content="#F1C40F">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tempest plugins for Hytale">
+<meta property="og:title" content="Land claims · Tempest plugins docs">
+<meta property="og:description" content="Who owns a place and what a player may do there, from Tempest Claims or Simple Claims.">
+<meta property="og:url" content="https://fogracvxy.github.io/tempest-api/claims.html">
+<meta property="og:image" content="https://fogracvxy.github.io/tempest-api/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="675">
+<meta property="og:image:alt" content="The Tempest plugin suite for Hytale servers">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://fogracvxy.github.io/tempest-api/assets/og-image.jpg">
+<link rel="stylesheet" href="site.css">
+<script src="site.js"></script>
+</head>
+<body>
+<header class="top">
+  <button class="icon-btn menu-btn" id="menu" type="button" aria-label="Menu">&#9776;</button>
+  <a class="brand" href="index.html"><img class="logo" src="assets/icon-192.png" alt="">Tempest Docs</a>
+  <span class="version">Core API 24</span>
+  <div class="search"><input id="q" type="search" placeholder="Search the docs" autocomplete="off" aria-label="Search"><kbd>Ctrl K</kbd><div class="results" id="results"></div></div>
+  <nav class="top-links"><a href="javadoc.html">Javadoc</a><a href="https://discord.gg/Q9PNVCMZXK" target="_blank" rel="noopener">Discord</a><a href="https://www.curseforge.com/hytale/mods/search?search=tempest" target="_blank" rel="noopener">CurseForge</a></nav>
+  <button class="icon-btn" id="theme" type="button" aria-label="Light or dark">&#9680;</button>
+</header>
+<div class="layout">
+  <aside class="side"><h4>Welcome</h4><a href="index.html">Introduction</a><h4>Server guide</h4><a href="server-guide.html"><span class="badge">NEW</span>Server guide</a><a href="guide-commands.html">All commands and permissions</a><a href="guide-core.html">Core</a><a href="guide-economy.html">Economy (Coins)</a><a href="guide-holograms.html">Holograms</a><a href="guide-shop.html">Shop</a><a href="guide-crates.html">Crates</a><a href="guide-quests.html">Quests</a><a href="guide-pass.html">Battle pass</a><a href="guide-events.html">Events</a><a href="guide-contracts.html">Contracts and bounties</a><a href="guide-projects.html">Town projects</a><a href="guide-town.html">Town</a><a href="guide-jobs.html">Jobs</a><a href="guide-trade.html">Trade</a><a href="guide-claims.html">Claims</a><a href="guide-slots.html">Slot machines</a><a href="guide-lottery.html">Lottery</a><a href="guide-coinflip.html">Coinflip</a><a href="leveling-mods.html"><span class="badge">NEW</span>Leveling mods</a><a href="economies.html">Economies</a><h4>Developers: start here</h4><a href="quick-start.html">Quick start</a><a href="link-your-mod.html"><span class="badge">NEW</span>Link your mod to Tempest</a><a href="setup.html">Setting up a plugin</a><a href="versions.html">API versions</a><h4>Core API</h4><a href="money.html">Money</a><a href="actions.html">Player actions</a><a href="settings.html">Settings and menus</a><a href="hud.html">Boards, HUD and placeholders</a><a href="rewards.html">Rewards, mail and boosts</a><a href="claims.html" class="here">Land claims</a><a href="world.html">Map, hub, town and demand</a><a href="safety.html">Safety and helpers</a><h4>Leveling and skills API</h4><a href="levels.html">Player levels</a><a href="skills.html"><span class="badge">NEW</span>Skills (MMO Skill Tree)</a><h4>Plugin APIs</h4><a href="quests.html">Quests</a><a href="crates.html">Crates</a><a href="holograms.html">Holograms</a><a href="coinflip.html">Coinflip</a><a href="jobs.html">Jobs</a><a href="projects.html">Town projects</a><a href="pass.html">Battle pass</a><a href="games.html">Lottery, slots and shop</a><h4>More</h4><a href="integrations.html">Integrations</a><a href="content.html">Content mods (JSON)</a><a href="rules.html">Rules of thumb</a><h4>Reference</h4><a href="javadoc.html">Javadoc</a><a href="changelog.html">Changelog</a></aside>
+  <main>
+    <div class="crumbs">Core API</div>
+    <h1>Land claims</h1>
+    <p class="lead">Who owns a place and what a player may do there, from Tempest Claims or Simple Claims.</p>
+    <article>
+<h2 id="land-claims-claims"><a class="anchor" href="#land-claims-claims" aria-label="Link to this section">#</a>Land claims: <code>Claims</code> <span class="since" title="Core API version 24">API 24+</span></h2>
+<p>One question for every plugin: <em>who owns this place, and may this player do this here?</em> Tempest Claims answers when it runs; else Simple Claims is read through a read-only link (it switches itself off, with a Doctor note, if that mod changes); else nobody owns anything and everything is allowed. No plugin talks to a claims mod directly.</p>
+<div class="code"><div class="code-bar"><span>java</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-java">if (!Claims.may(player, world, x, y, z, Claims.Action.BUILD)) { ... }   // true without a claims plugin
+Claims.Owner owner = Claims.ownerAt(world, x, y, z);                    // null in the wilderness
+boolean theirs = Claims.isMemberAt(player, world, x, y, z);            // owner or member of the party there
+Claims.Owner party = Claims.ownerOf(player);                            // the player's party, or null
+int chunks = Claims.chunksOf(player);                                   // how much land that party holds</code></pre></div>
+<div class="table"><table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><code>Claims.Action</code></td><td><code>BUILD</code>, <code>BREAK</code>, <code>USE</code>, <code>CONTAINERS</code>, <code>DOORS</code>, <code>BENCHES</code>, <code>SEATS</code>, <code>PICKUP</code>, <code>DROP</code>, <code>PVP</code>, <code>ANIMALS</code>, <code>ENTER</code></td></tr><tr><td><code>Claims.Owner</code></td><td><code>id</code> (stays the same), <code>name</code>, <code>color</code> ("#RRGGBB"), <code>kind</code> (<code>claims</code> or <code>simpleclaims</code>)</td></tr><tr><td><code>Claims.available()</code>, <code>providerId()</code></td><td>Whether a claims plugin answers, and which</td></tr><tr><td><code>Claims.chunk(position)</code>, <code>chunkKey(x, z)</code></td><td>A block or position as a chunk (32 blocks; by floor, so -0.5 is chunk -1)</td></tr><tr><td><code>Claims.may</code> when the claims plugin fails</td><td><code>false</code>: a broken claims plugin never opens anyone's land</td></tr></tbody></table></div>
+<p><strong>Your blocks inside claims.</strong> A block of yours that checks for itself who may use it (a stall, a machine) should stay usable for visitors on claimed land, but never breakable by them:</p>
+<div class="code"><div class="code-bar"><span>java</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-java">core.publicBlocks(id -&gt; MyBlock.isMine(id));   // Registrations; matched by your own exact test, never by words in a name</code></pre></div>
+<p>Tempest's stalls, ATMs, crate blocks and slot machines do this. <strong>Your own claims plugin</strong> answers for the suite with <code>core.claimsProvider(new Claims.Provider() { ... })</code>: <code>ownerAt</code>, <code>may</code>, <code>isMember</code>, and optionally <code>ownerOf</code> and <code>chunks</code>. Answer from memory and never throw.</p>
+    </article>
+    <nav class="pager"><a class="prev" href="rewards.html"><small>Previous</small>Rewards, mail and boosts</a><a class="next" href="world.html"><small>Next</small>Map, hub, town and demand</a></nav>
+    <footer class="foot">Tempest plugins for Hytale by AtomicTempest. Not made or endorsed by Hypixel Studios. · <a href="claims.md">This page as Markdown</a> · <a href="llms.txt">llms.txt</a></footer>
+  </main>
+  <aside class="toc"><h5>On this page</h5><a href="#land-claims-claims">Land claims: Claims</a></aside>
+</div>
+</body>
+</html>

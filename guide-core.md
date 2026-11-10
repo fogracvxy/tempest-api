@@ -34,6 +34,13 @@ The `/guide` pages of this plugin, as a player sees them on a test server (numbe
 | `/serverinfo` (/rules, /info) | Everyone | The server's rules and info |
 | `/tempest` (/casino) | Everyone | Tempest: the settings menu for admins, the help screen for players |
 | `/tempest doctor` | `tempest.admin` | Finds ways players could make money from nothing in the settings (admins) |
+| `/tempest hub` | `tempest.admin` | The Tempest hub: every plugin in one place, and protection for your spawn |
+| `/tempest hub corner` | `tempest.admin` | Mark a corner of an area to protect |
+| `/tempest hub place` | `tempest.admin` | Build the Tempest hub in front of you |
+| `/tempest hub protect` | `tempest.admin` | Turn the hub's protection on or off |
+| `/tempest hub protect-area` | `tempest.admin` | Protect the area between your two corners |
+| `/tempest hub remove` | `tempest.admin` | Remove the hub and put the ground back |
+| `/tempest hub unprotect-area` | `tempest.admin` | Stop protecting an area |
 | `/tempest info` | `tempest.admin` | Tempest plugins: versions, editions and the economy (admins) |
 | `/tempest log` | `tempest.admin` | Who changed what: the newest lines of the admin log (admins) |
 | `/tempest report` | `tempest.admin` | Writes a support report to paste when asking for help (admins) |
@@ -307,6 +314,27 @@ How these look on the map and who gets them. To change one of them, use /places.
 `/tempest` → Map: Crates. Who can change it: `tempest.admin` or `tempest.admin.map`.
 
 #### Crates
+
+How these look on the map and who gets them. To change one of them, use /places.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Show on the map | Shows every place of this kind on players' maps. Off: they are hidden, but stay known, so switching it on brings them back. | On or off |
+| Icon | A resource pack's own picture: put its file name in map.json. | A list |
+| Colour | White shows the icon as it was drawn. | A colour |
+| Name on the map | Empty: each place's own name. Written here, every one of them shows this. | Text |
+| Big icon | A larger icon on the map, for places players should find easily. | On or off |
+| On the compass too | These places also show on the compass at the top of the screen, not only on the map. | On or off |
+| Who sees it (permission) | Empty: everyone. With a permission, only players or ranks who have it. | Text |
+| Shown within (blocks) | Only players this near see them. 0: from anywhere. | 0 to 100000 |
+| Only in these worlds | World names with commas between them. Empty: every world. | Text |
+
+
+### Map: Claims
+
+`/tempest` → Map: Claims. Who can change it: `tempest.admin` or `tempest.admin.map`.
+
+#### Claims
 
 How these look on the map and who gets them. To change one of them, use /places.
 

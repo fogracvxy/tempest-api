@@ -1,6 +1,6 @@
-# Map, town and demand
+# Map, hub, town and demand
 
-Places on the world map, features the town unlocks and items the server wants.
+Places on the world map, the Tempest hub, features the town unlocks and items the server wants.
 
 ## Places on the world map: `MapPlaces` (API version 7)
 
@@ -26,6 +26,25 @@ MapPlaces.refresh();   // after a change that should show at once
 are kept under it. The second argument of `Kind` is what admins read in `/tempest`; the third is what players read.
 Icons are files in `Common/UI/WorldMap/MapMarkers`, so an asset pack can add its own: `MapPlaces.ICONS` lists what every
 server has. Paint them white with a dark edge and the admin's colour tints them.
+
+
+## The Tempest hub: `Hub` (API version 23)
+
+`/tempest hub place` builds a spawn area with a row for every plugin's blocks and a sign for every page; `remove` puts
+the ground back. Add your plugin's row and pages in `setup()` (guard it: `CoreAPI.runningVersion() >= 23`):
+
+```java
+core.hubArea(new Hub.Area("dragons", "Dragons", 50, () -> List.of(
+        new Hub.Block("Dragon_Altar", "Altar", new Hub.Placed() {
+            public void placed(String world, Vector3i pos) { altars.add(world, pos); }    // as if a player placed it
+            public void removed(String world, Vector3i pos) { altars.remove(world, pos); }
+        }))));
+core.hubPage(new Hub.Page("Dragons", "dragons", 50));   // a sign that runs /dragons for whoever clicks it
+```
+
+Rows are built from the lowest order (Shop 10, Slots 20, ATMs 30, Crates 40). The blocks are asked for when the hub is
+built. `removed` gets the position of each of your blocks, so find yours by position. Names and signs need Tempest
+Holograms; without it the blocks work and the pages open with their commands.
 
 
 ## Features the town unlocks: `Unlocks` (API version 8)

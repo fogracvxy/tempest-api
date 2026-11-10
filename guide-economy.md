@@ -35,6 +35,7 @@ The `/guide` pages of this plugin, as a player sees them on a test server (numbe
 - -Contracts
 - -Jobs
 - -Trade
+- -Land claims
 - -Town
 - -Town projects
 - Pick a page on the left to read more. Open this screen any time with /coins.
@@ -165,6 +166,10 @@ The `/guide` pages of this plugin, as a player sees them on a test server (numbe
 
 ### All commands
 
+
+**Claims**
+
+- /claims  -Your party and its land
 
 **Coinflip**
 

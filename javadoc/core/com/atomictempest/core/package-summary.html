@@ -127,6 +127,24 @@ prices.</div>
 <div class="col-last even-row-color class-summary class-summary-tab2">
 <div class="block">The coloured tag in front of a mod's chat messages, such as "[Slots]", as the admin set it.</div>
 </div>
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="Claims.html" title="class in com.atomictempest.core">Claims</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab2">
+<div class="block">Land claims, for every plugin (API 24): <i>who owns this place, and may this player do this here?</i> Tempest Claims
+answers when it runs; else Simple Claims is read (a read-only link that switches itself off when that mod changes);
+else nobody owns anything and everything is allowed.</div>
+</div>
+<div class="col-first even-row-color class-summary class-summary-tab3"><a href="Claims.Action.html" title="enum class in com.atomictempest.core">Claims.Action</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab3">
+<div class="block">What a player wants to do at a place.</div>
+</div>
+<div class="col-first odd-row-color class-summary class-summary-tab4"><a href="Claims.Owner.html" title="class in com.atomictempest.core">Claims.Owner</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab4">
+<div class="block">Who owns a place.</div>
+</div>
+<div class="col-first even-row-color class-summary class-summary-tab1"><a href="Claims.Provider.html" title="interface in com.atomictempest.core">Claims.Provider</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab1">
+<div class="block">A claims plugin.</div>
+</div>
 <div class="col-first odd-row-color class-summary class-summary-tab2"><a href="CoinEffects.html" title="class in com.atomictempest.core">CoinEffects</a></div>
 <div class="col-last odd-row-color class-summary class-summary-tab2">
 <div class="block">Visual coin effects shared by the ATM and other mods.</div>
@@ -194,192 +212,221 @@ money from nothing, before they find them.</div>
 <div class="block">One plugin's edition: what it is called, whether it is Pro, what Pro adds (shown in the free one), and who the
 Pro copy is licensed to ("" when unknown).</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="HudLines.html" title="class in com.atomictempest.core">HudLines</a></div>
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="Hub.html" title="class in com.atomictempest.core">Hub</a></div>
 <div class="col-last odd-row-color class-summary class-summary-tab2">
+<div class="block">The Tempest hub: <code>/tempest hub place</code> builds a spawn area with a row for each plugin's blocks and a sign for
+each page, so a server has every Tempest feature in one place in a minute (and our demo server shows them all).</div>
+</div>
+<div class="col-first even-row-color class-summary class-summary-tab4"><a href="Hub.Area.html" title="class in com.atomictempest.core">Hub.Area</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab4">
+<div class="block">A plugin's row in the hub.</div>
+</div>
+<div class="col-first odd-row-color class-summary class-summary-tab4"><a href="Hub.Block.html" title="class in com.atomictempest.core">Hub.Block</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab4">
+<div class="block">One block of a row.</div>
+</div>
+<div class="col-first even-row-color class-summary class-summary-tab1"><a href="Hub.Labels.html" title="interface in com.atomictempest.core">Hub.Labels</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab1">
+<div class="block">Names and clickable signs in the world.</div>
+</div>
+<div class="col-first odd-row-color class-summary class-summary-tab4"><a href="Hub.Page.html" title="class in com.atomictempest.core">Hub.Page</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab4">
+<div class="block">A sign that opens a page: clicking it runs the command as the player who clicked.</div>
+</div>
+<div class="col-first even-row-color class-summary class-summary-tab1"><a href="Hub.Placed.html" title="interface in com.atomictempest.core">Hub.Placed</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab1">
+<div class="block">Told when the hub places or removes one of a plugin's blocks, to record it as a player placing it would.</div>
+</div>
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="HubCommand.html" title="class in com.atomictempest.core">HubCommand</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab2">
+<div class="block">/tempest hub: the Tempest hub (<a href="Hub.html" title="class in com.atomictempest.core"><code>Hub</code></a>), and protection for a spawn built by hand.</div>
+</div>
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="HudLines.html" title="class in com.atomictempest.core">HudLines</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab2">
 <div class="block">Short lines of text shown under the coin counter in the corner of the screen.</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab2"><a href="ItemIcons.html" title="class in com.atomictempest.core">ItemIcons</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab2">
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="ItemIcons.html" title="class in com.atomictempest.core">ItemIcons</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab2">
 <div class="block">Item ids that are safe to draw.</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="JsonFiles.html" title="class in com.atomictempest.core">JsonFiles</a></div>
-<div class="col-last odd-row-color class-summary class-summary-tab2">
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="JsonFiles.html" title="class in com.atomictempest.core">JsonFiles</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab2">
 <div class="block">Settings and data kept as JSON files, saved with <a href="SafeFiles.html" title="class in com.atomictempest.core"><code>SafeFiles</code></a> (a crash in the middle of a save leaves a whole
 copy).</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab1"><a href="JsonFiles.Migration.html" title="interface in com.atomictempest.core">JsonFiles.Migration</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab1">
+<div class="col-first odd-row-color class-summary class-summary-tab1"><a href="JsonFiles.Migration.html" title="interface in com.atomictempest.core">JsonFiles.Migration</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab1">
 <div class="block">One step that brings a file's JSON from one config version to the next: renames or moves settings.</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="Lang.html" title="class in com.atomictempest.core">Lang</a></div>
-<div class="col-last odd-row-color class-summary class-summary-tab2">
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="Lang.html" title="class in com.atomictempest.core">Lang</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab2">
 <div class="block">The language of the plugins' texts.</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab2"><a href="Leaderboards.html" title="class in com.atomictempest.core">Leaderboards</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab2">
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="Leaderboards.html" title="class in com.atomictempest.core">Leaderboards</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab2">
 <div class="block">Extra boards for the leaderboards screen (/leaderboards), added by other mods.</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab4"><a href="Leaderboards.Board.html" title="class in com.atomictempest.core">Leaderboards.Board</a></div>
-<div class="col-last odd-row-color class-summary class-summary-tab4">&nbsp;</div>
-<div class="col-first even-row-color class-summary class-summary-tab2"><a href="Levels.html" title="class in com.atomictempest.core">Levels</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab2">
+<div class="col-first even-row-color class-summary class-summary-tab4"><a href="Leaderboards.Board.html" title="class in com.atomictempest.core">Leaderboards.Board</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab4">&nbsp;</div>
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="Levels.html" title="class in com.atomictempest.core">Levels</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab2">
 <div class="block">Player levels from whichever leveling mod the server runs, as <code>Economies</code> is for money: one way for every
 Tempest plugin to read a player's level, give leveling XP and hear about level-ups, without depending on the mod.</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab1"><a href="Levels.Leveling.html" title="interface in com.atomictempest.core">Levels.Leveling</a></div>
-<div class="col-last odd-row-color class-summary class-summary-tab1">
+<div class="col-first even-row-color class-summary class-summary-tab1"><a href="Levels.Leveling.html" title="interface in com.atomictempest.core">Levels.Leveling</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab1">
 <div class="block">A leveling mod, as Tempest sees it.</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab1"><a href="Levels.Listener.html" title="interface in com.atomictempest.core">Levels.Listener</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab1">
+<div class="col-first odd-row-color class-summary class-summary-tab1"><a href="Levels.Listener.html" title="interface in com.atomictempest.core">Levels.Listener</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab1">
 <div class="block">Level-ups and prestige, from any leveling mod.</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="Mailbox.html" title="class in com.atomictempest.core">Mailbox</a></div>
-<div class="col-last odd-row-color class-summary class-summary-tab2">
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="Mailbox.html" title="class in com.atomictempest.core">Mailbox</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab2">
 <div class="block">One mailbox for every Tempest plugin (Core API version 6).</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab4"><a href="Mailbox.Claimed.html" title="class in com.atomictempest.core">Mailbox.Claimed</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab4">
+<div class="col-first odd-row-color class-summary class-summary-tab4"><a href="Mailbox.Claimed.html" title="class in com.atomictempest.core">Mailbox.Claimed</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab4">
 <div class="block">What a claim gave.</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="Mailbox.Item.html" title="class in com.atomictempest.core">Mailbox.Item</a></div>
-<div class="col-last odd-row-color class-summary class-summary-tab2">
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="Mailbox.Item.html" title="class in com.atomictempest.core">Mailbox.Item</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab2">
 <div class="block">Some of one item.</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab1"><a href="Mailbox.ItemGiver.html" title="interface in com.atomictempest.core">Mailbox.ItemGiver</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab1">
+<div class="col-first odd-row-color class-summary class-summary-tab1"><a href="Mailbox.ItemGiver.html" title="interface in com.atomictempest.core">Mailbox.ItemGiver</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab1">
 <div class="block">Gives one kind of item; returns how many did not fit.</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="Mailbox.Parcel.html" title="class in com.atomictempest.core">Mailbox.Parcel</a></div>
-<div class="col-last odd-row-color class-summary class-summary-tab2">
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="Mailbox.Parcel.html" title="class in com.atomictempest.core">Mailbox.Parcel</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab2">
 <div class="block">One parcel: who it is from, its title, items and money.</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab2"><a href="MapPlaces.html" title="class in com.atomictempest.core">MapPlaces</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab2">
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="MapPlaces.html" title="class in com.atomictempest.core">MapPlaces</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab2">
 <div class="block">Places on the world map (API version 7).</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="MapPlaces.Kind.html" title="class in com.atomictempest.core">MapPlaces.Kind</a></div>
-<div class="col-last odd-row-color class-summary class-summary-tab2">
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="MapPlaces.Kind.html" title="class in com.atomictempest.core">MapPlaces.Kind</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab2">
 <div class="block">A kind of place.</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab4"><a href="MapPlaces.Place.html" title="class in com.atomictempest.core">MapPlaces.Place</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab4">
+<div class="col-first odd-row-color class-summary class-summary-tab4"><a href="MapPlaces.Place.html" title="class in com.atomictempest.core">MapPlaces.Place</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab4">
 <div class="block">One place.</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab4"><a href="MapPlaces.Shown.html" title="class in com.atomictempest.core">MapPlaces.Shown</a></div>
-<div class="col-last odd-row-color class-summary class-summary-tab4">
+<div class="col-first even-row-color class-summary class-summary-tab4"><a href="MapPlaces.Shown.html" title="class in com.atomictempest.core">MapPlaces.Shown</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab4">
 <div class="block">A place with everything that decides how it looks and who sees it.</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab2"><a href="Perks.html" title="class in com.atomictempest.core">Perks</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab2">
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="Perks.html" title="class in com.atomictempest.core">Perks</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab2">
 <div class="block">Rank perks: bonuses for players who have a perk's permission.</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab3"><a href="Perks.Bonus.html" title="enum class in com.atomictempest.core">Perks.Bonus</a></div>
-<div class="col-last odd-row-color class-summary class-summary-tab3">
+<div class="col-first even-row-color class-summary class-summary-tab3"><a href="Perks.Bonus.html" title="enum class in com.atomictempest.core">Perks.Bonus</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab3">
 <div class="block">The bonuses a perk can give, each in percent.</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab2"><a href="Placeholders.html" title="class in com.atomictempest.core">Placeholders</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab2">
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="Placeholders.html" title="class in com.atomictempest.core">Placeholders</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab2">
 <div class="block">Named values for each player, such as <code>coins_balance</code> or <code>lottery_pot</code>, for scoreboards, chat
 formats and placeholder plugins.</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="PlayerActions.html" title="class in com.atomictempest.core">PlayerActions</a></div>
-<div class="col-last odd-row-color class-summary class-summary-tab2">
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="PlayerActions.html" title="class in com.atomictempest.core">PlayerActions</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab2">
 <div class="block">Things players do in the economy mods, reported for other mods to count (the Quests mod builds its
 achievements and quests on them).</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab1"><a href="PlayerActions.Listener.html" title="interface in com.atomictempest.core">PlayerActions.Listener</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab1">&nbsp;</div>
-<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="PlayLimits.html" title="class in com.atomictempest.core">PlayLimits</a></div>
-<div class="col-last odd-row-color class-summary class-summary-tab2">
+<div class="col-first odd-row-color class-summary class-summary-tab1"><a href="PlayerActions.Listener.html" title="interface in com.atomictempest.core">PlayerActions.Listener</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab1">&nbsp;</div>
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="PlayLimits.html" title="class in com.atomictempest.core">PlayLimits</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab2">
 <div class="block">A daily limit on what each player may stake in games of chance (Slots, Lottery, Coinflip and any game built on
 Core), set by the admin in /tempest (General, "Daily limit for games"; 0 = no limit).</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab2"><a href="RateLimit.html" title="class in com.atomictempest.core">RateLimit</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab2">
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="RateLimit.html" title="class in com.atomictempest.core">RateLimit</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab2">
 <div class="block">Stops one player from flooding the server: an announcement, payment or message happens at most once in a while
 per key.</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="Registrations.html" title="class in com.atomictempest.core">Registrations</a></div>
-<div class="col-last odd-row-color class-summary class-summary-tab2">
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="Registrations.html" title="class in com.atomictempest.core">Registrations</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab2">
 <div class="block">Everything one plugin adds to Core, taken back with one call in shutdown().</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab2"><a href="ReservedDrops.html" title="class in com.atomictempest.core">ReservedDrops</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab2">
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="ReservedDrops.html" title="class in com.atomictempest.core">ReservedDrops</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab2">
 <div class="block">Items dropped on the ground that only one player can pick up for a while, such as slot machine winnings.</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="Rewards.html" title="class in com.atomictempest.core">Rewards</a></div>
-<div class="col-last odd-row-color class-summary class-summary-tab2">
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="Rewards.html" title="class in com.atomictempest.core">Rewards</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab2">
 <div class="block">Rewards beyond money, the same in every Tempest plugin (Core API version 18): items and a server command.</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab2"><a href="SafeFiles.html" title="class in com.atomictempest.core">SafeFiles</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab2">
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="SafeFiles.html" title="class in com.atomictempest.core">SafeFiles</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab2">
 <div class="block">Saving that survives a crash or a power cut in the middle of a save.</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab1"><a href="SafeFiles.Parser.html" title="interface in com.atomictempest.core">SafeFiles.Parser</a>&lt;T&gt;</div>
-<div class="col-last odd-row-color class-summary class-summary-tab1">
+<div class="col-first even-row-color class-summary class-summary-tab1"><a href="SafeFiles.Parser.html" title="interface in com.atomictempest.core">SafeFiles.Parser</a>&lt;T&gt;</div>
+<div class="col-last even-row-color class-summary class-summary-tab1">
 <div class="block">Turns a file's text into something; may throw if the text is not what it should be.</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab2"><a href="ServerInfo.html" title="class in com.atomictempest.core">ServerInfo</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab2">
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="ServerInfo.html" title="class in com.atomictempest.core">ServerInfo</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab2">
 <div class="block">The server's own page: rules and server info the admin writes in /tempest (Server info tab).</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="Skills.html" title="class in com.atomictempest.core">Skills</a></div>
-<div class="col-last odd-row-color class-summary class-summary-tab2">
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="Skills.html" title="class in com.atomictempest.core">Skills</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab2">
 <div class="block">Skills from MMO Skill Tree (by Ziggfreed), when it runs: one level per skill (Mining, Swords, custom skills), skill
 XP, and what happens in it, for any plugin, without depending on the mod.</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab2"><a href="Themes.html" title="class in com.atomictempest.core">Themes</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab2">
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="Themes.html" title="class in com.atomictempest.core">Themes</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab2">
 <div class="block">The look of every Tempest menu, chosen by the admin (/tempest, General, "Menu theme"): a preset or their own colours.</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab4"><a href="Themes.Theme.html" title="class in com.atomictempest.core">Themes.Theme</a></div>
-<div class="col-last odd-row-color class-summary class-summary-tab4">
+<div class="col-first even-row-color class-summary class-summary-tab4"><a href="Themes.Theme.html" title="class in com.atomictempest.core">Themes.Theme</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab4">
 <div class="block">One theme.</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab2"><a href="Unlocks.html" title="class in com.atomictempest.core">Unlocks</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab2">
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="Unlocks.html" title="class in com.atomictempest.core">Unlocks</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab2">
 <div class="block">Town unlocks: features a server can switch on as its town grows, such as savings interest once a bank is built.</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab4"><a href="Unlocks.Feature.html" title="class in com.atomictempest.core">Unlocks.Feature</a></div>
-<div class="col-last odd-row-color class-summary class-summary-tab4">
+<div class="col-first even-row-color class-summary class-summary-tab4"><a href="Unlocks.Feature.html" title="class in com.atomictempest.core">Unlocks.Feature</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab4">
 <div class="block">A feature that can be locked until the town unlocks it.</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab1"><a href="Unlocks.Listener.html" title="interface in com.atomictempest.core">Unlocks.Listener</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab1">
+<div class="col-first odd-row-color class-summary class-summary-tab1"><a href="Unlocks.Listener.html" title="interface in com.atomictempest.core">Unlocks.Listener</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab1">
 <div class="block">Hears when a feature is switched on or off.</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab1"><a href="Unlocks.Provider.html" title="interface in com.atomictempest.core">Unlocks.Provider</a></div>
-<div class="col-last odd-row-color class-summary class-summary-tab1">
+<div class="col-first even-row-color class-summary class-summary-tab1"><a href="Unlocks.Provider.html" title="interface in com.atomictempest.core">Unlocks.Provider</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab1">
 <div class="block">Decides which features are on.</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab2"><a href="UpdateCheck.html" title="class in com.atomictempest.core">UpdateCheck</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab2">
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="UpdateCheck.html" title="class in com.atomictempest.core">UpdateCheck</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab2">
 <div class="block">Tells admins when a newer version of a Tempest plugin is out.</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab4"><a href="UpdateCheck.Update.html" title="class in com.atomictempest.core">UpdateCheck.Update</a></div>
-<div class="col-last odd-row-color class-summary class-summary-tab4">
+<div class="col-first even-row-color class-summary class-summary-tab4"><a href="UpdateCheck.Update.html" title="class in com.atomictempest.core">UpdateCheck.Update</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab4">
 <div class="block">A plugin with a newer version out.</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab2"><a href="WalletEvents.html" title="class in com.atomictempest.core">WalletEvents</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab2">
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="WalletEvents.html" title="class in com.atomictempest.core">WalletEvents</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab2">
 <div class="block">Tells other mods about every change to any wallet: who, how much, why and the balance after.</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab1"><a href="WalletEvents.Listener.html" title="interface in com.atomictempest.core">WalletEvents.Listener</a></div>
-<div class="col-last odd-row-color class-summary class-summary-tab1">
+<div class="col-first even-row-color class-summary class-summary-tab1"><a href="WalletEvents.Listener.html" title="interface in com.atomictempest.core">WalletEvents.Listener</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab1">
 <div class="block">One change of one wallet.</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab1"><a href="WalletEvents.Veto.html" title="interface in com.atomictempest.core">WalletEvents.Veto</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab1">
+<div class="col-first odd-row-color class-summary class-summary-tab1"><a href="WalletEvents.Veto.html" title="interface in com.atomictempest.core">WalletEvents.Veto</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab1">
 <div class="block">Asked before coins leave a wallet.</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="WhatsNew.html" title="class in com.atomictempest.core">WhatsNew</a></div>
-<div class="col-last odd-row-color class-summary class-summary-tab2">
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="WhatsNew.html" title="class in com.atomictempest.core">WhatsNew</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab2">
 <div class="block">"What's new" for admins: after a Tempest plugin was updated, each admin is told once in chat, on their next join,
 which plugins changed and the first lines of their release notes.</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab4"><a href="WhatsNew.Change.html" title="class in com.atomictempest.core">WhatsNew.Change</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab4">
+<div class="col-first odd-row-color class-summary class-summary-tab4"><a href="WhatsNew.Change.html" title="class in com.atomictempest.core">WhatsNew.Change</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab4">
 <div class="block">One plugin that changed since an admin last joined.</div>
 </div>
 </div>
