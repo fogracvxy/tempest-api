@@ -52,6 +52,7 @@ Make and change crates in /crates with Edit crates.
 | Crates are open | Off: nobody can open crates. | On or off |
 | Spin time (seconds) | How long the strip runs before it stops on the prize. | 1 to 15 |
 | Prize board time (seconds) | How long the light runs round the prize board (crates with the board style). | 1 to 15 |
+| Prize wheel time (seconds) | How long the prize wheel turns before it stops (crates with the wheel style). | 1 to 15 |
 | Sounds | Ticks while the strip runs, and a bigger jingle the rarer the prize. | On or off |
 | Tell everyone about | Wins of this rarity or rarer are told to the whole server and sent to Discord. | No wins, Common wins and rarer, Uncommon wins and rarer, Rare wins and rarer, Epic wins and rarer, Legendary wins only |
 
@@ -124,6 +125,6 @@ Everyone online gets crate keys at once, after a ten-second countdown in chat. S
 | Setting | What it does | Values |
 |---|---|---|
 | A key party every (hours) | 0 = only when an admin types /keyparty. | 0 to 168 |
-| Key | bronze, silver, gold or any item id. | Text |
+| Key | The crate keys come first; any item can be given. | A list |
 | Keys each | How many of the key above each online player gets in a key party: the timed ones, and /keyparty typed without a key and amount. | 1 to 64 |
 | Players online for one by itself | A timed key party waits until at least this many players are online, so keys are not given to an empty server. /keyparty always works. | 1 to 500 |

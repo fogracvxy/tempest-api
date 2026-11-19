@@ -115,6 +115,7 @@ Many kills of one kind of mob in one spot pay less and less.
 | Size of a spot (blocks) | Mob farms: kills this close together count as one spot. A farm usually kills in a small area; normal hunting moves around. | 4 to 256 |
 | Each kill after pays less (%) | Mob farms: after the kills that pay in full, each further kill in the same spot pays this much less than the one before. | 0 to 100 |
 | Never under (%) | Mob farms: a kill never pays less than this share of its normal pay, however many there were. | 0 to 100 |
+| Add a mob that never pays |  | Add a mob... |
 | Mobs that never pay | Parts of mob names, commas between: Chicken, Dummy | Text |
 
 #### Jobs on this server

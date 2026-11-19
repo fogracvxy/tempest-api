@@ -29,6 +29,7 @@ The `/guide` pages of this plugin, as a player sees them on a test server (numbe
 | Command | Who can use it | What it does |
 |---|---|---|
 | `/events` (/event) | Everyone | Server events: what is on, what is coming, and the community goal |
+| `/events drop` | `events.admin` | Send a supply drop now, with an event's drop prizes (admins) |
 | `/events extend` | `events.admin` | More or fewer minutes for the event that is on (admins) |
 | `/events give` (/fund) | Everyone | Put money in the server fund: when it is full, an event starts for everyone |
 | `/events list` | `events.admin` | Every event and the next starts (admins) |

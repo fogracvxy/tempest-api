@@ -79,6 +79,25 @@ full list on the **Player actions** page:
 PlayerActions.listen((player, action, amount) -> { ... });
 ```
 
+## Any mod: give party renown
+
+With Tempest Claims, every party has **renown**: a level that never drops and brings land and perks, and a season score
+for the "Most renowned parties" board. Your mod can give a player's party renown for something worth it (a boss, a
+dungeon, a rare find), and read the level to unlock your own things (API 26):
+
+```java
+if (CoreAPI.runningVersion() >= 26) {
+    long got = Claims.addRenown(uuid, "mymod_dragon", 25);   // what the party really got, 0 for none
+    int level = Claims.renownLevel(uuid);                    // the party's level, 0 without a party
+}
+```
+
+Claims decides, with the same rules as its own sources: the player must be in a party, past the new-member wait and
+really playing, and every mod's renown together stays inside a daily cap per member that the admin sets. Without Tempest
+Claims every call answers 0, so nothing needs a second path. Name your source in lower case (`mymod_dragon`): players
+read it on the party's renown page. When a party reaches a level, every member fires the `claims_renown_level` action
+(amount: the level), which `PlayerActions.listen` hears. The **Land claims** section of the Core page has the details.
+
 ## Money
 
 Use the server's economy, whichever plugin keeps it, through `Economies.get()` (the **Money** page). Tempest Economy also

@@ -24,7 +24,7 @@ package.
 | Pass | `AtomicTempest:Pass` | `com.atomictempest.pass.api.PassAPI` |
 | Jobs | `AtomicTempest:Jobs` | `com.atomictempest.jobs.api.JobsAPI` |
 | Trade | `AtomicTempest:Trade` | no API of its own: the `trade_done` action |
-| Claims | `AtomicTempest:Claims` | no API of its own: it answers Core's `Claims` (below) for every plugin, the `claims_claim` and `claims_party` actions, and the `claims_party`, `claims_chunks`, `claims_limit`, `claims_bank` and `claims_here` placeholders |
+| Claims | `AtomicTempest:Claims` | no API of its own: it answers Core's `Claims` (below) for every plugin, the `claims_claim`, `claims_party` and `claims_renown_level` actions, party renown (API 26), and the `claims_party`, `claims_chunks`, `claims_limit`, `claims_bank` and `claims_here` placeholders |
 
 With **Endless Leveling** or **MMO Skill Tree** installed, Core's `Levels` and `Skills` give every plugin player
 levels, skills and what happens in them, without depending on either mod.
@@ -36,7 +36,7 @@ Core's `Claims` hides which.
 Every API class has a version constant that goes up when something is added. Everything in these APIs is safe to call
 from any thread unless it says otherwise.
 
-**Javadoc:** [Coinflip 1.0.4](javadoc/coinflip/) · [Coins 2.4.1](javadoc/coins/) · [Core 1.6.0](javadoc/core/) · [Holograms 1.2.2](javadoc/holograms/) · [Jobs 1.1.1](javadoc/jobs/) · [Lottery 1.1.3](javadoc/lottery/) · [Pass 1.3.0](javadoc/pass/) · [Projects 1.1.1](javadoc/projects/) · [Quests 1.5.0](javadoc/quests/) · [Shop 1.5.1](javadoc/shop/) · [SlotMachine 1.2.3](javadoc/slotmachine/)
+**Javadoc:** [Coinflip 1.0.6](javadoc/coinflip/) · [Coins 2.6.0](javadoc/coins/) · [Core 1.7.1](javadoc/core/) · [Holograms 1.4.0](javadoc/holograms/) · [Jobs 1.2.0](javadoc/jobs/) · [Lottery 1.1.4](javadoc/lottery/) · [Pass 1.4.0](javadoc/pass/) · [Projects 1.2.0](javadoc/projects/) · [Quests 1.6.0](javadoc/quests/) · [Shop 1.6.0](javadoc/shop/) · [SlotMachine 1.2.5](javadoc/slotmachine/)
 
 **Jars:** from the plugins' CurseForge pages; compile against them with `compileOnly`. **Questions and help:** [Discord](https://discord.gg/Q9PNVCMZXK)
 
@@ -107,6 +107,14 @@ Every command of the Tempest plugins, with the permission it needs. "Everyone" w
 | `/hud low` | Everyone | Money counter on the right side, lower down |
 | `/hud top` | Everyone | Money counter in a row along the top, right of centre |
 | `/mail` (/mailbox) | Everyone | Open your mailbox: rewards and items kept for you |
+| `/partyhud` (/pframes) | Everyone | Show or hide your party frames (/partyhud left, right, compact, self...) |
+| `/partyhud compact` | Everyone | Pick the style of your party frames |
+| `/partyhud full` | Everyone | Pick the style of your party frames |
+| `/partyhud left` | Everyone | Move your party frames here |
+| `/partyhud leftmiddle` | Everyone | Move your party frames here |
+| `/partyhud right` | Everyone | Move your party frames here |
+| `/partyhud rightmiddle` | Everyone | Move your party frames here |
+| `/partyhud self` | Everyone | Show or hide your own frame among your party |
 | `/places` | Everyone | Places on the world map, and what your map shows |
 | `/places add` | `tempest.admin.map` | Adds a place to the map where you stand (admins) |
 | `/serverinfo` (/rules, /info) | Everyone | The server's rules and info |
@@ -120,6 +128,7 @@ Every command of the Tempest plugins, with the permission it needs. "Everyone" w
 | `/tempest hub remove` | `tempest.admin` | Remove the hub and put the ground back |
 | `/tempest hub unprotect-area` | `tempest.admin` | Stop protecting an area |
 | `/tempest info` | `tempest.admin` | Tempest plugins: versions, editions and the economy (admins) |
+| `/tempest item` | `tempest.admin` | Every field of the item in your hand and how shops and rewards treat it (admins) |
 | `/tempest log` | `tempest.admin` | Who changed what: the newest lines of the admin log (admins) |
 | `/tempest report` | `tempest.admin` | Writes a support report to paste when asking for help (admins) |
 | `/tempest settings` | Everyone | Open the Tempest settings menu (admins) |
@@ -186,6 +195,7 @@ Every command of the Tempest plugins, with the permission it needs. "Everyone" w
 | Command | Who can use it | What it does |
 |---|---|---|
 | `/events` (/event) | Everyone | Server events: what is on, what is coming, and the community goal |
+| `/events drop` | `events.admin` | Send a supply drop now, with an event's drop prizes (admins) |
 | `/events extend` | `events.admin` | More or fewer minutes for the event that is on (admins) |
 | `/events give` (/fund) | Everyone | Put money in the server fund: when it is full, an event starts for everyone |
 | `/events list` | `events.admin` | Every event and the next starts (admins) |
@@ -284,6 +294,7 @@ Every command of the Tempest plugins, with the permission it needs. "Everyone" w
 | `/claims open` | Everyone | Let anyone join your party, on or off |
 | `/claims paytax` | Everyone | Pay what you owe your party in taxes |
 | `/claims promote` | Everyone | Make a member an assistant |
+| `/claims renown` | Everyone | Your party's renown and level |
 | `/claims rule` | Everyone | Change a rule: /claims rule visitor doors on |
 | `/claims rules` | Everyone | Who may do what on your land |
 | `/claims select` | Everyone | Pick a chunk to claim (the map uses this) |
@@ -357,6 +368,14 @@ The `/guide` pages of this plugin, as a player sees them on a test server (numbe
 | `/hud low` | Everyone | Money counter on the right side, lower down |
 | `/hud top` | Everyone | Money counter in a row along the top, right of centre |
 | `/mail` (/mailbox) | Everyone | Open your mailbox: rewards and items kept for you |
+| `/partyhud` (/pframes) | Everyone | Show or hide your party frames (/partyhud left, right, compact, self...) |
+| `/partyhud compact` | Everyone | Pick the style of your party frames |
+| `/partyhud full` | Everyone | Pick the style of your party frames |
+| `/partyhud left` | Everyone | Move your party frames here |
+| `/partyhud leftmiddle` | Everyone | Move your party frames here |
+| `/partyhud right` | Everyone | Move your party frames here |
+| `/partyhud rightmiddle` | Everyone | Move your party frames here |
+| `/partyhud self` | Everyone | Show or hide your own frame among your party |
 | `/places` | Everyone | Places on the world map, and what your map shows |
 | `/places add` | `tempest.admin.map` | Adds a place to the map where you stand (admins) |
 | `/serverinfo` (/rules, /info) | Everyone | The server's rules and info |
@@ -370,6 +389,7 @@ The `/guide` pages of this plugin, as a player sees them on a test server (numbe
 | `/tempest hub remove` | `tempest.admin` | Remove the hub and put the ground back |
 | `/tempest hub unprotect-area` | `tempest.admin` | Stop protecting an area |
 | `/tempest info` | `tempest.admin` | Tempest plugins: versions, editions and the economy (admins) |
+| `/tempest item` | `tempest.admin` | Every field of the item in your hand and how shops and rewards treat it (admins) |
 | `/tempest log` | `tempest.admin` | Who changed what: the newest lines of the admin log (admins) |
 | `/tempest report` | `tempest.admin` | Writes a support report to paste when asking for help (admins) |
 | `/tempest settings` | Everyone | Open the Tempest settings menu (admins) |
@@ -457,6 +477,24 @@ Slots, Lottery and Coinflip use only money earned in game. A daily limit stops a
 | Daily limit for games | Per player, all games together. 0 = no limit. | 0 to 1000000000 |
 
 
+### Party frames
+
+`/tempest` → Party frames. Who can change it: `tempest.admin` or `tempest.admin.core`.
+
+Each member of the player's party on the side of the screen: name, health, stamina and how far away. Shown when a plugin gives parties (Tempest Claims). Players hide, move and resize theirs with /partyhud.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Show party frames | Only players in a party see them. | On or off |
+| Party frames start at | Players move theirs with /partyhud. The board starts at the right, top. | Left, middle, Left, top, Right, middle, Right, top |
+| Party frame style |  | Full: bigger names and bars, Compact: small, for big parties |
+| Most members shown | Online members first. | 1 to 8 |
+| Show offline members |  | On or off |
+| Show the stamina bar |  | On or off |
+| Show how far away members are | In blocks, for members in the same world; members in another world show its name. Off for servers where positions should stay secret. | On or off |
+| Players see their own frame | Players change it for themselves with /partyhud self. | On or off |
+
+
 ### Rank Perks
 
 `/tempest` → Rank Perks. Who can change it: `tempest.admin` or `tempest.admin.core`.
@@ -505,6 +543,23 @@ Give a rank a perk's permission in your ranks plugin (LuckPerms, or Hytale's own
 | Leveling XP (%) | More XP in the leveling mod (Endless Leveling, RPG Leveling, MMO Skill Tree) for this rank. Adds to the Leveling XP boost, with events and boosters, up to the highest boost set on the Leveling tab. Does nothing without a leveling mod. | 0 to 1000 |
 
 
+### Custom items
+
+`/tempest` → Custom items. Who can change it: `tempest.admin` or `tempest.admin.core`.
+
+#### Items from other mods
+
+Enchanted (Simple Enchantments), reforged (Socket Reforge) and any mod's items keep what they have in shops, crates, the pass, quests, jobs, events, mail, trade and the market. Hold one and type /tempest item to see every field it has and how it is treated. Names below are field names; * is anything (*.XP fits SocketReforge.Lore.Socket.XP).
+
+| Setting | What it does | Values |
+|---|---|---|
+| Fields that change with use | Commas between, * for anything: *.XP, *KillCount* Shown to players, but never used to tell two items apart: experience, kill counts and the like. Without this a sword that gained experience would no longer sell back to its shop line. | Text |
+| More fields to hide | Commas between, * for anything A mod's own bookkeeping, neither shown nor matched. Tooltips, hashes and versions are hidden already. | Text |
+| Fields that hold other items | Commas between, * for anything An item with something in one of these is never copied into a shop, a prize or a reward (its contents would be copied too). Backpacks and containers the usual way are found already. | Text |
+| Fields that make an item one of a kind | Commas between, * for anything An item with one of these is never copied (a bound item, a named pet); it can still be traded. Ids written as UUIDs are found already. | Text |
+| Use the name a mod gave the item | A reforged "Iron Sword +3" shows by that name in shops, lists and mail. Off: the game's name. | On or off |
+
+
 ### Server info
 
 `/tempest` → Server info. Who can change it: `tempest.admin` or `tempest.admin.core`.
@@ -515,18 +570,86 @@ Your own page: rules and anything players should know. It is the first page of /
 |---|---|---|
 | Show the page | On: /info and /rules open this page, and it is the first page of /guide (new players see it when they first join, if that is on). Off: the page is hidden. | On or off |
 | Title | The heading at the top of the page, such as your server's name or "Rules". | Text |
-| Line 1 | Start a line with # to make it a heading; an empty line is a gap. One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
-| Line 2 | One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
-| Line 3 | One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
-| Line 4 | One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
-| Line 5 | One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
-| Line 6 | One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
-| Line 7 | One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
-| Line 8 | One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
-| Line 9 | One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
-| Line 10 | One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
-| Line 11 | One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
-| Line 12 | One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
+| Line 1 | Each line of the page, in order: text, a heading (bold) or an empty line for a gap. Two empty lines show below the last one written, up to 40 lines of 200 letters. | Text, Heading, Empty line (a gap) |
+| Line 1, words |  | Text |
+| Line 2 |  | Text, Heading, Empty line (a gap) |
+| Line 2, words |  | Text |
+| Line 3 |  | Text, Heading, Empty line (a gap) |
+| Line 3, words |  | Text |
+| Line 4 |  | Text, Heading, Empty line (a gap) |
+| Line 4, words |  | Text |
+| Line 5 |  | Text, Heading, Empty line (a gap) |
+| Line 5, words |  | Text |
+| Line 6 |  | Text, Heading, Empty line (a gap) |
+| Line 6, words |  | Text |
+| Line 7 |  | Text, Heading, Empty line (a gap) |
+| Line 7, words |  | Text |
+| Line 8 |  | Text, Heading, Empty line (a gap) |
+| Line 8, words |  | Text |
+| Line 9 |  | Text, Heading, Empty line (a gap) |
+| Line 9, words |  | Text |
+| Line 10 |  | Text, Heading, Empty line (a gap) |
+| Line 10, words |  | Text |
+| Line 11 |  | Text, Heading, Empty line (a gap) |
+| Line 11, words |  | Text |
+| Line 12 |  | Text, Heading, Empty line (a gap) |
+| Line 12, words |  | Text |
+| Line 13 |  | Text, Heading, Empty line (a gap) |
+| Line 13, words |  | Text |
+| Line 14 |  | Text, Heading, Empty line (a gap) |
+| Line 14, words |  | Text |
+| Line 15 |  | Text, Heading, Empty line (a gap) |
+| Line 15, words |  | Text |
+| Line 16 |  | Text, Heading, Empty line (a gap) |
+| Line 16, words |  | Text |
+| Line 17 |  | Text, Heading, Empty line (a gap) |
+| Line 17, words |  | Text |
+| Line 18 |  | Text, Heading, Empty line (a gap) |
+| Line 18, words |  | Text |
+| Line 19 |  | Text, Heading, Empty line (a gap) |
+| Line 19, words |  | Text |
+| Line 20 |  | Text, Heading, Empty line (a gap) |
+| Line 20, words |  | Text |
+| Line 21 |  | Text, Heading, Empty line (a gap) |
+| Line 21, words |  | Text |
+| Line 22 |  | Text, Heading, Empty line (a gap) |
+| Line 22, words |  | Text |
+| Line 23 |  | Text, Heading, Empty line (a gap) |
+| Line 23, words |  | Text |
+| Line 24 |  | Text, Heading, Empty line (a gap) |
+| Line 24, words |  | Text |
+| Line 25 |  | Text, Heading, Empty line (a gap) |
+| Line 25, words |  | Text |
+| Line 26 |  | Text, Heading, Empty line (a gap) |
+| Line 26, words |  | Text |
+| Line 27 |  | Text, Heading, Empty line (a gap) |
+| Line 27, words |  | Text |
+| Line 28 |  | Text, Heading, Empty line (a gap) |
+| Line 28, words |  | Text |
+| Line 29 |  | Text, Heading, Empty line (a gap) |
+| Line 29, words |  | Text |
+| Line 30 |  | Text, Heading, Empty line (a gap) |
+| Line 30, words |  | Text |
+| Line 31 |  | Text, Heading, Empty line (a gap) |
+| Line 31, words |  | Text |
+| Line 32 |  | Text, Heading, Empty line (a gap) |
+| Line 32, words |  | Text |
+| Line 33 |  | Text, Heading, Empty line (a gap) |
+| Line 33, words |  | Text |
+| Line 34 |  | Text, Heading, Empty line (a gap) |
+| Line 34, words |  | Text |
+| Line 35 |  | Text, Heading, Empty line (a gap) |
+| Line 35, words |  | Text |
+| Line 36 |  | Text, Heading, Empty line (a gap) |
+| Line 36, words |  | Text |
+| Line 37 |  | Text, Heading, Empty line (a gap) |
+| Line 37, words |  | Text |
+| Line 38 |  | Text, Heading, Empty line (a gap) |
+| Line 38, words |  | Text |
+| Line 39 |  | Text, Heading, Empty line (a gap) |
+| Line 39, words |  | Text |
+| Line 40 |  | Text, Heading, Empty line (a gap) |
+| Line 40, words |  | Text |
 
 #### Buttons
 
@@ -571,7 +694,8 @@ How these look on the map and who gets them. To change one of them, use /places.
 | On the compass too | These places also show on the compass at the top of the screen, not only on the map. | On or off |
 | Who sees it (permission) | Empty: everyone. With a permission, only players or ranks who have it. | Text |
 | Shown within (blocks) | Only players this near see them. 0: from anywhere. | 0 to 100000 |
-| Only in these worlds | World names with commas between them. Empty: every world. | Text |
+| Only in these worlds | Empty: every world. | Every world, default, Several (type their names) |
+| World names | World names with commas between them. | Text |
 
 
 ### Map: ATMs
@@ -592,7 +716,8 @@ How these look on the map and who gets them. To change one of them, use /places.
 | On the compass too | These places also show on the compass at the top of the screen, not only on the map. | On or off |
 | Who sees it (permission) | Empty: everyone. With a permission, only players or ranks who have it. | Text |
 | Shown within (blocks) | Only players this near see them. 0: from anywhere. | 0 to 100000 |
-| Only in these worlds | World names with commas between them. Empty: every world. | Text |
+| Only in these worlds | Empty: every world. | Every world, default, Several (type their names) |
+| World names | World names with commas between them. | Text |
 
 
 ### Map: Slot machines
@@ -613,7 +738,8 @@ How these look on the map and who gets them. To change one of them, use /places.
 | On the compass too | These places also show on the compass at the top of the screen, not only on the map. | On or off |
 | Who sees it (permission) | Empty: everyone. With a permission, only players or ranks who have it. | Text |
 | Shown within (blocks) | Only players this near see them. 0: from anywhere. | 0 to 100000 |
-| Only in these worlds | World names with commas between them. Empty: every world. | Text |
+| Only in these worlds | Empty: every world. | Every world, default, Several (type their names) |
+| World names | World names with commas between them. | Text |
 
 
 ### Map: Shops
@@ -634,7 +760,8 @@ How these look on the map and who gets them. To change one of them, use /places.
 | On the compass too | These places also show on the compass at the top of the screen, not only on the map. | On or off |
 | Who sees it (permission) | Empty: everyone. With a permission, only players or ranks who have it. | Text |
 | Shown within (blocks) | Only players this near see them. 0: from anywhere. | 0 to 100000 |
-| Only in these worlds | World names with commas between them. Empty: every world. | Text |
+| Only in these worlds | Empty: every world. | Every world, default, Several (type their names) |
+| World names | World names with commas between them. | Text |
 
 
 ### Map: Crates
@@ -655,7 +782,52 @@ How these look on the map and who gets them. To change one of them, use /places.
 | On the compass too | These places also show on the compass at the top of the screen, not only on the map. | On or off |
 | Who sees it (permission) | Empty: everyone. With a permission, only players or ranks who have it. | Text |
 | Shown within (blocks) | Only players this near see them. 0: from anywhere. | 0 to 100000 |
-| Only in these worlds | World names with commas between them. Empty: every world. | Text |
+| Only in these worlds | Empty: every world. | Every world, default, Several (type their names) |
+| World names | World names with commas between them. | Text |
+
+
+### Map: Supply drops
+
+`/tempest` → Map: Supply drops. Who can change it: `tempest.admin` or `tempest.admin.map`.
+
+#### Supply drops
+
+How these look on the map and who gets them. To change one of them, use /places.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Show on the map | Shows every place of this kind on players' maps. Off: they are hidden, but stay known, so switching it on brings them back. | On or off |
+| Icon | A resource pack's own picture: put its file name in map.json. | A list |
+| Colour | White shows the icon as it was drawn. | A colour |
+| Name on the map | Empty: each place's own name. Written here, every one of them shows this. | Text |
+| Big icon | A larger icon on the map, for places players should find easily. | On or off |
+| On the compass too | These places also show on the compass at the top of the screen, not only on the map. | On or off |
+| Who sees it (permission) | Empty: everyone. With a permission, only players or ranks who have it. | Text |
+| Shown within (blocks) | Only players this near see them. 0: from anywhere. | 0 to 100000 |
+| Only in these worlds | Empty: every world. | Every world, default, Several (type their names) |
+| World names | World names with commas between them. | Text |
+
+
+### Map: Building sites
+
+`/tempest` → Map: Building sites. Who can change it: `tempest.admin` or `tempest.admin.map`.
+
+#### Building sites
+
+How these look on the map and who gets them. To change one of them, use /places.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Show on the map | Shows every place of this kind on players' maps. Off: they are hidden, but stay known, so switching it on brings them back. | On or off |
+| Icon | A resource pack's own picture: put its file name in map.json. | A list |
+| Colour | White shows the icon as it was drawn. | A colour |
+| Name on the map | Empty: each place's own name. Written here, every one of them shows this. | Text |
+| Big icon | A larger icon on the map, for places players should find easily. | On or off |
+| On the compass too | These places also show on the compass at the top of the screen, not only on the map. | On or off |
+| Who sees it (permission) | Empty: everyone. With a permission, only players or ranks who have it. | Text |
+| Shown within (blocks) | Only players this near see them. 0: from anywhere. | 0 to 100000 |
+| Only in these worlds | Empty: every world. | Every world, default, Several (type their names) |
+| World names | World names with commas between them. | Text |
 
 
 ### Map: Claims
@@ -676,7 +848,8 @@ How these look on the map and who gets them. To change one of them, use /places.
 | On the compass too | These places also show on the compass at the top of the screen, not only on the map. | On or off |
 | Who sees it (permission) | Empty: everyone. With a permission, only players or ranks who have it. | Text |
 | Shown within (blocks) | Only players this near see them. 0: from anywhere. | 0 to 100000 |
-| Only in these worlds | World names with commas between them. Empty: every world. | Text |
+| Only in these worlds | Empty: every world. | Every world, default, Several (type their names) |
+| World names | World names with commas between them. | Text |
 
 
 # Economy (Coins)
@@ -1016,6 +1189,16 @@ Banks earn a little each day on the lowest balance they had since the last payou
 | Most per owner a day | All banks of one owner together, so many small banks earn no more. 0 = no limit. | 0 to 1000000000 |
 | Payout hour | Server time. | 0 to 23 |
 
+#### Money alerts
+
+Tells admins online (and Discord) when a player's money jumps unusually: the usual sign of a dupe or an exploit. Moving money between players and admins' gives never alert. Comes with any Tempest Pro plugin.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Money alerts | /eco, Health shows the limits in use. | On or off |
+| Alert at more made in an hour than | 0 = automatic: 5 times what an active player normally makes in a day. | 0 to 1000000000000 |
+| Alert at one gain over | 0 = automatic: 3 times what an active player normally makes in a day. | 0 to 1000000000000 |
+
 #### Other
 
 #### ATM designs
@@ -1173,8 +1356,9 @@ Posts big moments to a Discord channel. In Discord: Edit channel, Integrations, 
 | Big slot machine wins | The size is set on the Slot Machine tab (Announce wins from). | On or off |
 | Lottery winners | Posts who won each lottery drawing and how much. | On or off |
 | Achievements | Posts when a player unlocks an achievement or finishes a quest that announces itself, and when the server finishes a server quest together. | On or off |
+| Money alerts | Posts when a player's money jumps unusually (Tempest Pro; set on the Coins tab, Money alerts). | On or off |
 | News from other mods | Posts the other big moments: bounties, crate key parties, events starting and ending, finished town projects and unlocks, and battle pass seasons and players who finish them. | On or off |
-| Send a test message when saved | Tick, then Save: a test message is posted if the link works. | On or off |
+| Send a test message | Tick it: a test message is posted if the link works. | On or off |
 
 #### Placeholders
 
@@ -1190,7 +1374,10 @@ Floating text and top lists.
 - Admins: change, move or delete a hologram; /holo lists them
 - Admins: a new hologram like another, where you stand
 - Admins: floating text where you stand; | starts a new line, {placeholders} work
+- Admins: fetch a picture from an https link for holograms
 - Admins: a menu of all holograms: teleport to, edit and delete them
+- Admins: a picture (PNG, JPG or GIF, animated in Pro) where you stand, facing you
+- Admins: give a picture a new name; holograms that show it follow
 - Admins: a live top list where you stand, such as top:money 5; /holo boards lists them
 
 ## Commands
@@ -1200,13 +1387,23 @@ All of them need `holograms.admin`.
 | Command | What it does |
 |---|---|
 | `/holo boards` | List the top lists a hologram can show |
+| `/holo clicktest` | Put up three click boxes to test the F prompt |
 | `/holo copy` | Copy a hologram to where you stand |
 | `/holo create` | Make a hologram where you stand |
 | `/holo delete` | Delete a hologram |
+| `/holo deletepicture` | Delete a picture no hologram shows |
+| `/holo download` | Fetch a picture from an https link |
 | `/holo edit` | Change a hologram's text |
 | `/holo` | Floating text: list, create, edit, move or delete holograms |
+| `/holo link` | An https link to a PNG, JPG or GIF |
 | `/holo menu` | Open the hologram menu: teleport to, edit and delete holograms |
 | `/holo move` | Move a hologram to where you stand |
+| `/holo newname` | The new name |
+| `/holo picture` | Show a picture where you stand |
+| `/holo picturename` | The picture's name |
+| `/holo pictures` | List the pictures holograms can show |
+| `/holo renamepicture` | Give a picture a new name (holograms that show it follow) |
+| `/holo stats` | Show how holograms are doing: pieces, sendings, drawing time |
 
 
 # Shop
@@ -1510,6 +1707,7 @@ Make and change crates in /crates with Edit crates.
 | Crates are open | Off: nobody can open crates. | On or off |
 | Spin time (seconds) | How long the strip runs before it stops on the prize. | 1 to 15 |
 | Prize board time (seconds) | How long the light runs round the prize board (crates with the board style). | 1 to 15 |
+| Prize wheel time (seconds) | How long the prize wheel turns before it stops (crates with the wheel style). | 1 to 15 |
 | Sounds | Ticks while the strip runs, and a bigger jingle the rarer the prize. | On or off |
 | Tell everyone about | Wins of this rarity or rarer are told to the whole server and sent to Discord. | No wins, Common wins and rarer, Uncommon wins and rarer, Rare wins and rarer, Epic wins and rarer, Legendary wins only |
 
@@ -1582,7 +1780,7 @@ Everyone online gets crate keys at once, after a ten-second countdown in chat. S
 | Setting | What it does | Values |
 |---|---|---|
 | A key party every (hours) | 0 = only when an admin types /keyparty. | 0 to 168 |
-| Key | bronze, silver, gold or any item id. | Text |
+| Key | The crate keys come first; any item can be given. | A list |
 | Keys each | How many of the key above each online player gets in a key party: the timed ones, and /keyparty typed without a key and amount. | 1 to 64 |
 | Players online for one by itself | A timed key party waits until at least this many players are online, so keys are not given to an empty server. /keyparty always works. | 1 to 500 |
 
@@ -1803,6 +2001,7 @@ The `/guide` pages of this plugin, as a player sees them on a test server (numbe
 | Command | Who can use it | What it does |
 |---|---|---|
 | `/events` (/event) | Everyone | Server events: what is on, what is coming, and the community goal |
+| `/events drop` | `events.admin` | Send a supply drop now, with an event's drop prizes (admins) |
 | `/events extend` | `events.admin` | More or fewer minutes for the event that is on (admins) |
 | `/events give` (/fund) | Everyone | Put money in the server fund: when it is full, an event starts for everyone |
 | `/events list` | `events.admin` | Every event and the next starts (admins) |
@@ -1934,7 +2133,14 @@ Players post orders; the reward is taken when they post and paid out as items ar
 | Most items in one contract | The most items one contract can ask for. | 1 to 1000000 |
 | Largest reward | The most money one contract can offer. It also limits how much one player can put on one bounty. | 1 to 1000000000 |
 | How long contracts and offers last (hours) | Players pick one of these. Separate with commas, e.g. 24, 72, 168. | Text |
-| Items nobody may ask for or sell | Item ids separated with commas. Coins never can. | Text |
+
+#### Items nobody may ask for or sell
+
+Pick an item in the list to add it; the X takes one out. Coins never can.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Blocked items |  | Text |
 
 #### Permissions
 
@@ -2366,6 +2572,7 @@ Many kills of one kind of mob in one spot pay less and less.
 | Size of a spot (blocks) | Mob farms: kills this close together count as one spot. A farm usually kills in a small area; normal hunting moves around. | 4 to 256 |
 | Each kill after pays less (%) | Mob farms: after the kills that pay in full, each further kill in the same spot pays this much less than the one before. | 0 to 100 |
 | Never under (%) | Mob farms: a kill never pays less than this share of its normal pay, however many there were. | 0 to 100 |
+| Add a mob that never pays |  | Add a mob... |
 | Mobs that never pay | Parts of mob names, commas between: Chicken, Dummy | Text |
 
 #### Jobs on this server
@@ -2454,7 +2661,15 @@ What keeps trades fair.
 | Countdown after both are ready (seconds) | Any change stops it, so nobody can swap an item at the last moment. | 1 to 10 |
 | A request waits (seconds) | How long a /trade request stays open for the other player to accept. After that it is gone. | 10 to 600 |
 | Before asking the same player again (seconds) | How long a player waits before sending the same player another request, so nobody can spam requests. 0: no wait. | 0 to 600 |
-| Items that can never be traded | Item ids, with commas. End with * for every id that starts so: Crate_Key_* | Text |
+
+#### Items that can never be traded
+
+Pick an item in the list to add it; the X takes one out.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Never traded |  | Text |
+| Every id that starts so | End each with *, commas between: Crate_Key_*, Weapon_Debug_* | Text |
 | Log every trade | In the server log and /tempest log: who gave what to whom. | On or off |
 
 
@@ -2476,11 +2691,16 @@ The `/guide` pages of this plugin, as a player sees them on a test server (numbe
 
 **Rules and allies**
 
-- /claims rules shows who may do what: members, allies and visitors, each for building, breaking, using blocks, chests, doors, benches, seats and picking up items. Change a cell with /claims rule. /claims ally <party> and /claims trust <player> make allies. Shops, ATMs, crates and slot machines stay usable for everyone.
+- /claims rules shows who may do what: members, allies and visitors, each for building, breaking, using blocks, chests, doors, benches, seats, picking up items and hurting animals (monsters stay fair game). Change a cell with /claims rule. /claims ally <party> and /claims trust <player> make allies. Shops, ATMs, crates and slot machines stay usable for everyone.
 
 **More land**
 
 - A party may hold more land with more members, with chunks you buy (/claims buy) or earn as rewards, and with what the server gives for levels, ranks and town buildings. Where the server asks for upkeep, keep money in the party bank with /claims deposit.
+
+**Party renown**
+
+- Everything your party does gives it renown: quests, contracts, job pay, events, town projects and the land it holds. Renown raises the party's level, which never goes down and brings more land and the perks the server chose. /claims renown shows your level, perks, what comes next and your party's story.
+- Each season the parties with the most renown win prizes for every member. Games of chance, shop trades and payments never count, new members earn after their first day, and each member has a daily limit per kind of action.
 
 
 ## Commands
@@ -2513,6 +2733,7 @@ The `/guide` pages of this plugin, as a player sees them on a test server (numbe
 | `/claims open` | Everyone | Let anyone join your party, on or off |
 | `/claims paytax` | Everyone | Pay what you owe your party in taxes |
 | `/claims promote` | Everyone | Make a member an assistant |
+| `/claims renown` | Everyone | Your party's renown and level |
 | `/claims rule` | Everyone | Change a rule: /claims rule visitor doors on |
 | `/claims rules` | Everyone | Who may do what on your land |
 | `/claims select` | Everyone | Pick a chunk to claim (the map uses this) |
@@ -2570,6 +2791,7 @@ Rules that keep the map tidy.
 |---|---|---|
 | New land must touch the party's land | The first chunk in a world can be anywhere. | On or off |
 | Free chunks between two parties | 0 = parties may claim side by side. A party that allied another lets it come close. | 0 to 8 |
+| Add a world where nobody may claim |  | Add a world..., default |
 | Worlds where nobody may claim | World names, with commas. | Text |
 | Players can claim while walking | /claims auto: every new chunk the player walks into is claimed, while the limit and money last. | On or off |
 
@@ -2649,6 +2871,350 @@ With Tempest Economy, a party can keep its money in one of its owner's banks.
 | Parties may link a /bank account | /claims bank <name>: taxes and deposits go into that bank, upkeep is paid from it, and it earns the bank's savings interest. Takes effect for new links at once; a server restart switches existing links off when this is off. Only the bank's owner, who must also own the party, can link it. | On or off |
 
 
+### Claims renown
+
+`/tempest` → Claims renown. Who can change it: `tempest.admin` or `tempest.admin.claims`.
+
+#### Party renown
+
+Parties earn renown from what their members do across the Tempest plugins. Levels never go down; a season score starts again every few weeks. Games of chance, shop trades and payments never count.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Renown is on | Off: no party earns renown; levels already reached keep their land. | On or off |
+
+#### Points
+
+Points for each action, and the most one member earns from it a day (0 = no cap). Above the cap a member earns half as much, up to twice the cap.
+
+| Setting | What it does | Values |
+|---|---|---|
+| A quest or achievement finished |  | 0 to 10000 |
+| Daily cap: A quest or achievement finished |  | 0 to 100000 |
+| Items delivered to a contract (per 8 items) |  | 0 to 10000 |
+| Daily cap: Items delivered to a contract (per 8 items) |  | 0 to 100000 |
+| Job pay (per 100 coins) |  | 0 to 10000 |
+| Daily cap: Job pay (per 100 coins) |  | 0 to 100000 |
+| A job level reached |  | 0 to 10000 |
+| Daily cap: A job level reached |  | 0 to 100000 |
+| First place in an event (2nd and 3rd less) |  | 0 to 10000 |
+| Daily cap: First place in an event (2nd and 3rd less) |  | 0 to 100000 |
+| Helped reach an event goal |  | 0 to 10000 |
+| Daily cap: Helped reach an event goal |  | 0 to 100000 |
+| Items given to a town project (per 16) |  | 0 to 10000 |
+| Daily cap: Items given to a town project (per 16) |  | 0 to 100000 |
+| Coins given to a town project (per 500) |  | 0 to 10000 |
+| Daily cap: Coins given to a town project (per 500) |  | 0 to 100000 |
+| A new chunk claimed (each chunk once) |  | 0 to 10000 |
+| Daily cap: A new chunk claimed (each chunk once) |  | 0 to 100000 |
+| Elected mayor |  | 0 to 10000 |
+| Daily cap: Elected mayor |  | 0 to 100000 |
+| Each chunk held, once a day | Land in ruins gives nothing. | 0 to 1000 |
+| Other mods' actions | "action = points" with commas, such as "mymod_boss = 25, mmo_achievement = 5". Each counts per event, with no cap. Any action a mod reports through Tempest Core's PlayerActions. Games of chance, shop trades and payments are left out even if named here. | Text |
+
+#### Fair play
+
+Stops one player or alts from carrying a party.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Only members who are really playing earn | A member who has not turned their view for 5 minutes earns nothing (Tempest Core's activity check), so AFK farms and alts give no renown. | On or off |
+| Hours before a new member earns | Stops players hopping between parties to feed them. | 0 to 720 |
+| Most renown a party earns in an hour | 0 = no ceiling. Land and admins' gifts are not counted. | 0 to 1000000 |
+
+#### Levels
+
+The renown for a level is base × (level - 1) ^ power.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Base |  | 10 to 10000000 |
+| Power | Higher: later levels take much longer. | 1 to 3 |
+| Highest level |  | 1 to 100 |
+| More chunks for each level | From level 2 on, added to the party's limit. | 0 to 100 |
+| Most chunks from renown |  | 0 to 10000 |
+| Tell everyone at every Nth level | 10: the whole server hears about levels 10, 20, 30. 0 = only the party. | 0 to 100 |
+| Season length (weeks) | The season score and its leaderboard start again; levels and land stay. | 1 to 52 |
+| Follow the battle pass season | With Tempest Pass, a renown season starts and ends with the Pass's season instead of after the weeks above. Without the Pass the weeks count. Switching it starts counting again: the season running now pays no prizes. | On or off |
+| Renown from other plugins (a day per member) | Battle pass rewards and other mods, all together. 0 = none. Plugins can give a party renown through Tempest Core (a battle pass tier, another mod's boss). Every plugin's points together count up to this a day per member, half as much up to twice it, then nothing. | 0 to 100000 |
+
+
+### Claims perks
+
+`/tempest` → Claims perks. Who can change it: `tempest.admin` or `tempest.admin.claims`.
+
+#### Perks for party levels
+
+Pick what each perk gives; its fields follow what you pick ("How much" is a percent for upkeep and boosts). Three empty rows show under the last perk; save to get more.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Members who join later get past levels' rewards | Off: items, coins and commands go to the members a party has when it reaches the level. On: members who join later get them too, once they are past the new-member wait. Either way a player gets each level's rewards once, whatever party they are in. | On or off |
+| Perk 1 | Land and member slots add up over the levels. Upkeep and each boost: the highest level reached counts. Items, coins and commands go to every member once, through /mail. The title shows on the party frames. Empty rows are left out; saving moves the rows up so no gaps stay. Games of chance are never boosted. | (empty), More land (chunks), More member slots, Cheaper upkeep (% off), A boost for every member (%), Items for every member, Coins for every member, A command for every member, A party title |
+| Perk 1, level | At party level | 2 to 100 |
+| How much |  | 1 to 1000000 |
+| Perk 1, boost |  | Mob coins, Ore coins, Daily reward, Quest reward, Pass xp, Shop sell, Shop discount, Contract pay, Jobs pay |
+| Perk 1, item |  | A list |
+| Perk 1, command | Run by the console for each member; {player} is their name. | Text |
+| Perk 1, title |  | Text |
+| Perk 2 |  | (empty), More land (chunks), More member slots, Cheaper upkeep (% off), A boost for every member (%), Items for every member, Coins for every member, A command for every member, A party title |
+| Perk 2, level | At party level | 2 to 100 |
+| How much |  | 1 to 1000000 |
+| Perk 2, boost |  | Mob coins, Ore coins, Daily reward, Quest reward, Pass xp, Shop sell, Shop discount, Contract pay, Jobs pay |
+| Perk 2, item |  | A list |
+| Perk 2, command | Run by the console for each member; {player} is their name. | Text |
+| Perk 2, title |  | Text |
+| Perk 3 |  | (empty), More land (chunks), More member slots, Cheaper upkeep (% off), A boost for every member (%), Items for every member, Coins for every member, A command for every member, A party title |
+| Perk 3, level | At party level | 2 to 100 |
+| How much |  | 1 to 1000000 |
+| Perk 3, boost |  | Mob coins, Ore coins, Daily reward, Quest reward, Pass xp, Shop sell, Shop discount, Contract pay, Jobs pay |
+| Perk 3, item |  | A list |
+| Perk 3, command | Run by the console for each member; {player} is their name. | Text |
+| Perk 3, title |  | Text |
+| Perk 4 |  | (empty), More land (chunks), More member slots, Cheaper upkeep (% off), A boost for every member (%), Items for every member, Coins for every member, A command for every member, A party title |
+| Perk 4, level | At party level | 2 to 100 |
+| How much |  | 1 to 1000000 |
+| Perk 4, boost |  | Mob coins, Ore coins, Daily reward, Quest reward, Pass xp, Shop sell, Shop discount, Contract pay, Jobs pay |
+| Perk 4, item |  | A list |
+| Perk 4, command | Run by the console for each member; {player} is their name. | Text |
+| Perk 4, title |  | Text |
+| Perk 5 |  | (empty), More land (chunks), More member slots, Cheaper upkeep (% off), A boost for every member (%), Items for every member, Coins for every member, A command for every member, A party title |
+| Perk 5, level | At party level | 2 to 100 |
+| How much |  | 1 to 1000000 |
+| Perk 5, boost |  | Mob coins, Ore coins, Daily reward, Quest reward, Pass xp, Shop sell, Shop discount, Contract pay, Jobs pay |
+| Perk 5, item |  | A list |
+| Perk 5, command | Run by the console for each member; {player} is their name. | Text |
+| Perk 5, title |  | Text |
+| Perk 6 |  | (empty), More land (chunks), More member slots, Cheaper upkeep (% off), A boost for every member (%), Items for every member, Coins for every member, A command for every member, A party title |
+| Perk 6, level | At party level | 2 to 100 |
+| How much |  | 1 to 1000000 |
+| Perk 6, boost |  | Mob coins, Ore coins, Daily reward, Quest reward, Pass xp, Shop sell, Shop discount, Contract pay, Jobs pay |
+| Perk 6, item |  | A list |
+| Perk 6, command | Run by the console for each member; {player} is their name. | Text |
+| Perk 6, title |  | Text |
+| Perk 7 |  | (empty), More land (chunks), More member slots, Cheaper upkeep (% off), A boost for every member (%), Items for every member, Coins for every member, A command for every member, A party title |
+| Perk 7, level | At party level | 2 to 100 |
+| How much |  | 1 to 1000000 |
+| Perk 7, boost |  | Mob coins, Ore coins, Daily reward, Quest reward, Pass xp, Shop sell, Shop discount, Contract pay, Jobs pay |
+| Perk 7, item |  | A list |
+| Perk 7, command | Run by the console for each member; {player} is their name. | Text |
+| Perk 7, title |  | Text |
+| Perk 8 |  | (empty), More land (chunks), More member slots, Cheaper upkeep (% off), A boost for every member (%), Items for every member, Coins for every member, A command for every member, A party title |
+| Perk 8, level | At party level | 2 to 100 |
+| How much |  | 1 to 1000000 |
+| Perk 8, boost |  | Mob coins, Ore coins, Daily reward, Quest reward, Pass xp, Shop sell, Shop discount, Contract pay, Jobs pay |
+| Perk 8, item |  | A list |
+| Perk 8, command | Run by the console for each member; {player} is their name. | Text |
+| Perk 8, title |  | Text |
+| Perk 9 |  | (empty), More land (chunks), More member slots, Cheaper upkeep (% off), A boost for every member (%), Items for every member, Coins for every member, A command for every member, A party title |
+| Perk 9, level | At party level | 2 to 100 |
+| How much |  | 1 to 1000000 |
+| Perk 9, boost |  | Mob coins, Ore coins, Daily reward, Quest reward, Pass xp, Shop sell, Shop discount, Contract pay, Jobs pay |
+| Perk 9, item |  | A list |
+| Perk 9, command | Run by the console for each member; {player} is their name. | Text |
+| Perk 9, title |  | Text |
+| Perk 10 |  | (empty), More land (chunks), More member slots, Cheaper upkeep (% off), A boost for every member (%), Items for every member, Coins for every member, A command for every member, A party title |
+| Perk 10, level | At party level | 2 to 100 |
+| How much |  | 1 to 1000000 |
+| Perk 10, boost |  | Mob coins, Ore coins, Daily reward, Quest reward, Pass xp, Shop sell, Shop discount, Contract pay, Jobs pay |
+| Perk 10, item |  | A list |
+| Perk 10, command | Run by the console for each member; {player} is their name. | Text |
+| Perk 10, title |  | Text |
+| Perk 11 |  | (empty), More land (chunks), More member slots, Cheaper upkeep (% off), A boost for every member (%), Items for every member, Coins for every member, A command for every member, A party title |
+| Perk 11, level | At party level | 2 to 100 |
+| How much |  | 1 to 1000000 |
+| Perk 11, boost |  | Mob coins, Ore coins, Daily reward, Quest reward, Pass xp, Shop sell, Shop discount, Contract pay, Jobs pay |
+| Perk 11, item |  | A list |
+| Perk 11, command | Run by the console for each member; {player} is their name. | Text |
+| Perk 11, title |  | Text |
+| Perk 12 |  | (empty), More land (chunks), More member slots, Cheaper upkeep (% off), A boost for every member (%), Items for every member, Coins for every member, A command for every member, A party title |
+| Perk 12, level | At party level | 2 to 100 |
+| How much |  | 1 to 1000000 |
+| Perk 12, boost |  | Mob coins, Ore coins, Daily reward, Quest reward, Pass xp, Shop sell, Shop discount, Contract pay, Jobs pay |
+| Perk 12, item |  | A list |
+| Perk 12, command | Run by the console for each member; {player} is their name. | Text |
+| Perk 12, title |  | Text |
+| Perk 13 |  | (empty), More land (chunks), More member slots, Cheaper upkeep (% off), A boost for every member (%), Items for every member, Coins for every member, A command for every member, A party title |
+| Perk 13, level | At party level | 2 to 100 |
+| How much |  | 1 to 1000000 |
+| Perk 13, boost |  | Mob coins, Ore coins, Daily reward, Quest reward, Pass xp, Shop sell, Shop discount, Contract pay, Jobs pay |
+| Perk 13, item |  | A list |
+| Perk 13, command | Run by the console for each member; {player} is their name. | Text |
+| Perk 13, title |  | Text |
+| Perk 14 |  | (empty), More land (chunks), More member slots, Cheaper upkeep (% off), A boost for every member (%), Items for every member, Coins for every member, A command for every member, A party title |
+| Perk 14, level | At party level | 2 to 100 |
+| How much |  | 1 to 1000000 |
+| Perk 14, boost |  | Mob coins, Ore coins, Daily reward, Quest reward, Pass xp, Shop sell, Shop discount, Contract pay, Jobs pay |
+| Perk 14, item |  | A list |
+| Perk 14, command | Run by the console for each member; {player} is their name. | Text |
+| Perk 14, title |  | Text |
+| Perk 15 |  | (empty), More land (chunks), More member slots, Cheaper upkeep (% off), A boost for every member (%), Items for every member, Coins for every member, A command for every member, A party title |
+| Perk 15, level | At party level | 2 to 100 |
+| How much |  | 1 to 1000000 |
+| Perk 15, boost |  | Mob coins, Ore coins, Daily reward, Quest reward, Pass xp, Shop sell, Shop discount, Contract pay, Jobs pay |
+| Perk 15, item |  | A list |
+| Perk 15, command | Run by the console for each member; {player} is their name. | Text |
+| Perk 15, title |  | Text |
+| Perk 16 |  | (empty), More land (chunks), More member slots, Cheaper upkeep (% off), A boost for every member (%), Items for every member, Coins for every member, A command for every member, A party title |
+| Perk 16, level | At party level | 2 to 100 |
+| How much |  | 1 to 1000000 |
+| Perk 16, boost |  | Mob coins, Ore coins, Daily reward, Quest reward, Pass xp, Shop sell, Shop discount, Contract pay, Jobs pay |
+| Perk 16, item |  | A list |
+| Perk 16, command | Run by the console for each member; {player} is their name. | Text |
+| Perk 16, title |  | Text |
+| Perk 17 |  | (empty), More land (chunks), More member slots, Cheaper upkeep (% off), A boost for every member (%), Items for every member, Coins for every member, A command for every member, A party title |
+| Perk 17, level | At party level | 2 to 100 |
+| How much |  | 1 to 1000000 |
+| Perk 17, boost |  | Mob coins, Ore coins, Daily reward, Quest reward, Pass xp, Shop sell, Shop discount, Contract pay, Jobs pay |
+| Perk 17, item |  | A list |
+| Perk 17, command | Run by the console for each member; {player} is their name. | Text |
+| Perk 17, title |  | Text |
+| Perk 18 |  | (empty), More land (chunks), More member slots, Cheaper upkeep (% off), A boost for every member (%), Items for every member, Coins for every member, A command for every member, A party title |
+| Perk 18, level | At party level | 2 to 100 |
+| How much |  | 1 to 1000000 |
+| Perk 18, boost |  | Mob coins, Ore coins, Daily reward, Quest reward, Pass xp, Shop sell, Shop discount, Contract pay, Jobs pay |
+| Perk 18, item |  | A list |
+| Perk 18, command | Run by the console for each member; {player} is their name. | Text |
+| Perk 18, title |  | Text |
+| Perk 19 |  | (empty), More land (chunks), More member slots, Cheaper upkeep (% off), A boost for every member (%), Items for every member, Coins for every member, A command for every member, A party title |
+| Perk 19, level | At party level | 2 to 100 |
+| How much |  | 1 to 1000000 |
+| Perk 19, boost |  | Mob coins, Ore coins, Daily reward, Quest reward, Pass xp, Shop sell, Shop discount, Contract pay, Jobs pay |
+| Perk 19, item |  | A list |
+| Perk 19, command | Run by the console for each member; {player} is their name. | Text |
+| Perk 19, title |  | Text |
+| Perk 20 |  | (empty), More land (chunks), More member slots, Cheaper upkeep (% off), A boost for every member (%), Items for every member, Coins for every member, A command for every member, A party title |
+| Perk 20, level | At party level | 2 to 100 |
+| How much |  | 1 to 1000000 |
+| Perk 20, boost |  | Mob coins, Ore coins, Daily reward, Quest reward, Pass xp, Shop sell, Shop discount, Contract pay, Jobs pay |
+| Perk 20, item |  | A list |
+| Perk 20, command | Run by the console for each member; {player} is their name. | Text |
+| Perk 20, title |  | Text |
+| Perk 21 |  | (empty), More land (chunks), More member slots, Cheaper upkeep (% off), A boost for every member (%), Items for every member, Coins for every member, A command for every member, A party title |
+| Perk 21, level | At party level | 2 to 100 |
+| How much |  | 1 to 1000000 |
+| Perk 21, boost |  | Mob coins, Ore coins, Daily reward, Quest reward, Pass xp, Shop sell, Shop discount, Contract pay, Jobs pay |
+| Perk 21, item |  | A list |
+| Perk 21, command | Run by the console for each member; {player} is their name. | Text |
+| Perk 21, title |  | Text |
+| Perk 22 |  | (empty), More land (chunks), More member slots, Cheaper upkeep (% off), A boost for every member (%), Items for every member, Coins for every member, A command for every member, A party title |
+| Perk 22, level | At party level | 2 to 100 |
+| How much |  | 1 to 1000000 |
+| Perk 22, boost |  | Mob coins, Ore coins, Daily reward, Quest reward, Pass xp, Shop sell, Shop discount, Contract pay, Jobs pay |
+| Perk 22, item |  | A list |
+| Perk 22, command | Run by the console for each member; {player} is their name. | Text |
+| Perk 22, title |  | Text |
+| Perk 23 |  | (empty), More land (chunks), More member slots, Cheaper upkeep (% off), A boost for every member (%), Items for every member, Coins for every member, A command for every member, A party title |
+| Perk 23, level | At party level | 2 to 100 |
+| How much |  | 1 to 1000000 |
+| Perk 23, boost |  | Mob coins, Ore coins, Daily reward, Quest reward, Pass xp, Shop sell, Shop discount, Contract pay, Jobs pay |
+| Perk 23, item |  | A list |
+| Perk 23, command | Run by the console for each member; {player} is their name. | Text |
+| Perk 23, title |  | Text |
+| Perk 24 |  | (empty), More land (chunks), More member slots, Cheaper upkeep (% off), A boost for every member (%), Items for every member, Coins for every member, A command for every member, A party title |
+| Perk 24, level | At party level | 2 to 100 |
+| How much |  | 1 to 1000000 |
+| Perk 24, boost |  | Mob coins, Ore coins, Daily reward, Quest reward, Pass xp, Shop sell, Shop discount, Contract pay, Jobs pay |
+| Perk 24, item |  | A list |
+| Perk 24, command | Run by the console for each member; {player} is their name. | Text |
+| Perk 24, title |  | Text |
+| Perk 25 |  | (empty), More land (chunks), More member slots, Cheaper upkeep (% off), A boost for every member (%), Items for every member, Coins for every member, A command for every member, A party title |
+| Perk 25, level | At party level | 2 to 100 |
+| How much |  | 1 to 1000000 |
+| Perk 25, boost |  | Mob coins, Ore coins, Daily reward, Quest reward, Pass xp, Shop sell, Shop discount, Contract pay, Jobs pay |
+| Perk 25, item |  | A list |
+| Perk 25, command | Run by the console for each member; {player} is their name. | Text |
+| Perk 25, title |  | Text |
+| Perk 26 |  | (empty), More land (chunks), More member slots, Cheaper upkeep (% off), A boost for every member (%), Items for every member, Coins for every member, A command for every member, A party title |
+| Perk 26, level | At party level | 2 to 100 |
+| How much |  | 1 to 1000000 |
+| Perk 26, boost |  | Mob coins, Ore coins, Daily reward, Quest reward, Pass xp, Shop sell, Shop discount, Contract pay, Jobs pay |
+| Perk 26, item |  | A list |
+| Perk 26, command | Run by the console for each member; {player} is their name. | Text |
+| Perk 26, title |  | Text |
+| Perk 27 |  | (empty), More land (chunks), More member slots, Cheaper upkeep (% off), A boost for every member (%), Items for every member, Coins for every member, A command for every member, A party title |
+| Perk 27, level | At party level | 2 to 100 |
+| How much |  | 1 to 1000000 |
+| Perk 27, boost |  | Mob coins, Ore coins, Daily reward, Quest reward, Pass xp, Shop sell, Shop discount, Contract pay, Jobs pay |
+| Perk 27, item |  | A list |
+| Perk 27, command | Run by the console for each member; {player} is their name. | Text |
+| Perk 27, title |  | Text |
+| Perk 28 |  | (empty), More land (chunks), More member slots, Cheaper upkeep (% off), A boost for every member (%), Items for every member, Coins for every member, A command for every member, A party title |
+| Perk 28, level | At party level | 2 to 100 |
+| How much |  | 1 to 1000000 |
+| Perk 28, boost |  | Mob coins, Ore coins, Daily reward, Quest reward, Pass xp, Shop sell, Shop discount, Contract pay, Jobs pay |
+| Perk 28, item |  | A list |
+| Perk 28, command | Run by the console for each member; {player} is their name. | Text |
+| Perk 28, title |  | Text |
+| Perk 29 |  | (empty), More land (chunks), More member slots, Cheaper upkeep (% off), A boost for every member (%), Items for every member, Coins for every member, A command for every member, A party title |
+| Perk 29, level | At party level | 2 to 100 |
+| How much |  | 1 to 1000000 |
+| Perk 29, boost |  | Mob coins, Ore coins, Daily reward, Quest reward, Pass xp, Shop sell, Shop discount, Contract pay, Jobs pay |
+| Perk 29, item |  | A list |
+| Perk 29, command | Run by the console for each member; {player} is their name. | Text |
+| Perk 29, title |  | Text |
+| Perk 30 |  | (empty), More land (chunks), More member slots, Cheaper upkeep (% off), A boost for every member (%), Items for every member, Coins for every member, A command for every member, A party title |
+| Perk 30, level | At party level | 2 to 100 |
+| How much |  | 1 to 1000000 |
+| Perk 30, boost |  | Mob coins, Ore coins, Daily reward, Quest reward, Pass xp, Shop sell, Shop discount, Contract pay, Jobs pay |
+| Perk 30, item |  | A list |
+| Perk 30, command | Run by the console for each member; {player} is their name. | Text |
+| Perk 30, title |  | Text |
+
+
+### Claims seasons
+
+`/tempest` → Claims seasons. Who can change it: `tempest.admin` or `tempest.admin.claims`.
+
+#### The end of a season
+
+When a season ends, the three parties with the most renown that season get bonus renown (to their level, not the new season) and a reward for each member, through /mail.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Season prizes |  | On or off |
+| Tell the whole server who won |  | On or off |
+
+#### 1st place
+
+| Setting | What it does | Values |
+|---|---|---|
+| 1st place: bonus renown |  | 0 to 1000000 |
+| 1st place: reward for each member | Members who joined in the season's last day (the new-member wait) get none, so nobody joins a winning party just for the prize. | Nothing, Items, Coins, A command |
+| 1st place: item |  | A list |
+| 1st place: how many | Items: up to 1,000. Coins: up to 1,000,000. | 1 to 1000000 |
+| 1st place: command | Run by the console for each member; {player} is their name. | Text |
+
+#### 2nd place
+
+| Setting | What it does | Values |
+|---|---|---|
+| 2nd place: bonus renown |  | 0 to 1000000 |
+| 2nd place: reward for each member | Members who joined in the season's last day (the new-member wait) get none, so nobody joins a winning party just for the prize. | Nothing, Items, Coins, A command |
+| 2nd place: item |  | A list |
+| 2nd place: how many | Items: up to 1,000. Coins: up to 1,000,000. | 1 to 1000000 |
+| 2nd place: command | Run by the console for each member; {player} is their name. | Text |
+
+#### 3rd place
+
+| Setting | What it does | Values |
+|---|---|---|
+| 3rd place: bonus renown |  | 0 to 1000000 |
+| 3rd place: reward for each member | Members who joined in the season's last day (the new-member wait) get none, so nobody joins a winning party just for the prize. | Nothing, Items, Coins, A command |
+| 3rd place: item |  | A list |
+| 3rd place: how many | Items: up to 1,000. Coins: up to 1,000,000. | 1 to 1000000 |
+| 3rd place: command | Run by the console for each member; {player} is their name. | Text |
+
+#### Rivals
+
+Each Monday parties of a similar level are paired. The one that gains more renown that week wins the bonus. A race without PvP, so small parties compete with parties their size.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Weekly rivals |  | On or off |
+| Bonus renown for winning a week |  | 0 to 1000000 |
+
+
 ### Claims rules
 
 `/tempest` → Claims rules. Who can change it: `tempest.admin` or `tempest.admin.claims`.
@@ -2667,6 +3233,7 @@ What they may do on the party's land unless the party changes it.
 | Members: use benches |  | On or off |
 | Members: sit and sleep |  | On or off |
 | Members: pick up items |  | On or off |
+| Members: hurt animals |  | On or off |
 
 #### Allies
 
@@ -2682,6 +3249,7 @@ What they may do on the party's land unless the party changes it.
 | Allies: use benches |  | On or off |
 | Allies: sit and sleep |  | On or off |
 | Allies: pick up items |  | On or off |
+| Allies: hurt animals |  | On or off |
 
 #### Visitors
 
@@ -2697,6 +3265,7 @@ Everyone who is not a member or an ally. Parties can change the cells that are n
 | Visitors: use benches |  | On or off |
 | Visitors: sit and sleep |  | On or off |
 | Visitors: pick up items |  | On or off |
+| Visitors: hurt animals |  | On or off |
 | Visitors: PvP is on |  | On or off |
 
 
@@ -2718,6 +3287,7 @@ On: parties cannot change this cell; the server's default always applies.
 | Members: use benches |  | On or off |
 | Members: sit and sleep |  | On or off |
 | Members: pick up items |  | On or off |
+| Members: hurt animals |  | On or off |
 
 #### Allies
 
@@ -2733,6 +3303,7 @@ On: parties cannot change this cell; the server's default always applies.
 | Allies: use benches |  | On or off |
 | Allies: sit and sleep |  | On or off |
 | Allies: pick up items |  | On or off |
+| Allies: hurt animals |  | On or off |
 
 #### Visitors
 
@@ -2748,6 +3319,7 @@ On: parties cannot change this cell; the server's default always applies.
 | Visitors: use benches |  | On or off |
 | Visitors: sit and sleep |  | On or off |
 | Visitors: pick up items |  | On or off |
+| Visitors: hurt animals |  | On or off |
 | Visitors: PvP is on |  | On or off |
 
 
@@ -3175,16 +3747,86 @@ Run by the server console when a player reaches a level: ranks, kits, titles fro
 
 | Setting | What it does | Values |
 |---|---|---|
-| Reward 1 at level | The level at which the command below runs. 0: this reward is off. | 0 to 100000 |
+| Reward 1 at level | The level at which the command below runs. 0: this reward is off. A new empty reward shows below the last one used, up to 40; at the next start they are sorted by level and the empty ones left out. | 0 to 100000 |
 | Reward 1 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
-| Reward 2 at level | The level at which the command below runs. 0: this reward is off. | 0 to 100000 |
+| Reward 2 at level |  | 0 to 100000 |
 | Reward 2 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
-| Reward 3 at level | The level at which the command below runs. 0: this reward is off. | 0 to 100000 |
+| Reward 3 at level |  | 0 to 100000 |
 | Reward 3 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
-| Reward 4 at level | The level at which the command below runs. 0: this reward is off. | 0 to 100000 |
+| Reward 4 at level |  | 0 to 100000 |
 | Reward 4 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
-| Reward 5 at level | The level at which the command below runs. 0: this reward is off. | 0 to 100000 |
+| Reward 5 at level |  | 0 to 100000 |
 | Reward 5 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 6 at level |  | 0 to 100000 |
+| Reward 6 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 7 at level |  | 0 to 100000 |
+| Reward 7 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 8 at level |  | 0 to 100000 |
+| Reward 8 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 9 at level |  | 0 to 100000 |
+| Reward 9 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 10 at level |  | 0 to 100000 |
+| Reward 10 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 11 at level |  | 0 to 100000 |
+| Reward 11 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 12 at level |  | 0 to 100000 |
+| Reward 12 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 13 at level |  | 0 to 100000 |
+| Reward 13 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 14 at level |  | 0 to 100000 |
+| Reward 14 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 15 at level |  | 0 to 100000 |
+| Reward 15 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 16 at level |  | 0 to 100000 |
+| Reward 16 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 17 at level |  | 0 to 100000 |
+| Reward 17 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 18 at level |  | 0 to 100000 |
+| Reward 18 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 19 at level |  | 0 to 100000 |
+| Reward 19 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 20 at level |  | 0 to 100000 |
+| Reward 20 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 21 at level |  | 0 to 100000 |
+| Reward 21 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 22 at level |  | 0 to 100000 |
+| Reward 22 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 23 at level |  | 0 to 100000 |
+| Reward 23 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 24 at level |  | 0 to 100000 |
+| Reward 24 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 25 at level |  | 0 to 100000 |
+| Reward 25 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 26 at level |  | 0 to 100000 |
+| Reward 26 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 27 at level |  | 0 to 100000 |
+| Reward 27 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 28 at level |  | 0 to 100000 |
+| Reward 28 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 29 at level |  | 0 to 100000 |
+| Reward 29 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 30 at level |  | 0 to 100000 |
+| Reward 30 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 31 at level |  | 0 to 100000 |
+| Reward 31 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 32 at level |  | 0 to 100000 |
+| Reward 32 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 33 at level |  | 0 to 100000 |
+| Reward 33 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 34 at level |  | 0 to 100000 |
+| Reward 34 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 35 at level |  | 0 to 100000 |
+| Reward 35 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 36 at level |  | 0 to 100000 |
+| Reward 36 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 37 at level |  | 0 to 100000 |
+| Reward 37 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 38 at level |  | 0 to 100000 |
+| Reward 38 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 39 at level |  | 0 to 100000 |
+| Reward 39 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 40 at level |  | 0 to 100000 |
+| Reward 40 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
 
 #### Leveling XP from the economy
 
@@ -3295,7 +3937,7 @@ Money for each level of a skill. Example: 20 a level, 1 more for each level reac
 | More for each level reached | Mining 30 pays 30 times this on top, so higher levels pay more; 0 is off | 0 to 1000000000 |
 | Skill milestone every | Levels 10, 20, 30... with 10; 0 is no milestones | 0 to 10000 |
 | Milestone bonus | Paid on top at each milestone | 0 to 1000000000 |
-| Milestone items | e.g. Ingredient_Bar_Iron x16, Food_Bread x5; what does not fit goes to /mail | Text |
+| Milestone items |  | Text |
 | Tell everyone at milestones | "Steve reached Mining level 50!" for the whole server | On or off |
 | Only these skills | Skills that pay, by id or name, with commas (Mining, Swords); blank is every skill | Text |
 
@@ -3308,7 +3950,7 @@ Money when a player earns an MMO Skill Tree achievement, once per achievement. S
 | Money per achievement | 0 is off | 0 to 1000000000 |
 | Money per achievement point | Times the achievement's points: harder achievements pay more; 0 is off | 0 to 1000000000 |
 | Server first bonus | On top, for a server first; 0 is off | 0 to 1000000000 |
-| Server first items | Given for a server first, e.g. Ingredient_Bar_Gold x10 | Text |
+| Server first items |  | Text |
 | Tell everyone about server firsts | "Steve is the first on the server to earn Dragon Slayer!" | On or off |
 
 
@@ -3617,6 +4259,25 @@ full list on the **Player actions** page:
 PlayerActions.listen((player, action, amount) -> { ... });
 ```
 
+## Any mod: give party renown
+
+With Tempest Claims, every party has **renown**: a level that never drops and brings land and perks, and a season score
+for the "Most renowned parties" board. Your mod can give a player's party renown for something worth it (a boss, a
+dungeon, a rare find), and read the level to unlock your own things (API 26):
+
+```java
+if (CoreAPI.runningVersion() >= 26) {
+    long got = Claims.addRenown(uuid, "mymod_dragon", 25);   // what the party really got, 0 for none
+    int level = Claims.renownLevel(uuid);                    // the party's level, 0 without a party
+}
+```
+
+Claims decides, with the same rules as its own sources: the player must be in a party, past the new-member wait and
+really playing, and every mod's renown together stays inside a daily cap per member that the admin sets. Without Tempest
+Claims every call answers 0, so nothing needs a second path. Name your source in lower case (`mymod_dragon`): players
+read it on the party's renown page. When a party reaches a level, every member fires the `claims_renown_level` action
+(amount: the level), which `PlayerActions.listen` hears. The **Land claims** section of the Core page has the details.
+
 ## Money
 
 Use the server's economy, whichever plugin keeps it, through `Economies.get()` (the **Money** page). Tempest Economy also
@@ -3772,6 +4433,18 @@ code in a class of its own.
 | 22 | Show-when rules on settings (`shownWhen`, `shownWhenOn`, `shownWhenAboveZero`, `shownWhenChosen`), followed live in the menu; `Levels.has`, `Leveling.has` |
 | 23 | `Hub`: the Tempest hub (`/tempest hub`); plugins add their row and signs with `Registrations.hubArea` and `hubPage`. Comes with the next Core release |
 | 24 | `Claims`: land claims for every plugin (who owns a place, what a player may do there), answered by Tempest Claims or read from Simple Claims; `Registrations.claimsProvider` and `publicBlocks`. Comes with the next Core release |
+| 25 | `PartyHud`: party frames on the screen drawn by Core from a plugin's parties; `Registrations.partyHud` |
+| 26 | Party renown in `Claims`: `renownLevel`, `seasonRenown`, `addRenown` (inside Claims' daily cap for other plugins) and `partiesAtLevel`, answered by Tempest Claims |
+| 27 | `SettingsTab.MOST_SETTINGS`: a settings tab holds up to 250 settings, for tables of rows made of a dropdown and the fields it shows; `ItemRows`, a list of items as rows of item pickers |
+| 28 | `Setting.items`: a list of items shown as one "add an item" dropdown with the items under it (count, X to take one out); `ItemRows.of` now makes one, and `ItemRows.read/add/remove/amount` change its text; `CommandLists`, console commands in a menu as a list (a line per command with an X, one "+ Add a command" dropdown with ready-made rewards: crate keys, coins, a message) |
+| 29 | `ItemLists`, a list of items in a page (a row per item with its count and an X, one "add an item" dropdown); `CommandLists.split` and `join` for commands kept as one line |
+| 30 | `Targets`, a searchable "which one" dropdown of the game's blocks, items or monsters, with families ("Any Ore") |
+| 31 | `Setting.adder`, a searchable "Add..." dropdown that adds names to a list kept as text with commas (shown with the list's own field) |
+| 32 | `ItemData` (`special`, `encode`, `decode`, `describe`): items that carry more than their id (enchantments, other mods' data) kept whole; `Mailbox.Item(id, amount, stack)` and `stack()`, so mail gives them back whole |
+| 33 | Kept exact items for prizes and rewards: `ItemData.problem` (a backpack must be empty, an item a mod tracks by its own id is never copied), `keep`, `kept`, `make`, `tokenOf`, `itemOf`; item lines hold a kept item's token (`Weapon_Sword_Iron#1a2b3c4d x1`); `ItemLists.HAND` and `ItemLists.change(..., held)` |
+| 34 | `ItemData.bookkeeping` and `identity` (a mod's own fields such as ItemDisplay, hashes and versions are never part of what an item is); `ItemData.kindOf`, one key for the same exact item however worn and in whatever order it was written |
+| 35 | The admin's rules for other mods' item fields (`ItemData.rules`, /tempest -> Custom items): fields that change with use (shown, never matched), more bookkeeping, fields that hold items or make an item one of a kind; `ItemData.visible`, `changes`, `displayName` (a mod's own name for the item), `fields` (the inspector, `/tempest item`) |
+| 36 | `Steady`: a page's scrolling lists keep the rows that did not change (same file, same click data), so a click never takes the player back to the top; `new Steady("#List")`, `apply(cmd, events)` before `sendUpdate`, `reset()` in `build` |
 
 
 # Money
@@ -3923,6 +4596,7 @@ PlayerActions.listen((player, action, amount) -> {
 | `town_mayor` | Town | Elected mayor (not set by an admin) | 1 |
 | `claims_claim` | Claims | A chunk claimed for the player's party | A number that stands for the chunk, the same every time |
 | `claims_party` | Claims | Founded or joined a party | 1 |
+| `claims_renown_level` | Claims | The player's party reached a renown level (to every member) | The level |
 | `mmo_skill_level:<id> <name>` (`Skills.SKILL_LEVEL`, API 19) | Core, with MMO Skill Tree | A skill's level went up | The new level |
 | `mmo_skill_xp:<id> <name>` (`Skills.SKILL_XP`, API 19) | Core, with MMO Skill Tree | Skill XP from play | The XP |
 | `mmo_achievement:<id>` (`Skills.ACHIEVEMENT`, API 19) | Core, with MMO Skill Tree | An achievement unlocked | 1 |
@@ -3950,7 +4624,14 @@ CasinoSettings.register(new SettingsTab("Dragons", List.of(
 ), config::save));
 ```
 
-Your tab appears in `/tempest` for admins (permission `tempest.admin`), up to 40 settings. Staff with
+Your tab appears in `/tempest` for admins (permission `tempest.admin`), up to 40 settings (250 from API version 27, `SettingsTab.MOST_SETTINGS`: a table of rows, each a dropdown with `shownWhenChosen` fields, as Tempest Claims' perk table). A list of items kept as one text value ("Ingredient_Bar_Iron x16, Food_Bread x5")
+can show as an item list with `ItemRows.of("Milestone items", 6, true, c::getItems, c::setItems)` (API 27; from API 28
+one "add an item" dropdown with the items under it, each with its count and an X to take it out). In your own page,
+a list of items is `ItemLists` and a list of console commands is `CommandLists` (API 29): `draw(...)` fills an empty
+group with a row per entry and one "add" dropdown, and `change(...)` turns the page's events into the new line, kept
+as before ("Food_Bread x5, Rock_Gem_Diamond"; commands as "cmd ; cmd" with `CommandLists.split` and `join`). For what a goal counts, `Targets.entries(Targets.Kind.BLOCK, "Ore_", current)` gives a searchable dropdown: "Any
+block", families ("Any Ore Iron (5 kinds)") and every block, item or monster of the game (API 30). A list of names kept as text with commas ("Chicken, Dummy") gets a picker with
+`Setting.adder("Add a mob that never pays", "Add a mob...", choices, c::getMobs, c::setMobs)` above its text field (API 31). Staff with
 `tempest.admin.<group>` see only that group's tabs. The group is the title in lower case without spaces
 (`tempest.admin.dragons`); give it yourself when your plugin has more than one tab, so one permission covers them all
 (API 2): `new SettingsTab("Dragon Loot", "dragons", settings, config::save)`.
@@ -4217,6 +4898,17 @@ Mailbox.count(uuid);   Mailbox.of(uuid);   // what is waiting
 The title is a key in your plugin's `server.lang`, so each player reads it in their language. Crates sends keys from
 `/cratekey` and key parties there when the player is not in a world.
 
+An item that carries more than its id (enchantments from Simple Enchantments, a creature in a jar, any mod's data on
+it) goes in whole: `new Mailbox.Item(id, amount, ItemData.encode(stack))` (API 32), and claiming it gives it back with
+everything it had. `ItemData.special(stack)` tells such an item apart, `ItemData.describe(stack)` names what it has
+("Sharpness III"), and a plugin that deals in plain items should leave special ones in the inventory.
+
+For prizes and rewards an admin sets once and players get many times (API 33): `ItemData.problem(held)` says why an
+item must not be copied (it holds other items, or a mod tracks it by its own id), `ItemData.keep(held)` saves it and
+returns a token such as `Weapon_Sword_Iron#1a2b3c4d` that any item line can hold, and `ItemData.make(token, n)` gives
+it back. `Rewards.parseItems` already reads tokens into whole mail items, so a plugin using `Rewards.giveItems` needs
+nothing more. In an item list, `ItemLists.change(..., held)` handles "The item in your hand" (`ItemLists.HAND`).
+
 
 ## Boosts for a while: `Boosts` (API version 5)
 
@@ -4278,11 +4970,11 @@ whoever has it. Cap what you pay players with it, so someone with a discount can
 Check `CoreAPI.runningVersion() >= 10` before using it.
 
 
-# Land claims
+# Land claims and renown
 
-Who owns a place and what a player may do there, from Tempest Claims or Simple Claims.
+Who owns a place and what a player may do there, from Tempest Claims or Simple Claims; party renown and levels.
 
-## Land claims: `Claims` (Core, API version 24)
+## Land claims: `Claims` (Core, API version 24; renown 26)
 
 One question for every plugin: *who owns this place, and may this player do this here?* Tempest Claims answers when it
 runs; else Simple Claims is read through a read-only link (it switches itself off, with a Doctor note, if that mod
@@ -4314,6 +5006,48 @@ core.publicBlocks(id -> MyBlock.isMine(id));   // Registrations; matched by your
 Tempest's stalls, ATMs, crate blocks and slot machines do this. **Your own claims plugin** answers for the suite with
 `core.claimsProvider(new Claims.Provider() { ... })`: `ownerAt`, `may`, `isMember`, and optionally `ownerOf` and
 `chunks`. Answer from memory and never throw.
+
+**Party renown (API version 26).** Tempest Claims gives each party renown and levels;
+any plugin can read them and add to them. Without Tempest Claims everything answers 0.
+
+```java
+int level = Claims.renownLevel(player);          // the level of the player's party, 0 without a party
+long season = Claims.seasonRenown(player);       // the party's renown this season
+long got = Claims.addRenown(player, "mymod_dragon", 25);   // points for the party: what it really got, 0 for none
+int parties = Claims.partiesAtLevel(10);         // parties at level 10 or higher, -1 without renown
+```
+
+`addRenown` follows Claims' own rules: the player must be in a party, past the new-member wait and really playing, and
+every plugin's points together stay inside a daily cap per member (`/tempest` → Claims renown) and the party's hourly
+ceiling. The source is lower case letters, digits and `_ : . -`, at most 32; points 1 to 10,000. Games of chance give
+nothing. A party reaching a level fires `claims_renown_level` (amount = the level) to every member through
+`PlayerActions`. Check `CoreAPI.runningVersion() >= 26` first; a claims provider answers with the optional
+`renownLevel`, `seasonRenown`, `addRenown` and `partiesAtLevel`.
+
+
+## Party frames on the screen: `PartyHud` (Core, API version 25)
+
+Each member of a player's party on the side of the screen: name, how far away (or which world), a health bar and a
+stamina bar, under the party's name with an optional line and bar (a level, a goal). **Core draws them in its own HUD**,
+so they never fight another mod's HUD; a plugin with parties only says who is in the viewer's party. One source at a
+time: Tempest Claims is it when it runs.
+
+```java
+core.partyHud(viewer -> {                                   // Registrations; asked every second, answer from memory
+    MyParty party = parties.of(viewer);
+    if (party == null) return null;                         // no frames
+    List<PartyHud.Member> members = party.members().stream()
+            .map(m -> new PartyHud.Member(m.id(), m.name(), m.isLeader() ? "★" : null)).toList();
+    return new PartyHud.Party(party.name(), "#E05050", members, Message.raw("Level 6"), 0.62f);   // progress < 0: no bar
+});
+PartyHud.refresh(uuid);                                     // draw this player's frames now instead of within the second
+```
+
+Members are listed in your order with the viewer included; Core leaves the viewer out unless they asked to see
+themselves, puts online members first, and shows at most 8. Health and stamina are read by Core. The admin sets the
+defaults in `/tempest` (General, "Party frames"): on or off, place, style (full or compact), most members, offline
+members, the stamina bar, distances, the player's own frame. Players choose with `/partyhud`. Check
+`CoreAPI.runningVersion() >= 25` first and keep the code in a class of its own (Tempest Claims: `PartyFrames`).
 
 
 # Map, hub, town and demand
@@ -4763,7 +5497,7 @@ Floating text, items, statues and rankings.
 
 ## Holograms: `Holograms` (Holograms plugin)
 
-Floating text, coloured text pictures, floating show-only items and player statues, from any plugin (`Holograms.API_VERSION`, 3). Holograms placed through this
+Floating text, coloured text pictures, pictures and animated GIFs, floating show-only items and player statues, from any plugin (`Holograms.API_VERSION`, 5). Holograms placed through this
 API have no limit in either edition; the free edition limits only the ones admins place with `/holo`. Add `"AtomicTempest:Holograms": "*"` to your manifest's
 dependencies (or `OptionalDependencies`, as Crates does) and compile against the Holograms jar (the Maven repository above, `compileOnly`).
 
@@ -4780,6 +5514,10 @@ champion.show(otherUuid);    // another player; null shows nobody
 TextImage banner = Holograms.coloured("myplugin", worldName, feet,
         () -> List.of(Message.raw("<gradient:#FF4040:#40C0FF>Welcome</gradient>"), Message.raw("&aShop &7open")));  // API_VERSION 3
 banner.setSize(1.5f);  banner.setFacing(false, yaw);   // a fixed yaw instead of facing every player
+Picture logo = Picture.read(Path.of("universe/mods/myplugin/logo.png"));  // API_VERSION 5; limits below
+TextImage sign = Holograms.picture("myplugin", worldName, feet, logo, 3f,    // 3 blocks wide
+        TextImage.PictureFrame.PANEL, 256, true);                           // frame, detail (px), animate a GIF
+sign.setPictureWidth(4f);  sign.setFacing(false, yaw);  sign.setPictureSpeed(2f);  // a GIF twice as fast
 Holograms.texts();           // every plugin's floating text now (API_VERSION 3; /holo menu lists them)
 Colours.strip("&cRed");      // "Red"; Colours.runs(...) splits a line into coloured pieces for menus
 Holograms.removeAll("myplugin");   // in shutdown()
@@ -4790,9 +5528,35 @@ Holograms.removeAll("myplugin");   // in shutdown()
   they play, and to each player who joins. Codes: `&c` and the other 15 classic colours, `&#FF8800` or `<#FF8800>`,
   `<red>`..`</red>`, `<gradient:#F00:#00F>text</gradient>`, `<rainbow>text</rainbow>`. Everyone sees the same
   picture: the server's language, placeholders for nobody (server-wide ones work). A changed text is drawn again
-  at most every 15 s, and only while a player is near. By default it faces every player at once: each player's copy
-  of its turn is rewritten on the way out (the same packet watcher as the languages), 20 times a second while players move. Plain floating text leaves the codes out, since the game draws it in white.
+  at most every 15 s, and only while a player is near. By default it faces every player at once: a game system in the
+  tracker's update step (`Turning`) queues each player their own turn in their own entity updates, only when their
+  angle to it changed by 2 degrees. Plain floating text leaves the codes out, since the game draws it in white.
+- Coloured text with a source is worked out again at most every `Settings.colouredRefreshSeconds()` (default 60,
+  since API_VERSION 5): every new picture costs the players in its world a texture reload. Pictures go only to players
+  in the piece's world, gathered for up to 1.5 s so pieces drawn together cost one reload; a player who comes into the
+  world later gets what their game lacks.
+- Pictures drawn while nobody is online (a server start) go in the game's asset list (`CommonAssetModule.addCommonAsset`,
+  pack `AtomicTempest:HologramPictures`), so they reach players on their loading screen and the client keeps them by
+  hash. Never while players are online: that method shows every player an "assets reloaded" notice. Holograms needs
+  to know when each connection began (`Holograms.connecting(uuid)`, called from `PlayerSetupConnectEvent`).
+- Fonts (API_VERSION 5): `TextStyle` has a fifth part, `TextFont` (DEFAULT, FANTASY, MEDIEVAL, SERIF, COMIC, CURSIVE,
+  PIXEL, MONO); the four-part constructor keeps the default font. `Holograms.stats()` gives what /holo stats shows.
+  `ClickSpot.setUseInteraction(root)` picks the root interaction Use runs (`USE_OPEN_PAGE`, `USE_LIKE_NPC`, `USE_SIMPLE`);
+  the hint goes to each player who starts seeing a box from a system in the tracker's update step (`ClickHints`).
+- Pages (API_VERSION 5): `setPageSeconds(seconds)` splits the lines at `TextImage.PAGE_BREAK` ("---") lines; all
+  pages are drawn once as a flip book that each player's game turns (pages that do not fit in a 1024 px texture are
+  drawn a few at a time).
 
+- Pictures (API_VERSION 5): `Picture.read(bytes or path)` takes PNG, JPG, BMP and GIF and refuses anything over
+  8 MB, 4096 pixels a side or 16 million pixels, reading the size from the file's header before any pixels; an
+  animated GIF keeps up to 120 frames with their timing (frames are drawn on its canvas the way browsers do).
+  `Holograms.picture` hangs it like coloured text: a texture and a two-sided model sent to every player, so keep
+  pictures few and small (detail 128 to 512 px; each texture stays under about 3 MB). An animated GIF becomes a flip
+  book: its frames stacked in one texture (at most 2048 px tall, frames left out evenly if needed, keeping the timing)
+  and a model animation (`shapeUvOffset` steps, as the game's own fire) that plays on each player's game as the
+  model's idle animation, so nothing is sent while it plays. The overload with a `Supplier<Picture>` reads the
+  picture on the Holograms picture thread. `Holograms.previewColours(picture, frame, cols, rows[, frameIndex])` gives the colours
+  of a small preview for a page made of coloured cells (as `/holo menu` shows it).
 - A statue is a life-size figure of a player as they looked when they last joined (Holograms keeps each player's
   skin in `universe/mods/holograms/skins.json`), turning to face the nearest player. It shows nothing for a player
   Holograms has not seen join. Leaderboard holograms placed with `/holo` can stand their first place on top
@@ -5090,17 +5854,17 @@ Every class and method of each plugin's API.
 
 The javadoc lists every public class and method of each plugin's API, for the newest version published here:
 
-- [Coinflip 1.0.4](javadoc/coinflip/)
-- [Coins 2.4.1](javadoc/coins/)
-- [Core 1.6.0](javadoc/core/)
-- [Holograms 1.2.2](javadoc/holograms/)
-- [Jobs 1.1.1](javadoc/jobs/)
-- [Lottery 1.1.3](javadoc/lottery/)
-- [Pass 1.3.0](javadoc/pass/)
-- [Projects 1.1.1](javadoc/projects/)
-- [Quests 1.5.0](javadoc/quests/)
-- [Shop 1.5.1](javadoc/shop/)
-- [SlotMachine 1.2.3](javadoc/slotmachine/)
+- [Coinflip 1.0.6](javadoc/coinflip/)
+- [Coins 2.6.0](javadoc/coins/)
+- [Core 1.7.1](javadoc/core/)
+- [Holograms 1.4.0](javadoc/holograms/)
+- [Jobs 1.2.0](javadoc/jobs/)
+- [Lottery 1.1.4](javadoc/lottery/)
+- [Pass 1.4.0](javadoc/pass/)
+- [Projects 1.2.0](javadoc/projects/)
+- [Quests 1.6.0](javadoc/quests/)
+- [Shop 1.6.0](javadoc/shop/)
+- [SlotMachine 1.2.5](javadoc/slotmachine/)
 
 Core's stable API is `com.atomictempest.core` (except `Main`) and its `economy`, `help` and `settings` packages; each other plugin's is its `api` package.
 
@@ -5108,6 +5872,291 @@ Core's stable API is `com.atomictempest.core` (except `Main`) and its `economy`,
 # Changelog
 
 Every release of the Tempest plugins, newest first.
+
+## 2026-11-19
+
+### Core 1.7.1
+
+- Fixed: a short freeze 10 seconds after an admin joined, while the money check ran.
+
+### Holograms 1.4.0
+
+- Pictures in holograms: pick a PNG, JPG or GIF in /holo menu, or paste an https link and press Get; it hangs above the lines, any width, with a border, a dark panel or round corners, and a preview in the menu before you save.
+- Animated GIFs play in the world in the Pro edition (the free edition shows the first frame). They play smoothly on each player's game, with nothing sent while they play.
+- A clearer editor in tabs: Content (the lines, a top list, what Use does), Look (colours, size, hours, how far it is seen), Placement (aim, hide the menu, small steps) and Picture, with the name, kind and where it is always on top. Pick the hologram's Kind (Text, Top list or Picture) and only that kind's settings show.
+- Live editing: every change shows on the hologram in the world as you make it; Save keeps it, Cancel (or closing the menu) puts it back. New holograms appear a few blocks in front of you, facing you.
+- Aim to place: the menu closes and the hologram follows the block you look at; left-click (or crouch) sets it down, right-click puts it back, and the menu opens again. Hide menu lets you walk round the hologram before saving; crouch twice (or /holo menu) to bring the menu back. A line on the board says what is going on.
+- Place it exactly: Raise and Lower move it a quarter block, Face me turns it towards you, Turn turns it 45°, and "In front of me" brings it to you.
+- Lines under a picture now hang below it instead of overlapping it.
+- Fixed: a hologram that floats or spins and turns to face players could stop moving while someone walked by it. A spinning hologram no longer turns to face players (the spin shows every side), and a moving picture keeps playing whatever the game thinks it is doing. A hologram set to face one way is never turned towards players.
+- Facing: a hologram turns to each player as they walk round it, turns and also leans up or down towards their eyes, or faces one fixed way (Look tab, and the Picture tab for pictures).
+- Opacity for pictures: solid, 85%, 70%, 50% or 30%.
+- Seen only by a permission: a hologram can show only to players with a permission (Look tab, "Seen only by"), such as a VIP sign. Other players' games never get it at all. Admins with holograms.admin always see every hologram, so they can still edit it. Who has the permission is read when a player joins.
+- Picture slideshows: add more pictures after the first on the Picture tab (+ Add a picture) and choose how many seconds each shows; they take turns on each player's game with nothing sent while they play (Pro, like GIFs).
+- Fixed: opening a hologram in the editor no longer makes it disappear. It only changes once you change something (and goes back to how it was saved if you change it back). A hologram drawn again after an edit could also stay invisible, because its new picture reused the name of the one still showing; the names now take turns properly.
+- Coloured text without typing codes: pick a Text colour and a Behind colour with the game's colour picker, how strong what is behind is (light to solid), and whether lines sit centred, left or right (Look tab). Picking one turns Colours on; Reset puts them back. Colour codes in a line (&c, &#FF8800, <gradient>) still colour it letter by letter from where they stand, and &r goes back to the picked Text colour.
+- Letter styles in coloured text: &l bold, &o italic, &n underline and &m strikethrough (or <bold>, <italic>, <underlined>, <strikethrough>), letter by letter. A colour code clears them, as in Minecraft: &c&lHot is red and bold.
+- Lighter on players' games: a hologram changed in several ways at once (text, colour, effect, motion) is drawn and sent once, not once per change, and a player who joins gets every picture in one go. Each sending makes the game load its textures again (about a second), so this also cuts down stutter and repeated warnings from other mods.
+- Lighter on the server and players' connections: a hologram that turns to face players now turns again only when a player's angle to it changes by a couple of degrees, not on every step they take; players far away hardly cost anything.
+- Much less stutter for players: - Coloured holograms with pages draw all their pages once, and each player's game turns them by itself. Before, every page turn sent a new picture, and every player's game reloaded its textures (a short freeze) each time. - Pictures drawn at about the same time (a server start, several top lists refreshing) go out together: one texture reload instead of one per hologram. - A picture goes only to the players in its world, and a player never gets one their game already has. Someone in another world feels nothing when a hub top list changes; they get its picture when they go there. - New setting "Refresh coloured text (seconds)", default 60: how often coloured holograms with placeholders or top lists are drawn again at most (plain floating text still follows "Refresh placeholders").
+- Lighter on the server: turning a hologram to face players is now done the way the game turns anything, in its own tick, with each player sent only their own turn. Before, every turn went to everyone nearby and was rewritten for each of them.
+- Plain floating text with placeholders now resends only the lines with placeholders on each refresh, not all lines.
+- Eight fonts for coloured text, chosen in the editor's style row: Rounded (as before), Fantasy, Medieval, Serif, Comic, Cursive, Pixel and Mono. Letters a font does not have (Cyrillic in some) come from the rounded font. All are free fonts (SIL Open Font License, the licences are in the jar).
+- /holo stats: how many holograms of each kind there are, how many entities they have in the world now, how many pictures players got on their loading screen and how many were sent while playing (and how many MB), and how long drawing a picture takes.
+- Pictures drawn when the server starts go in the game's own asset list: players who join get them on their loading screen like the game's own textures (no freeze after joining), and their game keeps them, so after the next restart an unchanged picture is not downloaded again.
+- Floating and spinning keep their speed on long GIFs and pages (they float about every 3 seconds and turn about every 6, however long the animation is).
+- Rename a picture on the Picture tab, or with /holo renamepicture <picture> <new name>; every hologram that shows it follows the new name.
+- With the menu hidden, a click brings it back (crouching does not work while flying in creative); two crouches still work too.
+- Fixed: long GIFs and coloured text with an effect could slip between frames, show only their first letter, or turn black in game. Pictures now stay within the size the game takes (frames in rows and columns, at most 1024 pixels a side), long GIFs use smaller frames to play smoothly, and text effects step through their frames the right way.
+- Templates: "New from a template" starts a Welcome sign, Rules, Richest players, a Shop or Spawn sign, an Event or a Discord link, ready to change and save.
+- A better list: search by name or text, and show only this world, holograms near you, text, top lists, pictures, clickable or hidden ones. Each row's More menu can Bring it here, Copy it here, or Hide it without deleting it.
+- More for a click: send the player a message (colour codes, {player}), make them wait before they can click again, or let only players with a permission use it. A hologram can now do just one of these, with no command.
+- Motion: a picture or coloured text can float gently up and down, spin, or both; it moves on each player's game with nothing sent while it moves (Motion on the Picture tab, and on the Look tab for coloured text).
+- Effects for coloured text: Typing (the letters appear one after another), Shine (a bright band sweeps across) and Rainbow; they play on each player's game with nothing sent while they play (Effect on the Look tab).
+- GIF speed (Pro): play an animated picture from 4x slower to 4x faster, set in the editor.
+- The Picture tab shows the real picture, sharp, as the game draws it (coloured squares while it loads).
+- The menu's preview plays GIFs: drag the timeline to any frame, step with < and >, or press Play; it says how many frames there are and how long a round takes.
+- The editor says which other holograms show the same picture, /holo pictures marks pictures nothing uses, and /holo deletepicture <name> deletes one (never a picture a hologram still shows).
+- New commands: /holo picture <name> <picture>, /holo pictures, /holo download <picture> <link>. Pictures live in universe/mods/holograms/pictures, so owners can also copy files there.
+- Safe by design: links must be https and on the internet (never the server's own network), files are limited to 8 MB and 4096 pixels a side and are checked before anything is saved, and fetching from links can be switched off in /tempest → Holograms.
+- The line editor's text boxes are wider and its buttons no longer get cut off in game.
+- For developers: Picture, Holograms.picture, Holograms.previewColours (any frame), TextImage.setPictureSpeed, TextImage.setPictureMotion, TextImage.setTextEffect and MenuImages, a picture in a menu (API version 5).
+
+### Coins 2.6.0
+
+- Economy health on /eco (new Health tab): whether the server's money is steady, growing or shrinking, by how much this week, and which plugin makes the most money and which takes the most back.
+- With any Tempest Pro plugin: advice on what to change (such as which rewards to lower first), the last two weeks day by day (money made, destroyed and on the server), and money alerts.
+- Money alerts (with any Tempest Pro plugin): admins online, and your Discord channel, are told when a player's money jumps unusually, one big gain or much more in an hour than players normally make in a day: the usual sign of a dupe or an exploit. The limits set themselves from your server's own numbers, or set them in /tempest → Coins. Money moved between players and admins' gives never alert.
+
+### Crates 1.6.0
+
+- Four new ways to open a crate, picked per crate in /crates → Edit → Style: a prize wheel, a rarity climb, a prize grid, and pick-your-prize (Pro).
+- Prize wheel: the crate's prizes sit round a wheel that spins under a pointer and slows to a stop on the prize won.
+- Rarity climb: a meter climbs Common, Uncommon, Rare, Epic, Legendary, ringing at each new rarity, and stops at the prize's rarity before the prize shows. The rarer the prize, the longer the climb.
+- Prize grid: every prize on a 4 x 4 grid, a light jumping between them until it lands on the prize won.
+- Pick your prize (Pro): three different prizes are shown and the player takes the one they want; pity still counts, so a due Epic is always one of the three. Closing the menu takes the first one, so nothing is ever lost.
+- Rare, Epic and Legendary prizes are revealed with a burst of light in the rarity's colour (more rays the rarer).
+- Every opening stops exactly on what was won: no fake near-misses.
+- The wheel's time is its own setting ("Prize wheel time (seconds)", default 6).
+- Lighter on the server: crate blocks work out their circling prizes every 2 seconds instead of 20 times a second.
+
+### Events 1.4.0
+
+- Supply drops: during an event a crate lands near a random player, shows on the M map (and with Tempest Holograms a countdown sign over it), and the first player to reach it wins its coins, items and commands. Set how many drops an event has and what they give in /events → Edit; /events drop <event> drops one now.
+- Drops never land in water, on leaves or trees, or on claimed land (Tempest Claims), and one nobody reaches in 10 minutes disappears again.
+
+### Projects 1.2.0
+
+- Building sites on the M map, with each building's name and how far it has come ("Town Hall: 45% built"). On or off, icon and colour in /tempest → Map: Building sites.
+- Fixed: a short freeze (50-70 ms) about 20 seconds after each server start, while a building site read its building.
+
+## 2026-11-13
+
+### Core 1.7.0
+
+- Party frames: each party member on screen with name, health, stamina and distance, under the party's name (/partyhud). A Party frames tab in /tempest sets place, style, members, offline members, stamina and distances.
+- Enchanted and other mods' items are kept whole: enchantments (Simple Enchantments), reforges and sockets (Socket Reforge) and any mod's item data survive mail, rewards, prizes, shops and the market, and are named in plain words ("With Sharpness III", "Refinement Level 3, Socket Max 2").
+- Prizes and rewards can be an exact item: lists have "The item in your hand, exactly as it is". Safe against dupes: an item that holds other items (a backpack must be empty), one a mod tracks by its own id, or one with too much data is never copied, and the menu says why ("Can't copy").
+- New /tempest → Custom items tab sets how other mods' item fields are treated: fields that change with use (shown, never matched, so a sword that gained experience still sells back), extra bookkeeping to hide, fields that hold items or make an item one of a kind. The defaults suit the mods we know.
+- New /tempest item: shows every field of the item in your hand, what players read, its key and whether it can be copied.
+- A mod's own name for an item ("Iron Sword +3") shows in shops, the market, lists and mail.
+- Scrolling lists keep their place: a click, a timer update or a new row no longer takes the player back to the top (mail, places, texts, doctor, /tempest and every Tempest page with a list).
+- /tempest settings save the moment they change; there is no Save button any more. A value that isn't allowed is not saved and the status line says why. Undo puts the tab back as it was when you opened it, and the admin log gets one line per changed setting.
+- Settings that differ from how they come are tagged "changed" (hover to see the default); Reset to defaults puts a tab back.
+- Item lists are one searchable "add an item" dropdown, with each item below it (icon, name, count, X to remove).
+- Console command lists: one line per command with an X, and an "+ Add a command" dropdown of ready-made rewards (crate keys, coins, a message).
+- Dropdowns and pickers instead of typed lines in more menus: server info lines (Text, Heading or a gap), map place colours and worlds, the commands at levels (a list, up to 40, not five fixed slots).
+- Map places read players the way Hytale 0.7.7 wants (the old way is marked for removal there).
+- Settings tabs can hold up to 250 settings.
+- For developers: Core API 25 to 36 adds PartyHud, party renown (renownLevel, seasonRenown, addRenown, partiesAtLevel), ItemData and kept exact items, CommandLists, ItemRows and ItemLists, Targets (pick blocks, ores or monsters with families), Setting.adder and Setting.permission, and Steady (lists that keep their place). Nothing old changed.
+
+### Holograms 1.3.0
+
+- Hologram lines get a "+ Value" dropdown that shows what each placeholder says right now, so you no longer have to remember them.
+- "Use on it" has a searchable list of the server's commands (typing still works).
+- Scrolling lists in the hologram list and the line editor keep their place when you click.
+
+### Coins 2.5.0
+
+- The bank, wallet and leaderboard pages keep their scroll place when you click or the page updates.
+- Coins settings in /tempest save the moment they change, and settings you changed are tagged "changed" against their defaults.
+- Reset to defaults now works for the Coins tabs.
+
+### SlotMachine 1.2.5
+
+- Slot Machine settings in /tempest are tagged "changed" against their defaults, save the moment they change, and Reset to defaults works for them.
+
+### Shop 1.6.0
+
+- Enchanted items in the shop: hold an enchanted item and add it, and the shop sells it with its enchantments ("With Knockback III", marked "Enchanted"). A plain item and any number of enchanted ones of it are each their own line, side by side.
+- Enchanted lines buy back the same enchanted item at its sell price (worn ones by your condition rules), matched by what it carries in any order and however worn. A plain sword never sells to an enchanted line, nor an enchanted one to the plain line.
+- Security fix: selling (Sell, sell everything and /sell) compares the item's full data, so an item made to look like an enchanted line can never sell at its price.
+- Items from other mods: each mod with items in the shop gets its own entry on the side with its name and an icon ("Socket Reforge", "Simple Enchantments"), and new sort orders "By mod" and "By material". A mod's own item name shows on the card.
+- Items that can't be copied safely (a full backpack, an item a mod tracks by its own id) show "Can't copy" and say why, instead of being added.
+- Buyers always get fresh copies at full durability.
+- Shop pages keep their scroll place when you click.
+
+### Quests 1.6.0
+
+- Quest rewards can be an exact item (enchanted, other mods' items): "Add item in hand" keeps it exactly as it is.
+- New quest goal: reach a party level (with Tempest Claims party renown).
+- Quest items are picked from one "add an item" dropdown (each with its count and an X), and a quest can run up to 5 commands, picked from ready-made rewards or typed.
+- The quest editor and journal keep their scroll place when you click.
+
+### Crates 1.5.0
+
+- Crate prizes can be an exact item: "Add held item" keeps enchantments and other mods' data, with the dupe checks.
+- The key for party key drops is picked from a dropdown (the crate keys first).
+- Crate settings save the moment they change.
+- The crate list and prize editor keep their scroll place when you click.
+
+### Coinflip 1.0.6
+
+- Coinflip pages keep their scroll place when they update or you click.
+
+### Pass 1.4.0
+
+- New tier reward: party renown (Tempest Claims). It waits until the player is in a party, past the new-member wait.
+- Rewards can be an exact item: "Item in hand" keeps enchantments and other mods' data.
+- A "Ready-made reward..." dropdown fills in a reward's command and its name (crate keys, coins, a message).
+- Renown seasons in Tempest Claims can follow the pass season (a Claims setting, off by default).
+- Pass pages keep their scroll place when you click.
+
+### Events 1.3.0
+
+- Pick which blocks, ores or monsters a goal counts from a searchable list, with families ("Any Ore Iron (5 kinds)"). Typing still works, and goals that never look at ids hide the filter.
+- Event prizes can be an exact item: "The item in your hand, exactly as it is" (enchanted, other mods' items), and changing the count keeps it exact.
+- Goal and 1st to 3rd place prize items are one "add an item" dropdown with the items under it.
+- Console commands in the editor are one line per command with an X and ready-made rewards to add.
+- The goal bar no longer draws on a page without a goal.
+- Event pages keep their scroll place when you click.
+
+### Contracts 1.4.0
+
+- The market takes enchanted and other mods' items exactly as they are: list the item in your hand, and an enchanted sword is its own market item. The real item waits in the listing and goes to the buyer, or back to the seller, whole.
+- The market and contract deliveries never take an enchanted item as a plain one.
+- A mod's own item name shows in the market.
+- Blocked items are one "add an item" dropdown; server orders' console commands are a list with ready-made rewards.
+- Settings save the moment they change, and changed settings are tagged against their defaults.
+- Market and contract lists keep their scroll place when you click.
+
+### Projects 1.1.3
+
+- Project lists keep their scroll place when you click.
+
+### Town 1.3.0
+
+- New unlock condition: a number of parties at a party renown level (Tempest Claims), for example "two parties at level 10".
+- The commands run when an unlock is unlocked or locked again are a list with ready-made rewards.
+- Town pages keep their scroll place when you click.
+
+### Jobs 1.2.0
+
+- The pay table and mob tiers are clean tables with one header line, every row on one line. "+ Add a tier" is the last row, and each tier has a better sword than the one before.
+- The add bar says "Add what pays:" and lists what the job is paid for: mobs for a hunter, blocks for breaking, building and harvesting, items for crafting, with groups such as "Any Ore". Picking one adds its row at once.
+- Level rewards are a list ("+ Add a level reward", up to 50), not five fixed slots. Each reward's items and commands use the item dropdown and command list.
+- Level rewards can be an exact item (enchanted, other mods' items).
+- Adding or removing a row no longer jumps the editor back to the top.
+- "Mobs that never pay" is picked from a searchable list of the game's monsters.
+- Jobs settings are tagged when changed and Reset to defaults works for them.
+
+### Trade 1.1.0
+
+- Blocked items are one searchable "add an item" dropdown with the items under it.
+- Trade settings save the moment they change, are tagged "changed" against their defaults, and Reset to defaults works for them.
+
+### Claims 1.1.0
+
+- Party renown: everything a party does on your server (quests, contracts, jobs, events, projects, new land, land held) earns renown. Party levels never drop and add land. Daily caps per member, a wait for new members, and only active players count; games of chance and trades never count.
+- Renown perks for party levels, edited in /tempest → Claims perks: more land, member slots, cheaper upkeep, boosts, items, coins or a command to every member's /mail, and titles on the party frames. Each player gets a level's reward once, whatever party they are in.
+- Renown seasons: when a season ends, the top three parties get bonus renown and a prize for every member, and the whole server hears who won. Weekly rivals (off by default) pair parties of a similar level each Monday.
+- The renown page (/claims renown, or Renown on the claim page): level and bar, season place and days left, perks now and next, points by member and by source, and the party chronicle (founded, joined, levels, land, events won, mayors).
+- Party frames on screen for every party, and the board shows the party level where you stand ("Land: Red Dragons · Lv 6").
+- New rule "animals": only members may hurt creatures that are not hostile (cattle, sheep, chickens, neutral creatures) on the land; monsters stay fair game. Hits by hand, arrows or anything else a player causes are stopped. Allies and visitors are refused by default, and parties and admins can change and lock it like every rule.
+- "Pick up items" now also covers items lying on the ground, not only drops from breaking a block: a player who may not pick up there walks over them.
+- Land saved before the animals rule gets it refused for allies and visitors once (members keep it); later choices are kept.
+- Security fix: only a full Tempest admin (tempest.admin) can change renown perk and season prize commands, which run as the console; staff with only the Claims tabs no longer can.
+- Perks and season prizes are picked from dropdowns and item pickers; "Worlds where nobody may claim" picks from the server's worlds.
+- New placeholders, a "Most renowned parties" leaderboard, level-up messages and /claims admin renown.
+- Claim map spots read players the way Hytale 0.7.7 wants.
+
+## 2026-11-10
+
+### Core 1.6.1
+
+- Claims, land claims every plugin asks, with a read-only Simple Claims link
+- no PvP inside the Tempest hub and areas protected with /tempest hub protect-area
+- the update notice shows -> instead of an arrow the game cannot draw, and one line per plugin when many were updated
+- the ready-made hub becomes a plaza - marble avenues, a gold monument, a bank, a crate shrine, a market and a casino
+- the Tempest hub - /tempest hub place builds every plugin's blocks and page signs, and spawns can be protected
+
+### Holograms 1.2.3
+
+- the Tempest hub - /tempest hub place builds every plugin's blocks and page signs, and spawns can be protected
+
+### Coins 2.4.2
+
+- a bank shows what another plugin linked it to (CoinsAPI.bankNote), on its page and its card in /bank
+- banks for other plugins in CoinsAPI 5 - find a /bank account, check who may use it, pay in and take out
+- ATMs, shop stalls, crate blocks and slot machines stay usable on claimed land
+- the Tempest hub - /tempest hub place builds every plugin's blocks and page signs, and spawns can be protected
+
+### Lottery 1.1.4
+
+- the Tempest hub - /tempest hub place builds every plugin's blocks and page signs, and spawns can be protected
+
+### SlotMachine 1.2.4
+
+- ATMs, shop stalls, crate blocks and slot machines stay usable on claimed land
+- the Tempest hub - /tempest hub place builds every plugin's blocks and page signs, and spawns can be protected
+
+### Shop 1.5.2
+
+- ATMs, shop stalls, crate blocks and slot machines stay usable on claimed land
+- the Tempest hub - /tempest hub place builds every plugin's blocks and page signs, and spawns can be protected
+
+### Quests 1.5.1
+
+- goals for claiming land and founding or joining a party (Tempest Claims)
+- the Tempest hub - /tempest hub place builds every plugin's blocks and page signs, and spawns can be protected
+
+### Crates 1.4.2
+
+- ATMs, shop stalls, crate blocks and slot machines stay usable on claimed land
+- the menu's spin ends when the crate block drops the prize
+- the Tempest hub - /tempest hub place builds every plugin's blocks and page signs, and spawns can be protected
+
+### Coinflip 1.0.5
+
+- the Tempest hub - /tempest hub place builds every plugin's blocks and page signs, and spawns can be protected
+
+### Pass 1.3.1
+
+- the Tempest hub - /tempest hub place builds every plugin's blocks and page signs, and spawns can be protected
+
+### Events 1.2.2
+
+- the Tempest hub - /tempest hub place builds every plugin's blocks and page signs, and spawns can be protected
+
+### Contracts 1.3.2
+
+- the Tempest hub - /tempest hub place builds every plugin's blocks and page signs, and spawns can be protected
+
+### Projects 1.1.2
+
+- the Tempest hub - /tempest hub place builds every plugin's blocks and page signs, and spawns can be protected
+
+### Town 1.2.3
+
+- the Tempest hub - /tempest hub place builds every plugin's blocks and page signs, and spawns can be protected
+
+### Jobs 1.1.2
+
+- the Tempest hub - /tempest hub place builds every plugin's blocks and page signs, and spawns can be protected
+
+### Claims 1.0.0
+
+- First release.
 
 ## 2026-11-09
 

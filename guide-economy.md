@@ -335,6 +335,16 @@ Banks earn a little each day on the lowest balance they had since the last payou
 | Most per owner a day | All banks of one owner together, so many small banks earn no more. 0 = no limit. | 0 to 1000000000 |
 | Payout hour | Server time. | 0 to 23 |
 
+#### Money alerts
+
+Tells admins online (and Discord) when a player's money jumps unusually: the usual sign of a dupe or an exploit. Moving money between players and admins' gives never alert. Comes with any Tempest Pro plugin.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Money alerts | /eco, Health shows the limits in use. | On or off |
+| Alert at more made in an hour than | 0 = automatic: 5 times what an active player normally makes in a day. | 0 to 1000000000000 |
+| Alert at one gain over | 0 = automatic: 3 times what an active player normally makes in a day. | 0 to 1000000000000 |
+
 #### Other
 
 #### ATM designs
@@ -492,8 +502,9 @@ Posts big moments to a Discord channel. In Discord: Edit channel, Integrations, 
 | Big slot machine wins | The size is set on the Slot Machine tab (Announce wins from). | On or off |
 | Lottery winners | Posts who won each lottery drawing and how much. | On or off |
 | Achievements | Posts when a player unlocks an achievement or finishes a quest that announces itself, and when the server finishes a server quest together. | On or off |
+| Money alerts | Posts when a player's money jumps unusually (Tempest Pro; set on the Coins tab, Money alerts). | On or off |
 | News from other mods | Posts the other big moments: bounties, crate key parties, events starting and ending, finished town projects and unlocks, and battle pass seasons and players who finish them. | On or off |
-| Send a test message when saved | Tick, then Save: a test message is posted if the link works. | On or off |
+| Send a test message | Tick it: a test message is posted if the link works. | On or off |
 
 #### Placeholders
 

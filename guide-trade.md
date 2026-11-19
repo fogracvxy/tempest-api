@@ -69,5 +69,13 @@ What keeps trades fair.
 | Countdown after both are ready (seconds) | Any change stops it, so nobody can swap an item at the last moment. | 1 to 10 |
 | A request waits (seconds) | How long a /trade request stays open for the other player to accept. After that it is gone. | 10 to 600 |
 | Before asking the same player again (seconds) | How long a player waits before sending the same player another request, so nobody can spam requests. 0: no wait. | 0 to 600 |
-| Items that can never be traded | Item ids, with commas. End with * for every id that starts so: Crate_Key_* | Text |
+
+#### Items that can never be traded
+
+Pick an item in the list to add it; the X takes one out.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Never traded |  | Text |
+| Every id that starts so | End each with *, commas between: Crate_Key_*, Weapon_Debug_* | Text |
 | Log every trade | In the server log and /tempest log: who gave what to whom. | On or off |

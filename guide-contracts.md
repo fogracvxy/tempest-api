@@ -71,7 +71,14 @@ Players post orders; the reward is taken when they post and paid out as items ar
 | Most items in one contract | The most items one contract can ask for. | 1 to 1000000 |
 | Largest reward | The most money one contract can offer. It also limits how much one player can put on one bounty. | 1 to 1000000000 |
 | How long contracts and offers last (hours) | Players pick one of these. Separate with commas, e.g. 24, 72, 168. | Text |
-| Items nobody may ask for or sell | Item ids separated with commas. Coins never can. | Text |
+
+#### Items nobody may ask for or sell
+
+Pick an item in the list to add it; the X takes one out. Coins never can.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Blocked items |  | Text |
 
 #### Permissions
 

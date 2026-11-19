@@ -29,6 +29,14 @@ The `/guide` pages of this plugin, as a player sees them on a test server (numbe
 | `/hud low` | Everyone | Money counter on the right side, lower down |
 | `/hud top` | Everyone | Money counter in a row along the top, right of centre |
 | `/mail` (/mailbox) | Everyone | Open your mailbox: rewards and items kept for you |
+| `/partyhud` (/pframes) | Everyone | Show or hide your party frames (/partyhud left, right, compact, self...) |
+| `/partyhud compact` | Everyone | Pick the style of your party frames |
+| `/partyhud full` | Everyone | Pick the style of your party frames |
+| `/partyhud left` | Everyone | Move your party frames here |
+| `/partyhud leftmiddle` | Everyone | Move your party frames here |
+| `/partyhud right` | Everyone | Move your party frames here |
+| `/partyhud rightmiddle` | Everyone | Move your party frames here |
+| `/partyhud self` | Everyone | Show or hide your own frame among your party |
 | `/places` | Everyone | Places on the world map, and what your map shows |
 | `/places add` | `tempest.admin.map` | Adds a place to the map where you stand (admins) |
 | `/serverinfo` (/rules, /info) | Everyone | The server's rules and info |
@@ -42,6 +50,7 @@ The `/guide` pages of this plugin, as a player sees them on a test server (numbe
 | `/tempest hub remove` | `tempest.admin` | Remove the hub and put the ground back |
 | `/tempest hub unprotect-area` | `tempest.admin` | Stop protecting an area |
 | `/tempest info` | `tempest.admin` | Tempest plugins: versions, editions and the economy (admins) |
+| `/tempest item` | `tempest.admin` | Every field of the item in your hand and how shops and rewards treat it (admins) |
 | `/tempest log` | `tempest.admin` | Who changed what: the newest lines of the admin log (admins) |
 | `/tempest report` | `tempest.admin` | Writes a support report to paste when asking for help (admins) |
 | `/tempest settings` | Everyone | Open the Tempest settings menu (admins) |
@@ -129,6 +138,24 @@ Slots, Lottery and Coinflip use only money earned in game. A daily limit stops a
 | Daily limit for games | Per player, all games together. 0 = no limit. | 0 to 1000000000 |
 
 
+### Party frames
+
+`/tempest` → Party frames. Who can change it: `tempest.admin` or `tempest.admin.core`.
+
+Each member of the player's party on the side of the screen: name, health, stamina and how far away. Shown when a plugin gives parties (Tempest Claims). Players hide, move and resize theirs with /partyhud.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Show party frames | Only players in a party see them. | On or off |
+| Party frames start at | Players move theirs with /partyhud. The board starts at the right, top. | Left, middle, Left, top, Right, middle, Right, top |
+| Party frame style |  | Full: bigger names and bars, Compact: small, for big parties |
+| Most members shown | Online members first. | 1 to 8 |
+| Show offline members |  | On or off |
+| Show the stamina bar |  | On or off |
+| Show how far away members are | In blocks, for members in the same world; members in another world show its name. Off for servers where positions should stay secret. | On or off |
+| Players see their own frame | Players change it for themselves with /partyhud self. | On or off |
+
+
 ### Rank Perks
 
 `/tempest` → Rank Perks. Who can change it: `tempest.admin` or `tempest.admin.core`.
@@ -177,6 +204,23 @@ Give a rank a perk's permission in your ranks plugin (LuckPerms, or Hytale's own
 | Leveling XP (%) | More XP in the leveling mod (Endless Leveling, RPG Leveling, MMO Skill Tree) for this rank. Adds to the Leveling XP boost, with events and boosters, up to the highest boost set on the Leveling tab. Does nothing without a leveling mod. | 0 to 1000 |
 
 
+### Custom items
+
+`/tempest` → Custom items. Who can change it: `tempest.admin` or `tempest.admin.core`.
+
+#### Items from other mods
+
+Enchanted (Simple Enchantments), reforged (Socket Reforge) and any mod's items keep what they have in shops, crates, the pass, quests, jobs, events, mail, trade and the market. Hold one and type /tempest item to see every field it has and how it is treated. Names below are field names; * is anything (*.XP fits SocketReforge.Lore.Socket.XP).
+
+| Setting | What it does | Values |
+|---|---|---|
+| Fields that change with use | Commas between, * for anything: *.XP, *KillCount* Shown to players, but never used to tell two items apart: experience, kill counts and the like. Without this a sword that gained experience would no longer sell back to its shop line. | Text |
+| More fields to hide | Commas between, * for anything A mod's own bookkeeping, neither shown nor matched. Tooltips, hashes and versions are hidden already. | Text |
+| Fields that hold other items | Commas between, * for anything An item with something in one of these is never copied into a shop, a prize or a reward (its contents would be copied too). Backpacks and containers the usual way are found already. | Text |
+| Fields that make an item one of a kind | Commas between, * for anything An item with one of these is never copied (a bound item, a named pet); it can still be traded. Ids written as UUIDs are found already. | Text |
+| Use the name a mod gave the item | A reforged "Iron Sword +3" shows by that name in shops, lists and mail. Off: the game's name. | On or off |
+
+
 ### Server info
 
 `/tempest` → Server info. Who can change it: `tempest.admin` or `tempest.admin.core`.
@@ -187,18 +231,86 @@ Your own page: rules and anything players should know. It is the first page of /
 |---|---|---|
 | Show the page | On: /info and /rules open this page, and it is the first page of /guide (new players see it when they first join, if that is on). Off: the page is hidden. | On or off |
 | Title | The heading at the top of the page, such as your server's name or "Rules". | Text |
-| Line 1 | Start a line with # to make it a heading; an empty line is a gap. One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
-| Line 2 | One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
-| Line 3 | One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
-| Line 4 | One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
-| Line 5 | One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
-| Line 6 | One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
-| Line 7 | One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
-| Line 8 | One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
-| Line 9 | One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
-| Line 10 | One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
-| Line 11 | One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
-| Line 12 | One line of the page, in order. Start it with # to make it a heading; leave it empty for a gap. | Text |
+| Line 1 | Each line of the page, in order: text, a heading (bold) or an empty line for a gap. Two empty lines show below the last one written, up to 40 lines of 200 letters. | Text, Heading, Empty line (a gap) |
+| Line 1, words |  | Text |
+| Line 2 |  | Text, Heading, Empty line (a gap) |
+| Line 2, words |  | Text |
+| Line 3 |  | Text, Heading, Empty line (a gap) |
+| Line 3, words |  | Text |
+| Line 4 |  | Text, Heading, Empty line (a gap) |
+| Line 4, words |  | Text |
+| Line 5 |  | Text, Heading, Empty line (a gap) |
+| Line 5, words |  | Text |
+| Line 6 |  | Text, Heading, Empty line (a gap) |
+| Line 6, words |  | Text |
+| Line 7 |  | Text, Heading, Empty line (a gap) |
+| Line 7, words |  | Text |
+| Line 8 |  | Text, Heading, Empty line (a gap) |
+| Line 8, words |  | Text |
+| Line 9 |  | Text, Heading, Empty line (a gap) |
+| Line 9, words |  | Text |
+| Line 10 |  | Text, Heading, Empty line (a gap) |
+| Line 10, words |  | Text |
+| Line 11 |  | Text, Heading, Empty line (a gap) |
+| Line 11, words |  | Text |
+| Line 12 |  | Text, Heading, Empty line (a gap) |
+| Line 12, words |  | Text |
+| Line 13 |  | Text, Heading, Empty line (a gap) |
+| Line 13, words |  | Text |
+| Line 14 |  | Text, Heading, Empty line (a gap) |
+| Line 14, words |  | Text |
+| Line 15 |  | Text, Heading, Empty line (a gap) |
+| Line 15, words |  | Text |
+| Line 16 |  | Text, Heading, Empty line (a gap) |
+| Line 16, words |  | Text |
+| Line 17 |  | Text, Heading, Empty line (a gap) |
+| Line 17, words |  | Text |
+| Line 18 |  | Text, Heading, Empty line (a gap) |
+| Line 18, words |  | Text |
+| Line 19 |  | Text, Heading, Empty line (a gap) |
+| Line 19, words |  | Text |
+| Line 20 |  | Text, Heading, Empty line (a gap) |
+| Line 20, words |  | Text |
+| Line 21 |  | Text, Heading, Empty line (a gap) |
+| Line 21, words |  | Text |
+| Line 22 |  | Text, Heading, Empty line (a gap) |
+| Line 22, words |  | Text |
+| Line 23 |  | Text, Heading, Empty line (a gap) |
+| Line 23, words |  | Text |
+| Line 24 |  | Text, Heading, Empty line (a gap) |
+| Line 24, words |  | Text |
+| Line 25 |  | Text, Heading, Empty line (a gap) |
+| Line 25, words |  | Text |
+| Line 26 |  | Text, Heading, Empty line (a gap) |
+| Line 26, words |  | Text |
+| Line 27 |  | Text, Heading, Empty line (a gap) |
+| Line 27, words |  | Text |
+| Line 28 |  | Text, Heading, Empty line (a gap) |
+| Line 28, words |  | Text |
+| Line 29 |  | Text, Heading, Empty line (a gap) |
+| Line 29, words |  | Text |
+| Line 30 |  | Text, Heading, Empty line (a gap) |
+| Line 30, words |  | Text |
+| Line 31 |  | Text, Heading, Empty line (a gap) |
+| Line 31, words |  | Text |
+| Line 32 |  | Text, Heading, Empty line (a gap) |
+| Line 32, words |  | Text |
+| Line 33 |  | Text, Heading, Empty line (a gap) |
+| Line 33, words |  | Text |
+| Line 34 |  | Text, Heading, Empty line (a gap) |
+| Line 34, words |  | Text |
+| Line 35 |  | Text, Heading, Empty line (a gap) |
+| Line 35, words |  | Text |
+| Line 36 |  | Text, Heading, Empty line (a gap) |
+| Line 36, words |  | Text |
+| Line 37 |  | Text, Heading, Empty line (a gap) |
+| Line 37, words |  | Text |
+| Line 38 |  | Text, Heading, Empty line (a gap) |
+| Line 38, words |  | Text |
+| Line 39 |  | Text, Heading, Empty line (a gap) |
+| Line 39, words |  | Text |
+| Line 40 |  | Text, Heading, Empty line (a gap) |
+| Line 40, words |  | Text |
 
 #### Buttons
 
@@ -243,7 +355,8 @@ How these look on the map and who gets them. To change one of them, use /places.
 | On the compass too | These places also show on the compass at the top of the screen, not only on the map. | On or off |
 | Who sees it (permission) | Empty: everyone. With a permission, only players or ranks who have it. | Text |
 | Shown within (blocks) | Only players this near see them. 0: from anywhere. | 0 to 100000 |
-| Only in these worlds | World names with commas between them. Empty: every world. | Text |
+| Only in these worlds | Empty: every world. | Every world, default, Several (type their names) |
+| World names | World names with commas between them. | Text |
 
 
 ### Map: ATMs
@@ -264,7 +377,8 @@ How these look on the map and who gets them. To change one of them, use /places.
 | On the compass too | These places also show on the compass at the top of the screen, not only on the map. | On or off |
 | Who sees it (permission) | Empty: everyone. With a permission, only players or ranks who have it. | Text |
 | Shown within (blocks) | Only players this near see them. 0: from anywhere. | 0 to 100000 |
-| Only in these worlds | World names with commas between them. Empty: every world. | Text |
+| Only in these worlds | Empty: every world. | Every world, default, Several (type their names) |
+| World names | World names with commas between them. | Text |
 
 
 ### Map: Slot machines
@@ -285,7 +399,8 @@ How these look on the map and who gets them. To change one of them, use /places.
 | On the compass too | These places also show on the compass at the top of the screen, not only on the map. | On or off |
 | Who sees it (permission) | Empty: everyone. With a permission, only players or ranks who have it. | Text |
 | Shown within (blocks) | Only players this near see them. 0: from anywhere. | 0 to 100000 |
-| Only in these worlds | World names with commas between them. Empty: every world. | Text |
+| Only in these worlds | Empty: every world. | Every world, default, Several (type their names) |
+| World names | World names with commas between them. | Text |
 
 
 ### Map: Shops
@@ -306,7 +421,8 @@ How these look on the map and who gets them. To change one of them, use /places.
 | On the compass too | These places also show on the compass at the top of the screen, not only on the map. | On or off |
 | Who sees it (permission) | Empty: everyone. With a permission, only players or ranks who have it. | Text |
 | Shown within (blocks) | Only players this near see them. 0: from anywhere. | 0 to 100000 |
-| Only in these worlds | World names with commas between them. Empty: every world. | Text |
+| Only in these worlds | Empty: every world. | Every world, default, Several (type their names) |
+| World names | World names with commas between them. | Text |
 
 
 ### Map: Crates
@@ -327,7 +443,52 @@ How these look on the map and who gets them. To change one of them, use /places.
 | On the compass too | These places also show on the compass at the top of the screen, not only on the map. | On or off |
 | Who sees it (permission) | Empty: everyone. With a permission, only players or ranks who have it. | Text |
 | Shown within (blocks) | Only players this near see them. 0: from anywhere. | 0 to 100000 |
-| Only in these worlds | World names with commas between them. Empty: every world. | Text |
+| Only in these worlds | Empty: every world. | Every world, default, Several (type their names) |
+| World names | World names with commas between them. | Text |
+
+
+### Map: Supply drops
+
+`/tempest` → Map: Supply drops. Who can change it: `tempest.admin` or `tempest.admin.map`.
+
+#### Supply drops
+
+How these look on the map and who gets them. To change one of them, use /places.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Show on the map | Shows every place of this kind on players' maps. Off: they are hidden, but stay known, so switching it on brings them back. | On or off |
+| Icon | A resource pack's own picture: put its file name in map.json. | A list |
+| Colour | White shows the icon as it was drawn. | A colour |
+| Name on the map | Empty: each place's own name. Written here, every one of them shows this. | Text |
+| Big icon | A larger icon on the map, for places players should find easily. | On or off |
+| On the compass too | These places also show on the compass at the top of the screen, not only on the map. | On or off |
+| Who sees it (permission) | Empty: everyone. With a permission, only players or ranks who have it. | Text |
+| Shown within (blocks) | Only players this near see them. 0: from anywhere. | 0 to 100000 |
+| Only in these worlds | Empty: every world. | Every world, default, Several (type their names) |
+| World names | World names with commas between them. | Text |
+
+
+### Map: Building sites
+
+`/tempest` → Map: Building sites. Who can change it: `tempest.admin` or `tempest.admin.map`.
+
+#### Building sites
+
+How these look on the map and who gets them. To change one of them, use /places.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Show on the map | Shows every place of this kind on players' maps. Off: they are hidden, but stay known, so switching it on brings them back. | On or off |
+| Icon | A resource pack's own picture: put its file name in map.json. | A list |
+| Colour | White shows the icon as it was drawn. | A colour |
+| Name on the map | Empty: each place's own name. Written here, every one of them shows this. | Text |
+| Big icon | A larger icon on the map, for places players should find easily. | On or off |
+| On the compass too | These places also show on the compass at the top of the screen, not only on the map. | On or off |
+| Who sees it (permission) | Empty: everyone. With a permission, only players or ranks who have it. | Text |
+| Shown within (blocks) | Only players this near see them. 0: from anywhere. | 0 to 100000 |
+| Only in these worlds | Empty: every world. | Every world, default, Several (type their names) |
+| World names | World names with commas between them. | Text |
 
 
 ### Map: Claims
@@ -348,4 +509,5 @@ How these look on the map and who gets them. To change one of them, use /places.
 | On the compass too | These places also show on the compass at the top of the screen, not only on the map. | On or off |
 | Who sees it (permission) | Empty: everyone. With a permission, only players or ranks who have it. | Text |
 | Shown within (blocks) | Only players this near see them. 0: from anywhere. | 0 to 100000 |
-| Only in these worlds | World names with commas between them. Empty: every world. | Text |
+| Only in these worlds | Empty: every world. | Every world, default, Several (type their names) |
+| World names | World names with commas between them. | Text |

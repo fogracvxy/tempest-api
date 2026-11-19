@@ -76,6 +76,7 @@ PlayerActions.listen((player, action, amount) -> {
 | `town_mayor` | Town | Elected mayor (not set by an admin) | 1 |
 | `claims_claim` | Claims | A chunk claimed for the player's party | A number that stands for the chunk, the same every time |
 | `claims_party` | Claims | Founded or joined a party | 1 |
+| `claims_renown_level` | Claims | The player's party reached a renown level (to every member) | The level |
 | `mmo_skill_level:<id> <name>` (`Skills.SKILL_LEVEL`, API 19) | Core, with MMO Skill Tree | A skill's level went up | The new level |
 | `mmo_skill_xp:<id> <name>` (`Skills.SKILL_XP`, API 19) | Core, with MMO Skill Tree | Skill XP from play | The XP |
 | `mmo_achievement:<id>` (`Skills.ACHIEVEMENT`, API 19) | Core, with MMO Skill Tree | An achievement unlocked | 1 |

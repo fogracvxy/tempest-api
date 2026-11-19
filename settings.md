@@ -15,7 +15,14 @@ CasinoSettings.register(new SettingsTab("Dragons", List.of(
 ), config::save));
 ```
 
-Your tab appears in `/tempest` for admins (permission `tempest.admin`), up to 40 settings. Staff with
+Your tab appears in `/tempest` for admins (permission `tempest.admin`), up to 40 settings (250 from API version 27, `SettingsTab.MOST_SETTINGS`: a table of rows, each a dropdown with `shownWhenChosen` fields, as Tempest Claims' perk table). A list of items kept as one text value ("Ingredient_Bar_Iron x16, Food_Bread x5")
+can show as an item list with `ItemRows.of("Milestone items", 6, true, c::getItems, c::setItems)` (API 27; from API 28
+one "add an item" dropdown with the items under it, each with its count and an X to take it out). In your own page,
+a list of items is `ItemLists` and a list of console commands is `CommandLists` (API 29): `draw(...)` fills an empty
+group with a row per entry and one "add" dropdown, and `change(...)` turns the page's events into the new line, kept
+as before ("Food_Bread x5, Rock_Gem_Diamond"; commands as "cmd ; cmd" with `CommandLists.split` and `join`). For what a goal counts, `Targets.entries(Targets.Kind.BLOCK, "Ore_", current)` gives a searchable dropdown: "Any
+block", families ("Any Ore Iron (5 kinds)") and every block, item or monster of the game (API 30). A list of names kept as text with commas ("Chicken, Dummy") gets a picker with
+`Setting.adder("Add a mob that never pays", "Add a mob...", choices, c::getMobs, c::setMobs)` above its text field (API 31). Staff with
 `tempest.admin.<group>` see only that group's tabs. The group is the title in lower case without spaces
 (`tempest.admin.dragons`); give it yourself when your plugin has more than one tab, so one permission covers them all
 (API 2): `new SettingsTab("Dragon Loot", "dragons", settings, config::save)`.

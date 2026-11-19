@@ -41,6 +41,17 @@ Mailbox.count(uuid);   Mailbox.of(uuid);   // what is waiting
 The title is a key in your plugin's `server.lang`, so each player reads it in their language. Crates sends keys from
 `/cratekey` and key parties there when the player is not in a world.
 
+An item that carries more than its id (enchantments from Simple Enchantments, a creature in a jar, any mod's data on
+it) goes in whole: `new Mailbox.Item(id, amount, ItemData.encode(stack))` (API 32), and claiming it gives it back with
+everything it had. `ItemData.special(stack)` tells such an item apart, `ItemData.describe(stack)` names what it has
+("Sharpness III"), and a plugin that deals in plain items should leave special ones in the inventory.
+
+For prizes and rewards an admin sets once and players get many times (API 33): `ItemData.problem(held)` says why an
+item must not be copied (it holds other items, or a mod tracks it by its own id), `ItemData.keep(held)` saves it and
+returns a token such as `Weapon_Sword_Iron#1a2b3c4d` that any item line can hold, and `ItemData.make(token, n)` gives
+it back. `Rewards.parseItems` already reads tokens into whole mail items, so a plugin using `Rewards.giveItems` needs
+nothing more. In an item list, `ItemLists.change(..., held)` handles "The item in your hand" (`ItemLists.HAND`).
+
 
 ## Boosts for a while: `Boosts` (API version 5)
 

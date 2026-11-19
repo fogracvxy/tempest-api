@@ -118,16 +118,86 @@ Run by the server console when a player reaches a level: ranks, kits, titles fro
 
 | Setting | What it does | Values |
 |---|---|---|
-| Reward 1 at level | The level at which the command below runs. 0: this reward is off. | 0 to 100000 |
+| Reward 1 at level | The level at which the command below runs. 0: this reward is off. A new empty reward shows below the last one used, up to 40; at the next start they are sorted by level and the empty ones left out. | 0 to 100000 |
 | Reward 1 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
-| Reward 2 at level | The level at which the command below runs. 0: this reward is off. | 0 to 100000 |
+| Reward 2 at level |  | 0 to 100000 |
 | Reward 2 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
-| Reward 3 at level | The level at which the command below runs. 0: this reward is off. | 0 to 100000 |
+| Reward 3 at level |  | 0 to 100000 |
 | Reward 3 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
-| Reward 4 at level | The level at which the command below runs. 0: this reward is off. | 0 to 100000 |
+| Reward 4 at level |  | 0 to 100000 |
 | Reward 4 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
-| Reward 5 at level | The level at which the command below runs. 0: this reward is off. | 0 to 100000 |
+| Reward 5 at level |  | 0 to 100000 |
 | Reward 5 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 6 at level |  | 0 to 100000 |
+| Reward 6 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 7 at level |  | 0 to 100000 |
+| Reward 7 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 8 at level |  | 0 to 100000 |
+| Reward 8 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 9 at level |  | 0 to 100000 |
+| Reward 9 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 10 at level |  | 0 to 100000 |
+| Reward 10 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 11 at level |  | 0 to 100000 |
+| Reward 11 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 12 at level |  | 0 to 100000 |
+| Reward 12 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 13 at level |  | 0 to 100000 |
+| Reward 13 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 14 at level |  | 0 to 100000 |
+| Reward 14 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 15 at level |  | 0 to 100000 |
+| Reward 15 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 16 at level |  | 0 to 100000 |
+| Reward 16 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 17 at level |  | 0 to 100000 |
+| Reward 17 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 18 at level |  | 0 to 100000 |
+| Reward 18 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 19 at level |  | 0 to 100000 |
+| Reward 19 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 20 at level |  | 0 to 100000 |
+| Reward 20 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 21 at level |  | 0 to 100000 |
+| Reward 21 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 22 at level |  | 0 to 100000 |
+| Reward 22 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 23 at level |  | 0 to 100000 |
+| Reward 23 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 24 at level |  | 0 to 100000 |
+| Reward 24 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 25 at level |  | 0 to 100000 |
+| Reward 25 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 26 at level |  | 0 to 100000 |
+| Reward 26 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 27 at level |  | 0 to 100000 |
+| Reward 27 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 28 at level |  | 0 to 100000 |
+| Reward 28 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 29 at level |  | 0 to 100000 |
+| Reward 29 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 30 at level |  | 0 to 100000 |
+| Reward 30 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 31 at level |  | 0 to 100000 |
+| Reward 31 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 32 at level |  | 0 to 100000 |
+| Reward 32 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 33 at level |  | 0 to 100000 |
+| Reward 33 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 34 at level |  | 0 to 100000 |
+| Reward 34 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 35 at level |  | 0 to 100000 |
+| Reward 35 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 36 at level |  | 0 to 100000 |
+| Reward 36 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 37 at level |  | 0 to 100000 |
+| Reward 37 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 38 at level |  | 0 to 100000 |
+| Reward 38 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 39 at level |  | 0 to 100000 |
+| Reward 39 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Reward 40 at level |  | 0 to 100000 |
+| Reward 40 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
 
 #### Leveling XP from the economy
 
@@ -238,7 +308,7 @@ Money for each level of a skill. Example: 20 a level, 1 more for each level reac
 | More for each level reached | Mining 30 pays 30 times this on top, so higher levels pay more; 0 is off | 0 to 1000000000 |
 | Skill milestone every | Levels 10, 20, 30... with 10; 0 is no milestones | 0 to 10000 |
 | Milestone bonus | Paid on top at each milestone | 0 to 1000000000 |
-| Milestone items | e.g. Ingredient_Bar_Iron x16, Food_Bread x5; what does not fit goes to /mail | Text |
+| Milestone items |  | Text |
 | Tell everyone at milestones | "Steve reached Mining level 50!" for the whole server | On or off |
 | Only these skills | Skills that pay, by id or name, with commas (Mining, Swords); blank is every skill | Text |
 
@@ -251,7 +321,7 @@ Money when a player earns an MMO Skill Tree achievement, once per achievement. S
 | Money per achievement | 0 is off | 0 to 1000000000 |
 | Money per achievement point | Times the achievement's points: harder achievements pay more; 0 is off | 0 to 1000000000 |
 | Server first bonus | On top, for a server first; 0 is off | 0 to 1000000000 |
-| Server first items | Given for a server first, e.g. Ingredient_Bar_Gold x10 | Text |
+| Server first items |  | Text |
 | Tell everyone about server firsts | "Steve is the first on the server to earn Dragon Slayer!" | On or off |
 
 

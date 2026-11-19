@@ -16,6 +16,14 @@ Every command of the Tempest plugins, with the permission it needs. "Everyone" w
 | `/hud low` | Everyone | Money counter on the right side, lower down |
 | `/hud top` | Everyone | Money counter in a row along the top, right of centre |
 | `/mail` (/mailbox) | Everyone | Open your mailbox: rewards and items kept for you |
+| `/partyhud` (/pframes) | Everyone | Show or hide your party frames (/partyhud left, right, compact, self...) |
+| `/partyhud compact` | Everyone | Pick the style of your party frames |
+| `/partyhud full` | Everyone | Pick the style of your party frames |
+| `/partyhud left` | Everyone | Move your party frames here |
+| `/partyhud leftmiddle` | Everyone | Move your party frames here |
+| `/partyhud right` | Everyone | Move your party frames here |
+| `/partyhud rightmiddle` | Everyone | Move your party frames here |
+| `/partyhud self` | Everyone | Show or hide your own frame among your party |
 | `/places` | Everyone | Places on the world map, and what your map shows |
 | `/places add` | `tempest.admin.map` | Adds a place to the map where you stand (admins) |
 | `/serverinfo` (/rules, /info) | Everyone | The server's rules and info |
@@ -29,6 +37,7 @@ Every command of the Tempest plugins, with the permission it needs. "Everyone" w
 | `/tempest hub remove` | `tempest.admin` | Remove the hub and put the ground back |
 | `/tempest hub unprotect-area` | `tempest.admin` | Stop protecting an area |
 | `/tempest info` | `tempest.admin` | Tempest plugins: versions, editions and the economy (admins) |
+| `/tempest item` | `tempest.admin` | Every field of the item in your hand and how shops and rewards treat it (admins) |
 | `/tempest log` | `tempest.admin` | Who changed what: the newest lines of the admin log (admins) |
 | `/tempest report` | `tempest.admin` | Writes a support report to paste when asking for help (admins) |
 | `/tempest settings` | Everyone | Open the Tempest settings menu (admins) |
@@ -95,6 +104,7 @@ Every command of the Tempest plugins, with the permission it needs. "Everyone" w
 | Command | Who can use it | What it does |
 |---|---|---|
 | `/events` (/event) | Everyone | Server events: what is on, what is coming, and the community goal |
+| `/events drop` | `events.admin` | Send a supply drop now, with an event's drop prizes (admins) |
 | `/events extend` | `events.admin` | More or fewer minutes for the event that is on (admins) |
 | `/events give` (/fund) | Everyone | Put money in the server fund: when it is full, an event starts for everyone |
 | `/events list` | `events.admin` | Every event and the next starts (admins) |
@@ -193,6 +203,7 @@ Every command of the Tempest plugins, with the permission it needs. "Everyone" w
 | `/claims open` | Everyone | Let anyone join your party, on or off |
 | `/claims paytax` | Everyone | Pay what you owe your party in taxes |
 | `/claims promote` | Everyone | Make a member an assistant |
+| `/claims renown` | Everyone | Your party's renown and level |
 | `/claims rule` | Everyone | Change a rule: /claims rule visitor doors on |
 | `/claims rules` | Everyone | Who may do what on your land |
 | `/claims select` | Everyone | Pick a chunk to claim (the map uses this) |
