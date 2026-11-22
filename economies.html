@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Economies for server owners · Tempest plugins docs</title>
-<meta name="description" content="Which economy the Tempest plugins pay into: Tempest Economy, or one you already run through VaultUnlocked (GlymeraMerchant, Ecotale and others).">
+<meta name="description" content="Which economy the Tempest plugins pay into: Tempest Economy, or one you already run through VaultUnlocked. Tested with Ecotale, YAS Currency, PJ Money, EssentialsPlus, EliteEssentials and GlymeraMerchant.">
 <meta name="theme-color" content="#F1C40F">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png">
@@ -12,7 +12,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Tempest plugins for Hytale">
 <meta property="og:title" content="Economies for server owners · Tempest plugins docs">
-<meta property="og:description" content="Which economy the Tempest plugins pay into: Tempest Economy, or one you already run through VaultUnlocked (GlymeraMerchant, Ecotale and others).">
+<meta property="og:description" content="Which economy the Tempest plugins pay into: Tempest Economy, or one you already run through VaultUnlocked. Tested with Ecotale, YAS Currency, PJ Money, EssentialsPlus, EliteEssentials and GlymeraMerchant.">
 <meta property="og:url" content="https://fogracvxy.github.io/tempest-api/economies.html">
 <meta property="og:image" content="https://fogracvxy.github.io/tempest-api/assets/og-image.jpg">
 <meta property="og:image:width" content="1200">
@@ -37,16 +37,20 @@
   <main>
     <div class="crumbs">Server guide</div>
     <h1>Economies for server owners</h1>
-    <p class="lead">Which economy the Tempest plugins pay into: Tempest Economy, or one you already run through VaultUnlocked (GlymeraMerchant, Ecotale and others).</p>
+    <p class="lead">Which economy the Tempest plugins pay into: Tempest Economy, or one you already run through VaultUnlocked. Tested with Ecotale, YAS Currency, PJ Money, EssentialsPlus, EliteEssentials and GlymeraMerchant.</p>
     <article>
 <p>Every Tempest plugin pays and charges through Tempest Core, never through an economy directly. Core uses the first of these that runs:</p>
 <div class="table"><table><thead><tr><th>Order</th><th>Economy</th><th>What you need</th></tr></thead><tbody><tr><td>1</td><td><strong>Tempest Economy</strong> (Coins)</td><td>Its jar in <code>mods</code>. Wallets, coin items, banks (<code>/bank</code>), ATMs, daily rewards, mob and ore gold</td></tr><tr><td>2</td><td><strong>Any economy through VaultUnlocked</strong></td><td><a href="https://github.com/TheNewEconomy/VaultUnlocked-Hytale" target="_blank" rel="noopener">VaultUnlocked</a> in <code>mods</code>, next to an economy mod that registers with it</td></tr><tr><td>none</td><td>No economy</td><td>The plugins run; prices, paid rewards, taxes and upkeep simply wait</td></tr></tbody></table></div>
 <p><code>/tempest</code> → General shows which one is in use ("Coins", "VaultUnlocked: GlymeraMerchant"...).</p>
 <h2 id="using-the-economy-you-already-have"><a class="anchor" href="#using-the-economy-you-already-have" aria-label="Link to this section">#</a>Using the economy you already have</h2>
 <p>Install <strong>VaultUnlocked</strong> and your economy mod, and leave Tempest Economy (Coins) out: with Coins installed, Coins is the economy (and it registers itself with VaultUnlocked for other mods).</p>
-<div class="table"><table><thead><tr><th>Economy mod</th><th>Works</th><th>Notes</th></tr></thead><tbody><tr><td><strong>GlymeraMerchant</strong></td><td>Yes, tested in game</td><td>Registers with VaultUnlocked by itself. Jobs pay, shop prices, crate keys, quest rewards, claim prices and party taxes all use its gold</td></tr><tr><td><strong>Ecotale</strong></td><td>Yes</td><td>Through VaultUnlocked</td></tr><tr><td>Any other VaultUnlocked economy</td><td>Yes</td><td>It must register an economy with VaultUnlocked</td></tr></tbody></table></div>
+<div class="table"><table><thead><tr><th>Economy mod</th><th>Works</th><th>Notes</th></tr></thead><tbody><tr><td><strong>Ecotale</strong> 1.2.1</td><td>Yes, tested</td><td>Through VaultUnlocked. Switching to Coins later: <code>/eco import Ecotale</code> copies every balance</td></tr><tr><td><strong>YAS Currency</strong> 1.95</td><td>Yes, tested</td><td>Through VaultUnlocked</td></tr><tr><td><strong>PJ Money</strong> 1.3.2</td><td>Yes, tested</td><td>Through VaultUnlocked. Needs PJ-CoreLib, as always</td></tr><tr><td><strong>EssentialsPlus</strong> 1.21.0</td><td>Yes, tested</td><td>Its economy is on by default and registers with VaultUnlocked</td></tr><tr><td><strong>EliteEssentials</strong> 2.0.12</td><td>Yes, tested</td><td>Turn its economy on first: <code>"economy": { "enabled": true }</code> in <code>mods/EliteEssentials/config.json</code> (off by default)</td></tr><tr><td><strong>GlymeraMerchant</strong></td><td>Yes, tested in game</td><td>Registers with VaultUnlocked by itself. Jobs pay, shop prices, crate keys, quest rewards, claim prices and party taxes all use its gold</td></tr><tr><td><strong>Coins &amp; Markets</strong> 3.0.4</td><td>No</td><td>Its coins are not shared with other plugins (it has no VaultUnlocked economy). It runs fine next to Tempest Economy</td></tr><tr><td>Any other VaultUnlocked economy</td><td>Yes</td><td>It must register an economy with VaultUnlocked</td></tr></tbody></table></div>
+<p>"Tested" means on real servers with test players, 2026-11-22: the shop paid for sales and charged for purchases, a sale the economy refused gave the items back, quest and event rewards, the premium pass, slot bets, crates and coinflips were paid, and every coin added up at the end.</p>
 <p><strong>What changes without Tempest Economy:</strong> the money counter on the board, coin items, <code>/bank</code>, ATMs, daily rewards and mob and ore gold are part of Tempest Economy, so they are not there; your economy mod shows its own balance. A Tempest Claims party keeps its money inside Claims instead of a <code>/bank</code> account.</p>
 <p><strong>Amounts:</strong> Tempest works in whole coins. An economy with decimals is asked for whole amounts; what it reports is rounded down.</p>
+<h2 id="other-plugins-next-to-tempest-economy"><a class="anchor" href="#other-plugins-next-to-tempest-economy" aria-label="Link to this section">#</a>Other plugins next to Tempest Economy</h2>
+<p>Run <strong>one economy</strong> per server. With two (Coins and another one on VaultUnlocked), other authors' plugins may pay into either. Tempest always uses Coins when it is installed.</p>
+<div class="table"><table><thead><tr><th>Plugin</th><th>Next to Tempest Economy (Coins)</th><th>What to set</th></tr></thead><tbody><tr><td><strong>Ecotale</strong>, <strong>YAS Currency</strong>, <strong>PJ Money</strong></td><td>Works, tested</td><td>Nothing. To move to Coins: <code>/eco import &lt;economy&gt;</code> copies the balances, then remove the old one</td></tr><tr><td><strong>EssentialsPlus</strong></td><td>Works, tested, after one setting</td><td>Its <code>/pay</code>, <code>/money</code> and <code>/eco</code> take over Tempest Economy's. In <code>mods/fof1092_EssentialsPlus/config.json</code>: <code>"disabledCommands": ["/pay", "/money", "/eco"]</code></td></tr><tr><td><strong>EliteEssentials</strong></td><td>Works, tested</td><td>Nothing while its economy is off (the default). With it on, its <code>/pay</code> takes over: in <code>mods/EliteEssentials/config.json</code> set <code>"useExternalEconomy": true</code> and <code>"vaultUnlockedProvider": false</code> under <code>"economy"</code>, and its commands use Tempest Economy's money</td></tr><tr><td><strong>Coins &amp; Markets</strong></td><td>Works side by side, tested</td><td>Nothing. Its coins and vendors stay its own</td></tr></tbody></table></div>
 <h2 id="for-economy-mod-authors"><a class="anchor" href="#for-economy-mod-authors" aria-label="Link to this section">#</a>For economy mod authors</h2>
 <p>Register your economy with VaultUnlocked (<code>Economy</code> from the Vault2 API) and every Tempest plugin uses it, with no work on either side. If you would rather link directly, Tempest Core takes one economy:</p>
 <div class="code"><div class="code-bar"><span>java</span><button class="copy" type="button">Copy</button></div><pre><code class="lang-java">Economies.register(myEconomy);     // an implementation of com.atomictempest.core.economy.Economy</code></pre></div>
@@ -55,7 +59,7 @@
     <nav class="pager"><a class="prev" href="leveling-mods.html"><small>Previous</small>Leveling mods</a><a class="next" href="saving-and-backups.html"><small>Next</small>Saving and backups</a></nav>
     <footer class="foot">Tempest plugins for Hytale by AtomicTempest. Not made or endorsed by Hypixel Studios. · <a href="economies.md">This page as Markdown</a> · <a href="llms.txt">llms.txt</a></footer>
   </main>
-  <aside class="toc"><h5>On this page</h5><a href="#using-the-economy-you-already-have">Using the economy you already have</a><a href="#for-economy-mod-authors">For economy mod authors</a></aside>
+  <aside class="toc"><h5>On this page</h5><a href="#using-the-economy-you-already-have">Using the economy you already have</a><a href="#other-plugins-next-to-tempest-economy">Other plugins next to Tempest Economy</a><a href="#for-economy-mod-authors">For economy mod authors</a></aside>
 </div>
 </body>
 </html>
