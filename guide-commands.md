@@ -15,6 +15,7 @@ Every command of the Tempest plugins, with the permission it needs. "Everyone" w
 | `/hud left` | Everyone | Money counter in the top left corner |
 | `/hud low` | Everyone | Money counter on the right side, lower down |
 | `/hud top` | Everyone | Money counter in a row along the top, right of centre |
+| `/invite` | Everyone | Your invite code, to bring a friend |
 | `/mail` (/mailbox) | Everyone | Open your mailbox: rewards and items kept for you |
 | `/partyhud` (/pframes) | Everyone | Show or hide your party frames (/partyhud left, right, compact, self...) |
 | `/partyhud compact` | Everyone | Pick the style of your party frames |
@@ -28,6 +29,7 @@ Every command of the Tempest plugins, with the permission it needs. "Everyone" w
 | `/places add` | `tempest.admin.map` | Adds a place to the map where you stand (admins) |
 | `/serverinfo` (/rules, /info) | Everyone | The server's rules and info |
 | `/tempest` (/casino) | Everyone | Tempest: the settings menu for admins, the help screen for players |
+| `/tempest backup` | `tempest.admin` | Makes a backup of every Tempest plugin's data now (admins) |
 | `/tempest doctor` | `tempest.admin` | Finds ways players could make money from nothing in the settings (admins) |
 | `/tempest hub` | `tempest.admin` | The Tempest hub: every plugin in one place, and protection for your spawn |
 | `/tempest hub corner` | `tempest.admin` | Mark a corner of an area to protect |
@@ -39,8 +41,14 @@ Every command of the Tempest plugins, with the permission it needs. "Everyone" w
 | `/tempest info` | `tempest.admin` | Tempest plugins: versions, editions and the economy (admins) |
 | `/tempest item` | `tempest.admin` | Every field of the item in your hand and how shops and rewards treat it (admins) |
 | `/tempest log` | `tempest.admin` | Who changed what: the newest lines of the admin log (admins) |
+| `/tempest players` | `tempest.admin` | Player health: who is new, who comes back, busiest hours (admins) |
 | `/tempest report` | `tempest.admin` | Writes a support report to paste when asking for help (admins) |
+| `/tempest rollback` | `tempest.admin` | Puts a player back to a snapshot on every server (admins) |
 | `/tempest settings` | Everyone | Open the Tempest settings menu (admins) |
+| `/tempest setup` | `tempest.admin` | Set the server up for its kind (survival, RPG, friends): shop, crates, quests and rewards in one go (admins) |
+| `/tempest snapshot` | `tempest.admin` | Takes a snapshot of a player's data now (admins) |
+| `/tempest snapshots` | `tempest.admin` | Lists a player's snapshots (admins) |
+| `/tempest storage` | `tempest.admin` | Where the plugins save: files or a database, and a connection test (admins) |
 | `/tempest texts` | Everyone | Change any text players see (admins) |
 
 ## Economy (Coins)
@@ -55,9 +63,19 @@ Every command of the Tempest plugins, with the permission it needs. "Everyone" w
 | `/daily` | Everyone | Open the daily reward calendar |
 | `/economy` (/eco) | `coins.admin.economy` | Admin: the economy screen, and changing balances |
 | `/economy add` | `coins.admin.economy` | Give a player money |
+| `/economy blocks` | `coins.admin.economy` | List the sources blocked in /eco and what they tried to pay |
+| `/economy export` | `coins.admin.economy` | Save the transaction log as a CSV file (Pro) |
 | `/economy import` | `coins.admin.economy` | Copy every player's balance from another economy (Ecotale, or one through VaultUnlocked) |
+| `/economy network` | `coins.admin.economy` | Wallets shared with other servers: how it goes (Pro) |
+| `/economy network accept` | `coins.admin.economy` | Keep a wallet edited in the database as it is, and unfreeze it |
+| `/economy network download` | `coins.admin.economy` | Write the shared wallets into this server's files, before leaving the network |
+| `/economy network log` | `coins.admin.economy` | The latest money changes of a player on every server of the network |
+| `/economy network restore` | `coins.admin.economy` | Put back the amount a wallet edited in the database had, and unfreeze it |
+| `/economy network seal` | `coins.admin.economy` | Seals against money changed in the database outside the game: on or off (Pro) |
+| `/economy network tampered` | `coins.admin.economy` | Wallets and changes found edited in the database, waiting for your decision |
 | `/economy set` | `coins.admin.economy` | Set a player's balance to an amount |
 | `/economy take` | `coins.admin.economy` | Take money from a player |
+| `/economy unblock` | `coins.admin.economy` | Unblock a source by its number in /eco blocks |
 | `/leaderboards` (/leaderboard, /ranks) | Everyone | The richest players, biggest winners and best traders |
 | `/pay` | Everyone | Send money from your wallet to another player |
 | `/wallet` (/balance, /bal) | Everyone | Open your wallet: balance, coins, payments and history |

@@ -265,9 +265,19 @@ The `/guide` pages of this plugin, as a player sees them on a test server (numbe
 | `/daily` | Everyone | Open the daily reward calendar |
 | `/economy` (/eco) | `coins.admin.economy` | Admin: the economy screen, and changing balances |
 | `/economy add` | `coins.admin.economy` | Give a player money |
+| `/economy blocks` | `coins.admin.economy` | List the sources blocked in /eco and what they tried to pay |
+| `/economy export` | `coins.admin.economy` | Save the transaction log as a CSV file (Pro) |
 | `/economy import` | `coins.admin.economy` | Copy every player's balance from another economy (Ecotale, or one through VaultUnlocked) |
+| `/economy network` | `coins.admin.economy` | Wallets shared with other servers: how it goes (Pro) |
+| `/economy network accept` | `coins.admin.economy` | Keep a wallet edited in the database as it is, and unfreeze it |
+| `/economy network download` | `coins.admin.economy` | Write the shared wallets into this server's files, before leaving the network |
+| `/economy network log` | `coins.admin.economy` | The latest money changes of a player on every server of the network |
+| `/economy network restore` | `coins.admin.economy` | Put back the amount a wallet edited in the database had, and unfreeze it |
+| `/economy network seal` | `coins.admin.economy` | Seals against money changed in the database outside the game: on or off (Pro) |
+| `/economy network tampered` | `coins.admin.economy` | Wallets and changes found edited in the database, waiting for your decision |
 | `/economy set` | `coins.admin.economy` | Set a player's balance to an amount |
 | `/economy take` | `coins.admin.economy` | Take money from a player |
+| `/economy unblock` | `coins.admin.economy` | Unblock a source by its number in /eco blocks |
 | `/leaderboards` (/leaderboard, /ranks) | Everyone | The richest players, biggest winners and best traders |
 | `/pay` | Everyone | Send money from your wallet to another player |
 | `/wallet` (/balance, /bal) | Everyone | Open your wallet: balance, coins, payments and history |
@@ -299,6 +309,8 @@ Players paying each other with /pay or the wallet's Pay button.
 | Setting | What it does | Values |
 |---|---|---|
 | Players can pay each other | Off: /pay and the wallet's Pay button stop working. Admins can still move money with /eco. | On or off |
+| Pay players on other servers | With wallets shared between servers (/tempest, Saving): /pay reaches a player on any server of the network. | On or off |
+| Pay players who are offline | /pay by name reaches a player who is not online; the money waits in their wallet. | On or off |
 | Smallest payment | The lowest amount a player can send with /pay. Stops players from spamming each other with tiny payments. | 1 to 1000000000 |
 | Fee (%) | Paid on top by the sender. It leaves the game. | 0 to 100 |
 
@@ -503,6 +515,7 @@ Posts big moments to a Discord channel. In Discord: Edit channel, Integrations, 
 | Lottery winners | Posts who won each lottery drawing and how much. | On or off |
 | Achievements | Posts when a player unlocks an achievement or finishes a quest that announces itself, and when the server finishes a server quest together. | On or off |
 | Money alerts | Posts when a player's money jumps unusually (Tempest Pro; set on the Coins tab, Money alerts). | On or off |
+| Database outages and failed backups | Posts when the shared database (/tempest, Saving) has been away for the seconds set there, when it is back, and when a backup could not be made (a full disk). | On or off |
 | News from other mods | Posts the other big moments: bounties, crate key parties, events starting and ending, finished town projects and unlocks, and battle pass seasons and players who finish them. | On or off |
 | Send a test message | Tick it: a test message is posted if the link works. | On or off |
 

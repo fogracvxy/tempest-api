@@ -1,6 +1,6 @@
 # Safety and helpers
 
-Admin logs, rate limits, play limits, AFK checks, the doctor and crash-safe files.
+Admin logs, rate limits, play limits, AFK checks, the doctor, crash-safe files, player health, the setup wizard and helpers for Hytale 0.7 and 0.8.
 
 ## Who changed what: `AdminLog` (API version 2)
 
@@ -96,6 +96,69 @@ SafeFiles.exists(path);                                            // also true 
 
 `load` uses the newest complete copy; a file that cannot be read is kept as `name.broken-<time>` and the backup is
 used instead.
+
+
+## Who really plays: `PlayerHealth` (API version 39)
+
+Core keeps, for each player, the first day they joined and the minutes they really played (time away from the
+keyboard never counts, see `Activity`). It feeds /tempest players (player health) and the rewards for playing.
+
+```java
+long minutes = PlayerHealth.activeMinutes(uuid);   // really played, ever
+long first = PlayerHealth.firstDay(uuid);          // LocalDate.toEpochDay, -1 never seen, BEFORE_RECORDS from before Core kept them
+```
+
+Players the game already knew when player health started (universe/players) count as players from before the
+records: never new, never given the starter kit.
+
+
+## The setup wizard: `ServerSetup` (API version 38)
+
+`/tempest setup` (and an admin's first `/tempest` on a new server) asks what kind of server it is (Survival, RPG,
+Friends) and lets every plugin fit itself to it in one go. The admin sees every change with a tick box, unticks what
+they do not want, and applies the rest. A plugin takes part with a `Part`:
+
+```java
+core.setupPart(new ServerSetup.Part() {          // Registrations: removed again by close()
+    public String title() { return "Jobs"; }
+    public List<ServerSetup.Change> preview(ServerSetup.Kind kind) {
+        return List.of(new ServerSetup.Change("farmer", "Adds the Farmer job"),
+                new ServerSetup.Change("rate", "Pay: 2 a crop (now 1)", rateIsAsItComes));  // false: starts unticked
+    }
+    public List<String> apply(ServerSetup.Kind kind, Set<String> chosen) {   // only the ids still ticked
+        ServerSetup.backup("Jobs", jobsFile);                                // before anything is written
+        ...; return List.of("Added the Farmer job");
+    }
+    public boolean canUndo() { ... }
+    public List<String> undo() { ...; return List.of("Removed the Farmer job"); }
+});
+```
+
+The rules, so a setup never spoils a server that has its own content:
+- only add what is missing (matched by name or item id), never delete, rename or reprice what the admin made;
+- a setting the admin changed from how it comes is offered unticked (`Change(id, text, false)`);
+- `ServerSetup.backup(plugin, files...)` before writing (to `universe/mods/atomictempest/setup-backups/<time>/`); it
+  throws if it cannot copy, and then the part changes nothing;
+- remember what was added with `ServerSetup.fingerprint(thing)`: undo removes only what still has the same
+  fingerprint, so anything the admin edited since (or a crate placed in the world) stays;
+- check every item id exists, keep to the free edition's limits; `apply` and `undo` run off the world thread, one run
+  at a time on the whole server.
+
+
+## Hytale 0.7 and 0.8 alike: `Later` and `Creatures` (API version 37)
+
+Hytale 0.8 removes `World.scheduleAfter` and moves a creature's data from `NPCEntity` to a new `NPCComponent`. A
+plugin that uses either directly crashes on one of the two versions; these work on both:
+
+```java
+Later.after(world, () -> player.sendMessage(...), 2, TimeUnit.SECONDS);   // was world.scheduleAfter(task, 2, SECONDS)
+String role = Creatures.role(store, ref);    // "Skeleton_Fighter", or null if it is not a creature (was npc.getRoleName())
+Creatures.is(store, ref);                    // any creature: mob, animal, trader
+```
+
+`Later` waits on Core's timer, then hands the task to the world's queue (skipped if the world stopped, as before).
+A system's query can stay `NPCEntity.getComponentType()`: 0.8 still puts it on every creature, only its methods are
+gone. Check `CoreAPI.runningVersion() >= 37` before using them when your plugin may meet an older Core.
 
 
 ## Other helpers

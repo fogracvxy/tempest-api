@@ -36,7 +36,7 @@ Core's `Claims` hides which.
 Every API class has a version constant that goes up when something is added. Everything in these APIs is safe to call
 from any thread unless it says otherwise.
 
-**Javadoc:** [Coinflip 1.0.6](javadoc/coinflip/) · [Coins 2.6.0](javadoc/coins/) · [Core 1.7.1](javadoc/core/) · [Holograms 1.4.0](javadoc/holograms/) · [Jobs 1.2.0](javadoc/jobs/) · [Lottery 1.1.4](javadoc/lottery/) · [Pass 1.4.0](javadoc/pass/) · [Projects 1.2.0](javadoc/projects/) · [Quests 1.6.0](javadoc/quests/) · [Shop 1.6.0](javadoc/shop/) · [SlotMachine 1.2.5](javadoc/slotmachine/)
+**Javadoc:** [Coinflip 1.0.6](javadoc/coinflip/) · [Coins 2.7.1](javadoc/coins/) · [Core 1.8.1](javadoc/core/) · [Holograms 1.4.1](javadoc/holograms/) · [Jobs 1.3.0](javadoc/jobs/) · [Lottery 1.1.4](javadoc/lottery/) · [Pass 1.5.0](javadoc/pass/) · [Projects 1.2.0](javadoc/projects/) · [Quests 1.7.0](javadoc/quests/) · [Shop 1.7.1](javadoc/shop/) · [SlotMachine 1.2.7](javadoc/slotmachine/)
 
 **Jars:** from the plugins' CurseForge pages; compile against them with `compileOnly`. **Questions and help:** [Discord](https://discord.gg/Q9PNVCMZXK)
 
@@ -82,6 +82,13 @@ Some plugins come as a free jar and a Pro jar with the same name. The Pro jar re
 everything the server made. Free limits only stop you making more: they never break what a server already has.
 Core, Economy and the plugins' APIs are always free.
 
+## Saving, backups and networks
+
+Everything is saved in files by default, safely through crashes and power cuts, with a backup every 12 hours. With a
+Pro plugin, several servers can share one economy and players' progress through a MySQL or MariaDB database. See
+[Saving and backups](saving-and-backups.html), [Database and server networks](networks.html) and
+[Big servers](big-servers.html).
+
 ## Languages
 
 Every text players see is in 8 languages (English, German, Spanish, French, Italian, Polish, Brazilian Portuguese and
@@ -106,6 +113,7 @@ Every command of the Tempest plugins, with the permission it needs. "Everyone" w
 | `/hud left` | Everyone | Money counter in the top left corner |
 | `/hud low` | Everyone | Money counter on the right side, lower down |
 | `/hud top` | Everyone | Money counter in a row along the top, right of centre |
+| `/invite` | Everyone | Your invite code, to bring a friend |
 | `/mail` (/mailbox) | Everyone | Open your mailbox: rewards and items kept for you |
 | `/partyhud` (/pframes) | Everyone | Show or hide your party frames (/partyhud left, right, compact, self...) |
 | `/partyhud compact` | Everyone | Pick the style of your party frames |
@@ -119,6 +127,7 @@ Every command of the Tempest plugins, with the permission it needs. "Everyone" w
 | `/places add` | `tempest.admin.map` | Adds a place to the map where you stand (admins) |
 | `/serverinfo` (/rules, /info) | Everyone | The server's rules and info |
 | `/tempest` (/casino) | Everyone | Tempest: the settings menu for admins, the help screen for players |
+| `/tempest backup` | `tempest.admin` | Makes a backup of every Tempest plugin's data now (admins) |
 | `/tempest doctor` | `tempest.admin` | Finds ways players could make money from nothing in the settings (admins) |
 | `/tempest hub` | `tempest.admin` | The Tempest hub: every plugin in one place, and protection for your spawn |
 | `/tempest hub corner` | `tempest.admin` | Mark a corner of an area to protect |
@@ -130,8 +139,14 @@ Every command of the Tempest plugins, with the permission it needs. "Everyone" w
 | `/tempest info` | `tempest.admin` | Tempest plugins: versions, editions and the economy (admins) |
 | `/tempest item` | `tempest.admin` | Every field of the item in your hand and how shops and rewards treat it (admins) |
 | `/tempest log` | `tempest.admin` | Who changed what: the newest lines of the admin log (admins) |
+| `/tempest players` | `tempest.admin` | Player health: who is new, who comes back, busiest hours (admins) |
 | `/tempest report` | `tempest.admin` | Writes a support report to paste when asking for help (admins) |
+| `/tempest rollback` | `tempest.admin` | Puts a player back to a snapshot on every server (admins) |
 | `/tempest settings` | Everyone | Open the Tempest settings menu (admins) |
+| `/tempest setup` | `tempest.admin` | Set the server up for its kind (survival, RPG, friends): shop, crates, quests and rewards in one go (admins) |
+| `/tempest snapshot` | `tempest.admin` | Takes a snapshot of a player's data now (admins) |
+| `/tempest snapshots` | `tempest.admin` | Lists a player's snapshots (admins) |
+| `/tempest storage` | `tempest.admin` | Where the plugins save: files or a database, and a connection test (admins) |
 | `/tempest texts` | Everyone | Change any text players see (admins) |
 
 ## Economy (Coins)
@@ -146,9 +161,19 @@ Every command of the Tempest plugins, with the permission it needs. "Everyone" w
 | `/daily` | Everyone | Open the daily reward calendar |
 | `/economy` (/eco) | `coins.admin.economy` | Admin: the economy screen, and changing balances |
 | `/economy add` | `coins.admin.economy` | Give a player money |
+| `/economy blocks` | `coins.admin.economy` | List the sources blocked in /eco and what they tried to pay |
+| `/economy export` | `coins.admin.economy` | Save the transaction log as a CSV file (Pro) |
 | `/economy import` | `coins.admin.economy` | Copy every player's balance from another economy (Ecotale, or one through VaultUnlocked) |
+| `/economy network` | `coins.admin.economy` | Wallets shared with other servers: how it goes (Pro) |
+| `/economy network accept` | `coins.admin.economy` | Keep a wallet edited in the database as it is, and unfreeze it |
+| `/economy network download` | `coins.admin.economy` | Write the shared wallets into this server's files, before leaving the network |
+| `/economy network log` | `coins.admin.economy` | The latest money changes of a player on every server of the network |
+| `/economy network restore` | `coins.admin.economy` | Put back the amount a wallet edited in the database had, and unfreeze it |
+| `/economy network seal` | `coins.admin.economy` | Seals against money changed in the database outside the game: on or off (Pro) |
+| `/economy network tampered` | `coins.admin.economy` | Wallets and changes found edited in the database, waiting for your decision |
 | `/economy set` | `coins.admin.economy` | Set a player's balance to an amount |
 | `/economy take` | `coins.admin.economy` | Take money from a player |
+| `/economy unblock` | `coins.admin.economy` | Unblock a source by its number in /eco blocks |
 | `/leaderboards` (/leaderboard, /ranks) | Everyone | The richest players, biggest winners and best traders |
 | `/pay` | Everyone | Send money from your wallet to another player |
 | `/wallet` (/balance, /bal) | Everyone | Open your wallet: balance, coins, payments and history |
@@ -367,6 +392,7 @@ The `/guide` pages of this plugin, as a player sees them on a test server (numbe
 | `/hud left` | Everyone | Money counter in the top left corner |
 | `/hud low` | Everyone | Money counter on the right side, lower down |
 | `/hud top` | Everyone | Money counter in a row along the top, right of centre |
+| `/invite` | Everyone | Your invite code, to bring a friend |
 | `/mail` (/mailbox) | Everyone | Open your mailbox: rewards and items kept for you |
 | `/partyhud` (/pframes) | Everyone | Show or hide your party frames (/partyhud left, right, compact, self...) |
 | `/partyhud compact` | Everyone | Pick the style of your party frames |
@@ -380,6 +406,7 @@ The `/guide` pages of this plugin, as a player sees them on a test server (numbe
 | `/places add` | `tempest.admin.map` | Adds a place to the map where you stand (admins) |
 | `/serverinfo` (/rules, /info) | Everyone | The server's rules and info |
 | `/tempest` (/casino) | Everyone | Tempest: the settings menu for admins, the help screen for players |
+| `/tempest backup` | `tempest.admin` | Makes a backup of every Tempest plugin's data now (admins) |
 | `/tempest doctor` | `tempest.admin` | Finds ways players could make money from nothing in the settings (admins) |
 | `/tempest hub` | `tempest.admin` | The Tempest hub: every plugin in one place, and protection for your spawn |
 | `/tempest hub corner` | `tempest.admin` | Mark a corner of an area to protect |
@@ -391,8 +418,14 @@ The `/guide` pages of this plugin, as a player sees them on a test server (numbe
 | `/tempest info` | `tempest.admin` | Tempest plugins: versions, editions and the economy (admins) |
 | `/tempest item` | `tempest.admin` | Every field of the item in your hand and how shops and rewards treat it (admins) |
 | `/tempest log` | `tempest.admin` | Who changed what: the newest lines of the admin log (admins) |
+| `/tempest players` | `tempest.admin` | Player health: who is new, who comes back, busiest hours (admins) |
 | `/tempest report` | `tempest.admin` | Writes a support report to paste when asking for help (admins) |
+| `/tempest rollback` | `tempest.admin` | Puts a player back to a snapshot on every server (admins) |
 | `/tempest settings` | Everyone | Open the Tempest settings menu (admins) |
+| `/tempest setup` | `tempest.admin` | Set the server up for its kind (survival, RPG, friends): shop, crates, quests and rewards in one go (admins) |
+| `/tempest snapshot` | `tempest.admin` | Takes a snapshot of a player's data now (admins) |
+| `/tempest snapshots` | `tempest.admin` | Lists a player's snapshots (admins) |
+| `/tempest storage` | `tempest.admin` | Where the plugins save: files or a database, and a connection test (admins) |
 | `/tempest texts` | Everyone | Change any text players see (admins) |
 
 
@@ -475,6 +508,91 @@ Slots, Lottery and Coinflip use only money earned in game. A daily limit stops a
 | Setting | What it does | Values |
 |---|---|---|
 | Daily limit for games | Per player, all games together. 0 = no limit. | 0 to 1000000000 |
+
+
+### Rewards for playing
+
+`/tempest` → Rewards for playing. Who can change it: `tempest.admin` or `tempest.admin.core`.
+
+Reasons for players to stay and come back. Each is off until you turn it on. Time away from the keyboard never counts, and every reward is given once. See how players do with /tempest players.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Starter kit on the first join | Once per player, ever. Players from before you turned it on never get it. | On or off |
+| Starter kit items |  | Text |
+| Starter kit coins |  | 0 to 1000000 |
+| Rewards for hours played | Paid when a player has really played this many hours in all (AFK does not count). | On or off |
+| At these hours |  | Text |
+| Coins for each hour | At 10 hours a player gets 10 times this. | 0 to 100000 |
+| Welcome back after days away | At most once every 30 days per player. | On or off |
+| Days away |  | 2 to 365 |
+| Hours played before, at least | So an account made only to collect it gets nothing. | 0 to 1000 |
+| Welcome back coins |  | 0 to 1000000 |
+| Invite codes (/invite) | A friend types the code on their first day; when they have played the hours below, both are paid. | On or off |
+| Hours the friend plays first |  | 1 to 100 |
+| Coins for each of them |  | 0 to 1000000 |
+| Paid friends a week, at most | Per inviter. The inviter must have played 2 hours before their code works. | 1 to 50 |
+
+
+### Saving
+
+`/tempest` → Saving. Who can change it: `tempest.admin` or `tempest.admin.core`.
+
+#### Where the plugins keep their data
+
+Files on this server need nothing set up and suit most servers. A database lets several servers share players' money (Tempest Pro). Changes count from the next restart; /tempest storage tests the connection.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Save in a database (MySQL or MariaDB) | Comes with any Tempest Pro plugin. Before switching back to files, run /eco network download on this server. | On or off |
+| Address | Several addresses separated by commas (db1.example.com,db2.example.com): the first, and the next ones when it does not answer. Only for a database with a standby copy that is always up to date (Galera, or synchronous replication). A cloud database with automatic failover (Amazon RDS Multi-AZ, DigitalOcean standby nodes) needs only its one address. | Text |
+| Port | MySQL and MariaDB use 3306. | 1 to 65535 |
+| Database name |  | Text |
+| User |  | Text |
+| Password | Never shown again once saved; leave it empty to keep the one saved. To keep the password out of storage.json, type env:NAME and set the environment variable NAME on the server (hosting panels call these startup or environment variables). | Text |
+| Encrypt the connection | Turn it on when the database is on another machine. The connection test says whether your database offers it. | Off (database on this machine or a private network), On, On, and check the database's certificate |
+| This server's name | Different on every server that shares the database, such as survival or lobby. | Text |
+| Table prefix | The same on every server that shares wallets. Another prefix keeps a separate network in the same database. | Text |
+
+#### What the servers share
+
+Only what is on goes into the database; each server also keeps its own files up to date, so a part turned off goes on from them, and turned on again a player keeps what they had here. One server can use a database too. Each change counts from the next restart.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Players' money (shared wallets) | Players' money, banks and stats: one economy for every server. Turned off, the shared wallets are written into this server's files at the next start. | On or off |
+| Battle pass progress | XP, tiers claimed and premium follow players; a tier is never claimed twice. | On or off |
+| Quest progress | Quests and achievements follow players; a quest is never paid twice. | On or off |
+| Jobs | Jobs held, levels and XP follow players. Limits on how many may hold a job count each server's own players. | On or off |
+| Leaderboards for the whole network | Top lists of what follows players (pass, quests, jobs; money with shared wallets) rank every server's players. | On or off |
+| One money log for the whole network | Every server's money changes in one log (/eco network log; with players' money shared). Each server's own log stays complete either way. | On or off |
+| Days the network log keeps |  | 1 to 3650 |
+
+#### When the database is away
+
+Players keep playing; spending and rewards wait until it is back, and nothing is lost. These settings count at once.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Tell admins after (seconds) | A shorter hiccup is not an outage: the plugins retry by themselves. | 5 to 600 |
+| Tell admins in game | Players with tempest.admin get a message when an outage starts and ends. Discord: Coins' Discord tab, Database outages. | On or off |
+| Longest wait between tries (seconds) | The plugins try again after 2, 4, 8 ... seconds up to this. Shorter: back sooner after an outage; longer: less knocking on a database that is struggling. | 5 to 300 |
+
+#### Backups
+
+A zip of every Tempest plugin's data every few hours, with the shared tables when saving in a database. These settings count at once. Keep a copy away from this server too: point the folder at another disk or a synced folder. /tempest backup makes one now.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Hours between backups | 0 turns automatic backups off. | 0 to 168 |
+| Backups kept | The oldest are deleted; only Tempest's own backups. | 1 to 1000 |
+| Backup folder | Relative to the server's folder (universe/tempest-backups), or a whole path such as D:/backups/tempest. A folder on another disk survives a broken server disk. | Text |
+| Back up the database too | Every shared table as text in the zip. Your database host's own backups are still worth turning on. On a network, one server backing up the database is enough. | On or off |
+| Back up the network money log too | Every server's money changes (/eco network log). It can be large; each server keeps its own log anyway. | On or off |
+| Snapshots kept per player | /tempest rollback puts a player back to one. 0 turns snapshots off. Pinned ones (taken by an admin, or before a rollback) are always kept. | 0 to 100 |
+| Snapshot when a player leaves | Off: only the snapshots admins take (/tempest snapshot). | On or off |
+| Minutes between snapshots of a player | A player who hops between servers gets one snapshot in this time, so their older ones are kept. 0: every time. | 0 to 1440 |
+| Days snapshots are kept | Older ones are deleted (pinned ones stay). 0: kept until newer ones push them out. | 0 to 3650 |
 
 
 ### Party frames
@@ -1119,9 +1237,19 @@ The `/guide` pages of this plugin, as a player sees them on a test server (numbe
 | `/daily` | Everyone | Open the daily reward calendar |
 | `/economy` (/eco) | `coins.admin.economy` | Admin: the economy screen, and changing balances |
 | `/economy add` | `coins.admin.economy` | Give a player money |
+| `/economy blocks` | `coins.admin.economy` | List the sources blocked in /eco and what they tried to pay |
+| `/economy export` | `coins.admin.economy` | Save the transaction log as a CSV file (Pro) |
 | `/economy import` | `coins.admin.economy` | Copy every player's balance from another economy (Ecotale, or one through VaultUnlocked) |
+| `/economy network` | `coins.admin.economy` | Wallets shared with other servers: how it goes (Pro) |
+| `/economy network accept` | `coins.admin.economy` | Keep a wallet edited in the database as it is, and unfreeze it |
+| `/economy network download` | `coins.admin.economy` | Write the shared wallets into this server's files, before leaving the network |
+| `/economy network log` | `coins.admin.economy` | The latest money changes of a player on every server of the network |
+| `/economy network restore` | `coins.admin.economy` | Put back the amount a wallet edited in the database had, and unfreeze it |
+| `/economy network seal` | `coins.admin.economy` | Seals against money changed in the database outside the game: on or off (Pro) |
+| `/economy network tampered` | `coins.admin.economy` | Wallets and changes found edited in the database, waiting for your decision |
 | `/economy set` | `coins.admin.economy` | Set a player's balance to an amount |
 | `/economy take` | `coins.admin.economy` | Take money from a player |
+| `/economy unblock` | `coins.admin.economy` | Unblock a source by its number in /eco blocks |
 | `/leaderboards` (/leaderboard, /ranks) | Everyone | The richest players, biggest winners and best traders |
 | `/pay` | Everyone | Send money from your wallet to another player |
 | `/wallet` (/balance, /bal) | Everyone | Open your wallet: balance, coins, payments and history |
@@ -1153,6 +1281,8 @@ Players paying each other with /pay or the wallet's Pay button.
 | Setting | What it does | Values |
 |---|---|---|
 | Players can pay each other | Off: /pay and the wallet's Pay button stop working. Admins can still move money with /eco. | On or off |
+| Pay players on other servers | With wallets shared between servers (/tempest, Saving): /pay reaches a player on any server of the network. | On or off |
+| Pay players who are offline | /pay by name reaches a player who is not online; the money waits in their wallet. | On or off |
 | Smallest payment | The lowest amount a player can send with /pay. Stops players from spamming each other with tiny payments. | 1 to 1000000000 |
 | Fee (%) | Paid on top by the sender. It leaves the game. | 0 to 100 |
 
@@ -1357,6 +1487,7 @@ Posts big moments to a Discord channel. In Discord: Edit channel, Integrations, 
 | Lottery winners | Posts who won each lottery drawing and how much. | On or off |
 | Achievements | Posts when a player unlocks an achievement or finishes a quest that announces itself, and when the server finishes a server quest together. | On or off |
 | Money alerts | Posts when a player's money jumps unusually (Tempest Pro; set on the Coins tab, Money alerts). | On or off |
+| Database outages and failed backups | Posts when the shared database (/tempest, Saving) has been away for the seconds set there, when it is back, and when a backup could not be made (a full disk). | On or off |
 | News from other mods | Posts the other big moments: bounties, crate key parties, events starting and ending, finished town projects and unlocks, and battle pass seasons and players who finish them. | On or off |
 | Send a test message | Tick it: a test message is posted if the link works. | On or off |
 
@@ -4086,6 +4217,475 @@ Economies.register(myEconomy);     // an implementation of com.atomictempest.cor
 It is preferred over VaultUnlocked; call `Economies.unregister` when your plugin stops. See [Money](money.html).
 
 
+# Saving and backups
+
+How the Tempest plugins keep your server's data safe in files, through crashes, power cuts and full disks, and how to make and restore backups. Free, with no setup.
+
+Every Tempest plugin saves in files under `universe/mods`. This is the default, it needs no setup, and it is safe
+for big servers on Windows and Linux. A database (MySQL or MariaDB) is only needed when several servers share one
+economy: see [Database and server networks](networks.html).
+
+## How a save stays safe
+
+A save can be cut off at any moment: a crash, a power cut, a host that kills the server. The plugins never write
+over the old file directly, so a save is either fully done or not done at all.
+
+1. The new text goes to `name.tmp` and is flushed to the disk.
+2. The old file becomes `name.bak`.
+3. The new file takes its place in one step.
+
+When a file is read, the plugins use the newest complete copy. A file that cannot be read is kept as
+`name.broken-<time>` (so nothing is ever thrown away) and the backup copy is used instead.
+
+| Danger | What the plugins do |
+|---|---|
+| A crash or power cut in the middle of a save | The old file or the `.bak` copy is still whole. The next start uses it |
+| Two saves of the same file at the same moment | Saves and reads of one file never overlap. The newest data always wins |
+| Windows: a virus scanner, backup tool or sync program has the file open | The save waits a moment and tries again, instead of failing |
+| Linux: the disk loses the new name after a power cut | The folder is synced too, so the new file is really on the disk |
+| A server stopping while saving | The save still finishes. A stop cannot cut a file in half |
+| A file edited by hand with a mistake | It is kept as `name.broken-<time>`, the last good copy is used, and the error is logged |
+| Two server processes on the same folder | Found and named to admins (see below) |
+
+**What a crash can lose.** Rewards, purchases and claims are saved before they are given, so a crash never gives
+anything twice. Routine progress is saved every few seconds (money about every 5 seconds, battle pass XP every 10,
+job XP every 30), so a crash can lose at most those last seconds of earning.
+
+## Backups
+
+The plugins make a backup of all Tempest data every 12 hours. Backups are free and work with files and with a
+database.
+
+Each backup is a zip file in `universe/tempest-backups` with:
+
+- the files of all Tempest plugins (`universe/mods/...`), but no jar files and never the database password;
+- with a database: each shared table as text (`database/<table>.jsonl`);
+- `about.txt`: when, why, and how to restore.
+
+| Setting (`/tempest` → Saving) | Default | What it does |
+|---|---|---|
+| Hours between backups | 12 | 0 to 168. 0 turns automatic backups off |
+| Backups kept | 14 | 1 to 1000. The oldest Tempest backups are deleted, nothing else |
+| Backup folder | `universe/tempest-backups` | A folder in the server folder, or a full path such as `D:/backups/tempest` |
+| Back up the database too | On | The shared tables go into each backup |
+| Back up the network money log too | Off | The money log of all servers. It can be large |
+
+These settings work at once, with no restart.
+
+**Make a backup now:** `/tempest backup`. It also lists the newest backups.
+
+**A full disk never breaks the server.** A backup is not made if it would leave less than 512 MB free, because the
+plugins need room to save. Admins get a message in game (and on Discord, if Coins' Discord alerts are set up). Keep
+fewer backups, or move the backup folder to another disk.
+
+**Backups are private.** They never contain the database password. On Linux only the server's own user can read
+them. They do contain every player's data and the network's `seal.key`, so keep the backup folder as private as the
+server itself.
+
+### Restore a backup
+
+1. Stop the server.
+2. Open the zip and copy `files/universe/mods` over the server's `universe/mods`.
+3. If you save in a database, type the password again in `/tempest` → Saving (or use `env:NAME`).
+4. Start the server.
+
+### Good habits
+
+- Put the backup folder on a different disk, or in a folder that a sync program copies somewhere else.
+- Follow the 3-2-1 rule: 3 copies of the data, on 2 kinds of storage, 1 copy in another place.
+- With a database, also turn on your database host's own backups (for example automated backups with point-in-time
+  recovery). On a network, one server that backs up the database is enough: turn "Back up the database too" off on the
+  others.
+
+## One server process per folder
+
+Only one server process may use a server folder. Some hosting panels can start the same server twice after a crash
+or a restart, and two processes writing the same files would lose data.
+
+The plugins notice this. The second process names the first one in its log, and every admin gets a message in game
+and on Discord: "Another server process is using this server's folder". The message repeats every 10 minutes until
+one of the two is stopped. Stop one of them.
+
+## Is file saving enough for a big server?
+
+Yes, for one server. The safe-save steps above are tested on Windows and on Linux, including saves cut off half way
+and saves on a server that is stopping. You need a database only when:
+
+- two or more servers must share one economy and players' progress, or
+- a website, a bot or another tool must read the data while the server runs.
+
+See [Big servers](big-servers.html) for the load tests with hundreds of players.
+
+
+# Database and server networks
+
+Run several servers with one economy. Money, battle pass, quests and jobs follow players from server to server, through a MySQL or MariaDB database, with no dupes and no losses.
+
+By default every server keeps its own data in files ([Saving and backups](saving-and-backups.html)). With a database,
+two or more servers can share it: a player who earns 500 coins on your survival server has them on your lobby and
+minigame servers too, with the same battle pass tiers, quests and jobs.
+
+Use a database when:
+
+- two or more servers must share one economy, and players' progress must follow them; or
+- a website, a bot or a backup tool must read the data of a server.
+
+A database needs any Tempest Pro plugin on each server. Saving in files, backups and everything on
+[Saving and backups](saving-and-backups.html) are free.
+
+## What the servers can share
+
+You choose each part in `/tempest` → Saving. Parts you do not share stay in each server's own files.
+
+| Part | What follows the player |
+|---|---|
+| Money (shared wallets) | Balance, stats, daily streak, the last changes. Banks stay on each server |
+| Battle pass | XP, claimed tiers, premium |
+| Quests | Quests, achievements, progress, rerolls |
+| Jobs | The jobs the player holds, level and XP of each job, today's pay, explorer places |
+| Leaderboards for the whole network | The Pass, Quests and Jobs boards rank the players of all servers |
+| One money log for the whole network | Every money change on every server, in one log (`/eco network log`) |
+
+All parts are on when you turn the database on. The money boards (richest, top earners) rank all servers when money
+is shared.
+
+These always stay on each server: server quests, the paid places of a quest (first 5 players), the player limit of a
+job, shared banks, crates, shops, holograms, the lottery and coinflip rooms.
+
+## No dupes: one owner server at a time
+
+The hard part of a network is that a player can switch servers in a second. If two servers could change the same
+wallet, a player could spend the same coins twice, or claim the same reward on each server. The plugins prevent this.
+
+Each player's data has **one owner server at a time**: the server the player is on.
+
+1. When a player joins, that server takes their data from the database.
+2. If the previous server still holds it, the new server waits. The player sees "Your wallet is on its way" or a
+   similar message. This usually takes less than a second.
+3. While the player plays, the owner server saves their data. Before it gives a reward or money, it saves and waits
+   until the database has it.
+4. When the player leaves, the owner server saves the data and lets it go.
+
+A server that does not own a player's data changes nothing for them and gives no rewards for it. So a reward claimed
+on one server can never be claimed again on another.
+
+If a server crashes without letting go, its players' data is free again after 1 minute. Its last save counts.
+
+**Money to a player on another server.** `/pay`, shop sales and other payments go to the owner server, which adds them.
+`/pay <name> <amount>` finds the player on any server of the network, and they see the payment on their server. If the
+player is offline everywhere, the database is changed directly. Every change carries a code, so it is never counted
+twice, even if a server crashes halfway.
+
+## When the database goes down
+
+A database can stop: an outage at the cloud host, a restart, a network problem. The servers keep running and no
+player is kicked.
+
+| Time | What players can do | What waits |
+|---|---|---|
+| The first 30 seconds | Everything | Nothing. The servers keep the changes and save them when the database is back |
+| After 30 seconds | Earn money, get pass XP, make quest progress, do jobs (with pay) | Spending money (shops, `/pay`, crates), claiming pass tiers, quest rewards. Players see "The money server cannot be reached right now. Your coins are safe" |
+| A player who joins during the outage | Earn money (it is added when the database is back) | Spending, and their pass, quests and jobs: "on its way" |
+| When the database is back | Everything | Nothing. Every change goes into the database exactly once |
+
+Spending waits after 30 seconds on purpose: after 60 seconds another server may take over a wallet, and the same coins
+must never be spent twice.
+
+If a server restarts while the database is down, it keeps what changed. Coins keeps every money change in
+`universe/mods/coins/network-outbox.json`; Pass, Quests and Jobs keep their files up to date and Core remembers which
+players' progress the database does not have yet. When the database is back, it all goes in. If another server
+changed the same player in the meantime, the database counts.
+
+**Admins are told.** When the database is unreachable for 15 seconds, every admin in game gets a message, and Coins
+sends it to your Discord alerts channel (Coins' Discord tab, "Database outages and failed backups"). A second message
+comes when it is back. `/tempest storage` shows how fast the database answers and the last 5 outages.
+
+**Retries.** The servers try again after 1, 2, 4, 8 seconds and so on, up to 1 minute, with a random part, so many
+servers coming back at once do not all hit the database in the same moment.
+
+## What you need
+
+| Item | Details |
+|---|---|
+| Database | MySQL 8.4 or newer, or MariaDB 10.11 or newer. Both are tested |
+| Driver | `mariadb-java-client-3.5.11.jar`, in the Pro download under `Drivers/`. It works with MySQL too |
+| Distance | Best in the same region or data centre as the game servers (under 5 ms). A database farther away works (tested at 80 ms), but players wait longer when they join or switch servers |
+| Database user | A user for Tempest only, with rights on its own database only |
+| Pro plugin | Any Tempest Pro plugin, on each server |
+
+## Set up
+
+### 1. Make the database and the user
+
+On the database server (change the password):
+
+```sql
+CREATE DATABASE tempest CHARACTER SET utf8mb4;
+CREATE USER 'tempest'@'%' IDENTIFIED BY 'a-long-random-password';
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, ALTER, INDEX ON tempest.* TO 'tempest'@'%';
+```
+
+If the database runs on the same machine as the game server, use `'tempest'@'localhost'` instead of `'tempest'@'%'`.
+A hosting panel can make the database and user for you: give the user rights on its own database only.
+
+Never use the root user. If its password leaks, every database on that machine leaks.
+
+### 2. Set up one server
+
+1. Stop the server.
+2. Put `mariadb-java-client-3.5.11.jar` in `universe/mods/atomictempest/drivers/`.
+3. Start the server.
+4. In `/tempest` → Saving, turn on "Save in a database".
+5. Type the address, port, database name, user and password.
+6. If the database is on another machine, set "Encrypt the connection" to On.
+7. Turn off the parts you do not want shared.
+8. Run `/tempest storage`. It should say "Connected" and "Safety check: nothing to fix".
+9. Restart the server.
+
+At the first start with the database, Coins backs up the wallet files, then copies the wallets into the database. It
+never writes over a wallet that is already there.
+
+### 3. Add more servers
+
+1. Do step 2 on each server, with the same address, database, user, password and table prefix.
+2. Give each server its own name ("This server's name"), for example `survival` and `lobby`.
+3. Restart each server.
+4. Run `/eco network` on one server. "Servers running now" should list them all.
+
+If a player had wallet files on two servers before the network, the first copy in the database counts. Players with a
+different amount are listed in `universe/mods/coins/network-differences.csv`, and the backup has the other amount.
+
+Several networks can use one database: give each network its own table prefix.
+
+## Settings
+
+All in `/tempest` → Saving. The settings file is `universe/mods/atomictempest/storage.json`; on Linux only the
+server's own user can read it.
+
+| Setting | Default | What it does |
+|---|---|---|
+| Save in a database (MySQL or MariaDB) | Off | Off: files. On: the database. Needs a Pro plugin to turn on |
+| Address | `localhost` | Host name or IP. Several addresses, with commas, for a database with a standby copy |
+| Port | 3306 | The database port |
+| Database name | `tempest` | |
+| User | `tempest` | |
+| Password | Empty | Never shown again. Type `env:NAME` to read it from the environment variable `NAME` |
+| Encrypt the connection | Off | Off, On, or On with a check of the database's certificate |
+| This server's name | Random | A different name on each server |
+| Table prefix | `tempest_` | The same on every server of one network |
+| What the servers share | All on | See the table above |
+| Days the network log keeps | 90 | 1 to 3650 |
+| Snapshots kept per player | 16 | 0 to 100. 0 turns snapshots off. Pinned snapshots are always kept |
+| Snapshot when a player leaves | On | Off: only snapshots that admins make |
+| Minutes between snapshots of a player | 30 | 0 to 1440. A player who hops between servers gets one snapshot in this time |
+| Days snapshots are kept | 30 | 0 to 3650. 0: no limit. Pinned snapshots are never deleted |
+| Tell admins after (seconds) | 15 | 5 to 600 |
+| Tell admins in game | On | Players with `tempest.admin` get outage messages |
+| Longest wait between tries (seconds) | 60 | 5 to 300 |
+
+The backup settings are on [Saving and backups](saving-and-backups.html).
+
+The snapshot, backup and outage settings work at once. **The connection and the shared parts need a restart**: the
+plugins keep the settings they started with, so data never moves while a server runs.
+
+## Snapshots and rollback
+
+With a database, the plugins keep snapshots of each player: a few seconds after they leave a server, and whenever an
+admin runs `/tempest snapshot <player>`. A snapshot holds the player's shared wallet, battle pass, quests and jobs.
+
+To put a player back to an earlier state (after a scam, a bug or a mistake):
+
+1. Run `/tempest snapshots <player>`. The list shows the number, time and reason of each snapshot.
+2. Make sure the player is offline on every server.
+3. Run `/tempest rollback <player> <number>`.
+
+The player now has that snapshot's data on every server. First, the plugins keep a pinned "before rollback" snapshot,
+so a rollback can always be undone: roll back to that one.
+
+A rollback never runs while the player is online anywhere: the plugins never change data a server is using. With
+tamper seals on, a snapshot that was changed in the database is refused.
+
+## A database with a standby copy (failover)
+
+- **A cloud database with automatic failover** (for example Amazon RDS Multi-AZ, or DigitalOcean with standby nodes):
+  use its one address. The host moves the address to the standby.
+- **Your own database servers that always hold the same data** (Galera, or synchronous replication): type every
+  address in "Address", with commas: `db1.example.com,db2.example.com`. The plugins use the first one that answers.
+
+Do not use a replica that runs behind the main database (asynchronous replication): players could get old money and
+progress from it.
+
+## Tamper seals
+
+Anyone who can write to the database (a leaked password, a staff member with a database panel, a website) could
+change numbers in it. Tamper seals catch this. A seal is a code that only a server with the seal key can make, and the
+key is in the servers' files, not in the database.
+
+1. Run `/eco network seal on` on one server.
+2. If it says "Not yet", copy `universe/mods/coins/seal.key` from this server to each server it names. They read it
+   within 10 seconds, no restart needed.
+3. Run `/eco network seal on` again. It should say "Seals are on".
+4. Copy `seal.key` to each new server before it joins the network.
+
+| What was changed in the database | What happens |
+|---|---|
+| A wallet | The wallet is frozen: the player can earn but not spend. Admins are told in game and on Discord |
+| A money change between servers | It is refused and deleted. Nobody's money changes |
+| A pass, quest or job record | It is not used. The player's progress waits. Admins are told |
+
+Then run `/eco network tampered` to see what changed. `/eco network accept <player>` keeps the change (if it was
+yours); `/eco network restore <player>` takes back only that change, and money the player earned after it stays.
+
+Keep `seal.key` secret: anyone with it can make seals that fit. A server without the right key waits instead of
+writing data nobody can check.
+
+## Turning a part off, or the database off
+
+You can turn one part off, or the whole database, at any time, and on again later. Players lose no progress and
+nobody can claim a reward twice.
+
+- **Off:** at the next start, the server copies the newest data of that part from the database into its files (with
+  money players got while away), after a backup of the wallet files. Then it runs from files.
+- **On again:** players who only played here while it was off keep this server's data. Players another server changed
+  in the meantime keep the database's data; they are listed in `universe/mods/coins/network-conflicts.csv`, and the
+  backup has this server's amount.
+
+**Remove a server from the network:** run `/eco network download` (it should say "wallets written"), turn off "Save
+in a database", and restart.
+
+## Commands
+
+| Command | Permission | What it does |
+|---|---|---|
+| `/tempest storage` | `tempest.admin` | Tests the connection. Shows the safety check, how fast the database answers, the last outages and the players' data this server holds |
+| `/tempest backup` | `tempest.admin` | Makes a backup now and lists the newest backups |
+| `/tempest snapshots <player>` | `tempest.admin` | Lists a player's snapshots |
+| `/tempest snapshot <player>` | `tempest.admin` | Makes a pinned snapshot of a player now |
+| `/tempest rollback <player> <number>` | `tempest.admin` | Puts a player back to a snapshot on all servers (the player must be offline) |
+| `/eco network` | `coins.admin.economy` | Whether the shared wallets work, the servers running, and the seal status |
+| `/eco network download` | `coins.admin.economy` | Writes all shared wallets into this server's files (after a backup) |
+| `/eco network seal on\|off` | `coins.admin.economy` | Turns tamper seals on or off for the whole network |
+| `/eco network tampered` | `coins.admin.economy` | Wallets, money changes and records changed outside the game |
+| `/eco network accept <player>` | `coins.admin.economy` | Keeps the player's data as it is now, and unfreezes it |
+| `/eco network restore <player>` | `coins.admin.economy` | Takes back a wallet change made outside the game, and unfreezes it |
+| `/eco network log <player>` | `coins.admin.economy` | The player's last 20 money changes on all servers. A red "NOT SEALED" line was written by hand |
+
+## Security
+
+| Risk | What the plugins do | What you do |
+|---|---|---|
+| A hostile or hijacked database asks the game server for files | The driver option that allows it is always off. The driver in the Pro download has the security fixes | Use the driver from the newest Pro download. The safety check tells you if yours is old |
+| Dangerous options in the address | The address is built from the fields. An advanced url accepts only `jdbc:mariadb://` or `jdbc:mysql://` and a short list of options | Use the fields in the menu |
+| A database user with too many rights | The safety check warns about root, FILE, SUPER, ALL PRIVILEGES on all databases and WITH GRANT OPTION | Make the user as shown above |
+| Data sent unencrypted over a network | The safety check warns, and says whether the database can encrypt | Set "Encrypt the connection" to On |
+| A password in a file | The menu never shows it, and support reports leave it out | Use `env:NAME` and a variable of your hosting panel |
+| Numbers changed in the database outside the game | Tamper seals | Turn on the seals and keep `seal.key` secret |
+| An old database version | The safety check warns about MariaDB before 10.11 and MySQL before 8.4 | Update the database |
+| A snapshot changed to get money through a rollback | Snapshots are sealed. With seals on, a rollback refuses a broken seal | Turn on the seals |
+| A backup copied by someone else | Backups never hold the database password. On Linux only the server's user can read them | Keep the backup folder private |
+
+## Tables
+
+All tables start with the table prefix. The plugins make them and add new columns themselves: never change them by
+hand, use the commands.
+
+| Table | Plugin | Holds |
+|---|---|---|
+| `meta` | Coins | The version of the tables and the seal fingerprint |
+| `wallets` | Coins | One row per wallet: balance, data, owner server, seal |
+| `wallet_changes` | Coins | Money changes on their way to the owner server |
+| `servers` | Coins | The servers running, and the fingerprint of their seal key |
+| `saves` | Coins | Receipts of saves (kept 1 hour), so a save is never counted twice |
+| `tampered` | Coins | Wallets and changes found changed outside the game |
+| `ledger` | Coins | The money log of all servers |
+| `player_data` | Core | Players' data of Pass, Quests, Jobs and other plugins: owner server, seal |
+| `scores` | Core | The numbers of the network leaderboards |
+| `snapshots` | Core | Players' snapshots for rollback, with a seal |
+
+## Problems and fixes
+
+| Problem | Cause | Fix |
+|---|---|---|
+| `/tempest storage` says "Could not connect" | Wrong address, port, user or password | Correct them and run `/tempest storage` again |
+| | The database is off, or a firewall blocks the port | Start the database. Open the port for the game servers only |
+| | "No database driver" | Put the driver jar in `universe/mods/atomictempest/drivers/` and restart |
+| | "the url ... is not allowed" | Remove the option from the url in `storage.json`, or use the fields |
+| | An SSL error with encryption on | The database has no encryption. Turn it on there, or set the setting to Off on a private network |
+| "Your wallet is on its way" for a long time | The last server stopped without letting go | Wait 1 minute |
+| | The database is down | Check `/eco network` and `/tempest storage` |
+| Players cannot spend on one server | The database was down for 30 seconds or more | Spending starts again when it is back |
+| | The network seals and this server has no `seal.key` | Copy `seal.key` from another server |
+| `/pay` says payments to other servers are switched off | "Pay players on other servers" is off | Turn it on in `/tempest` → Coins, Payments |
+| A player's pass, quests or jobs do not come | The record was changed outside the game | `/eco network tampered`, then accept or restore |
+| `/eco network` says "Another running server is called ..." | Two servers have the same name | Give each server its own name |
+| A server rejoins and players' money is old | It left the network without `/eco network download` | Restore the backup in `universe/mods/coins/backup-...`, or set the right amounts |
+| Leaderboards show only this server's players | "Leaderboards for the whole network" is off, or the part is not shared | Turn it on in `/tempest` → Saving, then restart |
+| Admins get "Another server process is using this server's folder" | The server was started twice on one folder | Stop one of the two |
+
+
+# Big servers
+
+How the Tempest plugins hold up with hundreds of players, what was tested, and how to set up a big server or network.
+
+The Tempest plugins are built for big servers: hundreds of players earning, spending, paying each other, levelling
+the battle pass, doing quests and jobs, and switching servers, all at once.
+
+## What was tested
+
+Each test runs real Hytale servers with the Tempest plugins, two servers sharing one database, and simulated players
+that join and play the whole time. Every player does something every 2 seconds: earns, spends, pays a player on the
+same or the other server, gets pass XP, does a quest step or job work. Some keep switching servers. At the end, every
+player's money, pass XP, quest and job pay is compared with everything both servers recorded: one coin or XP point too
+many or too few would be a dupe or a loss.
+
+| Test | Result |
+|---|---|
+| 100 players on two servers, 5 minutes, 144 server switches | About 13,000 money actions. Every coin and XP point adds up. Actions take 0.1 ms on average. No lag from the plugins. 0.8-0.9 GB of memory per server |
+| 300 players, 150 per server, 5 minutes | All 300 joined in 7 seconds. About 38,000 money actions plus 6,600 pass XP, 2,200 quest and 2,200 job actions. Every coin and XP point adds up. Actions 0.1 ms on average, the slowest 24 ms. No lag from the plugins. 284 database queries a second |
+| A database 80 ms away (another data centre) | Every coin and XP point adds up. Switching servers takes about 8 seconds |
+| The database goes down while players play | Nobody is kicked. Earning goes on; spending waits; every change arrives once when it is back |
+| A shared part turned off and on again while players play on both servers | No dupes, no lost progress, no reward claimed twice |
+| A player rolled back on a network | The right data on every server; the rollback can be undone |
+| MySQL 8.4 and MariaDB | Both pass every test |
+| Windows and Linux | Saving passes on both |
+
+## How it stays fast
+
+- **Nothing waits on the game thread.** Earning money, pass XP and quest progress never wait for the disk or the
+  database, so the world never stutters because of a save.
+- **Saves are grouped.** On a network, routine saves of all players go to the database together, about once a second,
+  in one go. 300 players cost about as much as a few.
+- **Only rewards wait.** Before a reward or money is given, its save is confirmed. This is what makes dupes
+  impossible.
+- **Files are saved safely and in the background.** See [Saving and backups](saving-and-backups.html).
+
+## Setting up a big server
+
+**One server:** files are enough. Turn on backups to another disk (they are on by default, every 12 hours).
+
+**A network:**
+
+- Put the database in the same region or data centre as the game servers. Under 5 ms is best. A database far away
+  works, but players wait longer when they join or switch servers, and finishing a quest can wait up to 2 seconds.
+- Use MySQL 8.4+ or MariaDB 10.11+, with a database user that has rights on the Tempest database only.
+- For a database with a standby copy, see [failover](networks.html#a-database-with-a-standby-copy-failover).
+- Let one server back up the database; turn "Back up the database too" off on the others, and turn on your database
+  host's own backups.
+- Set up Coins' Discord alerts, so you hear about database outages and failed backups at once.
+- Turn on [tamper seals](networks.html#tamper-seals) if anyone besides the servers can write to the database.
+
+## Known limits
+
+With a database far away (tens of milliseconds), two things are slower. Neither loses anything; players only wait.
+
+| Situation | What players notice |
+|---|---|
+| Many players joining in the same second (after a restart) | Their wallet and progress can take several seconds to arrive ("on its way") |
+| Finishing a quest | Up to 2 seconds before the reward is given |
+
+A database in the same region as the game servers has neither. Both are being improved.
+
+
 # Quick start
 
 From an empty plugin to one that pays players and reads their level, in five steps.
@@ -4445,6 +5045,14 @@ code in a class of its own.
 | 34 | `ItemData.bookkeeping` and `identity` (a mod's own fields such as ItemDisplay, hashes and versions are never part of what an item is); `ItemData.kindOf`, one key for the same exact item however worn and in whatever order it was written |
 | 35 | The admin's rules for other mods' item fields (`ItemData.rules`, /tempest -> Custom items): fields that change with use (shown, never matched), more bookkeeping, fields that hold items or make an item one of a kind; `ItemData.visible`, `changes`, `displayName` (a mod's own name for the item), `fields` (the inspector, `/tempest item`) |
 | 36 | `Steady`: a page's scrolling lists keep the rows that did not change (same file, same click data), so a click never takes the player back to the top; `new Steady("#List")`, `apply(cmd, events)` before `sendUpdate`, `reset()` in `build` |
+| 37 | `Later` (a task on a world's thread after a delay) and `Creatures` (`role`, `is`): the same on Hytale 0.7 and 0.8, which removed `World.scheduleAfter` and moved creatures' data to `NPCComponent` |
+| 38 | `ServerSetup` and `Registrations.setupPart`: the setup wizard (/tempest setup), each plugin's part fits it to a kind of server, with a preview first and undo after |
+| 39 | `PlayerHealth.activeMinutes` and `firstDay`: minutes really played and each player's first day (player health, /tempest players; the rewards for playing) |
+| 40 | `storage.Storage` and `Storage.Target`: files or a MySQL or MariaDB database (/tempest, Saving), connections to it, a connection test |
+| 44 | `Setting.maxLength(characters)` and `Setting.MAX_LONG_TEXT`: a text setting that takes more than 64 characters (up to 1000), such as a web address or a webhook link |
+| 43 | `Storage.shares(part)`, `Storage.SHAREABLE`, `Storage.logDays()`, `Storage.justPaused(part)`, `pausedAt`, `pausedAtDb`, `notePaused`, `savedTarget()`: what the servers share is the admin's choice (/tempest, Saving); `SharedData.download`, `useOwnFile`, `tampered`, `isTampered`, `accept`, `sealAll`, `takeAlerts`: a part shared again and sealed records; `storage.SharedScores`, `Leaderboards.resetShared(id)` and `Leaderboards.networkWide(id)`: leaderboards for the whole network; `Storage.retryDelay`, `Storage.ping`, `storage.StorageHealth` (outages, latency, `listen`), `storage.Backups` (`now`, `list`, `folder`, `last`), `storage.PlayerSnapshots` (`part`, `take`, `list`, `find`, `pin`, `rollback`): outages told, backups and rollbacks; `SharedData.saveLater(player, json)` (routine saves batched, never waited for; `saveNow` drops an older queued one); `SafeFiles.write(path, Supplier<String>)` (the text made while no other save of the file runs); SafeFiles saves and reads of one file never overlap |
+| 42 | `storage.SharedData`: players' data that follows them between the servers sharing a database, held by one server at a time |
+| 41 | `Storage.check`, `Storage.Safety`, `Storage.lastSafety`, `Target.encrypted`, `Target.local`: the database safety check and encrypted connections |
 
 
 # Money
@@ -5141,7 +5749,7 @@ Demand.wanted();                     // every wanted id now, from every source (
 
 # Safety and helpers
 
-Admin logs, rate limits, play limits, AFK checks, the doctor and crash-safe files.
+Admin logs, rate limits, play limits, AFK checks, the doctor, crash-safe files, player health, the setup wizard and helpers for Hytale 0.7 and 0.8.
 
 ## Who changed what: `AdminLog` (API version 2)
 
@@ -5239,6 +5847,69 @@ SafeFiles.exists(path);                                            // also true 
 used instead.
 
 
+## Who really plays: `PlayerHealth` (API version 39)
+
+Core keeps, for each player, the first day they joined and the minutes they really played (time away from the
+keyboard never counts, see `Activity`). It feeds /tempest players (player health) and the rewards for playing.
+
+```java
+long minutes = PlayerHealth.activeMinutes(uuid);   // really played, ever
+long first = PlayerHealth.firstDay(uuid);          // LocalDate.toEpochDay, -1 never seen, BEFORE_RECORDS from before Core kept them
+```
+
+Players the game already knew when player health started (universe/players) count as players from before the
+records: never new, never given the starter kit.
+
+
+## The setup wizard: `ServerSetup` (API version 38)
+
+`/tempest setup` (and an admin's first `/tempest` on a new server) asks what kind of server it is (Survival, RPG,
+Friends) and lets every plugin fit itself to it in one go. The admin sees every change with a tick box, unticks what
+they do not want, and applies the rest. A plugin takes part with a `Part`:
+
+```java
+core.setupPart(new ServerSetup.Part() {          // Registrations: removed again by close()
+    public String title() { return "Jobs"; }
+    public List<ServerSetup.Change> preview(ServerSetup.Kind kind) {
+        return List.of(new ServerSetup.Change("farmer", "Adds the Farmer job"),
+                new ServerSetup.Change("rate", "Pay: 2 a crop (now 1)", rateIsAsItComes));  // false: starts unticked
+    }
+    public List<String> apply(ServerSetup.Kind kind, Set<String> chosen) {   // only the ids still ticked
+        ServerSetup.backup("Jobs", jobsFile);                                // before anything is written
+        ...; return List.of("Added the Farmer job");
+    }
+    public boolean canUndo() { ... }
+    public List<String> undo() { ...; return List.of("Removed the Farmer job"); }
+});
+```
+
+The rules, so a setup never spoils a server that has its own content:
+- only add what is missing (matched by name or item id), never delete, rename or reprice what the admin made;
+- a setting the admin changed from how it comes is offered unticked (`Change(id, text, false)`);
+- `ServerSetup.backup(plugin, files...)` before writing (to `universe/mods/atomictempest/setup-backups/<time>/`); it
+  throws if it cannot copy, and then the part changes nothing;
+- remember what was added with `ServerSetup.fingerprint(thing)`: undo removes only what still has the same
+  fingerprint, so anything the admin edited since (or a crate placed in the world) stays;
+- check every item id exists, keep to the free edition's limits; `apply` and `undo` run off the world thread, one run
+  at a time on the whole server.
+
+
+## Hytale 0.7 and 0.8 alike: `Later` and `Creatures` (API version 37)
+
+Hytale 0.8 removes `World.scheduleAfter` and moves a creature's data from `NPCEntity` to a new `NPCComponent`. A
+plugin that uses either directly crashes on one of the two versions; these work on both:
+
+```java
+Later.after(world, () -> player.sendMessage(...), 2, TimeUnit.SECONDS);   // was world.scheduleAfter(task, 2, SECONDS)
+String role = Creatures.role(store, ref);    // "Skeleton_Fighter", or null if it is not a creature (was npc.getRoleName())
+Creatures.is(store, ref);                    // any creature: mob, animal, trader
+```
+
+`Later` waits on Core's timer, then hands the task to the world's queue (skipped if the world stopped, as before).
+A system's query can stay `NPCEntity.getComponentType()`: 0.8 still puts it on every creature, only its methods are
+gone. Check `CoreAPI.runningVersion() >= 37` before using them when your plugin may meet an older Core.
+
+
 ## Other helpers
 
 - `Currency`: the money's name (`format`, `name`, `singular`, `plural`). Use it instead of writing "copper".
@@ -5248,6 +5919,109 @@ used instead.
 - `CoinStacks.of(amount)` (in Coins): the coin items that make up an amount (for dropping coins).
 - `ReservedDrops.spawn(...)`: dropped items only one player can pick up for a while.
 - `CraftRestrictions.restrict(itemId, () -> allowed)`: admin-only crafting with an on/off switch.
+
+
+# Databases and networks
+
+Files or a database, players' data that follows them between servers, outages, backups and snapshots.
+
+## Files or a database: `Storage` (API version 40)
+
+A server saves in files (the default, nothing to set up) or in a MySQL or MariaDB database, chosen in /tempest,
+Saving (`universe/mods/atomictempest/storage.json`). The choice counts from the next restart, so data never moves while
+a server runs. Several servers pointed at the same database share it: Tempest Economy keeps players' wallets there
+(with any Tempest Pro plugin), and your plugin can keep its own tables there too.
+
+```java
+if (CoreAPI.runningVersion() >= 40 && Storage.usesDatabase()) {
+    Storage.Target db = Storage.target();              // the settings this server started with
+    try (Connection c = db.open()) {                   // a new connection; close it yourself
+        // tables named db.tablePrefix() + "yourplugin_..."; db.server() is this server's name in the network
+    }
+}
+```
+
+| Method | What it gives |
+|---|---|
+| `Storage.usesDatabase()` | Whether this server saves in a database since its start |
+| `Storage.target()` | The database (null with files): `open()`, `server()`, `tablePrefix()`, `where()` (no password or options) |
+| `Storage.test(target)` | "Connected to MariaDB 11.4" or what went wrong; `lastTest()` is the one Core ran after the last change |
+| `Storage.check(target)` | API 41: the connection test plus a safety check (`Safety`: `connected()`, `connection()`, `warnings()`): a user with more rights than needed, root, no password, an unencrypted connection over a network, a database or driver without security fixes. `lastSafety()` is Core's last one |
+| `target.encrypted()`, `target.local()` | API 41: whether the connection is encrypted (/tempest, Saving, "Encrypt the connection"), and whether the database runs on this machine |
+
+The driver is a jar in `universe/mods/atomictempest/drivers` (Tempest Pro's download has the MariaDB one, which talks to
+MySQL too), loaded with only Java's own classes above it: never inside a plugin jar and never through a plugin's class
+loader. Every value from the settings is checked before it reaches SQL; use prepared statements for your own values.
+
+Since API 41, every connection has the driver options that let a hostile or hijacked database read the server's files
+(`allowLocalInfile`) or run code (`autoDeserialize`) switched off, whatever the settings say; the advanced `url` in
+storage.json takes only `jdbc:mariadb://` or `jdbc:mysql://`, hosts, one database and allowlisted options (encryption,
+time-outs, character sets). The password may be `env:NAME` to read it from an environment variable, and storage.json is
+readable only by the server's own user on Linux.
+
+
+## Players' data that follows them between servers: `SharedData` (API version 42)
+
+When servers share a database (/tempest, Saving), a plugin's per-player data can follow players from server to
+server, held by one server at a time, like the shared wallets: a server takes a player's data when they join, once no
+other server holds it, saves it while they play and lets go when they leave. A server that does not hold a player's
+data must change nothing for them; so a reward claimed on one server can never be claimed again by switching servers,
+and a server that crashed holds nothing after a minute (its last save counts). Tempest Pass and Quests use it.
+
+```java
+SharedData shared = CoreAPI.runningVersion() >= 42 ? SharedData.open("yourplugin") : null;  // null: saving in files
+shared.claim(uuid);                        // PlayerConnectEvent: taken as soon as no other server holds it
+String json = shared.data(uuid);           // null: not held here (change nothing); "": new to the network (your file once)
+if (!shared.saveNow(uuid, json)) { ... }   // before giving a reward: true once the database has it (waits up to 5 s)
+shared.release(uuid, json);                // PlayerDisconnectEvent: saved and let go for the next server
+shared.releaseAll();                       // your plugin's shutdown, after saving your players
+```
+
+| Method | What it does |
+|---|---|
+| `holds(uuid)` | Held here and kept alive: changes may be made. `isHeld(uuid)` is true also while the database is away for a moment (keep your copy, change nothing) |
+| `saveNow(uuid, json)` | False when not held, the database is away or another server took it: never give what the data says was given |
+| `saveLater(uuid, json)` | API 43: a routine save (an autosave), never waited for. Every player's routine save goes to the database in one transaction about once a second, and only the newest of each player counts, so a database far away keeps up with hundreds of players. Call it while holding the lock you read the data under. `saveNow` drops any routine save of that player still waiting, so an older copy can never land after a reward's save |
+| `heldCounts()`, `lastError()` | For status lines (/tempest storage shows them) |
+
+The data is one text (your JSON) per plugin and player, in the table `<prefix>player_data`. Since API 43 the admin chooses in /tempest, Saving what the servers share: `Storage.shares("wallets" | "pass" | "quests" | "jobs" | "leaderboards" | "log")`; `SharedData.open` returns null for a part that is off (another author's plugin id is shared whenever the database is).
+
+**Leaderboards for the whole network (API 43).** With that option on, every board in `Leaderboards` ranks the players of all servers: Core writes the numbers of the players online here once a minute (never a 0, so a server that does not hold a player's data never lowers their number) and reads everyone's back; `Leaderboards.all()` gives each board the larger of this server's number and the network's. A board that starts everyone at 0 again (a new season) calls `Leaderboards.resetShared(id)`. Only boards of data that follows players rank the network: Pass, Quests and Jobs (while shared), and boards a plugin marks with `Leaderboards.networkWide(id)`; a board of data each server keeps for itself (land, crates opened here) stays this server's.
+
+**A part turned off and on again (API 43).** While a part is shared, keep writing your own files too (your file first, then `saveNow`). At the first start with the part off (`Storage.justPaused(part)`), call `SharedData.download(plugin, writer)` before anyone plays: it writes every player's newest record into your files through `writer`. When the part is shared again, read your own file for a player when `shared.useOwnFile(uuid, file)` is true (their file changed here during the pause and nobody wrote their record since), else the shared data; `useOwnFile(uuid, changedHere)` is for a plugin that keeps several players in one file.
+
+**Sealed records (API 43).** While the network seals (/eco network seal on), every record carries an HMAC made with the servers' seal.key. A record changed in the database by hand is never taken: `data` stays null for that player (their progress waits) until an admin accepts it (`/eco network accept`). Keep the class that calls
+`SharedData` apart, loaded only when `CoreAPI.runningVersion() >= 42`.
+
+
+## Outages, backups and snapshots (API version 43)
+
+Core watches the database, makes backups and keeps players' snapshots for rollbacks (/tempest backup, snapshots,
+rollback). A plugin can hear about outages, ask for a backup, and put its own data into snapshots.
+
+```java
+if (CoreAPI.runningVersion() >= 43) {
+    StorageHealth.listen(text -> myDiscord.send(text));     // an outage started or ended, a backup failed
+    long ms = StorageHealth.latencyMs();                     // how fast the database answered last
+    Backups.now("before the season reset").thenAccept(result -> log(result));   // in the background
+}
+```
+
+| Method | What it does |
+|---|---|
+| `StorageHealth.listen(listener)`, `stopListening` | Hears every admin alert: an outage starts or ends (after the admin's "Tell admins after" time), a backup failed, a second server process on the folder. Coins sends them to Discord |
+| `StorageHealth.outage()`, `history()`, `latencyMs()` | Whether the database is away now; the last outages (`Outage`: `from`, `to`, `error`, `millis()`); the last answer time |
+| `StorageHealth.notice(text)` | Tells admins in game and every listener with the next tick (use it for a fault the admin must act on) |
+| `Storage.retryDelay(attempts)` | How long to wait before the next try: 1, 2, 4, 8 s ... up to the admin's longest wait, with a random part. Use it for your own tables so many servers never retry at the same moment |
+| `Backups.now(why)` | A backup now, in the background; the future says where it went or why not. `list()`, `folder()`, `last()` |
+| `PlayerSnapshots.part(name, part)` | Puts your own per-player data into every snapshot (a `Part`: `capture(player)` gives it as text, `restore(player, data)` writes it back and returns null, or why not). Data kept through `SharedData` is in snapshots already. `removePart(name)` when your plugin stops |
+| `PlayerSnapshots.take(player, name, reason, pinned)` | A snapshot now (a pinned one is never deleted); -1 when the player has nothing. `on()`: whether snapshots are kept on this server |
+| `PlayerSnapshots.list(player)`, `find(name)`, `pin(player, id, pinned)` | A player's snapshots (`Snapshot`: `id`, `made`, `server`, `reason`, `pinned`, `summary`), a player by name, pinning |
+| `PlayerSnapshots.rollback(player, id)` | Null when done, else why not. The player must be offline on every server; a pinned "before rollback" snapshot is taken first, so it can be undone. With tamper seals on, a snapshot changed in the database is refused |
+
+`restore` runs while the player's records are locked: it must not wait for another server. `take`, `list`, `pin` and
+`rollback` use the database: call them off the world thread (`PlayerSnapshots.background(work)` runs them on Core's
+snapshot thread).
 
 
 # Player levels
@@ -5855,16 +6629,16 @@ Every class and method of each plugin's API.
 The javadoc lists every public class and method of each plugin's API, for the newest version published here:
 
 - [Coinflip 1.0.6](javadoc/coinflip/)
-- [Coins 2.6.0](javadoc/coins/)
-- [Core 1.7.1](javadoc/core/)
-- [Holograms 1.4.0](javadoc/holograms/)
-- [Jobs 1.2.0](javadoc/jobs/)
+- [Coins 2.7.1](javadoc/coins/)
+- [Core 1.8.1](javadoc/core/)
+- [Holograms 1.4.1](javadoc/holograms/)
+- [Jobs 1.3.0](javadoc/jobs/)
 - [Lottery 1.1.4](javadoc/lottery/)
-- [Pass 1.4.0](javadoc/pass/)
+- [Pass 1.5.0](javadoc/pass/)
 - [Projects 1.2.0](javadoc/projects/)
-- [Quests 1.6.0](javadoc/quests/)
-- [Shop 1.6.0](javadoc/shop/)
-- [SlotMachine 1.2.5](javadoc/slotmachine/)
+- [Quests 1.7.0](javadoc/quests/)
+- [Shop 1.7.1](javadoc/shop/)
+- [SlotMachine 1.2.7](javadoc/slotmachine/)
 
 Core's stable API is `com.atomictempest.core` (except `Main`) and its `economy`, `help` and `settings` packages; each other plugin's is its `api` package.
 
@@ -5872,6 +6646,122 @@ Core's stable API is `com.atomictempest.core` (except `Main`) and its `economy`,
 # Changelog
 
 Every release of the Tempest plugins, newest first.
+
+## 2026-11-22
+
+### Core 1.8.1
+
+- Fixed: ATMs, slot machines and shop stalls showed two icons on the world map (Tempest's and the game's own). Now one each, with the colour pictures; maps already affected tidy themselves.
+- Text settings take long values where needed: the Discord webhook link, several database addresses, long database passwords and backup folders.
+- For developers: Core API 44 adds Setting.maxLength, a text setting that takes more than 64 characters.
+
+### Coins 2.7.1
+
+- Fixed: a Discord webhook link could not be saved in /tempest (the field took only 64 characters). Needs Tempest Core 1.8.1.
+- Fixed: each ATM showed two icons on the world map. Now one, with the ATM picture (with Tempest Core 1.8.1).
+
+### SlotMachine 1.2.7
+
+- Fixed: each slot machine showed two icons on the world map. Now one, with the slot machine picture (with Tempest Core 1.8.1).
+
+### Shop 1.7.1
+
+- Fixed: each shop stall showed two icons on the world map. Now one, with the stall picture (with Tempest Core 1.8.1).
+
+### Crates 1.7.1
+
+- Fixed: since Crates 1.6.0 every player was disconnected on join ("Could not find document ... for Custom UI Append command"). Update to 1.7.1 right away if you run 1.6.0 or 1.7.0.
+
+## 2026-11-22
+
+### Core 1.8.0
+
+- Several servers can now share one economy and players' progress through a MySQL or MariaDB database (needs any Tempest Pro plugin). Files stay the default and need nothing.
+- /tempest → Saving: keep data in files or in a database, and choose what the servers share, each its own switch: players' money, battle pass, quests, jobs, leaderboards for the whole network, one money log. One server can use a database too.
+- Players' progress follows them from server to server, held by one server at a time, so a reward is never claimed twice by switching servers.
+- Leaderboards for the whole network: the pass, quest and job boards rank the players of every server.
+- Switch between files and a database, or turn one part off and on, whenever you like: what players did meanwhile is kept, and nothing can be claimed twice.
+- If the database goes down, play goes on: earning, pass XP, quests and jobs continue, spending and rewards wait (players are told why), and nothing is lost, even if the server restarts before the database is back.
+- Admins are told in game and on Discord when the database has been down for 15 seconds, and when it is back. /tempest storage shows how fast it answers and the last outages.
+- Standby database: type several addresses, and the next one takes over when the first does not answer.
+- Backups for every server: a zip of every Tempest plugin's data every 12 hours, with the shared tables when you use a database, never with the database password. /tempest backup makes one now; the folder, how often and how many are kept are settings.
+- Player rollback (with a database): a snapshot of each player's money, pass, quests and jobs when they leave. /tempest snapshots lists them, /tempest rollback puts a player back on every server (only while they are offline; it can be undone).
+- Fully configurable in /tempest → Saving, counting at once: when admins are told of an outage and whether in game (Discord: Coins' Discord tab), the longest wait between tries, backups (how often, how many, where, with the database and the money log or not) and snapshots (how many, on leaving or not, minutes between, days kept).
+- Safe database connections: a hostile database can never read the server's files, only safe connection options are accepted, encryption with an optional certificate check, the password can come from an environment variable, and /tempest storage runs a safety check that says what to fix (root user, too many rights, no encryption, old database or driver).
+- Player health dashboard (/tempest players), and rewards for playing that bring players back.
+- Setup wizard: /tempest setup fits every plugin to the kind of server in one go, with a tick box for every change, and can undo itself.
+- Fixed: an ATM, slot machine or shop stall could show two or three times on the world map (once for each part of its model that was used); maps already affected tidy themselves.
+- Saving in files is safer on busy servers: two saves of one file at once can no longer mix, a read never lands in the middle of a save, files Windows holds for a moment (antivirus, backup tools) are tried again, and on Linux a finished save survives a power cut. A backup never fills the disk; admins are told instead.
+- Faster with a database far away (a cloud host in another region): routine saves of all players go in one transaction per round, so servers keep up with hundreds of players; XP and money never wait for the database. Tested with 300 players and with an 80 ms database. A second server process started on the same folder is found and named to admins.
+- Ready for Hytale 0.8: the same jars run on 0.7.7 and 0.8.
+- For developers: Core API 40 to 43 adds Storage (files or a database), SharedData (players' data shared between servers), SharedScores and network leaderboards, StorageHealth, Backups and PlayerSnapshots. Nothing old changed.
+
+### Holograms 1.4.1
+
+- Ready for Hytale 0.8: the same jar runs on 0.7.7 and 0.8.
+
+### Coins 2.7.0
+
+- Several servers share one economy through MySQL or MariaDB (Tempest Core's Saving, with any Tempest Pro plugin): each wallet is held by the server the player is on, so money is never spent twice.
+- Payments to players on another server, or offline, arrive exactly once, also after the database was away.
+- /pay reaches players on any server of the network by name, and they are told there. Paying players who are offline is a setting of its own (off by default).
+- Tamper seals (/eco network seal on): money changed in the database outside the game is found, frozen for spending and can be accepted or taken back (/eco network tampered, accept, restore).
+- One money log for the whole network: /eco network log <player> follows a player's money across servers.
+- If the database goes down, players keep earning; spending waits and players are told their coins are safe. A restart during the outage keeps every coin. Outages are posted to your Discord alerts.
+- Wallets switched to files and back keep money paid while offline and everything earned meanwhile; any conflict is listed for the admin.
+- Player rollback (/tempest rollback) includes the wallet.
+- Put a dupe right from /eco's transaction log: undo a line, block a source, export as CSV (with any Tempest Pro plugin).
+- Setup wizard support, and ready for Hytale 0.8.
+
+### SlotMachine 1.2.6
+
+- Ready for Hytale 0.8: the same jar runs on 0.7.7 and 0.8.
+
+### Shop 1.7.0
+
+- Fixed: a shop stall could show two or three times on the world map. A stall is now one place on the map and breaks from any part of it; stalls already saved at a part move to their block by themselves.
+- Setup wizard support (/tempest setup): the shop is fitted to the kind of server in one go, with a tick box for every change, and it can be undone.
+- Ready for Hytale 0.8: the same jar runs on 0.7.7 and 0.8.
+
+### Quests 1.7.0
+
+- Quest progress and achievements follow players between servers sharing a database (Tempest Core's Saving, with any Tempest Pro plugin): a quest is never paid twice.
+- The quest leaderboard can rank the whole network.
+- If the database goes down, progress keeps counting; rewards are paid once it is back. Nothing is lost, even across a restart.
+- "Your quests are on their way" for the moment progress comes from another server.
+- Included in player snapshots and /tempest rollback.
+- Setup wizard support, and ready for Hytale 0.8.
+
+### Crates 1.7.0
+
+- Setup wizard support (/tempest setup): crates and keys are fitted to the kind of server in one go, with a tick box for every change, and it can be undone.
+- Guards so the wizard never spoils a server: what an admin changed or placed is never touched.
+
+### Pass 1.5.0
+
+- The battle pass follows players between servers sharing a database (Tempest Core's Saving, with any Tempest Pro plugin): XP, claimed tiers and premium. A tier claimed on one server is claimed on every server.
+- The pass leaderboard can rank the whole network; a new season empties it everywhere.
+- If the database goes down, XP keeps counting; tiers can be claimed once it is back. Nothing is lost, even across a restart.
+- "Your battle pass is on its way" for the moment a pass comes from another server.
+- Included in player snapshots and /tempest rollback.
+- Setup wizard support, and ready for Hytale 0.8.
+
+### Events 1.4.1
+
+- Ready for Hytale 0.8: the same jar runs on 0.7.7 and 0.8.
+
+### Jobs 1.3.0
+
+- Jobs, levels, XP and pay follow players between servers sharing a database (Tempest Core's Saving, with any Tempest Pro plugin): work is never paid twice.
+- The job leaderboards can rank the whole network. Limits on how many players may hold a job count each server's own players.
+- If the database goes down, work is still paid and saved once it is back. Nothing is lost, even across a restart.
+- "Your jobs are on their way" for the moment jobs come from another server.
+- Included in player snapshots and /tempest rollback.
+- Setup wizard support, and ready for Hytale 0.8.
+
+### Claims 1.1.1
+
+- Ready for Hytale 0.8: the same jar runs on 0.7.7 and 0.8.
 
 ## 2026-11-19
 

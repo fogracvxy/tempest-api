@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Saving and backups · Tempest plugins docs</title>
+<meta name="description" content="How the Tempest plugins keep your server&#x27;s data safe in files, through crashes, power cuts and full disks, and how to make and restore backups. Free, with no setup.">
+<meta name="theme-color" content="#F1C40F">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tempest plugins for Hytale">
+<meta property="og:title" content="Saving and backups · Tempest plugins docs">
+<meta property="og:description" content="How the Tempest plugins keep your server&#x27;s data safe in files, through crashes, power cuts and full disks, and how to make and restore backups. Free, with no setup.">
+<meta property="og:url" content="https://fogracvxy.github.io/tempest-api/saving-and-backups.html">
+<meta property="og:image" content="https://fogracvxy.github.io/tempest-api/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="675">
+<meta property="og:image:alt" content="The Tempest plugin suite for Hytale servers">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://fogracvxy.github.io/tempest-api/assets/og-image.jpg">
+<link rel="stylesheet" href="site.css">
+<script src="site.js"></script>
+</head>
+<body>
+<header class="top">
+  <button class="icon-btn menu-btn" id="menu" type="button" aria-label="Menu">&#9776;</button>
+  <a class="brand" href="index.html"><img class="logo" src="assets/icon-192.png" alt="">Tempest Docs</a>
+  <span class="version">Core API 44</span>
+  <div class="search"><input id="q" type="search" placeholder="Search the docs" autocomplete="off" aria-label="Search"><kbd>Ctrl K</kbd><div class="results" id="results"></div></div>
+  <nav class="top-links"><a href="javadoc.html">Javadoc</a><a href="https://discord.gg/Q9PNVCMZXK" target="_blank" rel="noopener">Discord</a><a href="https://www.curseforge.com/hytale/mods/search?search=tempest" target="_blank" rel="noopener">CurseForge</a></nav>
+  <button class="icon-btn" id="theme" type="button" aria-label="Light or dark">&#9680;</button>
+</header>
+<div class="layout">
+  <aside class="side"><h4>Welcome</h4><a href="index.html">Introduction</a><h4>Server guide</h4><a href="server-guide.html">Server guide</a><a href="guide-commands.html">All commands and permissions</a><a href="guide-core.html">Core</a><a href="guide-economy.html">Economy (Coins)</a><a href="guide-holograms.html">Holograms</a><a href="guide-shop.html">Shop</a><a href="guide-crates.html">Crates</a><a href="guide-quests.html">Quests</a><a href="guide-pass.html">Battle pass</a><a href="guide-events.html">Events</a><a href="guide-contracts.html">Contracts and bounties</a><a href="guide-projects.html">Town projects</a><a href="guide-town.html">Town</a><a href="guide-jobs.html">Jobs</a><a href="guide-trade.html">Trade</a><a href="guide-claims.html">Claims</a><a href="guide-slots.html">Slot machines</a><a href="guide-lottery.html">Lottery</a><a href="guide-coinflip.html">Coinflip</a><a href="leveling-mods.html">Leveling mods</a><a href="economies.html">Economies</a><h4>Saving and networks</h4><a href="saving-and-backups.html" class="here"><span class="badge">NEW</span>Saving and backups</a><a href="networks.html"><span class="badge">NEW</span>Database and server networks</a><a href="big-servers.html"><span class="badge">NEW</span>Big servers</a><h4>Developers: start here</h4><a href="quick-start.html">Quick start</a><a href="link-your-mod.html">Link your mod to Tempest</a><a href="setup.html">Setting up a plugin</a><a href="versions.html">API versions</a><h4>Core API</h4><a href="money.html">Money</a><a href="actions.html">Player actions</a><a href="settings.html">Settings and menus</a><a href="hud.html">Boards, HUD and placeholders</a><a href="rewards.html">Rewards, mail and boosts</a><a href="claims.html">Land claims and renown</a><a href="world.html">Map, hub, town and demand</a><a href="safety.html">Safety and helpers</a><a href="storage.html"><span class="badge">NEW</span>Databases and networks</a><h4>Leveling and skills API</h4><a href="levels.html">Player levels</a><a href="skills.html">Skills (MMO Skill Tree)</a><h4>Plugin APIs</h4><a href="quests.html">Quests</a><a href="crates.html">Crates</a><a href="holograms.html">Holograms</a><a href="coinflip.html">Coinflip</a><a href="jobs.html">Jobs</a><a href="projects.html">Town projects</a><a href="pass.html">Battle pass</a><a href="games.html">Lottery, slots and shop</a><h4>More</h4><a href="integrations.html">Integrations</a><a href="content.html">Content mods (JSON)</a><a href="rules.html">Rules of thumb</a><h4>Reference</h4><a href="javadoc.html">Javadoc</a><a href="changelog.html">Changelog</a></aside>
+  <main>
+    <div class="crumbs">Saving and networks</div>
+    <h1>Saving and backups</h1>
+    <p class="lead">How the Tempest plugins keep your server&#x27;s data safe in files, through crashes, power cuts and full disks, and how to make and restore backups. Free, with no setup.</p>
+    <article>
+<p>Every Tempest plugin saves in files under <code>universe/mods</code>. This is the default, it needs no setup, and it is safe for big servers on Windows and Linux. A database (MySQL or MariaDB) is only needed when several servers share one economy: see <a href="networks.html">Database and server networks</a>.</p>
+<h2 id="how-a-save-stays-safe"><a class="anchor" href="#how-a-save-stays-safe" aria-label="Link to this section">#</a>How a save stays safe</h2>
+<p>A save can be cut off at any moment: a crash, a power cut, a host that kills the server. The plugins never write over the old file directly, so a save is either fully done or not done at all.</p>
+<ol><li>The new text goes to <code>name.tmp</code> and is flushed to the disk.</li><li>The old file becomes <code>name.bak</code>.</li><li>The new file takes its place in one step.</li></ol>
+<p>When a file is read, the plugins use the newest complete copy. A file that cannot be read is kept as <code>name.broken-&lt;time&gt;</code> (so nothing is ever thrown away) and the backup copy is used instead.</p>
+<div class="table"><table><thead><tr><th>Danger</th><th>What the plugins do</th></tr></thead><tbody><tr><td>A crash or power cut in the middle of a save</td><td>The old file or the <code>.bak</code> copy is still whole. The next start uses it</td></tr><tr><td>Two saves of the same file at the same moment</td><td>Saves and reads of one file never overlap. The newest data always wins</td></tr><tr><td>Windows: a virus scanner, backup tool or sync program has the file open</td><td>The save waits a moment and tries again, instead of failing</td></tr><tr><td>Linux: the disk loses the new name after a power cut</td><td>The folder is synced too, so the new file is really on the disk</td></tr><tr><td>A server stopping while saving</td><td>The save still finishes. A stop cannot cut a file in half</td></tr><tr><td>A file edited by hand with a mistake</td><td>It is kept as <code>name.broken-&lt;time&gt;</code>, the last good copy is used, and the error is logged</td></tr><tr><td>Two server processes on the same folder</td><td>Found and named to admins (see below)</td></tr></tbody></table></div>
+<p><strong>What a crash can lose.</strong> Rewards, purchases and claims are saved before they are given, so a crash never gives anything twice. Routine progress is saved every few seconds (money about every 5 seconds, battle pass XP every 10, job XP every 30), so a crash can lose at most those last seconds of earning.</p>
+<h2 id="backups"><a class="anchor" href="#backups" aria-label="Link to this section">#</a>Backups</h2>
+<p>The plugins make a backup of all Tempest data every 12 hours. Backups are free and work with files and with a database.</p>
+<p>Each backup is a zip file in <code>universe/tempest-backups</code> with:</p>
+<ul><li>the files of all Tempest plugins (<code>universe/mods/...</code>), but no jar files and never the database password;</li><li>with a database: each shared table as text (<code>database/&lt;table&gt;.jsonl</code>);</li><li><code>about.txt</code>: when, why, and how to restore.</li></ul>
+<div class="table"><table><thead><tr><th>Setting (<code>/tempest</code> → Saving)</th><th>Default</th><th>What it does</th></tr></thead><tbody><tr><td>Hours between backups</td><td>12</td><td>0 to 168. 0 turns automatic backups off</td></tr><tr><td>Backups kept</td><td>14</td><td>1 to 1000. The oldest Tempest backups are deleted, nothing else</td></tr><tr><td>Backup folder</td><td><code>universe/tempest-backups</code></td><td>A folder in the server folder, or a full path such as <code>D:/backups/tempest</code></td></tr><tr><td>Back up the database too</td><td>On</td><td>The shared tables go into each backup</td></tr><tr><td>Back up the network money log too</td><td>Off</td><td>The money log of all servers. It can be large</td></tr></tbody></table></div>
+<p>These settings work at once, with no restart.</p>
+<p><strong>Make a backup now:</strong> <code>/tempest backup</code>. It also lists the newest backups.</p>
+<p><strong>A full disk never breaks the server.</strong> A backup is not made if it would leave less than 512 MB free, because the plugins need room to save. Admins get a message in game (and on Discord, if Coins' Discord alerts are set up). Keep fewer backups, or move the backup folder to another disk.</p>
+<p><strong>Backups are private.</strong> They never contain the database password. On Linux only the server's own user can read them. They do contain every player's data and the network's <code>seal.key</code>, so keep the backup folder as private as the server itself.</p>
+<h3 id="restore-a-backup"><a class="anchor" href="#restore-a-backup" aria-label="Link to this section">#</a>Restore a backup</h3>
+<ol><li>Stop the server.</li><li>Open the zip and copy <code>files/universe/mods</code> over the server's <code>universe/mods</code>.</li><li>If you save in a database, type the password again in <code>/tempest</code> → Saving (or use <code>env:NAME</code>).</li><li>Start the server.</li></ol>
+<h3 id="good-habits"><a class="anchor" href="#good-habits" aria-label="Link to this section">#</a>Good habits</h3>
+<ul><li>Put the backup folder on a different disk, or in a folder that a sync program copies somewhere else.</li><li>Follow the 3-2-1 rule: 3 copies of the data, on 2 kinds of storage, 1 copy in another place.</li><li>With a database, also turn on your database host's own backups (for example automated backups with point-in-time recovery). On a network, one server that backs up the database is enough: turn "Back up the database too" off on the others.</li></ul>
+<h2 id="one-server-process-per-folder"><a class="anchor" href="#one-server-process-per-folder" aria-label="Link to this section">#</a>One server process per folder</h2>
+<p>Only one server process may use a server folder. Some hosting panels can start the same server twice after a crash or a restart, and two processes writing the same files would lose data.</p>
+<p>The plugins notice this. The second process names the first one in its log, and every admin gets a message in game and on Discord: "Another server process is using this server's folder". The message repeats every 10 minutes until one of the two is stopped. Stop one of them.</p>
+<h2 id="is-file-saving-enough-for-a-big-server"><a class="anchor" href="#is-file-saving-enough-for-a-big-server" aria-label="Link to this section">#</a>Is file saving enough for a big server?</h2>
+<p>Yes, for one server. The safe-save steps above are tested on Windows and on Linux, including saves cut off half way and saves on a server that is stopping. You need a database only when:</p>
+<ul><li>two or more servers must share one economy and players' progress, or</li><li>a website, a bot or another tool must read the data while the server runs.</li></ul>
+<p>See <a href="big-servers.html">Big servers</a> for the load tests with hundreds of players.</p>
+    </article>
+    <nav class="pager"><a class="prev" href="economies.html"><small>Previous</small>Economies</a><a class="next" href="networks.html"><small>Next</small>Database and server networks</a></nav>
+    <footer class="foot">Tempest plugins for Hytale by AtomicTempest. Not made or endorsed by Hypixel Studios. · <a href="saving-and-backups.md">This page as Markdown</a> · <a href="llms.txt">llms.txt</a></footer>
+  </main>
+  <aside class="toc"><h5>On this page</h5><a href="#how-a-save-stays-safe">How a save stays safe</a><a href="#backups">Backups</a><a href="#restore-a-backup" class="sub">Restore a backup</a><a href="#good-habits" class="sub">Good habits</a><a href="#one-server-process-per-folder">One server process per folder</a><a href="#is-file-saving-enough-for-a-big-server">Is file saving enough for a big server?</a></aside>
+</div>
+</body>
+</html>

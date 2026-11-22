@@ -39,6 +39,13 @@ Some plugins come as a free jar and a Pro jar with the same name. The Pro jar re
 everything the server made. Free limits only stop you making more: they never break what a server already has.
 Core, Economy and the plugins' APIs are always free.
 
+## Saving, backups and networks
+
+Everything is saved in files by default, safely through crashes and power cuts, with a backup every 12 hours. With a
+Pro plugin, several servers can share one economy and players' progress through a MySQL or MariaDB database. See
+[Saving and backups](saving-and-backups.html), [Database and server networks](networks.html) and
+[Big servers](big-servers.html).
+
 ## Languages
 
 Every text players see is in 8 languages (English, German, Spanish, French, Italian, Polish, Brazilian Portuguese and

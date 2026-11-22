@@ -29,6 +29,11 @@
 - [Leveling mods for server owners](leveling-mods.md): What the Tempest plugins do with Endless Leveling and MMO Skill Tree, alone or together, and where it is set.
 - [Economies for server owners](economies.md): Which economy the Tempest plugins pay into: Tempest Economy, or one you already run through VaultUnlocked (GlymeraMerchant, Ecotale and others).
 
+## Saving and networks
+- [Saving and backups](saving-and-backups.md): How the Tempest plugins keep your server's data safe in files, through crashes, power cuts and full disks, and how to make and restore backups. Free, with no setup.
+- [Database and server networks](networks.md): Run several servers with one economy. Money, battle pass, quests and jobs follow players from server to server, through a MySQL or MariaDB database, with no dupes and no losses.
+- [Big servers](big-servers.md): How the Tempest plugins hold up with hundreds of players, what was tested, and how to set up a big server or network.
+
 ## Developers: start here
 - [Quick start](quick-start.md): From an empty plugin to one that pays players and reads their level, in five steps.
 - [Link your mod to Tempest](link-your-mod.md): Make your leveling, party, claims or gameplay mod work with all 16 Tempest plugins by talking to Tempest Core once.
@@ -43,7 +48,8 @@
 - [Rewards, mail and boosts](rewards.md): Item and command rewards, the mailbox, boosts for a while and rank perks.
 - [Land claims and renown](claims.md): Who owns a place and what a player may do there, from Tempest Claims or Simple Claims; party renown and levels.
 - [Map, hub, town and demand](world.md): Places on the world map, the Tempest hub, features the town unlocks and items the server wants.
-- [Safety and helpers](safety.md): Admin logs, rate limits, play limits, AFK checks, the doctor and crash-safe files.
+- [Safety and helpers](safety.md): Admin logs, rate limits, play limits, AFK checks, the doctor, crash-safe files, player health, the setup wizard and helpers for Hytale 0.7 and 0.8.
+- [Databases and networks](storage.md): Files or a database, players' data that follows them between servers, outages, backups and snapshots.
 
 ## Leveling and skills API
 - [Player levels](levels.md): Levels from Endless Leveling or MMO Skill Tree, through one API.

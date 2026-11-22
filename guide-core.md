@@ -28,6 +28,7 @@ The `/guide` pages of this plugin, as a player sees them on a test server (numbe
 | `/hud left` | Everyone | Money counter in the top left corner |
 | `/hud low` | Everyone | Money counter on the right side, lower down |
 | `/hud top` | Everyone | Money counter in a row along the top, right of centre |
+| `/invite` | Everyone | Your invite code, to bring a friend |
 | `/mail` (/mailbox) | Everyone | Open your mailbox: rewards and items kept for you |
 | `/partyhud` (/pframes) | Everyone | Show or hide your party frames (/partyhud left, right, compact, self...) |
 | `/partyhud compact` | Everyone | Pick the style of your party frames |
@@ -41,6 +42,7 @@ The `/guide` pages of this plugin, as a player sees them on a test server (numbe
 | `/places add` | `tempest.admin.map` | Adds a place to the map where you stand (admins) |
 | `/serverinfo` (/rules, /info) | Everyone | The server's rules and info |
 | `/tempest` (/casino) | Everyone | Tempest: the settings menu for admins, the help screen for players |
+| `/tempest backup` | `tempest.admin` | Makes a backup of every Tempest plugin's data now (admins) |
 | `/tempest doctor` | `tempest.admin` | Finds ways players could make money from nothing in the settings (admins) |
 | `/tempest hub` | `tempest.admin` | The Tempest hub: every plugin in one place, and protection for your spawn |
 | `/tempest hub corner` | `tempest.admin` | Mark a corner of an area to protect |
@@ -52,8 +54,14 @@ The `/guide` pages of this plugin, as a player sees them on a test server (numbe
 | `/tempest info` | `tempest.admin` | Tempest plugins: versions, editions and the economy (admins) |
 | `/tempest item` | `tempest.admin` | Every field of the item in your hand and how shops and rewards treat it (admins) |
 | `/tempest log` | `tempest.admin` | Who changed what: the newest lines of the admin log (admins) |
+| `/tempest players` | `tempest.admin` | Player health: who is new, who comes back, busiest hours (admins) |
 | `/tempest report` | `tempest.admin` | Writes a support report to paste when asking for help (admins) |
+| `/tempest rollback` | `tempest.admin` | Puts a player back to a snapshot on every server (admins) |
 | `/tempest settings` | Everyone | Open the Tempest settings menu (admins) |
+| `/tempest setup` | `tempest.admin` | Set the server up for its kind (survival, RPG, friends): shop, crates, quests and rewards in one go (admins) |
+| `/tempest snapshot` | `tempest.admin` | Takes a snapshot of a player's data now (admins) |
+| `/tempest snapshots` | `tempest.admin` | Lists a player's snapshots (admins) |
+| `/tempest storage` | `tempest.admin` | Where the plugins save: files or a database, and a connection test (admins) |
 | `/tempest texts` | Everyone | Change any text players see (admins) |
 
 
@@ -136,6 +144,91 @@ Slots, Lottery and Coinflip use only money earned in game. A daily limit stops a
 | Setting | What it does | Values |
 |---|---|---|
 | Daily limit for games | Per player, all games together. 0 = no limit. | 0 to 1000000000 |
+
+
+### Rewards for playing
+
+`/tempest` → Rewards for playing. Who can change it: `tempest.admin` or `tempest.admin.core`.
+
+Reasons for players to stay and come back. Each is off until you turn it on. Time away from the keyboard never counts, and every reward is given once. See how players do with /tempest players.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Starter kit on the first join | Once per player, ever. Players from before you turned it on never get it. | On or off |
+| Starter kit items |  | Text |
+| Starter kit coins |  | 0 to 1000000 |
+| Rewards for hours played | Paid when a player has really played this many hours in all (AFK does not count). | On or off |
+| At these hours |  | Text |
+| Coins for each hour | At 10 hours a player gets 10 times this. | 0 to 100000 |
+| Welcome back after days away | At most once every 30 days per player. | On or off |
+| Days away |  | 2 to 365 |
+| Hours played before, at least | So an account made only to collect it gets nothing. | 0 to 1000 |
+| Welcome back coins |  | 0 to 1000000 |
+| Invite codes (/invite) | A friend types the code on their first day; when they have played the hours below, both are paid. | On or off |
+| Hours the friend plays first |  | 1 to 100 |
+| Coins for each of them |  | 0 to 1000000 |
+| Paid friends a week, at most | Per inviter. The inviter must have played 2 hours before their code works. | 1 to 50 |
+
+
+### Saving
+
+`/tempest` → Saving. Who can change it: `tempest.admin` or `tempest.admin.core`.
+
+#### Where the plugins keep their data
+
+Files on this server need nothing set up and suit most servers. A database lets several servers share players' money (Tempest Pro). Changes count from the next restart; /tempest storage tests the connection.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Save in a database (MySQL or MariaDB) | Comes with any Tempest Pro plugin. Before switching back to files, run /eco network download on this server. | On or off |
+| Address | Several addresses separated by commas (db1.example.com,db2.example.com): the first, and the next ones when it does not answer. Only for a database with a standby copy that is always up to date (Galera, or synchronous replication). A cloud database with automatic failover (Amazon RDS Multi-AZ, DigitalOcean standby nodes) needs only its one address. | Text |
+| Port | MySQL and MariaDB use 3306. | 1 to 65535 |
+| Database name |  | Text |
+| User |  | Text |
+| Password | Never shown again once saved; leave it empty to keep the one saved. To keep the password out of storage.json, type env:NAME and set the environment variable NAME on the server (hosting panels call these startup or environment variables). | Text |
+| Encrypt the connection | Turn it on when the database is on another machine. The connection test says whether your database offers it. | Off (database on this machine or a private network), On, On, and check the database's certificate |
+| This server's name | Different on every server that shares the database, such as survival or lobby. | Text |
+| Table prefix | The same on every server that shares wallets. Another prefix keeps a separate network in the same database. | Text |
+
+#### What the servers share
+
+Only what is on goes into the database; each server also keeps its own files up to date, so a part turned off goes on from them, and turned on again a player keeps what they had here. One server can use a database too. Each change counts from the next restart.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Players' money (shared wallets) | Players' money, banks and stats: one economy for every server. Turned off, the shared wallets are written into this server's files at the next start. | On or off |
+| Battle pass progress | XP, tiers claimed and premium follow players; a tier is never claimed twice. | On or off |
+| Quest progress | Quests and achievements follow players; a quest is never paid twice. | On or off |
+| Jobs | Jobs held, levels and XP follow players. Limits on how many may hold a job count each server's own players. | On or off |
+| Leaderboards for the whole network | Top lists of what follows players (pass, quests, jobs; money with shared wallets) rank every server's players. | On or off |
+| One money log for the whole network | Every server's money changes in one log (/eco network log; with players' money shared). Each server's own log stays complete either way. | On or off |
+| Days the network log keeps |  | 1 to 3650 |
+
+#### When the database is away
+
+Players keep playing; spending and rewards wait until it is back, and nothing is lost. These settings count at once.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Tell admins after (seconds) | A shorter hiccup is not an outage: the plugins retry by themselves. | 5 to 600 |
+| Tell admins in game | Players with tempest.admin get a message when an outage starts and ends. Discord: Coins' Discord tab, Database outages. | On or off |
+| Longest wait between tries (seconds) | The plugins try again after 2, 4, 8 ... seconds up to this. Shorter: back sooner after an outage; longer: less knocking on a database that is struggling. | 5 to 300 |
+
+#### Backups
+
+A zip of every Tempest plugin's data every few hours, with the shared tables when saving in a database. These settings count at once. Keep a copy away from this server too: point the folder at another disk or a synced folder. /tempest backup makes one now.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Hours between backups | 0 turns automatic backups off. | 0 to 168 |
+| Backups kept | The oldest are deleted; only Tempest's own backups. | 1 to 1000 |
+| Backup folder | Relative to the server's folder (universe/tempest-backups), or a whole path such as D:/backups/tempest. A folder on another disk survives a broken server disk. | Text |
+| Back up the database too | Every shared table as text in the zip. Your database host's own backups are still worth turning on. On a network, one server backing up the database is enough. | On or off |
+| Back up the network money log too | Every server's money changes (/eco network log). It can be large; each server keeps its own log anyway. | On or off |
+| Snapshots kept per player | /tempest rollback puts a player back to one. 0 turns snapshots off. Pinned ones (taken by an admin, or before a rollback) are always kept. | 0 to 100 |
+| Snapshot when a player leaves | Off: only the snapshots admins take (/tempest snapshot). | On or off |
+| Minutes between snapshots of a player | A player who hops between servers gets one snapshot in this time, so their older ones are kept. 0: every time. | 0 to 1440 |
+| Days snapshots are kept | Older ones are deleted (pinned ones stay). 0: kept until newer ones push them out. | 0 to 3650 |
 
 
 ### Party frames

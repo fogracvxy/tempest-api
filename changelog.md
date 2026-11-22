@@ -2,6 +2,122 @@
 
 Every release of the Tempest plugins, newest first.
 
+## 2026-11-22
+
+### Core 1.8.1
+
+- Fixed: ATMs, slot machines and shop stalls showed two icons on the world map (Tempest's and the game's own). Now one each, with the colour pictures; maps already affected tidy themselves.
+- Text settings take long values where needed: the Discord webhook link, several database addresses, long database passwords and backup folders.
+- For developers: Core API 44 adds Setting.maxLength, a text setting that takes more than 64 characters.
+
+### Coins 2.7.1
+
+- Fixed: a Discord webhook link could not be saved in /tempest (the field took only 64 characters). Needs Tempest Core 1.8.1.
+- Fixed: each ATM showed two icons on the world map. Now one, with the ATM picture (with Tempest Core 1.8.1).
+
+### SlotMachine 1.2.7
+
+- Fixed: each slot machine showed two icons on the world map. Now one, with the slot machine picture (with Tempest Core 1.8.1).
+
+### Shop 1.7.1
+
+- Fixed: each shop stall showed two icons on the world map. Now one, with the stall picture (with Tempest Core 1.8.1).
+
+### Crates 1.7.1
+
+- Fixed: since Crates 1.6.0 every player was disconnected on join ("Could not find document ... for Custom UI Append command"). Update to 1.7.1 right away if you run 1.6.0 or 1.7.0.
+
+## 2026-11-22
+
+### Core 1.8.0
+
+- Several servers can now share one economy and players' progress through a MySQL or MariaDB database (needs any Tempest Pro plugin). Files stay the default and need nothing.
+- /tempest → Saving: keep data in files or in a database, and choose what the servers share, each its own switch: players' money, battle pass, quests, jobs, leaderboards for the whole network, one money log. One server can use a database too.
+- Players' progress follows them from server to server, held by one server at a time, so a reward is never claimed twice by switching servers.
+- Leaderboards for the whole network: the pass, quest and job boards rank the players of every server.
+- Switch between files and a database, or turn one part off and on, whenever you like: what players did meanwhile is kept, and nothing can be claimed twice.
+- If the database goes down, play goes on: earning, pass XP, quests and jobs continue, spending and rewards wait (players are told why), and nothing is lost, even if the server restarts before the database is back.
+- Admins are told in game and on Discord when the database has been down for 15 seconds, and when it is back. /tempest storage shows how fast it answers and the last outages.
+- Standby database: type several addresses, and the next one takes over when the first does not answer.
+- Backups for every server: a zip of every Tempest plugin's data every 12 hours, with the shared tables when you use a database, never with the database password. /tempest backup makes one now; the folder, how often and how many are kept are settings.
+- Player rollback (with a database): a snapshot of each player's money, pass, quests and jobs when they leave. /tempest snapshots lists them, /tempest rollback puts a player back on every server (only while they are offline; it can be undone).
+- Fully configurable in /tempest → Saving, counting at once: when admins are told of an outage and whether in game (Discord: Coins' Discord tab), the longest wait between tries, backups (how often, how many, where, with the database and the money log or not) and snapshots (how many, on leaving or not, minutes between, days kept).
+- Safe database connections: a hostile database can never read the server's files, only safe connection options are accepted, encryption with an optional certificate check, the password can come from an environment variable, and /tempest storage runs a safety check that says what to fix (root user, too many rights, no encryption, old database or driver).
+- Player health dashboard (/tempest players), and rewards for playing that bring players back.
+- Setup wizard: /tempest setup fits every plugin to the kind of server in one go, with a tick box for every change, and can undo itself.
+- Fixed: an ATM, slot machine or shop stall could show two or three times on the world map (once for each part of its model that was used); maps already affected tidy themselves.
+- Saving in files is safer on busy servers: two saves of one file at once can no longer mix, a read never lands in the middle of a save, files Windows holds for a moment (antivirus, backup tools) are tried again, and on Linux a finished save survives a power cut. A backup never fills the disk; admins are told instead.
+- Faster with a database far away (a cloud host in another region): routine saves of all players go in one transaction per round, so servers keep up with hundreds of players; XP and money never wait for the database. Tested with 300 players and with an 80 ms database. A second server process started on the same folder is found and named to admins.
+- Ready for Hytale 0.8: the same jars run on 0.7.7 and 0.8.
+- For developers: Core API 40 to 43 adds Storage (files or a database), SharedData (players' data shared between servers), SharedScores and network leaderboards, StorageHealth, Backups and PlayerSnapshots. Nothing old changed.
+
+### Holograms 1.4.1
+
+- Ready for Hytale 0.8: the same jar runs on 0.7.7 and 0.8.
+
+### Coins 2.7.0
+
+- Several servers share one economy through MySQL or MariaDB (Tempest Core's Saving, with any Tempest Pro plugin): each wallet is held by the server the player is on, so money is never spent twice.
+- Payments to players on another server, or offline, arrive exactly once, also after the database was away.
+- /pay reaches players on any server of the network by name, and they are told there. Paying players who are offline is a setting of its own (off by default).
+- Tamper seals (/eco network seal on): money changed in the database outside the game is found, frozen for spending and can be accepted or taken back (/eco network tampered, accept, restore).
+- One money log for the whole network: /eco network log <player> follows a player's money across servers.
+- If the database goes down, players keep earning; spending waits and players are told their coins are safe. A restart during the outage keeps every coin. Outages are posted to your Discord alerts.
+- Wallets switched to files and back keep money paid while offline and everything earned meanwhile; any conflict is listed for the admin.
+- Player rollback (/tempest rollback) includes the wallet.
+- Put a dupe right from /eco's transaction log: undo a line, block a source, export as CSV (with any Tempest Pro plugin).
+- Setup wizard support, and ready for Hytale 0.8.
+
+### SlotMachine 1.2.6
+
+- Ready for Hytale 0.8: the same jar runs on 0.7.7 and 0.8.
+
+### Shop 1.7.0
+
+- Fixed: a shop stall could show two or three times on the world map. A stall is now one place on the map and breaks from any part of it; stalls already saved at a part move to their block by themselves.
+- Setup wizard support (/tempest setup): the shop is fitted to the kind of server in one go, with a tick box for every change, and it can be undone.
+- Ready for Hytale 0.8: the same jar runs on 0.7.7 and 0.8.
+
+### Quests 1.7.0
+
+- Quest progress and achievements follow players between servers sharing a database (Tempest Core's Saving, with any Tempest Pro plugin): a quest is never paid twice.
+- The quest leaderboard can rank the whole network.
+- If the database goes down, progress keeps counting; rewards are paid once it is back. Nothing is lost, even across a restart.
+- "Your quests are on their way" for the moment progress comes from another server.
+- Included in player snapshots and /tempest rollback.
+- Setup wizard support, and ready for Hytale 0.8.
+
+### Crates 1.7.0
+
+- Setup wizard support (/tempest setup): crates and keys are fitted to the kind of server in one go, with a tick box for every change, and it can be undone.
+- Guards so the wizard never spoils a server: what an admin changed or placed is never touched.
+
+### Pass 1.5.0
+
+- The battle pass follows players between servers sharing a database (Tempest Core's Saving, with any Tempest Pro plugin): XP, claimed tiers and premium. A tier claimed on one server is claimed on every server.
+- The pass leaderboard can rank the whole network; a new season empties it everywhere.
+- If the database goes down, XP keeps counting; tiers can be claimed once it is back. Nothing is lost, even across a restart.
+- "Your battle pass is on its way" for the moment a pass comes from another server.
+- Included in player snapshots and /tempest rollback.
+- Setup wizard support, and ready for Hytale 0.8.
+
+### Events 1.4.1
+
+- Ready for Hytale 0.8: the same jar runs on 0.7.7 and 0.8.
+
+### Jobs 1.3.0
+
+- Jobs, levels, XP and pay follow players between servers sharing a database (Tempest Core's Saving, with any Tempest Pro plugin): work is never paid twice.
+- The job leaderboards can rank the whole network. Limits on how many players may hold a job count each server's own players.
+- If the database goes down, work is still paid and saved once it is back. Nothing is lost, even across a restart.
+- "Your jobs are on their way" for the moment jobs come from another server.
+- Included in player snapshots and /tempest rollback.
+- Setup wizard support, and ready for Hytale 0.8.
+
+### Claims 1.1.1
+
+- Ready for Hytale 0.8: the same jar runs on 0.7.7 and 0.8.
+
 ## 2026-11-19
 
 ### Core 1.7.1
