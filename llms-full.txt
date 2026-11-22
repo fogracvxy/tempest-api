@@ -4225,6 +4225,9 @@ either. Tempest always uses Coins when it is installed.
 | **EssentialsPlus** | Works, tested, after one setting | Its `/pay`, `/money` and `/eco` take over Tempest Economy's. In `mods/fof1092_EssentialsPlus/config.json`: `"disabledCommands": ["/pay", "/money", "/eco"]` |
 | **EliteEssentials** | Works, tested | Nothing while its economy is off (the default). With it on, its `/pay` takes over: in `mods/EliteEssentials/config.json` set `"useExternalEconomy": true` and `"vaultUnlockedProvider": false` under `"economy"`, and its commands use Tempest Economy's money |
 | **Coins & Markets** | Works side by side, tested | Nothing. Its coins and vendors stay its own |
+| **EconomyAPI** | Works, tested, after one setting | By default it keeps a money of its own ($500 to start, paid for kills). In `mods/Sennecoolgames_EconomyAPI/config.json` set `"bridgeMode": "VaultUnlocked"`, `"disableMobKillRewards": true` and `"disablePlayerKillRewards": true`: it then uses Tempest Economy's money |
+| **Ecotale Marketplace** | Works next to Ecotale, tested | It needs Ecotale and pays in Ecotale's money |
+| **LuckPerms**, **BetterMap** | Run side by side, tested | Nothing |
 
 ## For economy mod authors
 
