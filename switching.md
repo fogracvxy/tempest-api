@@ -67,7 +67,7 @@ and doing quests, and every coin added up at the end.
 | Plugin | Works next to Tempest | What to set |
 |---|---|---|
 | **Ecotale**, **YAS Currency**, **PJ Money** | Yes, as your economy or next to Tempest Economy | Nothing |
-| **EssentialsPlus** | Yes | Next to Tempest Economy its `/pay`, `/money` and `/eco` take over Tempest's: in `mods/fof1092_EssentialsPlus/config.json` set `"disabledCommands": ["/pay", "/money", "/eco"]` |
+| **EssentialsPlus** | Yes | Next to Tempest Economy its `/pay`, `/money` and `/eco` take over Tempest's: in `mods/fof1092_EssentialsPlus/config.json` set `"disabledCommands": ["/pay", "/money", "/eco"]` and `"economy": {"enabled": false}` |
 | **EliteEssentials** | Yes | Its economy is off by default and then nothing clashes. If you turn it on next to Tempest Economy, set `"useExternalEconomy": true` and `"vaultUnlockedProvider": false` under `"economy"` in `mods/EliteEssentials/config.json`, so its commands use Tempest's money |
 | **EconomyAPI** | Yes | Next to Tempest Economy it keeps a second money of its own. In `mods/Sennecoolgames_EconomyAPI/config.json` set `"bridgeMode": "VaultUnlocked"`, `"disableMobKillRewards": true` and `"disablePlayerKillRewards": true` |
 | **Ecotale Marketplace** | Yes, next to Ecotale | Nothing. It pays in Ecotale's money |
@@ -77,6 +77,11 @@ and doing quests, and every coin added up at the end.
 | **BetterMap** | Yes | Nothing. Tempest's map places (ATMs, stalls, crates) register as usual |
 | **Endless Leveling**, **RPG Leveling**, **MMO Skill Tree** | Yes | Nothing: see [Leveling mods](leveling-mods.html) |
 | **Simple Enchantments**, **Socket Reforge** | Yes | Enchanted and socketed items keep everything in shops, crates, rewards, mail and trades |
+
+**The doctor checks this for you.** `/tempest doctor` (and the note admins get when they join) warns when another
+plugin answers Tempest Economy's commands (`/pay`, `/balance`, `/eco`...), when a second economy is installed, and when
+Coins & Markets is installed next to Tempest Economy, each with the exact setting that fixes it. Needs Tempest Economy
+newer than 2.7.2.
 
 **One economy per server.** With two economies on VaultUnlocked, other authors' plugins may pay into either one.
 Tempest always uses Tempest Economy when it is installed.

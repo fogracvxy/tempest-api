@@ -48,7 +48,7 @@ either. Tempest always uses Coins when it is installed.
 | Plugin | Next to Tempest Economy (Coins) | What to set |
 |---|---|---|
 | **Ecotale**, **YAS Currency**, **PJ Money** | Works, tested | Nothing. To move to Coins: `/eco import <economy>` copies the balances, then remove the old one |
-| **EssentialsPlus** | Works, tested, after one setting | Its `/pay`, `/money` and `/eco` take over Tempest Economy's. In `mods/fof1092_EssentialsPlus/config.json`: `"disabledCommands": ["/pay", "/money", "/eco"]` |
+| **EssentialsPlus** | Works, tested, after one setting | Its `/pay`, `/money` and `/eco` take over Tempest Economy's. In `mods/fof1092_EssentialsPlus/config.json`: `"disabledCommands": ["/pay", "/money", "/eco"]` and `"economy": {"enabled": false}` |
 | **EliteEssentials** | Works, tested | Nothing while its economy is off (the default). With it on, its `/pay` takes over: in `mods/EliteEssentials/config.json` set `"useExternalEconomy": true` and `"vaultUnlockedProvider": false` under `"economy"`, and its commands use Tempest Economy's money |
 | **Coins & Markets** | Works side by side, tested | Nothing. Its coins and vendors stay its own |
 | **EconomyAPI** | Works, tested, after one setting | By default it keeps a money of its own ($500 to start, paid for kills). In `mods/Sennecoolgames_EconomyAPI/config.json` set `"bridgeMode": "VaultUnlocked"`, `"disableMobKillRewards": true` and `"disablePlayerKillRewards": true`: it then uses Tempest Economy's money |
