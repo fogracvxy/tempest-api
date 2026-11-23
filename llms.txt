@@ -28,6 +28,7 @@
 - [Coinflip](guide-coinflip.md)
 - [Leveling mods for server owners](leveling-mods.md): What the Tempest plugins do with Endless Leveling and MMO Skill Tree, alone or together, and where it is set.
 - [Economies for server owners](economies.md): Which economy the Tempest plugins pay into: Tempest Economy, or one you already run through VaultUnlocked. Tested with Ecotale, YAS Currency, PJ Money, EssentialsPlus, EliteEssentials and GlymeraMerchant.
+- [Switching to Tempest](switching.md): Move your server to Tempest without losing anyone's money, and what works next to the plugins you already run. Every line on this page was tested on real servers.
 
 ## Saving and networks
 - [Saving and backups](saving-and-backups.md): How the Tempest plugins keep your server's data safe in files, through crashes, power cuts and full disks, and how to make and restore backups. Free, with no setup.

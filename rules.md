@@ -12,6 +12,13 @@
   Pass gives rewards after its player lock is let go.
 - Never trust numbers from a page's event data: clamp amounts on the server to what your page offers.
 - Never let something be sold back for more than it costs, and keep coin items out of shops.
+- Run with an older Core, never fail to load. Server owners update one plugin at a time and CurseForge approves each
+  file on its own, so your plugin will meet an older Tempest Core, and a plugin that fails to load stops the whole
+  Hytale server. Check `CoreAPI.runningVersion()` before you use something newer, and name newer Core types only in a
+  class of their own that your code reaches after that check: never in your main class, a field, or a method
+  signature, because Java checks those as it loads the class, before your check runs. Declare the oldest Core you
+  really work with in your manifest (`"AtomicTempest:Core": ">=1.6.1"`): an older one then gets a clear message
+  instead of a crash. Then start a server with that oldest Core and your jar, and see your plugin enabled.
 
 - Never tie coins to real money.
 - Give every coin change a reason.

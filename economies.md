@@ -55,6 +55,33 @@ either. Tempest always uses Coins when it is installed.
 | **Ecotale Marketplace** | Works next to Ecotale, tested | It needs Ecotale and pays in Ecotale's money |
 | **LuckPerms**, **BetterMap** | Run side by side, tested | Nothing |
 
+## Switching to Tempest Economy
+
+Keep your old economy installed next to Tempest Economy and VaultUnlocked, then type `/eco import <economy>`: it shows
+how many players and how much money it found. Type the same command again within a minute to copy. Each player's
+balance becomes their balance in the old economy, rounded down to whole coins. The wallets are backed up first and
+nothing is taken from the old economy. Then remove the old one.
+
+| Switching from | Type | Tested |
+|---|---|---|
+| Ecotale | `/eco import Ecotale` | Yes, every balance copied exactly |
+| YAS Currency | `/eco import YASCurrency` | Yes |
+| PJ Money | `/eco import PJ-Money` | Yes |
+| EssentialsPlus | `/eco import EssentialsPlus` | Yes |
+| EliteEssentials | `/eco import EliteEssentials` | Yes |
+| EconomyAPI | `/eco import EconomyAPI` | Yes |
+| Coins & Markets | `/eco import CoinsAndMarkets` | Yes: its coins are exchanged (below) |
+| Any other economy on VaultUnlocked | `/eco import list` shows its name | Should work: every player who ever joined your server is looked up |
+
+Players who never joined your server are not known to it, so their balances are not copied.
+
+**Coins & Markets** keeps its money in coins players carry, so it is exchanged instead: after
+`/eco import CoinsAndMarkets` (and the same again to confirm), each player's Coins & Markets coins, in their inventory
+and pouch, are swapped for Tempest coins: everyone online at once, everyone else when they next join, until you type
+`/eco import stop`. 1 copper is 1 coin; `/eco import CoinsAndMarkets --rate 100` makes 100 copper one coin. Coins in
+chests and vendor earnings are not reached, so tell players to withdraw them first, and keep Coins & Markets installed
+until everyone has been on.
+
 ## For economy mod authors
 
 Register your economy with VaultUnlocked (`Economy` from the Vault2 API) and every Tempest plugin uses it, with no
