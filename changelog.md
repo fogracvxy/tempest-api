@@ -2,6 +2,85 @@
 
 Every release of the Tempest plugins, newest first.
 
+## 2026-11-23
+
+### Coins 2.8.0
+
+- Switch to Tempest from any economy in one command: `/eco import` now copies balances from YAS Currency, EliteEssentials and EconomyAPI too, which don't list their players (every player who ever joined your server is looked up). Tested on real servers with Ecotale, YAS Currency, PJ Money, EssentialsPlus, EliteEssentials and EconomyAPI.
+- `/tempest doctor` warns when another plugin has taken Tempest Economy's commands (`/pay`, `/balance`, `/eco`...) or keeps a second money next to it (EssentialsPlus, EliteEssentials, EconomyAPI, Ecotale, Coins & Markets and others), and says the exact setting that fixes it.
+- Switch from Coins & Markets: `/eco import CoinsAndMarkets` exchanges its physical coins (inventory and pouch) for Tempest coins, everyone online at once and everyone else when they next join, until `/eco import stop`. 1 copper is 1 coin, or choose with `--rate 100` (100 copper a coin).
+- `/eco import` says plainly when an economy has no balance for anyone who joined your server, instead of offering to copy nothing.
+
+## 2026-11-22
+
+### Holograms 1.4.2
+
+- every plugin tells admins when Tempest Core is older than it was made for, and names the oldest Core it loads with
+
+### Coins 2.7.2
+
+- Fixed: with an older Tempest Core (1.7.1 or before) the plugin failed to load ("Failed to load plugins: AtomicTempest:Coins"). It now loads with any Core; update Tempest Core to 1.8.1 for the newest features.
+- When Tempest Core is older than this plugin was made for, admins are told in game (one line for every Tempest plugin), and the plugin still runs. The oldest Core it loads with is 1.6.1.
+
+### Lottery 1.1.5
+
+- every plugin tells admins when Tempest Core is older than it was made for, and names the oldest Core it loads with
+
+### SlotMachine 1.2.8
+
+- every plugin tells admins when Tempest Core is older than it was made for, and names the oldest Core it loads with
+
+### Shop 1.7.2
+
+- Fixed: with an older Tempest Core (1.7.1 or before) the plugin failed to load ("Failed to load plugins: AtomicTempest:Shop"). It now loads with any Core; update Tempest Core to 1.8.1 for the newest features.
+- When Tempest Core is older than this plugin was made for, admins are told in game (one line for every Tempest plugin), and the plugin still runs. The oldest Core it loads with is 1.6.1.
+
+### Quests 1.7.1
+
+- Fixed: with an older Tempest Core (1.7.1 or before) the plugin failed to load ("Failed to load plugins: AtomicTempest:Quests"). It now loads with any Core; update Tempest Core to 1.8.1 for the newest features.
+- When Tempest Core is older than this plugin was made for, admins are told in game (one line for every Tempest plugin), and the plugin still runs. The oldest Core it loads with is 1.6.1.
+
+### Crates 1.7.2
+
+- Fixed: with an older Tempest Core (1.7.1 or before) the plugin failed to load ("Failed to load plugins: AtomicTempest:Crates"). It now loads with any Core; update Tempest Core to 1.8.1 for the newest features.
+- When Tempest Core is older than this plugin was made for, admins are told in game (one line for every Tempest plugin), and the plugin still runs. The oldest Core it loads with is 1.6.1.
+
+### Coinflip 1.0.7
+
+- every plugin tells admins when Tempest Core is older than it was made for, and names the oldest Core it loads with
+
+### Pass 1.5.1
+
+- every plugin tells admins when Tempest Core is older than it was made for, and names the oldest Core it loads with
+
+### Events 1.4.2
+
+- every plugin tells admins when Tempest Core is older than it was made for, and names the oldest Core it loads with
+
+### Contracts 1.4.1
+
+- every plugin tells admins when Tempest Core is older than it was made for, and names the oldest Core it loads with
+
+### Projects 1.2.1
+
+- every plugin tells admins when Tempest Core is older than it was made for, and names the oldest Core it loads with
+
+### Town 1.3.1
+
+- every plugin tells admins when Tempest Core is older than it was made for, and names the oldest Core it loads with
+
+### Jobs 1.3.1
+
+- every plugin tells admins when Tempest Core is older than it was made for, and names the oldest Core it loads with
+
+### Trade 1.1.1
+
+- every plugin tells admins when Tempest Core is older than it was made for, and names the oldest Core it loads with
+
+### Claims 1.1.2
+
+- every plugin tells admins when Tempest Core is older than it was made for, and names the oldest Core it loads with
+
 ## 2026-11-22
 
 ### Core 1.8.1
