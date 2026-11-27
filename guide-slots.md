@@ -58,6 +58,12 @@ Every setting is changed in game with `/tempest` and saved at once; nothing need
 
 `/tempest` → Slot Machine. Who can change it: `tempest.admin` or `tempest.admin.slots`.
 
+#### Slot machines
+
+| Setting | What it does | Values |
+|---|---|---|
+| Slot machines are on | Off: machines stay where they are but do not spin. The jackpot is kept. | On or off |
+
 #### Bets
 
 Players crouch and press F on a machine (or type /slotbet) to choose their bet.

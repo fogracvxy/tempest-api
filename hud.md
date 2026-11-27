@@ -79,6 +79,7 @@ Placeholders.register("mymod_bounty", uuid -> String.valueOf(bounty(uuid)));
 | `contracts_delivered`, `contracts_earned`, `contracts_earned_formatted`, `contracts_rank`, `contracts_open`, `contracts_to_collect`, `contracts_market_items`, `contracts_sold`, `contracts_bounty`, `contracts_bounties_claimed`, `contracts_most_wanted` | Contracts | `120`, `540`, `540 copper`, `Courier`, `7`, `10`, `14`, `320` |
 | `events_fund_percent`, `events_fund_total`, `events_stage` | Events | `42`, `10500`, `2` (empty when the fund is off or nothing is on) |
 | `town_unlocked`, `town_total`, `town_mayor` | Town | `3`, `5`, `Steve` |
+| `town_season`, `town_season_days` | Town Pro (`-` while seasons are off) | `2`, `12` |
 
 
 ## Announcements: `Announcements`

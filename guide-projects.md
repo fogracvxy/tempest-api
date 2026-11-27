@@ -24,10 +24,13 @@ The `/guide` pages of this plugin, as a player sees them on a test server (numbe
 | Command | Who can use it | What it does |
 |---|---|---|
 | `/projects` (/project) | Everyone | See the town projects and donate to them |
+| `/projects after` | `projects.admin` | Open a project for donations only after another one is finished |
 | `/projects cancel` | `projects.admin` | Cancel a project: everything goes back |
 | `/projects coins` | `projects.admin` | Set the coin goal of a project |
 | `/projects finish` | `projects.admin` | Finish a project now: the whole building goes up |
 | `/projects list` | `projects.admin` | List every project |
+| `/projects lostfound` | `projects.admin` | What the chests of buildings that came down held |
+| `/projects lostfound take` | `projects.admin` | Take everything in the lost and found |
 | `/projects material` | `projects.admin` | Change a material of a project (0 takes it off) |
 | `/projects new` | `projects.admin` | Pick a prefab and place a new project |
 | `/projects out` | Everyone | Leave a plot under construction |
@@ -35,10 +38,12 @@ The `/guide` pages of this plugin, as a player sees them on a test server (numbe
 | `/projects place` | `projects.admin` | Go back to the plot you are placing |
 | `/projects plan` | `projects.admin` | Mark a plot for a prefab where you stand |
 | `/projects prefabs` | `projects.admin` | Find prefabs by name |
+| `/projects rebuild` | `projects.admin` | Build a project again from nothing on the same plot |
 | `/projects remove` | `projects.admin` | Take an ended project off the list |
 | `/projects resume` | `projects.admin` | Go on with a paused project |
 | `/projects reward` | `projects.admin` | Add a console command run for each donor at the end |
 | `/projects rewarditems` | `projects.admin` | Pro: items every donor gets at the end (none clears them) |
+| `/projects season` | `projects.admin` | Choose what a new town season does with a project |
 | `/projects start` | `projects.admin` | Start the project on the marked plot |
 | `/projects stop` | `projects.admin` | Stop a project: what stands stays |
 
@@ -58,6 +63,16 @@ Players donate items and coins, and a building rises block by block on a marked 
 | Projects are on | Off: no donations, and the builders rest. Plots keep their guard, money and items. | On or off |
 | Blocks placed each second | How fast donated blocks go up. Lower it if a big plot slows the server. | 4 to 2000 |
 | Move players out of the way | On: a player a block would land on goes to the nearest safe spot beside the plot. Off: the block waits until they step away. | On or off |
+
+#### Taking buildings down
+
+When a building comes down: built again (BUILD AGAIN, a new town season), taken down, or cancelled.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Items in its chests | What happens to the items in a building's chests, barrels and other containers when it comes down. Kept for admins: /projects lostfound lists them and /projects lostfound take gives them to you. Dropped: on the ground beside the plot. | Kept for admins, Dropped beside the plot, Lost |
+| Plots cleared at the same time | 0: any number. A new town season clears many plots at once: fewer at a time keeps a big town from slowing the server. | 0 to 50 |
+| Load faraway plots to clear them | On: a plot nobody is near is loaded so it is cleared at once. Off: it is cleared when a player comes near. | On or off |
 
 #### New projects
 

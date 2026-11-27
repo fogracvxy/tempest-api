@@ -86,3 +86,15 @@ Now and then, by chance, an event starts by itself while nothing else is on.
 | Which event | The event a lucky roll starts. | Gold Rush, Monster Hunt, XP Frenzy, Market Day, Lucky Hour |
 | Chance each hour (%) | The chance, checked once an hour, that a lucky event starts. 10: about one every 10 hours. | 0 to 100 |
 | Players online at least | Fewer players online: no lucky event, so nobody misses it. | 0 to 500 |
+
+#### Supply drops
+
+Crates an event drops near players, shown on the map, for whoever reaches them first.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Supply drops | Off: events that drop supplies run without them. | On or off |
+| At most at once |  | 1 to 20 |
+| Nearest to the player (blocks) |  | 10 to 1000 |
+| Farthest (blocks) |  | 10 to 2000 |
+| Minutes before one goes |  | 1 to 240 |

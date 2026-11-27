@@ -106,6 +106,7 @@ Players found a party with /claims create, invite others, and choose allies.
 | Setting | What it does | Values |
 |---|---|---|
 | Most members in a party |  | 1 to 200 |
+| Minutes to accept an invite |  | 1 to 1440 |
 | Most allies of a party | Allied parties and single trusted players together. | 0 to 100 |
 
 #### Where

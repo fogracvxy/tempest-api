@@ -128,3 +128,4 @@ Everyone online gets crate keys at once, after a ten-second countdown in chat. S
 | Key | The crate keys come first; any item can be given. | A list |
 | Keys each | How many of the key above each online player gets in a key party: the timed ones, and /keyparty typed without a key and amount. | 1 to 64 |
 | Players online for one by itself | A timed key party waits until at least this many players are online, so keys are not given to an empty server. /keyparty always works. | 1 to 500 |
+| Countdown (seconds) | From the announcement to the keys, so players can get ready. | 3 to 600 |

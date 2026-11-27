@@ -82,6 +82,7 @@ Prices and rewards in every AtomicTempest plugin use the server's economy: Coins
 | Show the money counter | Players can still hide theirs with /hud. | On or off |
 | Starting corner | Players can move theirs with /hud. | Top right, Left, Lower right |
 | Short amounts on the counter | Big balances in short, such as 12.5K and 3.2M, so they fit. | On or off |
+| Save players right after a trade | When a shop, stall, trade, ATM, crate or contract moves items for coins, the player is saved at once instead of within the game's next 10 seconds, so a server crash in between cannot copy items. Leave it on. | On or off |
 
 #### Tempest board
 
@@ -98,11 +99,7 @@ A panel on the right of each player's screen with their name, world and money, t
 | Players may show the time | The time of day in their world. | On or off |
 | Players may show their ping | Lets each player add their ping (the delay between them and the server) to their own Tempest board. Players switch it on themselves in /board. | On or off |
 | Players may show their position | Off for servers where coordinates should stay secret. Players switch it on themselves. | On or off |
-| Your own line 1 | "Label \| text": placeholders show other plugins' numbers, such as "Kills \| {myplugin_kills}". Without \| it is one line of text. | Text |
-| Your own line 2 | Empty: none. | Text |
-| Your own line 3 | Empty: none. | Text |
-| Your own line 4 | Empty: none. | Text |
-| Your own line 5 | Empty: none. | Text |
+| Your own lines | Lines of your own on the board, up to 5. Label and text show as "Label: text"; placeholders show other plugins' numbers, such as Kills and {myplugin_kills}. Without a label the text is the whole line. | Text |
 
 #### Menus
 
@@ -158,16 +155,18 @@ Reasons for players to stay and come back. Each is off until you turn it on. Tim
 | Starter kit items |  | Text |
 | Starter kit coins |  | 0 to 1000000 |
 | Rewards for hours played | Paid when a player has really played this many hours in all (AFK does not count). | On or off |
-| At these hours |  | Text |
-| Coins for each hour | At 10 hours a player gets 10 times this. | 0 to 100000 |
-| Welcome back after days away | At most once every 30 days per player. | On or off |
+| Milestones | One row per reward: the hours played in all, the coins, and a console command run for the player (ranks, kits, crate keys), with {player}, {uuid} and {level} (the hours) filled in. Leave the command empty for coins only. Only a full admin (tempest.admin) can change them. | Text |
+| Welcome back after days away | At most once in the days set below, per player. | On or off |
 | Days away |  | 2 to 365 |
 | Hours played before, at least | So an account made only to collect it gets nothing. | 0 to 1000 |
+| Days between two welcome backs |  | 1 to 365 |
 | Welcome back coins |  | 0 to 1000000 |
 | Invite codes (/invite) | A friend types the code on their first day; when they have played the hours below, both are paid. | On or off |
 | Hours the friend plays first |  | 1 to 100 |
 | Coins for each of them |  | 0 to 1000000 |
-| Paid friends a week, at most | Per inviter. The inviter must have played 2 hours before their code works. | 1 to 50 |
+| Paid friends a week, at most | Per inviter. | 1 to 50 |
+| Hours the inviter played first | Before their code works, so new accounts cannot invite each other. | 0 to 100 |
+| Minutes still before a player is AFK | Without turning their view. AFK time never counts for rewards or in /tempest players. | 1 to 60 |
 
 
 ### Saving
@@ -324,86 +323,7 @@ Your own page: rules and anything players should know. It is the first page of /
 |---|---|---|
 | Show the page | On: /info and /rules open this page, and it is the first page of /guide (new players see it when they first join, if that is on). Off: the page is hidden. | On or off |
 | Title | The heading at the top of the page, such as your server's name or "Rules". | Text |
-| Line 1 | Each line of the page, in order: text, a heading (bold) or an empty line for a gap. Two empty lines show below the last one written, up to 40 lines of 200 letters. | Text, Heading, Empty line (a gap) |
-| Line 1, words |  | Text |
-| Line 2 |  | Text, Heading, Empty line (a gap) |
-| Line 2, words |  | Text |
-| Line 3 |  | Text, Heading, Empty line (a gap) |
-| Line 3, words |  | Text |
-| Line 4 |  | Text, Heading, Empty line (a gap) |
-| Line 4, words |  | Text |
-| Line 5 |  | Text, Heading, Empty line (a gap) |
-| Line 5, words |  | Text |
-| Line 6 |  | Text, Heading, Empty line (a gap) |
-| Line 6, words |  | Text |
-| Line 7 |  | Text, Heading, Empty line (a gap) |
-| Line 7, words |  | Text |
-| Line 8 |  | Text, Heading, Empty line (a gap) |
-| Line 8, words |  | Text |
-| Line 9 |  | Text, Heading, Empty line (a gap) |
-| Line 9, words |  | Text |
-| Line 10 |  | Text, Heading, Empty line (a gap) |
-| Line 10, words |  | Text |
-| Line 11 |  | Text, Heading, Empty line (a gap) |
-| Line 11, words |  | Text |
-| Line 12 |  | Text, Heading, Empty line (a gap) |
-| Line 12, words |  | Text |
-| Line 13 |  | Text, Heading, Empty line (a gap) |
-| Line 13, words |  | Text |
-| Line 14 |  | Text, Heading, Empty line (a gap) |
-| Line 14, words |  | Text |
-| Line 15 |  | Text, Heading, Empty line (a gap) |
-| Line 15, words |  | Text |
-| Line 16 |  | Text, Heading, Empty line (a gap) |
-| Line 16, words |  | Text |
-| Line 17 |  | Text, Heading, Empty line (a gap) |
-| Line 17, words |  | Text |
-| Line 18 |  | Text, Heading, Empty line (a gap) |
-| Line 18, words |  | Text |
-| Line 19 |  | Text, Heading, Empty line (a gap) |
-| Line 19, words |  | Text |
-| Line 20 |  | Text, Heading, Empty line (a gap) |
-| Line 20, words |  | Text |
-| Line 21 |  | Text, Heading, Empty line (a gap) |
-| Line 21, words |  | Text |
-| Line 22 |  | Text, Heading, Empty line (a gap) |
-| Line 22, words |  | Text |
-| Line 23 |  | Text, Heading, Empty line (a gap) |
-| Line 23, words |  | Text |
-| Line 24 |  | Text, Heading, Empty line (a gap) |
-| Line 24, words |  | Text |
-| Line 25 |  | Text, Heading, Empty line (a gap) |
-| Line 25, words |  | Text |
-| Line 26 |  | Text, Heading, Empty line (a gap) |
-| Line 26, words |  | Text |
-| Line 27 |  | Text, Heading, Empty line (a gap) |
-| Line 27, words |  | Text |
-| Line 28 |  | Text, Heading, Empty line (a gap) |
-| Line 28, words |  | Text |
-| Line 29 |  | Text, Heading, Empty line (a gap) |
-| Line 29, words |  | Text |
-| Line 30 |  | Text, Heading, Empty line (a gap) |
-| Line 30, words |  | Text |
-| Line 31 |  | Text, Heading, Empty line (a gap) |
-| Line 31, words |  | Text |
-| Line 32 |  | Text, Heading, Empty line (a gap) |
-| Line 32, words |  | Text |
-| Line 33 |  | Text, Heading, Empty line (a gap) |
-| Line 33, words |  | Text |
-| Line 34 |  | Text, Heading, Empty line (a gap) |
-| Line 34, words |  | Text |
-| Line 35 |  | Text, Heading, Empty line (a gap) |
-| Line 35, words |  | Text |
-| Line 36 |  | Text, Heading, Empty line (a gap) |
-| Line 36, words |  | Text |
-| Line 37 |  | Text, Heading, Empty line (a gap) |
-| Line 37, words |  | Text |
-| Line 38 |  | Text, Heading, Empty line (a gap) |
-| Line 38, words |  | Text |
-| Line 39 |  | Text, Heading, Empty line (a gap) |
-| Line 39, words |  | Text |
-| Line 40 |  | Text, Heading, Empty line (a gap) |
-| Line 40, words |  | Text |
+| Lines | Each line of the page, in order. Tick Heading for a bold title line; leave the words empty for a gap. Up to 40 lines of 200 letters. | Text |
 
 #### Buttons
 
@@ -411,10 +331,7 @@ Up to two buttons under the text, each running a command as the player.
 
 | Setting | What it does | Values |
 |---|---|---|
-| Button 1 text | The word on the first button under the text. Empty: no button. | Text |
-| Button 1 command | For example /shop The command the first button runs as the player who clicks it, such as /shop or /spawn. | Text |
-| Button 2 text | The word on the second button. Empty: no second button. | Text |
-| Button 2 command | The command the second button runs as the player who clicks it. | Text |
+| Buttons | The word on each button and the command it runs as the player who clicks it, such as /shop or /spawn. | Text |
 
 
 ### World map

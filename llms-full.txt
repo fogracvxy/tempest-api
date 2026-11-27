@@ -18,7 +18,7 @@ package.
 | Events | `AtomicTempest:Events` | no API of its own: it turns on Core's `Boosts` (below) and has placeholders |
 | Contracts | `AtomicTempest:Contracts` | no API of its own: the `contract_deliver` action, the `contract_pay` boost kind and placeholders |
 | Projects | `AtomicTempest:Projects` | `com.atomictempest.projects.api.ProjectsAPI` (the buildings and their states); the `projects_donate` action (amount: items given), `projects_coins` (amount: coins given) and the `projects_open` placeholder |
-| Town | `AtomicTempest:Town` | no API of its own: it decides Core's `Unlocks` (below), and has the `town_unlocked`, `town_total` and `town_mayor` placeholders |
+| Town | `AtomicTempest:Town` | no API of its own: it decides Core's `Unlocks` (below), and has the `town_unlocked`, `town_total`, `town_mayor`, `town_season` and `town_season_days` placeholders |
 | Crates | `AtomicTempest:Crates` | no API of its own: the `crate_open` action and `Announcements.BIG_WIN` |
 | Holograms | `AtomicTempest:Holograms` | `com.atomictempest.holograms.api.Holograms` (and `Hologram`, `TextArt`, `Rankings`...) |
 | Pass | `AtomicTempest:Pass` | `com.atomictempest.pass.api.PassAPI` |
@@ -36,7 +36,7 @@ Core's `Claims` hides which.
 Every API class has a version constant that goes up when something is added. Everything in these APIs is safe to call
 from any thread unless it says otherwise.
 
-**Javadoc:** [Coinflip 1.0.7](javadoc/coinflip/) · [Coins 2.8.0](javadoc/coins/) · [Core 1.8.1](javadoc/core/) · [Holograms 1.4.2](javadoc/holograms/) · [Jobs 1.3.1](javadoc/jobs/) · [Lottery 1.1.5](javadoc/lottery/) · [Pass 1.5.1](javadoc/pass/) · [Projects 1.2.1](javadoc/projects/) · [Quests 1.7.1](javadoc/quests/) · [Shop 1.7.2](javadoc/shop/) · [SlotMachine 1.2.8](javadoc/slotmachine/)
+**Javadoc:** [Coinflip 1.0.7](javadoc/coinflip/) · [Coins 2.8.1](javadoc/coins/) · [Core 1.9.1](javadoc/core/) · [Holograms 1.4.3](javadoc/holograms/) · [Jobs 1.3.1](javadoc/jobs/) · [Lottery 1.1.5](javadoc/lottery/) · [Pass 1.5.1](javadoc/pass/) · [Projects 1.3.0](javadoc/projects/) · [Quests 1.8.0](javadoc/quests/) · [Shop 1.8.0](javadoc/shop/) · [SlotMachine 1.3.0](javadoc/slotmachine/)
 
 **Jars:** from the plugins' CurseForge pages; compile against them with `compileOnly`. **Questions and help:** [Discord](https://discord.gg/Q9PNVCMZXK)
 
@@ -189,6 +189,15 @@ Every command of the Tempest plugins, with the permission it needs. "Everyone" w
 | `/shop link` | `shop.admin` | Make the block you look at a shop, selling as this stall kind |
 | `/shop stall` | `shop.admin` | Get a stall to place |
 | `/shop unlink` | `shop.admin` | Make the block you look at an ordinary block again |
+| `/stall` | Everyone | Players' stalls: the market, or buy and find |
+| `/stall buy` | Everyone | Buy a stall of your own |
+| `/stall district` | `shop.admin` | Market districts where players may put stalls |
+| `/stall find` | Everyone | Who sells and buys an item |
+| `/stall open` | Everyone | Open a player stall (from its menu on the map) |
+| `/stall remove` | `shop.admin` | Take down the player stall you look at |
+| `/stall sales` | Everyone | Your last sales and purchases at player stalls |
+| `/stall unreview` | `shop.admin` | Remove a player's review of the stall you look at |
+| `/stall way` | Everyone | Show the way to a player stall on your map and compass |
 
 ## Crates
 
@@ -242,10 +251,13 @@ Every command of the Tempest plugins, with the permission it needs. "Everyone" w
 | Command | Who can use it | What it does |
 |---|---|---|
 | `/projects` (/project) | Everyone | See the town projects and donate to them |
+| `/projects after` | `projects.admin` | Open a project for donations only after another one is finished |
 | `/projects cancel` | `projects.admin` | Cancel a project: everything goes back |
 | `/projects coins` | `projects.admin` | Set the coin goal of a project |
 | `/projects finish` | `projects.admin` | Finish a project now: the whole building goes up |
 | `/projects list` | `projects.admin` | List every project |
+| `/projects lostfound` | `projects.admin` | What the chests of buildings that came down held |
+| `/projects lostfound take` | `projects.admin` | Take everything in the lost and found |
 | `/projects material` | `projects.admin` | Change a material of a project (0 takes it off) |
 | `/projects new` | `projects.admin` | Pick a prefab and place a new project |
 | `/projects out` | Everyone | Leave a plot under construction |
@@ -253,10 +265,12 @@ Every command of the Tempest plugins, with the permission it needs. "Everyone" w
 | `/projects place` | `projects.admin` | Go back to the plot you are placing |
 | `/projects plan` | `projects.admin` | Mark a plot for a prefab where you stand |
 | `/projects prefabs` | `projects.admin` | Find prefabs by name |
+| `/projects rebuild` | `projects.admin` | Build a project again from nothing on the same plot |
 | `/projects remove` | `projects.admin` | Take an ended project off the list |
 | `/projects resume` | `projects.admin` | Go on with a paused project |
 | `/projects reward` | `projects.admin` | Add a console command run for each donor at the end |
 | `/projects rewarditems` | `projects.admin` | Pro: items every donor gets at the end (none clears them) |
+| `/projects season` | `projects.admin` | Choose what a new town season does with a project |
 | `/projects start` | `projects.admin` | Start the project on the marked plot |
 | `/projects stop` | `projects.admin` | Stop a project: what stands stays |
 
@@ -272,6 +286,9 @@ Every command of the Tempest plugins, with the permission it needs. "Everyone" w
 | `/mayor set` | Everyone | Admins: make an online player mayor until the term ends |
 | `/town` | Everyone | Town: what the town has unlocked and what it still needs |
 | `/town lock` | Everyone | Admins: keep an unlock locked |
+| `/town season` | Everyone | Show the town's season and its top builders |
+| `/town season preview` | Everyone | Show what a new town season would do now (admins) |
+| `/town season start` | Everyone | Start the next town season now (admins) |
 | `/town unlock` | Everyone | Admins: keep an unlock unlocked |
 
 ## Jobs
@@ -446,6 +463,7 @@ Prices and rewards in every AtomicTempest plugin use the server's economy: Coins
 | Show the money counter | Players can still hide theirs with /hud. | On or off |
 | Starting corner | Players can move theirs with /hud. | Top right, Left, Lower right |
 | Short amounts on the counter | Big balances in short, such as 12.5K and 3.2M, so they fit. | On or off |
+| Save players right after a trade | When a shop, stall, trade, ATM, crate or contract moves items for coins, the player is saved at once instead of within the game's next 10 seconds, so a server crash in between cannot copy items. Leave it on. | On or off |
 
 #### Tempest board
 
@@ -462,11 +480,7 @@ A panel on the right of each player's screen with their name, world and money, t
 | Players may show the time | The time of day in their world. | On or off |
 | Players may show their ping | Lets each player add their ping (the delay between them and the server) to their own Tempest board. Players switch it on themselves in /board. | On or off |
 | Players may show their position | Off for servers where coordinates should stay secret. Players switch it on themselves. | On or off |
-| Your own line 1 | "Label \| text": placeholders show other plugins' numbers, such as "Kills \| {myplugin_kills}". Without \| it is one line of text. | Text |
-| Your own line 2 | Empty: none. | Text |
-| Your own line 3 | Empty: none. | Text |
-| Your own line 4 | Empty: none. | Text |
-| Your own line 5 | Empty: none. | Text |
+| Your own lines | Lines of your own on the board, up to 5. Label and text show as "Label: text"; placeholders show other plugins' numbers, such as Kills and {myplugin_kills}. Without a label the text is the whole line. | Text |
 
 #### Menus
 
@@ -522,16 +536,18 @@ Reasons for players to stay and come back. Each is off until you turn it on. Tim
 | Starter kit items |  | Text |
 | Starter kit coins |  | 0 to 1000000 |
 | Rewards for hours played | Paid when a player has really played this many hours in all (AFK does not count). | On or off |
-| At these hours |  | Text |
-| Coins for each hour | At 10 hours a player gets 10 times this. | 0 to 100000 |
-| Welcome back after days away | At most once every 30 days per player. | On or off |
+| Milestones | One row per reward: the hours played in all, the coins, and a console command run for the player (ranks, kits, crate keys), with {player}, {uuid} and {level} (the hours) filled in. Leave the command empty for coins only. Only a full admin (tempest.admin) can change them. | Text |
+| Welcome back after days away | At most once in the days set below, per player. | On or off |
 | Days away |  | 2 to 365 |
 | Hours played before, at least | So an account made only to collect it gets nothing. | 0 to 1000 |
+| Days between two welcome backs |  | 1 to 365 |
 | Welcome back coins |  | 0 to 1000000 |
 | Invite codes (/invite) | A friend types the code on their first day; when they have played the hours below, both are paid. | On or off |
 | Hours the friend plays first |  | 1 to 100 |
 | Coins for each of them |  | 0 to 1000000 |
-| Paid friends a week, at most | Per inviter. The inviter must have played 2 hours before their code works. | 1 to 50 |
+| Paid friends a week, at most | Per inviter. | 1 to 50 |
+| Hours the inviter played first | Before their code works, so new accounts cannot invite each other. | 0 to 100 |
+| Minutes still before a player is AFK | Without turning their view. AFK time never counts for rewards or in /tempest players. | 1 to 60 |
 
 
 ### Saving
@@ -688,86 +704,7 @@ Your own page: rules and anything players should know. It is the first page of /
 |---|---|---|
 | Show the page | On: /info and /rules open this page, and it is the first page of /guide (new players see it when they first join, if that is on). Off: the page is hidden. | On or off |
 | Title | The heading at the top of the page, such as your server's name or "Rules". | Text |
-| Line 1 | Each line of the page, in order: text, a heading (bold) or an empty line for a gap. Two empty lines show below the last one written, up to 40 lines of 200 letters. | Text, Heading, Empty line (a gap) |
-| Line 1, words |  | Text |
-| Line 2 |  | Text, Heading, Empty line (a gap) |
-| Line 2, words |  | Text |
-| Line 3 |  | Text, Heading, Empty line (a gap) |
-| Line 3, words |  | Text |
-| Line 4 |  | Text, Heading, Empty line (a gap) |
-| Line 4, words |  | Text |
-| Line 5 |  | Text, Heading, Empty line (a gap) |
-| Line 5, words |  | Text |
-| Line 6 |  | Text, Heading, Empty line (a gap) |
-| Line 6, words |  | Text |
-| Line 7 |  | Text, Heading, Empty line (a gap) |
-| Line 7, words |  | Text |
-| Line 8 |  | Text, Heading, Empty line (a gap) |
-| Line 8, words |  | Text |
-| Line 9 |  | Text, Heading, Empty line (a gap) |
-| Line 9, words |  | Text |
-| Line 10 |  | Text, Heading, Empty line (a gap) |
-| Line 10, words |  | Text |
-| Line 11 |  | Text, Heading, Empty line (a gap) |
-| Line 11, words |  | Text |
-| Line 12 |  | Text, Heading, Empty line (a gap) |
-| Line 12, words |  | Text |
-| Line 13 |  | Text, Heading, Empty line (a gap) |
-| Line 13, words |  | Text |
-| Line 14 |  | Text, Heading, Empty line (a gap) |
-| Line 14, words |  | Text |
-| Line 15 |  | Text, Heading, Empty line (a gap) |
-| Line 15, words |  | Text |
-| Line 16 |  | Text, Heading, Empty line (a gap) |
-| Line 16, words |  | Text |
-| Line 17 |  | Text, Heading, Empty line (a gap) |
-| Line 17, words |  | Text |
-| Line 18 |  | Text, Heading, Empty line (a gap) |
-| Line 18, words |  | Text |
-| Line 19 |  | Text, Heading, Empty line (a gap) |
-| Line 19, words |  | Text |
-| Line 20 |  | Text, Heading, Empty line (a gap) |
-| Line 20, words |  | Text |
-| Line 21 |  | Text, Heading, Empty line (a gap) |
-| Line 21, words |  | Text |
-| Line 22 |  | Text, Heading, Empty line (a gap) |
-| Line 22, words |  | Text |
-| Line 23 |  | Text, Heading, Empty line (a gap) |
-| Line 23, words |  | Text |
-| Line 24 |  | Text, Heading, Empty line (a gap) |
-| Line 24, words |  | Text |
-| Line 25 |  | Text, Heading, Empty line (a gap) |
-| Line 25, words |  | Text |
-| Line 26 |  | Text, Heading, Empty line (a gap) |
-| Line 26, words |  | Text |
-| Line 27 |  | Text, Heading, Empty line (a gap) |
-| Line 27, words |  | Text |
-| Line 28 |  | Text, Heading, Empty line (a gap) |
-| Line 28, words |  | Text |
-| Line 29 |  | Text, Heading, Empty line (a gap) |
-| Line 29, words |  | Text |
-| Line 30 |  | Text, Heading, Empty line (a gap) |
-| Line 30, words |  | Text |
-| Line 31 |  | Text, Heading, Empty line (a gap) |
-| Line 31, words |  | Text |
-| Line 32 |  | Text, Heading, Empty line (a gap) |
-| Line 32, words |  | Text |
-| Line 33 |  | Text, Heading, Empty line (a gap) |
-| Line 33, words |  | Text |
-| Line 34 |  | Text, Heading, Empty line (a gap) |
-| Line 34, words |  | Text |
-| Line 35 |  | Text, Heading, Empty line (a gap) |
-| Line 35, words |  | Text |
-| Line 36 |  | Text, Heading, Empty line (a gap) |
-| Line 36, words |  | Text |
-| Line 37 |  | Text, Heading, Empty line (a gap) |
-| Line 37, words |  | Text |
-| Line 38 |  | Text, Heading, Empty line (a gap) |
-| Line 38, words |  | Text |
-| Line 39 |  | Text, Heading, Empty line (a gap) |
-| Line 39, words |  | Text |
-| Line 40 |  | Text, Heading, Empty line (a gap) |
-| Line 40, words |  | Text |
+| Lines | Each line of the page, in order. Tick Heading for a bold title line; leave the words empty for a gap. Up to 40 lines of 200 letters. | Text |
 
 #### Buttons
 
@@ -775,10 +712,7 @@ Up to two buttons under the text, each running a command as the player.
 
 | Setting | What it does | Values |
 |---|---|---|
-| Button 1 text | The word on the first button under the text. Empty: no button. | Text |
-| Button 1 command | For example /shop The command the first button runs as the player who clicks it, such as /shop or /spawn. | Text |
-| Button 2 text | The word on the second button. Empty: no second button. | Text |
-| Button 2 command | The command the second button runs as the player who clicks it. | Text |
+| Buttons | The word on each button and the command it runs as the player who clicks it, such as /shop or /spawn. | Text |
 
 
 ### World map
@@ -1578,6 +1512,15 @@ The `/guide` pages of this plugin, as a player sees them on a test server (numbe
 | `/shop link` | `shop.admin` | Make the block you look at a shop, selling as this stall kind |
 | `/shop stall` | `shop.admin` | Get a stall to place |
 | `/shop unlink` | `shop.admin` | Make the block you look at an ordinary block again |
+| `/stall` | Everyone | Players' stalls: the market, or buy and find |
+| `/stall buy` | Everyone | Buy a stall of your own |
+| `/stall district` | `shop.admin` | Market districts where players may put stalls |
+| `/stall find` | Everyone | Who sells and buys an item |
+| `/stall open` | Everyone | Open a player stall (from its menu on the map) |
+| `/stall remove` | `shop.admin` | Take down the player stall you look at |
+| `/stall sales` | Everyone | Your last sales and purchases at player stalls |
+| `/stall unreview` | `shop.admin` | Remove a player's review of the stall you look at |
+| `/stall way` | Everyone | Show the way to a player stall on your map and compass |
 
 
 ## Settings
@@ -1669,7 +1612,7 @@ Tools, weapons and armour that have lost durability.
 
 #### Free edition
 
-The Pro edition adds: more stalls (Apothecary, Fishmonger, Tavern, Mage), prices that move with supply and demand.
+The Pro edition adds: more stalls (Apothecary, Fishmonger, Tavern, Mage), prices that move with supply and demand, player shops: players' own stalls that sell and buy (/stall).
 
 
 ### Stalls
@@ -1914,6 +1857,7 @@ Everyone online gets crate keys at once, after a ten-second countdown in chat. S
 | Key | The crate keys come first; any item can be given. | A list |
 | Keys each | How many of the key above each online player gets in a key party: the timed ones, and /keyparty typed without a key and amount. | 1 to 64 |
 | Players online for one by itself | A timed key party waits until at least this many players are online, so keys are not given to an empty server. /keyparty always works. | 1 to 500 |
+| Countdown (seconds) | From the announcement to the keys, so players can get ready. | 3 to 600 |
 
 
 # Quests
@@ -1971,6 +1915,7 @@ Open /quests and use the Edit (admin) tab. Admins need the permission quests.adm
 
 | Setting | What it does | Values |
 |---|---|---|
+| Quests and achievements are on | Off: nothing counts and players cannot open /quests. Their progress is kept. Admins can still edit. | On or off |
 | Players choose their quests | From the quest board. Off: every quest counts at once. | On or off |
 | Most quests at once | While players choose their quests. | 1 to 50 |
 | Play time only while moving | Standing still (AFK) does not count towards play time goals. | On or off |
@@ -2190,6 +2135,18 @@ Now and then, by chance, an event starts by itself while nothing else is on.
 | Chance each hour (%) | The chance, checked once an hour, that a lucky event starts. 10: about one every 10 hours. | 0 to 100 |
 | Players online at least | Fewer players online: no lucky event, so nobody misses it. | 0 to 500 |
 
+#### Supply drops
+
+Crates an event drops near players, shown on the map, for whoever reaches them first.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Supply drops | Off: events that drop supplies run without them. | On or off |
+| At most at once |  | 1 to 20 |
+| Nearest to the player (blocks) |  | 10 to 1000 |
+| Farthest (blocks) |  | 10 to 2000 |
+| Minutes before one goes |  | 1 to 240 |
+
 
 # Contracts and bounties
 
@@ -2315,20 +2272,7 @@ By items delivered; the bonus is on server orders. Leave a name empty for the bu
 
 | Setting | What it does | Values |
 |---|---|---|
-| Rank 1 name | Newcomer | Text |
-| Rank 1: bonus (%) | Players at this rank get this much more for delivering to server orders. Players' own contracts pay what they offer. | 0 to 100 |
-| Rank 2 name | Courier | Text |
-| Rank 2: items delivered | How many items a player must have delivered in all to reach this rank. | 1 to 10000000 |
-| Rank 2: bonus (%) | Players at this rank get this much more for delivering to server orders. Players' own contracts pay what they offer. | 0 to 100 |
-| Rank 3 name | Trader | Text |
-| Rank 3: items delivered | How many items a player must have delivered in all to reach this rank. | 1 to 10000000 |
-| Rank 3: bonus (%) | Players at this rank get this much more for delivering to server orders. Players' own contracts pay what they offer. | 0 to 100 |
-| Rank 4 name | Merchant | Text |
-| Rank 4: items delivered | How many items a player must have delivered in all to reach this rank. | 1 to 10000000 |
-| Rank 4: bonus (%) | Players at this rank get this much more for delivering to server orders. Players' own contracts pay what they offer. | 0 to 100 |
-| Rank 5 name | Tycoon | Text |
-| Rank 5: items delivered | How many items a player must have delivered in all to reach this rank. | 1 to 10000000 |
-| Rank 5: bonus (%) | Players at this rank get this much more for delivering to server orders. Players' own contracts pay what they offer. | 0 to 100 |
+| Ranks | Each rank's name (empty: the built-in one in each player's language), how many items a player must have delivered in all to reach it (rank 1 is every player), and how much more it gets for delivering to server orders. Players' own contracts pay what they offer. | Text |
 
 
 ### Bounties
@@ -2389,10 +2333,13 @@ The `/guide` pages of this plugin, as a player sees them on a test server (numbe
 | Command | Who can use it | What it does |
 |---|---|---|
 | `/projects` (/project) | Everyone | See the town projects and donate to them |
+| `/projects after` | `projects.admin` | Open a project for donations only after another one is finished |
 | `/projects cancel` | `projects.admin` | Cancel a project: everything goes back |
 | `/projects coins` | `projects.admin` | Set the coin goal of a project |
 | `/projects finish` | `projects.admin` | Finish a project now: the whole building goes up |
 | `/projects list` | `projects.admin` | List every project |
+| `/projects lostfound` | `projects.admin` | What the chests of buildings that came down held |
+| `/projects lostfound take` | `projects.admin` | Take everything in the lost and found |
 | `/projects material` | `projects.admin` | Change a material of a project (0 takes it off) |
 | `/projects new` | `projects.admin` | Pick a prefab and place a new project |
 | `/projects out` | Everyone | Leave a plot under construction |
@@ -2400,10 +2347,12 @@ The `/guide` pages of this plugin, as a player sees them on a test server (numbe
 | `/projects place` | `projects.admin` | Go back to the plot you are placing |
 | `/projects plan` | `projects.admin` | Mark a plot for a prefab where you stand |
 | `/projects prefabs` | `projects.admin` | Find prefabs by name |
+| `/projects rebuild` | `projects.admin` | Build a project again from nothing on the same plot |
 | `/projects remove` | `projects.admin` | Take an ended project off the list |
 | `/projects resume` | `projects.admin` | Go on with a paused project |
 | `/projects reward` | `projects.admin` | Add a console command run for each donor at the end |
 | `/projects rewarditems` | `projects.admin` | Pro: items every donor gets at the end (none clears them) |
+| `/projects season` | `projects.admin` | Choose what a new town season does with a project |
 | `/projects start` | `projects.admin` | Start the project on the marked plot |
 | `/projects stop` | `projects.admin` | Stop a project: what stands stays |
 
@@ -2423,6 +2372,16 @@ Players donate items and coins, and a building rises block by block on a marked 
 | Projects are on | Off: no donations, and the builders rest. Plots keep their guard, money and items. | On or off |
 | Blocks placed each second | How fast donated blocks go up. Lower it if a big plot slows the server. | 4 to 2000 |
 | Move players out of the way | On: a player a block would land on goes to the nearest safe spot beside the plot. Off: the block waits until they step away. | On or off |
+
+#### Taking buildings down
+
+When a building comes down: built again (BUILD AGAIN, a new town season), taken down, or cancelled.
+
+| Setting | What it does | Values |
+|---|---|---|
+| Items in its chests | What happens to the items in a building's chests, barrels and other containers when it comes down. Kept for admins: /projects lostfound lists them and /projects lostfound take gives them to you. Dropped: on the ground beside the plot. | Kept for admins, Dropped beside the plot, Lost |
+| Plots cleared at the same time | 0: any number. A new town season clears many plots at once: fewer at a time keeps a big town from slowing the server. | 0 to 50 |
+| Load faraway plots to clear them | On: a plot nobody is near is loaded so it is cleared at once. Off: it is cleared when a player comes near. | On or off |
 
 #### New projects
 
@@ -2533,6 +2492,9 @@ The `/guide` pages of this plugin, as a player sees them on a test server (numbe
 | `/mayor set` | Everyone | Admins: make an online player mayor until the term ends |
 | `/town` | Everyone | Town: what the town has unlocked and what it still needs |
 | `/town lock` | Everyone | Admins: keep an unlock locked |
+| `/town season` | Everyone | Show the town's season and its top builders |
+| `/town season preview` | Everyone | Show what a new town season would do now (admins) |
+| `/town season start` | Everyone | Start the next town season now (admins) |
 | `/town unlock` | Everyone | Admins: keep an unlock unlocked |
 
 
@@ -2912,6 +2874,7 @@ Players found a party with /claims create, invite others, and choose allies.
 | Setting | What it does | Values |
 |---|---|---|
 | Most members in a party |  | 1 to 200 |
+| Minutes to accept an invite |  | 1 to 1440 |
 | Most allies of a party | Allied parties and single trusted players together. | 0 to 100 |
 
 #### Where
@@ -3514,6 +3477,12 @@ Every setting is changed in game with `/tempest` and saved at once; nothing need
 
 `/tempest` → Slot Machine. Who can change it: `tempest.admin` or `tempest.admin.slots`.
 
+#### Slot machines
+
+| Setting | What it does | Values |
+|---|---|---|
+| Slot machines are on | Off: machines stay where they are but do not spin. The jackpot is kept. | On or off |
+
 #### Bets
 
 Players crouch and press F on a machine (or type /slotbet) to choose their bet.
@@ -3878,86 +3847,7 @@ Run by the server console when a player reaches a level: ranks, kits, titles fro
 
 | Setting | What it does | Values |
 |---|---|---|
-| Reward 1 at level | The level at which the command below runs. 0: this reward is off. A new empty reward shows below the last one used, up to 40; at the next start they are sorted by level and the empty ones left out. | 0 to 100000 |
-| Reward 1 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
-| Reward 2 at level |  | 0 to 100000 |
-| Reward 2 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
-| Reward 3 at level |  | 0 to 100000 |
-| Reward 3 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
-| Reward 4 at level |  | 0 to 100000 |
-| Reward 4 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
-| Reward 5 at level |  | 0 to 100000 |
-| Reward 5 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
-| Reward 6 at level |  | 0 to 100000 |
-| Reward 6 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
-| Reward 7 at level |  | 0 to 100000 |
-| Reward 7 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
-| Reward 8 at level |  | 0 to 100000 |
-| Reward 8 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
-| Reward 9 at level |  | 0 to 100000 |
-| Reward 9 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
-| Reward 10 at level |  | 0 to 100000 |
-| Reward 10 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
-| Reward 11 at level |  | 0 to 100000 |
-| Reward 11 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
-| Reward 12 at level |  | 0 to 100000 |
-| Reward 12 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
-| Reward 13 at level |  | 0 to 100000 |
-| Reward 13 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
-| Reward 14 at level |  | 0 to 100000 |
-| Reward 14 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
-| Reward 15 at level |  | 0 to 100000 |
-| Reward 15 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
-| Reward 16 at level |  | 0 to 100000 |
-| Reward 16 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
-| Reward 17 at level |  | 0 to 100000 |
-| Reward 17 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
-| Reward 18 at level |  | 0 to 100000 |
-| Reward 18 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
-| Reward 19 at level |  | 0 to 100000 |
-| Reward 19 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
-| Reward 20 at level |  | 0 to 100000 |
-| Reward 20 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
-| Reward 21 at level |  | 0 to 100000 |
-| Reward 21 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
-| Reward 22 at level |  | 0 to 100000 |
-| Reward 22 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
-| Reward 23 at level |  | 0 to 100000 |
-| Reward 23 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
-| Reward 24 at level |  | 0 to 100000 |
-| Reward 24 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
-| Reward 25 at level |  | 0 to 100000 |
-| Reward 25 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
-| Reward 26 at level |  | 0 to 100000 |
-| Reward 26 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
-| Reward 27 at level |  | 0 to 100000 |
-| Reward 27 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
-| Reward 28 at level |  | 0 to 100000 |
-| Reward 28 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
-| Reward 29 at level |  | 0 to 100000 |
-| Reward 29 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
-| Reward 30 at level |  | 0 to 100000 |
-| Reward 30 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
-| Reward 31 at level |  | 0 to 100000 |
-| Reward 31 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
-| Reward 32 at level |  | 0 to 100000 |
-| Reward 32 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
-| Reward 33 at level |  | 0 to 100000 |
-| Reward 33 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
-| Reward 34 at level |  | 0 to 100000 |
-| Reward 34 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
-| Reward 35 at level |  | 0 to 100000 |
-| Reward 35 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
-| Reward 36 at level |  | 0 to 100000 |
-| Reward 36 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
-| Reward 37 at level |  | 0 to 100000 |
-| Reward 37 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
-| Reward 38 at level |  | 0 to 100000 |
-| Reward 38 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
-| Reward 39 at level |  | 0 to 100000 |
-| Reward 39 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
-| Reward 40 at level |  | 0 to 100000 |
-| Reward 40 command | Run by the server console when a player reaches the level above, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. | Text |
+| Commands | One row per reward: the level, and the command the server console runs when a player reaches it, such as: rank give {player} adept. {player}, {uuid} and {level} are filled in. + Add reward adds a row; at the next start they are sorted by level. | Text |
 
 #### Leveling XP from the economy
 
@@ -5203,6 +5093,9 @@ code in a class of its own.
 | 38 | `ServerSetup` and `Registrations.setupPart`: the setup wizard (/tempest setup), each plugin's part fits it to a kind of server, with a preview first and undo after |
 | 39 | `PlayerHealth.activeMinutes` and `firstDay`: minutes really played and each player's first day (player health, /tempest players; the rewards for playing) |
 | 40 | `storage.Storage` and `Storage.Target`: files or a MySQL or MariaDB database (/tempest, Saving), connections to it, a connection test |
+| 47 | `Setting.itemTable` and `TableRows.Column.item`, `TableRows.addItem`, `TableRows.itemColumn`: a table whose rows are items picked from a searchable "+ Add an item" dropdown, each shown with its icon and name and its own numbers and tick boxes (Shop's rules per item) |
+| 46 | `PlayerSaves.now(ref, store)`: saves a player at once after items move for coins, a listing or a trade (the game saves every 10 s, and a crash in between would copy the items); `PlayerSaves.enabled()`. Plugins reach it through their generated `CoreNotice.saveNow` |
+| 45 | `Setting.table`, `Setting.fixedRows` and `settings.TableRows` (`Column.number`, `Column.check`, `Column.text`, `read`, `cells`, `write`, `writeCells`, `add`, `remove`, `set`, `setText`): a table of rows added with "+ Add" and taken out with an X, each row the same small number fields and tick boxes, kept as one text |
 | 44 | `Setting.maxLength(characters)` and `Setting.MAX_LONG_TEXT`: a text setting that takes more than 64 characters (up to 1000), such as a web address or a webhook link |
 | 43 | `Storage.shares(part)`, `Storage.SHAREABLE`, `Storage.logDays()`, `Storage.justPaused(part)`, `pausedAt`, `pausedAtDb`, `notePaused`, `savedTarget()`: what the servers share is the admin's choice (/tempest, Saving); `SharedData.download`, `useOwnFile`, `tampered`, `isTampered`, `accept`, `sealAll`, `takeAlerts`: a part shared again and sealed records; `storage.SharedScores`, `Leaderboards.resetShared(id)` and `Leaderboards.networkWide(id)`: leaderboards for the whole network; `Storage.retryDelay`, `Storage.ping`, `storage.StorageHealth` (outages, latency, `listen`), `storage.Backups` (`now`, `list`, `folder`, `last`), `storage.PlayerSnapshots` (`part`, `take`, `list`, `find`, `pin`, `rollback`): outages told, backups and rollbacks; `SharedData.saveLater(player, json)` (routine saves batched, never waited for; `saveNow` drops an older queued one); `SafeFiles.write(path, Supplier<String>)` (the text made while no other save of the file runs); SafeFiles saves and reads of one file never overlap |
 | 42 | `storage.SharedData`: players' data that follows them between the servers sharing a database, held by one server at a time |
@@ -5393,7 +5286,7 @@ a list of items is `ItemLists` and a list of console commands is `CommandLists` 
 group with a row per entry and one "add" dropdown, and `change(...)` turns the page's events into the new line, kept
 as before ("Food_Bread x5, Rock_Gem_Diamond"; commands as "cmd ; cmd" with `CommandLists.split` and `join`). For what a goal counts, `Targets.entries(Targets.Kind.BLOCK, "Ore_", current)` gives a searchable dropdown: "Any
 block", families ("Any Ore Iron (5 kinds)") and every block, item or monster of the game (API 30). A list of names kept as text with commas ("Chicken, Dummy") gets a picker with
-`Setting.adder("Add a mob that never pays", "Add a mob...", choices, c::getMobs, c::setMobs)` above its text field (API 31). Staff with
+`Setting.adder("Add a mob that never pays", "Add a mob...", choices, c::getMobs, c::setMobs)` above its text field (API 31). Rows of the same few numbers and tick boxes (levels, tiers) are one `Setting.table("Levels", "Level", 2, 10, columns, c::getLevels, c::setLevels)` with `TableRows.Column.number("Price", 0, 1_000_000, 0)` and `TableRows.Column.check("Featured")` (API 45): the admin adds a row with "+ Add level" (a copy of the last one), changes its fields in place and takes it out with an X; the value stays one text, "2000 1000 1; 6000 10000 0", read with `TableRows.read(text, columns)`. Columns of words are `TableRows.Column.text("Command", 300, true)` (wide) or `("Name", 24, false)`, read with `TableRows.cells(text, columns)` (each field as a String; spaces and ";" are written as %20 and %3B, "_" for none); `.fixedRows()` keeps a set number of rows (no "+ Add", no X), as Contracts' five ranks. Rules per item are `Setting.itemTable("Rules per item", 50, columns, c::getRules, c::setRules)` (API 47): the admin picks an item from a searchable dropdown, its row shows the item's icon and name with your columns beside it, one row per item; the item's id is field 0 of `TableRows.cells`. Staff with
 `tempest.admin.<group>` see only that group's tabs. The group is the title in lower case without spaces
 (`tempest.admin.dragons`); give it yourself when your plugin has more than one tab, so one permission covers them all
 (API 2): `new SettingsTab("Dragon Loot", "dragons", settings, config::save)`.
@@ -5608,6 +5501,7 @@ Placeholders.register("mymod_bounty", uuid -> String.valueOf(bounty(uuid)));
 | `contracts_delivered`, `contracts_earned`, `contracts_earned_formatted`, `contracts_rank`, `contracts_open`, `contracts_to_collect`, `contracts_market_items`, `contracts_sold`, `contracts_bounty`, `contracts_bounties_claimed`, `contracts_most_wanted` | Contracts | `120`, `540`, `540 copper`, `Courier`, `7`, `10`, `14`, `320` |
 | `events_fund_percent`, `events_fund_total`, `events_stage` | Events | `42`, `10500`, `2` (empty when the fund is off or nothing is on) |
 | `town_unlocked`, `town_total`, `town_mayor` | Town | `3`, `5`, `Steve` |
+| `town_season`, `town_season_days` | Town Pro (`-` while seasons are off) | `2`, `12` |
 
 
 ## Announcements: `Announcements`
@@ -6485,6 +6379,10 @@ Holograms.removeAll("myplugin");   // in shutdown()
   model's idle animation, so nothing is sent while it plays. The overload with a `Supplier<Picture>` reads the
   picture on the Holograms picture thread. `Holograms.previewColours(picture, frame, cols, rows[, frameIndex])` gives the colours
   of a small preview for a page made of coloured cells (as `/holo menu` shows it).
+- Standing blocks (API_VERSION 6): `FloatingItem.setStanding(yaw)` on an item that is a block (furniture, a chest, a
+  potion, a plain cube) stands the block itself as the game's block entity, still and with its own textures, at about
+  the size of the block dropped on the ground. `Holograms.runningVersion()` says which Holograms runs (`API_VERSION`
+  is copied into your plugin when it compiles); before 6 it is missing, so call it inside a `LinkageError` catch.
 - A statue is a life-size figure of a player as they looked when they last joined (Holograms keeps each player's
   skin in `universe/mods/holograms/skins.json`), turning to face the nearest player. It shows nothing for a player
   Holograms has not seen join. Leaderboard holograms placed with `/holo` can stand their first place on top
@@ -6634,7 +6532,8 @@ The buildings players build together, and their states.
 ## Town projects: `ProjectsAPI` (Projects plugin)
 
 What is being built and how far each building is, and a word whenever a project changes state
-(`ProjectsAPI.API_VERSION`, 1). Tempest Town uses it to unlock features when a building is finished. Declare
+(`ProjectsAPI.API_VERSION`, 2). Tempest Town uses it to unlock features when a building is finished, and (Pro) to
+build every project again for a new town season. Declare
 `"AtomicTempest:Projects": "*"` under OptionalDependencies, keep the classes that touch it in one file of their own
 (as Shop does with Holograms), and check `ProjectsAPI.isAvailable()` first.
 
@@ -6646,15 +6545,26 @@ ProjectsAPI.building("k3f9");          // one, or null
 ProjectsAPI.donors("k3f9");            // different players who donated; -1 when there is no such project
 ProjectsAPI.listen(listener);          // listener.changed(building): made, paused, finished, stopped, cancelled, removed
 ProjectsAPI.stopListening(listener);   // in your shutdown()
+String why = ProjectsAPI.rebuild("k3f9"); // API 2: null when it is being built again from nothing; otherwise why not
+ProjectsAPI.seasonRule("k3f9");        // API 2: what a new town season does with it: SEASON_TOWN, _REBUILD, _FINISHED, _KEEP, _REMOVE
+ProjectsAPI.takeDown("k3f9");          // API 2: building down, old ground back, off the list (under way: a cancel)
+ProjectsAPI.rebuild("k3f9", false);    // API 2: a project under way keeps its donations (takeDown(id, false) too)
+// Refunds are reported as the player actions projects_refund (items) and projects_refund_coins (coins)
 ```
 
-- `state` is the project's state name: `CLEARING`, `OPEN`, `PAUSED`, `FINISHING`, `FINISHED`, `CANCELLING`, `STOPPING`
-  or `STOPPED`. A listener hears `ProjectsAPI.REMOVED` for a project taken off the list (after a cancel has put the old
+- `state` is the project's state name: `CLEARING`, `OPEN`, `PAUSED`, `FINISHING`, `FINISHED`, `CANCELLING`, `STOPPING`,
+  `STOPPED` or (API 2) `WAITING`: cleared, its plan standing, and open for donations once the project it comes after
+  (`/projects after`) is finished. A listener hears `ProjectsAPI.REMOVED` for a project taken off the list (after a cancel has put the old
   ground back, or an admin removed a finished or stopped one).
 - `percentDone` is how much of the goal was donated (100 once finished). Donations change no state, so listeners are
   not told about them: read `buildings()` again when you need the numbers.
 - Listeners are called on Projects' timer thread, within a second of the change and never while Projects holds a
   lock, so a listener may call `buildings()`. Every call may come from any thread; answers never wait for the builder.
+- `rebuild(id)` (API 2) takes the building down and opens the project from nothing on the same plot, with its
+  plan, materials, goals and rewards as they were. A finished building's donations were spent on it; a project still
+  under way gives them back to its donors first. It reads the prefab (50-70 ms), so call it from your own thread, and
+  refuses (with a reason in English) when the prefab is gone or changed, so a building never comes down that could
+  not go up again. Call it inside a try that catches `LinkageError` when your plugin may meet Projects older than 1.3.
 - When Projects stops (or reloads) it forgets every listener: listen again when it is back, or ask `buildings()` on
   a timer, as Town does every minute.
 
@@ -6790,16 +6700,16 @@ Every class and method of each plugin's API.
 The javadoc lists every public class and method of each plugin's API, for the newest version published here:
 
 - [Coinflip 1.0.7](javadoc/coinflip/)
-- [Coins 2.8.0](javadoc/coins/)
-- [Core 1.8.1](javadoc/core/)
-- [Holograms 1.4.2](javadoc/holograms/)
+- [Coins 2.8.1](javadoc/coins/)
+- [Core 1.9.1](javadoc/core/)
+- [Holograms 1.4.3](javadoc/holograms/)
 - [Jobs 1.3.1](javadoc/jobs/)
 - [Lottery 1.1.5](javadoc/lottery/)
 - [Pass 1.5.1](javadoc/pass/)
-- [Projects 1.2.1](javadoc/projects/)
-- [Quests 1.7.1](javadoc/quests/)
-- [Shop 1.7.2](javadoc/shop/)
-- [SlotMachine 1.2.8](javadoc/slotmachine/)
+- [Projects 1.3.0](javadoc/projects/)
+- [Quests 1.8.0](javadoc/quests/)
+- [Shop 1.8.0](javadoc/shop/)
+- [SlotMachine 1.3.0](javadoc/slotmachine/)
 
 Core's stable API is `com.atomictempest.core` (except `Main`) and its `economy`, `help` and `settings` packages; each other plugin's is its `api` package.
 
@@ -6807,6 +6717,122 @@ Core's stable API is `com.atomictempest.core` (except `Main`) and its `economy`,
 # Changelog
 
 Every release of the Tempest plugins, newest first.
+
+## 2026-11-27
+
+### Projects 1.3.0
+
+- New: build a finished project again from nothing on the same plot: BUILD AGAIN in its MANAGE tab, or `/projects rebuild <id>`. The prefab is checked first, so a building never comes down that could not go up again
+- New: AT A NEW TOWN SEASON in a project's MANAGE tab (or `/projects season <id> <rule>`): what Tempest Town Pro does with it when a season starts: build again, again only if finished, stay, or be taken down with its old ground back
+- New: the items in the chests of a building that comes down are kept: in a lost and found for admins (`/projects lostfound`, `/projects lostfound take`), dropped beside the plot, or lost, as set in /tempest
+- Players and creatures standing in a plot are moved beside it before it is cleared, so nobody falls into the hole
+- Faraway plots are loaded to be cleared at once, and only a few plots are cleared at the same time (both settings)
+- Pro: finish rewards only for donors who gave at least a set share of the goal (1% at first), so one coin from many accounts earns nothing
+- Donations given back (a cancel) are reported, so Tempest Town takes back the season and mayor points they gave
+- New: a town that grows one building at a time. OPENS AFTER in a project's MANAGE tab, or `/projects after <id> <other>`, keeps a project waiting, with its plan shown, until the other one is finished
+- What stood on a plot before a building is now kept while the project is on the list, so cancelling a rebuilt project still puts the old ground back
+
+### Town 1.4.0
+
+- New: Tempest Town Pro with town seasons. Every few weeks the town starts again from the ground up: every building comes down and opens from nothing on its plot, and what it unlocked locks until it stands again
+- Plots, plans, materials, goals and rewards stay as you made them, and buildings you add join the next season. Unlocks you set to ON or OFF never change
+- Players are warned 7 days, 1 day and 1 hour before a new season
+- Season prizes in money for the season's top three builders, and `/town season` shows the season, its top builders and the last seasons. Admins can start the next season now with `/town season start`
+- Each building chooses what a new season does with it (in its MANAGE tab in /projects): build again, again only if finished, stay as it is, be taken down (a building for one season), or let the town's settings decide
+- Everything else is a setting: the season's length and the hour it starts at, the warning times, whether projects under way start again, unlocks that always stay, a new mayor with each season, chat and Discord announcements, points per item, the least points for a prize, money and a console command for the top three, commands to run at each new season, and how many past seasons are kept
+- Projects under way carry on and keep their donations at a new season unless you choose otherwise, so nobody can donate just before a season, collect what donating earns, and get it all back. Refunded donations lose their season and mayor points, and the prizes are worked out after the buildings
+- A season that ends while Tempest Projects reloads waits for it
+- `/town season preview` shows what a new season would do now, building by building, before anything happens; and a backup of every plugin's data is made before each new season (Back up first, on by default)
+- Off until switched on: /tempest, Town tab, Seasons. The free edition of Town stays as it is
+- Fixed: a Town chat line could fail while Town was starting
+
+## 2026-11-26
+
+### Core 1.9.1
+
+- Settings tabs with many item pickers (Claims perks) open at once instead of freezing the game for a moment: a long list is sent only when its row shows.
+
+## 2026-11-26
+
+### Core 1.9.0
+
+- Settings can show a table of items: pick an item from a searchable list and set its own numbers and tick boxes in its row (used for Shop's rules per item).
+- A player is saved the moment a shop, stall, trade, ATM, crate, slot token or contract moves their items, instead of within the game's next 10 seconds, so a server crash in between can no longer copy items. On by default (/tempest, General, "Save players right after a trade").
+- Settings tabs can show a small table: rows added with "+ Add" and taken out with an X, each with the same few numbers, tick boxes and words (used for Shop's stall levels).
+- Rewards for hours played are now a table of milestones: each row has its hours, its own coins and, if you like, a console command (a rank, a kit, a crate key). Your old hours and coins per hour are turned into rows.
+- Leveling extras: the commands at levels are one table (level and command per row, + Add reward) instead of 40 numbered pairs of fields.
+- The board's own lines, and the Server info page's lines and buttons, are tables too: a line has a label and its text, or a Heading tick box and its words (empty words make a gap).
+- New settings in Rewards for playing: minutes still before a player counts as AFK, hours an inviter must have played before their code works, and days between two welcome backs.
+
+### Holograms 1.4.3
+
+- Floating items that stand (shop shelves) show blocks as the block itself: still, and with their own textures, instead of a black shape. Plugins read it as API 6.
+
+### Coins 2.8.1
+
+- players are saved at once after putting coins in or taking them out
+
+### SlotMachine 1.3.0
+
+- A switch for all slot machines: off, they stay in place but do not spin, and the jackpot is kept.
+
+### Shop 1.8.0
+
+- **Better market search** (/stall): as you type, cards show the items your words find, with how many stalls sell each and the cheapest price; click one to see only that item, with who sells it from what, its usual price and the best buy order. Filters for the kind of item, the most to pay each, the stars, how far away, and your favourite stalls only, with Clear filters.
+- **My market** (a button on /stall, or `/stall sales`): your favourite stalls with Open and Way, your want list, and every trade you made at stalls. Admins also see anyone's trades and who paid whom the most.
+- **Favourite stalls**: Add to favourites on any stall, and you hear when it puts something new on sale.
+- **Want list**: pick an item and the most you would pay; you hear the moment any stall sells it at that price or less, and My market shows the cheapest stall now. Both limits are in /tempest (0 switches them off).
+- **Helpers**: a stall owner lets up to 3 players stock their stall (Sales & helpers, then a name). Helpers put items on it and take back only their own; what sells pays the owner. They never rename it, raise its level, post buy orders or review it.
+- **Your stall page**: Sales & helpers on your stall shows what it earned today, in 7 and in 30 days, the best sellers, the newest sales with who bought, and what is running low.
+- **Price guard** for player stalls: a listing or buy order far over an item's usual price (the server shop's price, or what it typically sold for at stalls) is refused, so no one can hand coins to a second account or to someone who paid them outside the game. On by default at 10 times; both in /tempest.
+- **Rules per item**: pick any item from a list in /tempest and give it its own lowest and highest price at stalls, or keep it off stalls altogether (quest items, crate keys).
+- **Sales history**: `/stall sales` shows your own last sales and purchases; admins see anyone's with `/stall sales <player>`, and `/stall sales pairs` lists who paid whom the most. Kept 30 days by default.
+- Player stalls have their own map icon, a market tent with its seller, so they no longer look like the server's shops.
+- Stall names may not pass for the server's or staff's shop: "Admin Shop", "Adm1n" or "S e r v e r" are refused. The words and the switch are in /tempest; admins may use any name.
+- Owners put items on their stall and take them back only standing at it, so a far-off stall is not a chest reachable from the whole map. A switch in /tempest allows it from anywhere.
+- **Player shops (Pro):** players put up their own stalls, sell their own items (enchanted ones too) and post buy orders; stalls sell while the owner is offline, and `/stall` is the market with search.
+- Where stalls may go is up to you: market districts you mark (`/stall district add`), the party's own land in Tempest Claims, or anywhere they may build. Never on land where the owner may not build.
+- Stalls can be unbreakable (only admins), one per player by default (more with `tempest.shop.stalls.<n>`), with a sales tax, daily rent and an away limit; everything on a stall that goes is sent to its owner's `/mail`.
+- Stalls are safe: players who may not break one cannot even damage it, and one blown up, burnt or removed by another mod is put back within seconds with everything on it.
+- Items on stall shelves that are blocks (furniture, chests, other mods' blocks) stand still with their own textures instead of a black shape, at server stalls too (with this release of Tempest Holograms; older ones float them).
+- Stall reviews: buyers give a stall 1 to 5 stars and a few words; the rating shows on the stall and in the market. Who may review, the least they must have spent there, words or stars only, and how often a review can change are settings.
+- Trading from afar (a setting): players buy and sell from the `/stall` market list without walking there, with an optional fee; owners still place a real stall.
+- Player stalls on the world map with their rating; right-click one to open its shop or show the way there.
+- Cooldowns: a wait before a new stall after taking one down, and between renames.
+- New settings: how near the stall players must be to trade, and how long the Way marker stays and when it counts as arrived.
+- Stall levels: owners upgrade their stall once it has sold enough, for more items, more buy orders, less tax, a bigger map icon and a Featured place. In /tempest the levels are one small table: **+ Add level** adds a row (up to 10), each row's numbers and tick boxes change in place, and the X takes a level out.
+- A real search for the market: words in any order, item names in the player's language, enchantments, stall names and owners; the start of a word, plurals and small typos are enough. Sort by best match, price, rating, distance or stock, and a Way button marks the stall on your map and compass.
+- Scam-proof stalls: a price raised while you were looking buys nothing, worn items cannot be sold as new, two accounts cannot fake the price hint, and no stall can copy another's name.
+- Each item shows its typical price at player stalls over the last 7 days; player stalls and districts show on the map, and owners read what sold while they were away.
+
+### Quests 1.8.0
+
+- A switch for the whole plugin: with Quests off nothing counts and players cannot open /quests; their progress is kept.
+
+### Crates 1.8.0
+
+- New setting: the key party countdown.
+
+### Events 1.5.0
+
+- Supply drops can be switched off on their own.
+- New settings for supply drops: how many at once, how near and far from players they land, and how long they stay.
+
+### Contracts 1.5.0
+
+- The contractor ranks in /tempest are one small table: each rank's name, items delivered and bonus in a row.
+
+### Projects 1.2.2
+
+- players are saved at once after giving items and collecting
+
+### Trade 1.1.2
+
+- players are saved at once when items go into a trade and when they arrive
+
+### Claims 1.2.0
+
+- New setting: minutes to accept a party invite.
 
 ## 2026-11-23
 

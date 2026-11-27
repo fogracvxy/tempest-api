@@ -122,20 +122,7 @@ By items delivered; the bonus is on server orders. Leave a name empty for the bu
 
 | Setting | What it does | Values |
 |---|---|---|
-| Rank 1 name | Newcomer | Text |
-| Rank 1: bonus (%) | Players at this rank get this much more for delivering to server orders. Players' own contracts pay what they offer. | 0 to 100 |
-| Rank 2 name | Courier | Text |
-| Rank 2: items delivered | How many items a player must have delivered in all to reach this rank. | 1 to 10000000 |
-| Rank 2: bonus (%) | Players at this rank get this much more for delivering to server orders. Players' own contracts pay what they offer. | 0 to 100 |
-| Rank 3 name | Trader | Text |
-| Rank 3: items delivered | How many items a player must have delivered in all to reach this rank. | 1 to 10000000 |
-| Rank 3: bonus (%) | Players at this rank get this much more for delivering to server orders. Players' own contracts pay what they offer. | 0 to 100 |
-| Rank 4 name | Merchant | Text |
-| Rank 4: items delivered | How many items a player must have delivered in all to reach this rank. | 1 to 10000000 |
-| Rank 4: bonus (%) | Players at this rank get this much more for delivering to server orders. Players' own contracts pay what they offer. | 0 to 100 |
-| Rank 5 name | Tycoon | Text |
-| Rank 5: items delivered | How many items a player must have delivered in all to reach this rank. | 1 to 10000000 |
-| Rank 5: bonus (%) | Players at this rank get this much more for delivering to server orders. Players' own contracts pay what they offer. | 0 to 100 |
+| Ranks | Each rank's name (empty: the built-in one in each player's language), how many items a player must have delivered in all to reach it (rank 1 is every player), and how much more it gets for delivering to server orders. Players' own contracts pay what they offer. | Text |
 
 
 ### Bounties

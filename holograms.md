@@ -64,6 +64,10 @@ Holograms.removeAll("myplugin");   // in shutdown()
   model's idle animation, so nothing is sent while it plays. The overload with a `Supplier<Picture>` reads the
   picture on the Holograms picture thread. `Holograms.previewColours(picture, frame, cols, rows[, frameIndex])` gives the colours
   of a small preview for a page made of coloured cells (as `/holo menu` shows it).
+- Standing blocks (API_VERSION 6): `FloatingItem.setStanding(yaw)` on an item that is a block (furniture, a chest, a
+  potion, a plain cube) stands the block itself as the game's block entity, still and with its own textures, at about
+  the size of the block dropped on the ground. `Holograms.runningVersion()` says which Holograms runs (`API_VERSION`
+  is copied into your plugin when it compiles); before 6 it is missing, so call it inside a `LinkageError` catch.
 - A statue is a life-size figure of a player as they looked when they last joined (Holograms keeps each player's
   skin in `universe/mods/holograms/skins.json`), turning to face the nearest player. It shows nothing for a player
   Holograms has not seen join. Leaderboard holograms placed with `/holo` can stand their first place on top

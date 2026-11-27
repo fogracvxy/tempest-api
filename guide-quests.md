@@ -53,6 +53,7 @@ Open /quests and use the Edit (admin) tab. Admins need the permission quests.adm
 
 | Setting | What it does | Values |
 |---|---|---|
+| Quests and achievements are on | Off: nothing counts and players cannot open /quests. Their progress is kept. Admins can still edit. | On or off |
 | Players choose their quests | From the quest board. Off: every quest counts at once. | On or off |
 | Most quests at once | While players choose their quests. | 1 to 50 |
 | Play time only while moving | Standing still (AFK) does not count towards play time goals. | On or off |

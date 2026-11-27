@@ -18,7 +18,7 @@ package.
 | Events | `AtomicTempest:Events` | no API of its own: it turns on Core's `Boosts` (below) and has placeholders |
 | Contracts | `AtomicTempest:Contracts` | no API of its own: the `contract_deliver` action, the `contract_pay` boost kind and placeholders |
 | Projects | `AtomicTempest:Projects` | `com.atomictempest.projects.api.ProjectsAPI` (the buildings and their states); the `projects_donate` action (amount: items given), `projects_coins` (amount: coins given) and the `projects_open` placeholder |
-| Town | `AtomicTempest:Town` | no API of its own: it decides Core's `Unlocks` (below), and has the `town_unlocked`, `town_total` and `town_mayor` placeholders |
+| Town | `AtomicTempest:Town` | no API of its own: it decides Core's `Unlocks` (below), and has the `town_unlocked`, `town_total`, `town_mayor`, `town_season` and `town_season_days` placeholders |
 | Crates | `AtomicTempest:Crates` | no API of its own: the `crate_open` action and `Announcements.BIG_WIN` |
 | Holograms | `AtomicTempest:Holograms` | `com.atomictempest.holograms.api.Holograms` (and `Hologram`, `TextArt`, `Rankings`...) |
 | Pass | `AtomicTempest:Pass` | `com.atomictempest.pass.api.PassAPI` |
@@ -36,6 +36,6 @@ Core's `Claims` hides which.
 Every API class has a version constant that goes up when something is added. Everything in these APIs is safe to call
 from any thread unless it says otherwise.
 
-**Javadoc:** [Coinflip 1.0.7](javadoc/coinflip/) · [Coins 2.8.0](javadoc/coins/) · [Core 1.8.1](javadoc/core/) · [Holograms 1.4.2](javadoc/holograms/) · [Jobs 1.3.1](javadoc/jobs/) · [Lottery 1.1.5](javadoc/lottery/) · [Pass 1.5.1](javadoc/pass/) · [Projects 1.2.1](javadoc/projects/) · [Quests 1.7.1](javadoc/quests/) · [Shop 1.7.2](javadoc/shop/) · [SlotMachine 1.2.8](javadoc/slotmachine/)
+**Javadoc:** [Coinflip 1.0.7](javadoc/coinflip/) · [Coins 2.8.1](javadoc/coins/) · [Core 1.9.1](javadoc/core/) · [Holograms 1.4.3](javadoc/holograms/) · [Jobs 1.3.1](javadoc/jobs/) · [Lottery 1.1.5](javadoc/lottery/) · [Pass 1.5.1](javadoc/pass/) · [Projects 1.3.0](javadoc/projects/) · [Quests 1.8.0](javadoc/quests/) · [Shop 1.8.0](javadoc/shop/) · [SlotMachine 1.3.0](javadoc/slotmachine/)
 
 **Jars:** from the plugins' CurseForge pages; compile against them with `compileOnly`. **Questions and help:** [Discord](https://discord.gg/Q9PNVCMZXK)

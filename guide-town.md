@@ -27,6 +27,9 @@ The `/guide` pages of this plugin, as a player sees them on a test server (numbe
 | `/mayor set` | Everyone | Admins: make an online player mayor until the term ends |
 | `/town` | Everyone | Town: what the town has unlocked and what it still needs |
 | `/town lock` | Everyone | Admins: keep an unlock locked |
+| `/town season` | Everyone | Show the town's season and its top builders |
+| `/town season preview` | Everyone | Show what a new town season would do now (admins) |
+| `/town season start` | Everyone | Start the next town season now (admins) |
 | `/town unlock` | Everyone | Admins: keep an unlock unlocked |
 
 

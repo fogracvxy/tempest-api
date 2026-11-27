@@ -2,6 +2,122 @@
 
 Every release of the Tempest plugins, newest first.
 
+## 2026-11-27
+
+### Projects 1.3.0
+
+- New: build a finished project again from nothing on the same plot: BUILD AGAIN in its MANAGE tab, or `/projects rebuild <id>`. The prefab is checked first, so a building never comes down that could not go up again
+- New: AT A NEW TOWN SEASON in a project's MANAGE tab (or `/projects season <id> <rule>`): what Tempest Town Pro does with it when a season starts: build again, again only if finished, stay, or be taken down with its old ground back
+- New: the items in the chests of a building that comes down are kept: in a lost and found for admins (`/projects lostfound`, `/projects lostfound take`), dropped beside the plot, or lost, as set in /tempest
+- Players and creatures standing in a plot are moved beside it before it is cleared, so nobody falls into the hole
+- Faraway plots are loaded to be cleared at once, and only a few plots are cleared at the same time (both settings)
+- Pro: finish rewards only for donors who gave at least a set share of the goal (1% at first), so one coin from many accounts earns nothing
+- Donations given back (a cancel) are reported, so Tempest Town takes back the season and mayor points they gave
+- New: a town that grows one building at a time. OPENS AFTER in a project's MANAGE tab, or `/projects after <id> <other>`, keeps a project waiting, with its plan shown, until the other one is finished
+- What stood on a plot before a building is now kept while the project is on the list, so cancelling a rebuilt project still puts the old ground back
+
+### Town 1.4.0
+
+- New: Tempest Town Pro with town seasons. Every few weeks the town starts again from the ground up: every building comes down and opens from nothing on its plot, and what it unlocked locks until it stands again
+- Plots, plans, materials, goals and rewards stay as you made them, and buildings you add join the next season. Unlocks you set to ON or OFF never change
+- Players are warned 7 days, 1 day and 1 hour before a new season
+- Season prizes in money for the season's top three builders, and `/town season` shows the season, its top builders and the last seasons. Admins can start the next season now with `/town season start`
+- Each building chooses what a new season does with it (in its MANAGE tab in /projects): build again, again only if finished, stay as it is, be taken down (a building for one season), or let the town's settings decide
+- Everything else is a setting: the season's length and the hour it starts at, the warning times, whether projects under way start again, unlocks that always stay, a new mayor with each season, chat and Discord announcements, points per item, the least points for a prize, money and a console command for the top three, commands to run at each new season, and how many past seasons are kept
+- Projects under way carry on and keep their donations at a new season unless you choose otherwise, so nobody can donate just before a season, collect what donating earns, and get it all back. Refunded donations lose their season and mayor points, and the prizes are worked out after the buildings
+- A season that ends while Tempest Projects reloads waits for it
+- `/town season preview` shows what a new season would do now, building by building, before anything happens; and a backup of every plugin's data is made before each new season (Back up first, on by default)
+- Off until switched on: /tempest, Town tab, Seasons. The free edition of Town stays as it is
+- Fixed: a Town chat line could fail while Town was starting
+
+## 2026-11-26
+
+### Core 1.9.1
+
+- Settings tabs with many item pickers (Claims perks) open at once instead of freezing the game for a moment: a long list is sent only when its row shows.
+
+## 2026-11-26
+
+### Core 1.9.0
+
+- Settings can show a table of items: pick an item from a searchable list and set its own numbers and tick boxes in its row (used for Shop's rules per item).
+- A player is saved the moment a shop, stall, trade, ATM, crate, slot token or contract moves their items, instead of within the game's next 10 seconds, so a server crash in between can no longer copy items. On by default (/tempest, General, "Save players right after a trade").
+- Settings tabs can show a small table: rows added with "+ Add" and taken out with an X, each with the same few numbers, tick boxes and words (used for Shop's stall levels).
+- Rewards for hours played are now a table of milestones: each row has its hours, its own coins and, if you like, a console command (a rank, a kit, a crate key). Your old hours and coins per hour are turned into rows.
+- Leveling extras: the commands at levels are one table (level and command per row, + Add reward) instead of 40 numbered pairs of fields.
+- The board's own lines, and the Server info page's lines and buttons, are tables too: a line has a label and its text, or a Heading tick box and its words (empty words make a gap).
+- New settings in Rewards for playing: minutes still before a player counts as AFK, hours an inviter must have played before their code works, and days between two welcome backs.
+
+### Holograms 1.4.3
+
+- Floating items that stand (shop shelves) show blocks as the block itself: still, and with their own textures, instead of a black shape. Plugins read it as API 6.
+
+### Coins 2.8.1
+
+- players are saved at once after putting coins in or taking them out
+
+### SlotMachine 1.3.0
+
+- A switch for all slot machines: off, they stay in place but do not spin, and the jackpot is kept.
+
+### Shop 1.8.0
+
+- **Better market search** (/stall): as you type, cards show the items your words find, with how many stalls sell each and the cheapest price; click one to see only that item, with who sells it from what, its usual price and the best buy order. Filters for the kind of item, the most to pay each, the stars, how far away, and your favourite stalls only, with Clear filters.
+- **My market** (a button on /stall, or `/stall sales`): your favourite stalls with Open and Way, your want list, and every trade you made at stalls. Admins also see anyone's trades and who paid whom the most.
+- **Favourite stalls**: Add to favourites on any stall, and you hear when it puts something new on sale.
+- **Want list**: pick an item and the most you would pay; you hear the moment any stall sells it at that price or less, and My market shows the cheapest stall now. Both limits are in /tempest (0 switches them off).
+- **Helpers**: a stall owner lets up to 3 players stock their stall (Sales & helpers, then a name). Helpers put items on it and take back only their own; what sells pays the owner. They never rename it, raise its level, post buy orders or review it.
+- **Your stall page**: Sales & helpers on your stall shows what it earned today, in 7 and in 30 days, the best sellers, the newest sales with who bought, and what is running low.
+- **Price guard** for player stalls: a listing or buy order far over an item's usual price (the server shop's price, or what it typically sold for at stalls) is refused, so no one can hand coins to a second account or to someone who paid them outside the game. On by default at 10 times; both in /tempest.
+- **Rules per item**: pick any item from a list in /tempest and give it its own lowest and highest price at stalls, or keep it off stalls altogether (quest items, crate keys).
+- **Sales history**: `/stall sales` shows your own last sales and purchases; admins see anyone's with `/stall sales <player>`, and `/stall sales pairs` lists who paid whom the most. Kept 30 days by default.
+- Player stalls have their own map icon, a market tent with its seller, so they no longer look like the server's shops.
+- Stall names may not pass for the server's or staff's shop: "Admin Shop", "Adm1n" or "S e r v e r" are refused. The words and the switch are in /tempest; admins may use any name.
+- Owners put items on their stall and take them back only standing at it, so a far-off stall is not a chest reachable from the whole map. A switch in /tempest allows it from anywhere.
+- **Player shops (Pro):** players put up their own stalls, sell their own items (enchanted ones too) and post buy orders; stalls sell while the owner is offline, and `/stall` is the market with search.
+- Where stalls may go is up to you: market districts you mark (`/stall district add`), the party's own land in Tempest Claims, or anywhere they may build. Never on land where the owner may not build.
+- Stalls can be unbreakable (only admins), one per player by default (more with `tempest.shop.stalls.<n>`), with a sales tax, daily rent and an away limit; everything on a stall that goes is sent to its owner's `/mail`.
+- Stalls are safe: players who may not break one cannot even damage it, and one blown up, burnt or removed by another mod is put back within seconds with everything on it.
+- Items on stall shelves that are blocks (furniture, chests, other mods' blocks) stand still with their own textures instead of a black shape, at server stalls too (with this release of Tempest Holograms; older ones float them).
+- Stall reviews: buyers give a stall 1 to 5 stars and a few words; the rating shows on the stall and in the market. Who may review, the least they must have spent there, words or stars only, and how often a review can change are settings.
+- Trading from afar (a setting): players buy and sell from the `/stall` market list without walking there, with an optional fee; owners still place a real stall.
+- Player stalls on the world map with their rating; right-click one to open its shop or show the way there.
+- Cooldowns: a wait before a new stall after taking one down, and between renames.
+- New settings: how near the stall players must be to trade, and how long the Way marker stays and when it counts as arrived.
+- Stall levels: owners upgrade their stall once it has sold enough, for more items, more buy orders, less tax, a bigger map icon and a Featured place. In /tempest the levels are one small table: **+ Add level** adds a row (up to 10), each row's numbers and tick boxes change in place, and the X takes a level out.
+- A real search for the market: words in any order, item names in the player's language, enchantments, stall names and owners; the start of a word, plurals and small typos are enough. Sort by best match, price, rating, distance or stock, and a Way button marks the stall on your map and compass.
+- Scam-proof stalls: a price raised while you were looking buys nothing, worn items cannot be sold as new, two accounts cannot fake the price hint, and no stall can copy another's name.
+- Each item shows its typical price at player stalls over the last 7 days; player stalls and districts show on the map, and owners read what sold while they were away.
+
+### Quests 1.8.0
+
+- A switch for the whole plugin: with Quests off nothing counts and players cannot open /quests; their progress is kept.
+
+### Crates 1.8.0
+
+- New setting: the key party countdown.
+
+### Events 1.5.0
+
+- Supply drops can be switched off on their own.
+- New settings for supply drops: how many at once, how near and far from players they land, and how long they stay.
+
+### Contracts 1.5.0
+
+- The contractor ranks in /tempest are one small table: each rank's name, items delivered and bonus in a row.
+
+### Projects 1.2.2
+
+- players are saved at once after giving items and collecting
+
+### Trade 1.1.2
+
+- players are saved at once when items go into a trade and when they arrive
+
+### Claims 1.2.0
+
+- New setting: minutes to accept a party invite.
+
 ## 2026-11-23
 
 ### Coins 2.8.0

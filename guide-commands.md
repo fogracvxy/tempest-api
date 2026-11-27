@@ -91,6 +91,15 @@ Every command of the Tempest plugins, with the permission it needs. "Everyone" w
 | `/shop link` | `shop.admin` | Make the block you look at a shop, selling as this stall kind |
 | `/shop stall` | `shop.admin` | Get a stall to place |
 | `/shop unlink` | `shop.admin` | Make the block you look at an ordinary block again |
+| `/stall` | Everyone | Players' stalls: the market, or buy and find |
+| `/stall buy` | Everyone | Buy a stall of your own |
+| `/stall district` | `shop.admin` | Market districts where players may put stalls |
+| `/stall find` | Everyone | Who sells and buys an item |
+| `/stall open` | Everyone | Open a player stall (from its menu on the map) |
+| `/stall remove` | `shop.admin` | Take down the player stall you look at |
+| `/stall sales` | Everyone | Your last sales and purchases at player stalls |
+| `/stall unreview` | `shop.admin` | Remove a player's review of the stall you look at |
+| `/stall way` | Everyone | Show the way to a player stall on your map and compass |
 
 ## Crates
 
@@ -144,10 +153,13 @@ Every command of the Tempest plugins, with the permission it needs. "Everyone" w
 | Command | Who can use it | What it does |
 |---|---|---|
 | `/projects` (/project) | Everyone | See the town projects and donate to them |
+| `/projects after` | `projects.admin` | Open a project for donations only after another one is finished |
 | `/projects cancel` | `projects.admin` | Cancel a project: everything goes back |
 | `/projects coins` | `projects.admin` | Set the coin goal of a project |
 | `/projects finish` | `projects.admin` | Finish a project now: the whole building goes up |
 | `/projects list` | `projects.admin` | List every project |
+| `/projects lostfound` | `projects.admin` | What the chests of buildings that came down held |
+| `/projects lostfound take` | `projects.admin` | Take everything in the lost and found |
 | `/projects material` | `projects.admin` | Change a material of a project (0 takes it off) |
 | `/projects new` | `projects.admin` | Pick a prefab and place a new project |
 | `/projects out` | Everyone | Leave a plot under construction |
@@ -155,10 +167,12 @@ Every command of the Tempest plugins, with the permission it needs. "Everyone" w
 | `/projects place` | `projects.admin` | Go back to the plot you are placing |
 | `/projects plan` | `projects.admin` | Mark a plot for a prefab where you stand |
 | `/projects prefabs` | `projects.admin` | Find prefabs by name |
+| `/projects rebuild` | `projects.admin` | Build a project again from nothing on the same plot |
 | `/projects remove` | `projects.admin` | Take an ended project off the list |
 | `/projects resume` | `projects.admin` | Go on with a paused project |
 | `/projects reward` | `projects.admin` | Add a console command run for each donor at the end |
 | `/projects rewarditems` | `projects.admin` | Pro: items every donor gets at the end (none clears them) |
+| `/projects season` | `projects.admin` | Choose what a new town season does with a project |
 | `/projects start` | `projects.admin` | Start the project on the marked plot |
 | `/projects stop` | `projects.admin` | Stop a project: what stands stays |
 
@@ -174,6 +188,9 @@ Every command of the Tempest plugins, with the permission it needs. "Everyone" w
 | `/mayor set` | Everyone | Admins: make an online player mayor until the term ends |
 | `/town` | Everyone | Town: what the town has unlocked and what it still needs |
 | `/town lock` | Everyone | Admins: keep an unlock locked |
+| `/town season` | Everyone | Show the town's season and its top builders |
+| `/town season preview` | Everyone | Show what a new town season would do now (admins) |
+| `/town season start` | Everyone | Start the next town season now (admins) |
 | `/town unlock` | Everyone | Admins: keep an unlock unlocked |
 
 ## Jobs

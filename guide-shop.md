@@ -39,6 +39,15 @@ The `/guide` pages of this plugin, as a player sees them on a test server (numbe
 | `/shop link` | `shop.admin` | Make the block you look at a shop, selling as this stall kind |
 | `/shop stall` | `shop.admin` | Get a stall to place |
 | `/shop unlink` | `shop.admin` | Make the block you look at an ordinary block again |
+| `/stall` | Everyone | Players' stalls: the market, or buy and find |
+| `/stall buy` | Everyone | Buy a stall of your own |
+| `/stall district` | `shop.admin` | Market districts where players may put stalls |
+| `/stall find` | Everyone | Who sells and buys an item |
+| `/stall open` | Everyone | Open a player stall (from its menu on the map) |
+| `/stall remove` | `shop.admin` | Take down the player stall you look at |
+| `/stall sales` | Everyone | Your last sales and purchases at player stalls |
+| `/stall unreview` | `shop.admin` | Remove a player's review of the stall you look at |
+| `/stall way` | Everyone | Show the way to a player stall on your map and compass |
 
 
 ## Settings
@@ -130,7 +139,7 @@ Tools, weapons and armour that have lost durability.
 
 #### Free edition
 
-The Pro edition adds: more stalls (Apothecary, Fishmonger, Tavern, Mage), prices that move with supply and demand.
+The Pro edition adds: more stalls (Apothecary, Fishmonger, Tavern, Mage), prices that move with supply and demand, player shops: players' own stalls that sell and buy (/stall).
 
 
 ### Stalls
